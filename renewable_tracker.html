@@ -31,9 +31,13 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .sec-title:first-of-type{margin-top:0;}
 .sec-meta{font-size:11px;color:var(--muted2);text-transform:none;letter-spacing:normal;font-weight:400;}
 
-/* ── 排名卡片（區塊1／區塊2共用） ── */
-.rank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:8px;}
-.rank-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+/* ── 排名卡片（區塊1／區塊2共用） ──
+   結構固定順序：能源類別→數值&%→資料時間→內容說明→趨勢說明。
+   卡片本身用flex column撐滿grid stretch出的等高格，趨勢說明區塊用
+   margin-top:auto貼齊卡片底部，讓同一列卡片的分隔線視覺對齊，不受
+   內容說明長短不一影響（這是使用者反映「高度不一致」的根因）。 */
+.rank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:8px;align-items:stretch;}
+.rank-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
 .rank-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;}
 .rank-card.fossil::before{background:var(--fossil);}
 .rank-card.renew::before{background:var(--renew);}
@@ -44,11 +48,14 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .rank-value.fossil{color:var(--fossil);}
 .rank-value.renew{color:var(--renew);}
 .rank-value.nuclear{color:var(--nuclear);}
-.rank-note{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5;}
-.rank-reason{font-size:11px;color:var(--text2);margin-top:6px;padding-top:6px;border-top:1px dashed var(--border2);line-height:1.55;}
+.rank-time{font-size:10.5px;color:var(--muted2);margin-top:5px;}
+.rank-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.55;}
+.rank-reason{font-size:11px;color:var(--text2);margin-top:auto;padding-top:6px;border-top:1px dashed var(--border2);line-height:1.55;}
 .rank-reason b{color:var(--smart);font-weight:700;}
 .rank-trend{font-size:11px;font-weight:600;margin-left:6px;}
 .trend-up{color:#306840;}.trend-down{color:#884040;}.trend-flat{color:var(--muted);}
+.mini-list{margin:0;padding-left:15px;}
+.mini-list li{margin-bottom:2px;}
 
 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;font-size:11px;color:var(--muted);}
 .legend span{display:inline-flex;align-items:center;gap:5px;}
@@ -57,9 +64,16 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .legend-sw.renew{background:var(--renew);}
 .legend-sw.nuclear{background:var(--nuclear);}
 
-.total-banner{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:var(--text2);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+/* 曾誤用display:flex，混合文字節點與<span class="big">在同一段落內時，
+   flex會把長文字與大字體數字拆成不同flex item各自換行，導致「0%」這類
+   數字突然被單獨擠到新的一行且異常放大。改回一般文字流排版即可。 */
+.total-banner{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:var(--text2);line-height:1.7;}
 .total-banner:empty{display:none;}
-.total-banner .big{font-size:20px;font-weight:700;color:var(--renew);}
+.total-banner .big{font-size:19px;font-weight:700;color:var(--renew);margin:0 3px;}
+.total-banner .risk-badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+.risk-badge.risk-high{background:#f0dcd8;color:#8a3830;}
+.risk-badge.risk-mid{background:#f0e8d0;color:#8a6a20;}
+.risk-badge.risk-low{background:#dceadf;color:#2a6840;}
 
 /* ── 案例卡（區塊3） ── */
 .case-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:10px;}
@@ -72,12 +86,22 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .case-src{font-size:11px;}
 .case-src a{color:var(--smart);text-decoration:none;}
 .case-src a:hover{text-decoration:underline;}
+.np-block{font-size:11.5px;color:var(--text2);line-height:1.6;margin-top:7px;}
+.np-block b{display:block;font-size:10.5px;color:var(--smart);font-weight:700;margin-bottom:2px;}
 
 /* ── 歷年趨勢折線圖 ── */
 .trend-chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:14px;}
 .trend-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:11px;color:var(--text2);}
 .trend-legend span{display:inline-flex;align-items:center;gap:5px;}
 .trend-sw{width:14px;height:2.5px;border-radius:2px;flex-shrink:0;}
+
+/* ── 各能源別國家占比小卡（避免%與補充說明擠在同一行） ── */
+.cb-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow);}
+.cb-hd{font-size:12px;font-weight:700;margin-bottom:6px;}
+.cb-row{padding:5px 0;border-bottom:1px solid var(--card2);}
+.cb-row:last-child{border-bottom:none;}
+.cb-country{font-size:11.5px;font-weight:600;}
+.cb-value{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.5;}
 
 .empty-state{text-align:center;color:var(--muted);font-size:13px;padding:24px 0;}
 .src-note{font-size:11px;color:var(--muted2);margin:6px 0 0;}
@@ -159,13 +183,24 @@ function trendBadge(t){
   return '';
 }
 
+// 把含多個句子的說明文字拆成bullet list；只有一句就照舊用單行文字，
+// 避免短說明也被硬拆成只有一項的清單顯得多餘。
+function bulletize(text){
+  if(!text) return '';
+  const parts = String(text).split(/(?<=[。；])/).map(s=>s.trim()).filter(Boolean);
+  if(parts.length<=1) return esc(text);
+  return `<ul class="mini-list">${parts.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>`;
+}
+
+// 卡片結構固定順序：能源類別→數值&%→資料時間→內容說明→趨勢說明
 function rankCard(item, cls){
   return `<div class="rank-card ${cls}">
     <div class="rank-num">占比 Top${item.rank||''}</div>
     <div class="rank-name">${esc(item.name)}</div>
     <div class="rank-value ${cls}">${item.share_pct!=null?item.share_pct+'%':'—'}${trendBadge(item.trend)}</div>
-    ${item.note?`<div class="rank-note">${esc(item.note)}</div>`:''}
-    ${item.trend_reason?`<div class="rank-reason"><b>趨勢原因：</b>${esc(item.trend_reason)}</div>`:''}
+    ${item.data_year?`<div class="rank-time">🗓 ${esc(item.data_year)}</div>`:''}
+    ${item.note?`<div class="rank-note">${bulletize(item.note)}</div>`:''}
+    ${item.trend_reason?`<div class="rank-reason"><b>趨勢原因：</b>${bulletize(item.trend_reason)}</div>`:''}
   </div>`;
 }
 
@@ -173,7 +208,8 @@ function renewCard(item){
   return `<div class="rank-card renew">
     <div class="rank-name">${esc(item.name)}</div>
     <div class="rank-value renew">${item.share_pct!=null?item.share_pct+'%':'—'}</div>
-    ${item.note?`<div class="rank-note">${esc(item.note)}</div>`:''}
+    ${item.data_year?`<div class="rank-time">🗓 ${esc(item.data_year)}</div>`:''}
+    ${item.note?`<div class="rank-note">${bulletize(item.note)}</div>`:''}
   </div>`;
 }
 
@@ -199,7 +235,9 @@ function trendChartSvg(trend){
   const linesHtml = trend.series.map(s=>{
     const color = SERIES_COLORS[s.name]||'var(--muted)';
     const pts = s.values.map((v,i)=>v!=null?`${px(i)},${py(v)}`:null).filter(Boolean).join(' ');
-    const dots = s.values.map((v,i)=>v!=null?`<circle cx="${px(i)}" cy="${py(v)}" r="2.5" fill="${color}"/>`:'').join('');
+    // 每個資料點疊一個透明的大範圍hit-circle承載<title>，滑鼠移到附近就能
+    // 看到瀏覽器原生tooltip顯示年份/類別/%數，不用額外寫JS事件處理。
+    const dots = s.values.map((v,i)=>v!=null?`<circle cx="${px(i)}" cy="${py(v)}" r="7" fill="transparent" style="cursor:pointer;"><title>${esc(s.name)}　${esc(String(years[i]))}年：${v}%</title></circle><circle cx="${px(i)}" cy="${py(v)}" r="2.5" fill="${color}" style="pointer-events:none;"/>`:'').join('');
     return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/>${dots}`;
   }).join('');
   const legendHtml = trend.series.map(s=>`<span><span class="trend-sw" style="background:${SERIES_COLORS[s.name]||'var(--muted)'}"></span>${esc(s.name)}</span>`).join('');
@@ -213,18 +251,19 @@ function trendChartSvg(trend){
   </div>`;
 }
 
-// ── 各能源類型的全球主要國家占比 ──
+// ── 各能源類型的全球主要國家占比（國名一行、%與補充說明另起一行，
+//    避免長文字擠在同一行造成視覺混亂） ──
 function countryBreakdownBlock(items){
   const withCountries = (items||[]).filter(it=>(it.top_countries||[]).length);
   if(!withCountries.length) return '';
   const cols = withCountries.map(it=>{
     const rows = it.top_countries.map((c,i)=>`
-      <div style="display:flex;justify-content:space-between;font-size:11.5px;padding:3px 0;border-bottom:1px solid var(--card2);">
-        <span>${i+1}. ${esc(c.country)}</span>
-        <span style="color:var(--muted);">${c.value!=null?esc(String(c.value)):''}</span>
+      <div class="cb-row">
+        <div class="cb-country">${i+1}. ${esc(c.country)}</div>
+        ${c.value!=null?`<div class="cb-value">${esc(String(c.value))}</div>`:''}
       </div>`).join('');
-    return `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow);">
-      <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:${SERIES_COLORS[it.name]||'var(--text)'};">${esc(it.name)} — 全球主要國家</div>
+    return `<div class="cb-card">
+      <div class="cb-hd" style="color:${SERIES_COLORS[it.name]||'var(--text)'};">${esc(it.name)} — 全球主要國家</div>
       ${rows}
     </div>`;
   }).join('');
@@ -236,8 +275,20 @@ function caseCard(item){
   return `<div class="case-card">
     <div class="case-name">${esc(item.name)}</div>
     ${item.date?`<div class="case-date">🕐 ${esc(item.date)}${item.region?' · '+esc(item.region):''}</div>`:''}
-    <div class="case-desc">${esc(item.desc)}</div>
+    <div class="case-desc">${bulletize(item.desc)}</div>
     ${item.src_url?`<div class="case-src">來源：<a href="${item.src_url}" target="_blank" rel="noopener">${esc(item.src_label||'連結')}</a></div>`:''}
+  </div>`;
+}
+
+// 核能國別檔案卡：營運狀況／營運計畫／核能政策固定分區呈現
+function nuclearProfileCard(p){
+  return `<div class="case-card">
+    <div class="case-name">${esc(p.country)}${p.national_share_pct!=null?` <span style="color:var(--nuclear);font-weight:700;">核能占比 ${p.national_share_pct}%</span>`:''}</div>
+    ${p.as_of?`<div class="case-date">🗓 ${esc(p.as_of)}</div>`:''}
+    ${p.operating_status?`<div class="np-block"><b>營運狀況</b>${bulletize(p.operating_status)}</div>`:''}
+    ${p.operating_plans?`<div class="np-block"><b>營運計畫</b>${bulletize(p.operating_plans)}</div>`:''}
+    ${p.policy?`<div class="np-block"><b>核能政策</b>${bulletize(p.policy)}</div>`:''}
+    ${p.note?`<div class="np-block"><b>備註</b>${bulletize(p.note)}</div>`:''}
   </div>`;
 }
 
@@ -284,24 +335,20 @@ async function init(){
   const nuclear = data.nuclear||{};
   document.getElementById('nuclear-meta').textContent = nuclear.as_of ? `資料時間點：${nuclear.as_of}` : '';
   document.getElementById('nuclear-tw-banner').innerHTML = nuclear.taiwan_status
-    ? `🇹🇼 台灣現況：${esc(nuclear.taiwan_status)}${nuclear.taiwan_share_pct!=null?`（占比 <span class="big" style="color:var(--nuclear);">${nuclear.taiwan_share_pct}%</span>）`:''}`
+    ? `🇹🇼 台灣現況　核能占比 <span class="big" style="color:var(--nuclear);">${nuclear.taiwan_share_pct!=null?nuclear.taiwan_share_pct+'%':'—'}</span>
+       <div style="margin-top:6px;">${bulletize(nuclear.taiwan_status)}</div>`
     : '';
   document.getElementById('nuclear-country-grid').innerHTML = (nuclear.global_ranking||[]).length
     ? nuclear.global_ranking.map(c=>`<div class="rank-card nuclear">
         <div class="rank-num">發電量 Top${c.rank||''}</div>
         <div class="rank-name">${esc(c.country)}</div>
         <div class="rank-value nuclear">${esc(c.value||'—')}</div>
-        ${c.note?`<div class="rank-note">${esc(c.note)}</div>`:''}
+        ${c.note?`<div class="rank-note">${bulletize(c.note)}</div>`:''}
       </div>`).join('')
     : '<div class="empty-state">尚無資料</div>';
-  document.getElementById('nuclear-plants-block').innerHTML = (nuclear.plants||[]).length
-    ? `<div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🏗 代表性電廠概況</div>
-       <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${nuclear.plants.map(p=>`
-        <div class="case-card">
-          <div class="case-name">${esc(p.name)}（${esc(p.country)}）</div>
-          <div class="case-date">🏗 ${esc(p.units||'')}機組 · ${esc(p.capacity||'')} · ${esc(p.status||'')}</div>
-          ${p.note?`<div class="case-desc">${esc(p.note)}</div>`:''}
-        </div>`).join('')}</div>` : '';
+  document.getElementById('nuclear-plants-block').innerHTML = (nuclear.country_profiles||[]).length
+    ? `<div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🏗 各國核能營運狀況／計畫／政策</div>
+       <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">${nuclear.country_profiles.map(nuclearProfileCard).join('')}</div>` : '';
   document.getElementById('nuclear-src').innerHTML = nuclear.source_url
     ? `📌 來源：<a href="${nuclear.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(nuclear.source_label||'')}</a>` : '';
 
@@ -314,30 +361,37 @@ async function init(){
         <div class="rank-num">占比 Top${c.rank||''}</div>
         <div class="rank-name">${esc(c.country)}</div>
         <div class="rank-value fossil">${esc(c.value||'—')}</div>
-        ${c.note?`<div class="rank-note">${esc(c.note)}</div>`:''}
+        ${c.note?`<div class="rank-note">${bulletize(c.note)}</div>`:''}
       </div>`).join('')
     : '<div class="empty-state">尚無資料</div>';
   document.getElementById('carbon-src').innerHTML = carbon.source_url
     ? `📌 來源：<a href="${carbon.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(carbon.source_label||'')}</a>` : '';
 
   const tps = data.taiwan_power_shortage||{};
+  const risk = tps.risk_assessment||{};
+  const riskCls = risk.level==='high'?'risk-high':risk.level==='low'?'risk-low':'risk-mid';
+  const riskBannerHtml = risk.label ? `<div class="total-banner">
+      綜合風險燈號　<span class="risk-badge ${riskCls}">${esc(risk.label)}</span>
+      ${risk.rationale?`<div style="margin-top:6px;">${bulletize(risk.rationale)}</div>`:''}
+      ${risk.criteria_note?`<div style="margin-top:5px;font-size:11px;color:var(--muted2);">ℹ️ ${esc(risk.criteria_note)}</div>`:''}
+    </div>` : '';
   const tpsFacts = [
     tps.reserve_margin_note && {lbl:'📊 備轉容量率', val:tps.reserve_margin_note},
     tps.supply_demand_note && {lbl:'⚡ 供需數字', val:tps.supply_demand_note},
     tps.incident_note && {lbl:'🚨 近年事件記錄', val:tps.incident_note},
   ].filter(Boolean);
   const tpsFactsHtml = tpsFacts.length ? tpsFacts.map(f=>`
-    <div class="case-card"><div class="case-name">${f.lbl}</div><div class="case-desc">${esc(f.val)}</div></div>`).join('') : '';
+    <div class="case-card"><div class="case-name">${f.lbl}</div><div class="case-desc">${bulletize(f.val)}</div></div>`).join('') : '';
   const tpsViewsHtml = (tps.viewpoints||[]).length ? `
     <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🗣 各方說法（並陳，不評斷）</div>
     <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${tps.viewpoints.map(v=>`
       <div class="case-card">
         <div class="case-name">${esc(v.source)}</div>
-        <div class="case-desc">${esc(v.desc)}</div>
+        <div class="case-desc">${bulletize(v.desc)}</div>
         ${v.src_url?`<div class="case-src">來源：<a href="${v.src_url}" target="_blank" rel="noopener">${esc(v.src_label||'連結')}</a></div>`:''}
       </div>`).join('')}</div>` : '';
-  document.getElementById('taiwan-power-block').innerHTML = (tpsFactsHtml || tpsViewsHtml)
-    ? `<div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:4px;">${tpsFactsHtml}</div>${tpsViewsHtml}`
+  document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsFactsHtml || tpsViewsHtml)
+    ? `${riskBannerHtml}<div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:4px;">${tpsFactsHtml}</div>${tpsViewsHtml}`
     : '<div class="empty-state">尚無資料</div>';
 
   const sm = data.smart_management||{};
