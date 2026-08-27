@@ -157,6 +157,9 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
   <div class="sec-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;color:var(--muted);">只整理各方數據與官方說法，不下結論</div>
   <div id="taiwan-power-block"></div>
 
+  <div class="sec-title">🤖 AI發展對能源用量的影響<span class="sec-meta" id="ai-energy-meta"></span></div>
+  <div id="ai-energy-block"></div>
+
   <div class="sec-title">⚡ 電力管理現況 — 智慧化發展</div>
   <div class="case-cols">
     <div>
@@ -225,19 +228,24 @@ function trendChartSvg(trend){
   const yMax = Math.ceil(maxV/5)*5 + 5;
   const px = i => padL + i/(years.length-1||1)*(W-padL-padR);
   const py = v => H-padB - (v/yMax)*(H-padT-padB);
+  // SVG viewBox寬640實際渲染寬約900+px（縮放約1.45倍），字體要用viewBox
+  // 座標系的較小數值才能讓實際渲染大小對齊卡片內文(約11px)。
   const gridHtml = [0,1,2,3,4].map(i=>{
     const v = yMax*i/4;
     const y = py(v);
     return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
-      <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="9" fill="var(--muted2)">${Math.round(v)}%</text>`;
+      <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="7.5" fill="var(--muted2)">${Math.round(v)}%</text>`;
   }).join('');
-  const xLabelsHtml = years.map((y,i)=>`<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="9" fill="var(--muted2)">${y}</text>`).join('');
+  const xLabelsHtml = years.map((y,i)=>`<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="7.5" fill="var(--muted2)">${y}</text>`).join('');
   const linesHtml = trend.series.map(s=>{
     const color = SERIES_COLORS[s.name]||'var(--muted)';
     const pts = s.values.map((v,i)=>v!=null?`${px(i)},${py(v)}`:null).filter(Boolean).join(' ');
     // 每個資料點疊一個透明的大範圍hit-circle承載<title>，滑鼠移到附近就能
     // 看到瀏覽器原生tooltip顯示年份/類別/%數，不用額外寫JS事件處理。
-    const dots = s.values.map((v,i)=>v!=null?`<circle cx="${px(i)}" cy="${py(v)}" r="7" fill="transparent" style="cursor:pointer;"><title>${esc(s.name)}　${esc(String(years[i]))}年：${v}%</title></circle><circle cx="${px(i)}" cy="${py(v)}" r="2.5" fill="${color}" style="pointer-events:none;"/>`:'').join('');
+    // 注意：SVG預設pointer-events是visiblePainted，fill="transparent"不算
+    // 「已上色」，不加pointer-events="all"的話這個hit-circle根本收不到
+    // hover事件——這是上一版tooltip滑過去沒反應的真正原因。
+    const dots = s.values.map((v,i)=>v!=null?`<circle cx="${px(i)}" cy="${py(v)}" r="7" fill="transparent" pointer-events="all" style="cursor:pointer;"><title>${esc(s.name)}　${esc(String(years[i]))}年：${v}%</title></circle><circle cx="${px(i)}" cy="${py(v)}" r="2.5" fill="${color}" style="pointer-events:none;"/>`:'').join('');
     return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/>${dots}`;
   }).join('');
   const legendHtml = trend.series.map(s=>`<span><span class="trend-sw" style="background:${SERIES_COLORS[s.name]||'var(--muted)'}"></span>${esc(s.name)}</span>`).join('');
@@ -277,6 +285,16 @@ function caseCard(item){
     ${item.date?`<div class="case-date">🕐 ${esc(item.date)}${item.region?' · '+esc(item.region):''}</div>`:''}
     <div class="case-desc">${bulletize(item.desc)}</div>
     ${item.src_url?`<div class="case-src">來源：<a href="${item.src_url}" target="_blank" rel="noopener">${esc(item.src_label||'連結')}</a></div>`:''}
+  </div>`;
+}
+
+// AI發展對能源用量影響：AI發展狀況／可用能源狀況固定分區呈現
+function aiEnergyCard(p){
+  return `<div class="case-card">
+    <div class="case-name">${esc(p.country)}</div>
+    ${p.as_of?`<div class="case-date">🗓 ${esc(p.as_of)}</div>`:''}
+    ${p.ai_development_status?`<div class="np-block"><b>AI發展狀況</b>${bulletize(p.ai_development_status)}</div>`:''}
+    ${p.energy_availability?`<div class="np-block"><b>可用能源狀況</b>${bulletize(p.energy_availability)}</div>`:''}
   </div>`;
 }
 
@@ -354,7 +372,9 @@ async function init(){
 
   const carbon = data.carbon||{};
   document.getElementById('carbon-total').innerHTML = carbon.global_total
-    ? `全球碳排放總量 <span class="big" style="color:var(--fossil);">${esc(carbon.global_total)}</span>　${esc(carbon.global_trend_note||'')}${carbon.taiwan_total?`<br>🇹🇼 台灣：${esc(carbon.taiwan_total)} ${esc(carbon.taiwan_note||'')}`:''}`
+    ? `全球碳排放總量 <span class="big" style="color:var(--fossil);">${esc(carbon.global_total)}</span>
+       ${carbon.global_trend_note?`<div style="margin-top:5px;">${bulletize(carbon.global_trend_note)}</div>`:''}
+       ${carbon.taiwan_total?`<div style="margin-top:8px;">🇹🇼 台灣：<b>${esc(carbon.taiwan_total)}</b>${carbon.taiwan_note?`<div style="margin-top:3px;">${bulletize(carbon.taiwan_note)}</div>`:''}</div>`:''}`
     : '';
   document.getElementById('carbon-country-grid').innerHTML = (carbon.country_ranking||[]).length
     ? carbon.country_ranking.map(c=>`<div class="rank-card fossil">
@@ -362,6 +382,8 @@ async function init(){
         <div class="rank-name">${esc(c.country)}</div>
         <div class="rank-value fossil">${esc(c.value||'—')}</div>
         ${c.note?`<div class="rank-note">${bulletize(c.note)}</div>`:''}
+        ${c.main_source?`<div class="np-block"><b>碳排主因</b>${bulletize(c.main_source)}</div>`:''}
+        ${c.policy?`<div class="rank-reason"><b>對應政策：</b>${bulletize(c.policy)}</div>`:''}
       </div>`).join('')
     : '<div class="empty-state">尚無資料</div>';
   document.getElementById('carbon-src').innerHTML = carbon.source_url
@@ -392,6 +414,14 @@ async function init(){
       </div>`).join('')}</div>` : '';
   document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsFactsHtml || tpsViewsHtml)
     ? `${riskBannerHtml}<div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:4px;">${tpsFactsHtml}</div>${tpsViewsHtml}`
+    : '<div class="empty-state">尚無資料</div>';
+
+  const aiEnergy = data.ai_energy_impact||{};
+  document.getElementById('ai-energy-meta').textContent = aiEnergy.as_of ? `資料時間點：${aiEnergy.as_of}` : '';
+  document.getElementById('ai-energy-block').innerHTML = (aiEnergy.country_profiles||[]).length
+    ? `${aiEnergy.intro_note?`<div class="total-banner">${bulletize(aiEnergy.intro_note)}</div>`:''}
+       <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">${aiEnergy.country_profiles.map(aiEnergyCard).join('')}</div>
+       ${aiEnergy.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${aiEnergy.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(aiEnergy.source_label||'')}</a></div>`:''}`
     : '<div class="empty-state">尚無資料</div>';
 
   const sm = data.smart_management||{};
