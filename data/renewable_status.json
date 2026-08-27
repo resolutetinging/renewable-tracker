@@ -1,31 +1,449 @@
 {
   "last_updated": "2026-08-27",
   "global_mix": {
-    "as_of": "2025年（Ember GER2026，2026-04-21發布）",
+    "as_of": "煤炭／天然氣為2025年確定數字（Ember GER2026）；水力／核能／風力／太陽能為2024年數字（Ember官方逐項2025年細分尚未完整發布，v1原標示2025年有誤，已更正）",
     "source_label": "Ember Global Electricity Review 2026",
     "source_url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/",
     "milestone_note": "🎉 再生能源合計33.8%已超越煤炭33.0%，是現代電力系統史上首次（Ember，2025年資料）",
-    "cross_ref_note": "IEA《Electricity 2026》另一套統計口徑：煤炭34%／天然氣21%／再生能源合計34%／低碳能源(再生+核能)合計43%——跟Ember數字有零點幾個百分點差異，屬統計方法論差異非查證錯誤，兩來源並陳供參考",
+    "cross_ref_note": "IEA《Electricity 2026》另一套統計口徑：煤炭34%／天然氣21%／再生能源合計34%／低碳能源(再生+核能)合計43%——跟Ember數字有零點幾個百分點差異，屬統計方法論差異非查證錯誤，兩來源並陳供參考。另外，太陽能／風力／核能2025年可反推估算值分別約8.7%／8.5%／8.9%（由絕對發電量TWh變化反推），但因反推涉及複合誤差，本表仍採用直接查證到的2024年官方數字，不用反推值取代。",
     "items": [
-      {"rank":1,"name":"煤炭","share_pct":33.0,"trend":"down","kind":"fossil","note":"首次跌破三分之一；較2024年-0.6%（-63 TWh）"},
-      {"rank":2,"name":"天然氣","share_pct":21.8,"trend":"down","kind":"fossil","note":"較2020年23.9%連續5年下滑；2025單年+0.5%（+36 TWh）"},
-      {"rank":3,"name":"水力","share_pct":14.3,"trend":"flat","kind":"renew","note":"全球最大低碳電力單項來源；數字精確度為約略值（查證時標註可能沿用2024年引用值）"},
-      {"rank":4,"name":"核能","share_pct":9.0,"trend":"up","kind":"nuclear","note":"創歷史新高2,812 TWh，較2024年+1.3%"},
-      {"rank":5,"name":"風力","share_pct":8.1,"trend":"up","kind":"renew","note":"較2024年+8.2%（+205 TWh）"},
-      {"rank":6,"name":"太陽能","share_pct":6.9,"trend":"up","kind":"renew","note":"較2024年+30%（+636 TWh），成長最快，單獨貢獻全球用電成長的75%"}
+      {
+        "rank": 1,
+        "name": "煤炭",
+        "share_pct": 33.0,
+        "trend": "down",
+        "kind": "fossil",
+        "note": "首次跌破三分之一；較2024年-0.6%（-63 TWh）【2025年數字】",
+        "trend_reason": "全球降幅主要來自再生能源取代效應，而非中國主動削減——中國「十五五」規劃(2026-2030)雖將非化石能源發電占比目標由42.3%提高到50%，卻同時把煤炭政策由「達峰後下降」改為「促進煤炭消費達峰」，維持煤炭高原期",
+        "top_countries": [
+          {
+            "country": "中國",
+            "value": "5,775 TWh（55.6%）"
+          },
+          {
+            "country": "印度",
+            "value": "1,516.9 TWh（14.6%）"
+          },
+          {
+            "country": "美國",
+            "value": "652.2 TWh（6.3%）"
+          },
+          {
+            "country": "印尼",
+            "value": "259.7 TWh（2.5%）"
+          },
+          {
+            "country": "日本",
+            "value": "258.7 TWh（2.5%）"
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "name": "天然氣",
+        "share_pct": 21.8,
+        "trend": "down",
+        "kind": "fossil",
+        "note": "較2020年23.9%連續5年下滑；2025單年+0.5%（+36 TWh）【2025年數字】",
+        "trend_reason": "太陽能發電成長速度是天然氣的17倍（2025年太陽能新增636TWh、天然氣僅新增38TWh）；歐盟RePowerEU計畫（2022年俄烏戰爭後推出）修訂再生能源指令、目標2030年占比42.5%，加速各國擺脫天然氣進口依賴。降幅最大5國：日本(-127TWh)、英國(-85TWh)、印度(-69TWh)、西班牙(-59TWh)、義大利(-48TWh)",
+        "top_countries": [
+          {
+            "country": "美國",
+            "value": "約1,865 TWh（占全球26%）"
+          },
+          {
+            "country": "俄羅斯",
+            "value": "約513 TWh（2023年數字，查不到2024年官方確切值）"
+          },
+          {
+            "country": "伊朗",
+            "value": "約340–367 TWh"
+          },
+          {
+            "country": "日本",
+            "value": "約304 TWh"
+          },
+          {
+            "country": "中國",
+            "value": "283 TWh（僅占中國自身發電量3%）"
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "name": "水力",
+        "share_pct": 14.3,
+        "trend": "flat",
+        "kind": "renew",
+        "note": "全球最大低碳電力單項來源【2024年數字，非2025年】",
+        "top_countries": [
+          {
+            "country": "中國",
+            "value": "約1,350–1,480 TWh（不同來源有落差）"
+          },
+          {
+            "country": "巴西",
+            "value": "約388–413 TWh"
+          },
+          {
+            "country": "加拿大",
+            "value": "約345 TWh（近年因乾旱條件下滑）"
+          },
+          {
+            "country": "美國",
+            "value": "242 TWh（較2023年-1%）"
+          },
+          {
+            "country": "俄羅斯",
+            "value": "約180–196.5 TWh"
+          }
+        ]
+      },
+      {
+        "rank": 4,
+        "name": "核能",
+        "share_pct": 9.0,
+        "trend": "up",
+        "kind": "nuclear",
+        "note": "創歷史新高2,812 TWh，較2024年+1.3%【2024年占比數字，非2025年；2025年反推估算約8.9%】"
+      },
+      {
+        "rank": 5,
+        "name": "風力",
+        "share_pct": 8.1,
+        "trend": "up",
+        "kind": "renew",
+        "note": "較2024年+8.2%（+205 TWh）【2024年占比數字，非2025年；2025年反推估算約8.5%】",
+        "trend_reason": "歐盟RePowerEU計畫、中國「十五五」規劃（目標2030年風力+太陽能裝置容量達2,800GW）等政策目標驅動裝置量持續擴大",
+        "top_countries": [
+          {
+            "country": "中國",
+            "value": "997.04 TWh"
+          },
+          {
+            "country": "美國",
+            "value": "451.90 TWh"
+          },
+          {
+            "country": "德國",
+            "value": "134.30 TWh"
+          },
+          {
+            "country": "巴西",
+            "value": "105.61 TWh"
+          },
+          {
+            "country": "印度",
+            "value": "90.73 TWh"
+          }
+        ]
+      },
+      {
+        "rank": 6,
+        "name": "太陽能",
+        "share_pct": 6.9,
+        "trend": "up",
+        "kind": "renew",
+        "note": "較2024年+30%（+636 TWh），成長最快，單獨貢獻全球用電成長的75%【2024年占比數字，非2025年；Ember原文另引述2025年太陽能達8.7%】",
+        "trend_reason": "2025年太陽能新增發電量636TWh，成長速度為天然氣的17倍；中國2025年太陽能新增336TWh（占全球新增近半），印度太陽能新增裝置容量首度超越美國；歐盟太陽能於2024年首度在電力結構中超越煤炭（11% vs 不到10%）",
+        "top_countries": [
+          {
+            "country": "中國",
+            "value": "839.04 TWh（占全球太陽能發電39%）"
+          },
+          {
+            "country": "美國",
+            "value": "303.75 TWh"
+          },
+          {
+            "country": "印度",
+            "value": "135.37 TWh"
+          },
+          {
+            "country": "日本",
+            "value": "97.12 TWh"
+          },
+          {
+            "country": "德國",
+            "value": "72.43 TWh"
+          }
+        ]
+      }
+    ]
+  },
+  "historical_trend": {
+    "as_of": "關鍵年份快照，非完整逐年序列（查證時IEA/Ember/OWID逐年完整表格皆無法取得）",
+    "source_label": "Ember Global Electricity Review系列報告 + Carbon Brief",
+    "source_url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/",
+    "years": [
+      2015,
+      2023,
+      2024,
+      2025
+    ],
+    "series": [
+      {
+        "name": "煤炭",
+        "values": [
+          38.7,
+          null,
+          34,
+          33.0
+        ]
+      },
+      {
+        "name": "天然氣",
+        "values": [
+          null,
+          null,
+          22,
+          21.8
+        ]
+      },
+      {
+        "name": "核能",
+        "values": [
+          null,
+          null,
+          9.0,
+          8.9
+        ]
+      },
+      {
+        "name": "水力",
+        "values": [
+          null,
+          14.3,
+          14.3,
+          14.0
+        ]
+      },
+      {
+        "name": "風力",
+        "values": [
+          null,
+          7.8,
+          8.1,
+          8.5
+        ]
+      },
+      {
+        "name": "太陽能",
+        "values": [
+          null,
+          5.5,
+          6.9,
+          8.7
+        ]
+      }
     ]
   },
   "renewable_breakdown": {
-    "as_of": "2025年（Ember GER2026，2026-04-21發布）",
-    "source_label": "Ember Global Electricity Review 2026",
-    "source_url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/",
-    "total_share_pct": 33.8,
-    "total_trend_note": "首度超越煤炭（33.0%），是現代電力系統史上首次；十年來自2015年23%成長到2025年33.8%（+10.8個百分點）",
-    "items": [
-      {"name":"水力","share_pct":14.3,"note":"全球最大低碳電力單項來源（數字精確度為約略值）"},
-      {"name":"風力","share_pct":8.1,"note":"2025單年+205 TWh（+8.2%）"},
-      {"name":"太陽能","share_pct":6.9,"note":"2025單年+636 TWh（+30%），成長最快"},
-      {"name":"其他再生能源（生質能／地熱等）","share_pct":null,"note":"查不到個別公開拆解百分比，Ember報告歸入再生能源大類未拆分，不採用推算值"}
+    "global": {
+      "as_of": "整體占比33.8%為2025年確定數字（Ember GER2026）；水力/風力/太陽能個別細分為2024年數字（Ember逐項2025細分尚未完整發布）",
+      "source_label": "Ember Global Electricity Review 2026",
+      "source_url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/",
+      "total_share_pct": 33.8,
+      "total_trend_note": "首度超越煤炭（33.0%），是現代電力系統史上首次；十年來自2015年23%成長到2025年33.8%（+10.8個百分點）",
+      "items": [
+        {
+          "name": "水力",
+          "share_pct": 14.3,
+          "note": "全球最大低碳電力單項來源（數字精確度為約略值）【2024年數字】"
+        },
+        {
+          "name": "風力",
+          "share_pct": 8.1,
+          "note": "2024年+8.2%（+205 TWh）【2024年數字，2025年反推估算約8.5%】"
+        },
+        {
+          "name": "太陽能",
+          "share_pct": 6.9,
+          "note": "2024年+30%（+636 TWh），成長最快【2024年數字；Ember原文另引述2025年太陽能達8.7%】"
+        },
+        {
+          "name": "其他再生能源（生質能／地熱等）",
+          "share_pct": null,
+          "note": "查不到個別公開拆解百分比，Ember報告歸入再生能源大類未拆分，不採用推算值"
+        }
+      ]
+    },
+    "taiwan": {
+      "as_of": "占比：民國114年(2025)能源署口徑13.3%／台電系統口徑12.7%（兩者定義範圍不同，並列供參考）；細分項目為2023/8–2024/7滾動12個月數字",
+      "source_label": "經濟部能源署",
+      "source_url": "https://www.re.org.tw/news/more.aspx?cid=198&id=7042",
+      "total_share_pct": 13.3,
+      "total_trend_note": "原訂2025年達20%政策目標未達標，經濟部已修正時程預估遞延至2026年11月；105年(2016)燃煤45.9%／核能12.0% → 114年(2025)燃煤35.3%／核能1.1%，燃氣由31.5%升至47.7%",
+      "items": [
+        {
+          "name": "太陽能",
+          "share_pct": 4.92,
+          "note": "2023/8–2024/7滾動12個月，能源署能源統計專區"
+        },
+        {
+          "name": "風力",
+          "share_pct": 2.78,
+          "note": "同上期間"
+        },
+        {
+          "name": "水力",
+          "share_pct": 2.56,
+          "note": "同上期間"
+        },
+        {
+          "name": "其他（垃圾、沼氣等）",
+          "share_pct": 1.23,
+          "note": "同上期間"
+        }
+      ]
+    }
+  },
+  "nuclear": {
+    "as_of": "全球：2024年（World Nuclear Association／IAEA PRIS，2025-09-30更新）；台灣：至2025-05-17",
+    "source_label": "World Nuclear Association — Nuclear Generation by Country",
+    "source_url": "https://world-nuclear.org/information-library/facts-and-figures/nuclear-generation-by-country",
+    "global_ranking": [
+      {
+        "rank": 1,
+        "country": "美國",
+        "value": "782.0 TWh",
+        "note": "占本國電力結構約18.2%；裝置容量97GW／94座反應爐（全球最大）"
+      },
+      {
+        "rank": 2,
+        "country": "中國",
+        "value": "417.5 TWh",
+        "note": "占本國電力結構僅約5%（總發電基數龐大）；裝置容量55GW／57座反應爐"
+      },
+      {
+        "rank": 3,
+        "country": "法國",
+        "value": "364.4 TWh",
+        "note": "占本國電力結構68.79%，全球占比最高；裝置容量63GW／57座反應爐"
+      },
+      {
+        "rank": 4,
+        "country": "俄羅斯",
+        "value": "202.1 TWh",
+        "note": "裝置容量27GW"
+      },
+      {
+        "rank": 5,
+        "country": "南韓",
+        "value": "179.4 TWh",
+        "note": "占本國電力結構約30%；裝置容量26GW"
+      },
+      {
+        "rank": 6,
+        "country": "日本",
+        "value": "84.9 TWh",
+        "note": ""
+      }
+    ],
+    "taiwan_status": "2025年5月17日核三2號機除役後正式進入「非核家園」，核能占比歸零。除役時程：核一廠2018-2019除役、核二廠2021-2023除役、核三廠2024-2025除役；核四廠（龍門）從未商轉，目前封存中，尚無明確重啟計畫",
+    "taiwan_share_pct": 0,
+    "plants": [
+      {
+        "country": "美國",
+        "name": "Palo Verde 核電廠",
+        "units": "3",
+        "capacity": "約3,937–4,000 MW",
+        "status": "運轉中（美國最大、全球第9大）",
+        "note": "1988年商轉，平均容量因數高達92%"
+      },
+      {
+        "country": "法國",
+        "name": "Gravelines 核電廠",
+        "units": "6",
+        "capacity": "5,460 MW",
+        "status": "運轉中",
+        "note": "1980–1985年間陸續商轉"
+      },
+      {
+        "country": "中國",
+        "name": "紅沿河核電廠",
+        "units": "6",
+        "capacity": "6,710 MW",
+        "status": "運轉中",
+        "note": "2022年6月全部機組達滿載運轉"
+      },
+      {
+        "country": "南韓",
+        "name": "Hanul 核電廠",
+        "units": "8",
+        "capacity": "9.14 GW",
+        "status": "運轉中",
+        "note": ""
+      },
+      {
+        "country": "俄羅斯",
+        "name": "Kalinin 核電廠",
+        "units": "4",
+        "capacity": "4,000 MW",
+        "status": "運轉中",
+        "note": "VVER型機組"
+      }
+    ]
+  },
+  "carbon": {
+    "as_of": "全球：2025年（Global Carbon Project，2025-11-13發布）；台灣：2024年（環境部氣候變遷署）",
+    "source_label": "Global Carbon Budget 2025",
+    "source_url": "https://globalcarbonbudget.org/fossil-fuel-co2-emissions-hit-record-high-in-2025/",
+    "global_total": "381億噸CO2（化石燃料）／422億噸CO2（含土地利用變化）",
+    "global_trend_note": "較2024年+1.1%，創歷史新高；近十年(2015-2024)年均成長率僅0.3%，遠低於前十年(2005-2014)的1.9%；全球剩餘1.5°C碳預算僅夠再排約4年",
+    "taiwan_total": "251.4百萬噸CO2e（2024年）",
+    "taiwan_note": "較2005基準年減少6.59%；人均12.90 tCO2eq/人/年，高於全球平均，主因能源結構高度依賴進口化石燃料（2025年火力發電占比達81.3%），核電歸零後火力吃重更深",
+    "country_ranking": [
+      {
+        "rank": 1,
+        "country": "中國",
+        "value": "約32%（12,289 Mt CO2）",
+        "note": "人均8.7噸/年；電力結構仍以煤炭為主，總量居高不下"
+      },
+      {
+        "rank": 2,
+        "country": "美國",
+        "value": "12.7%",
+        "note": "人均14.2噸/年，約全球均值3倍"
+      },
+      {
+        "rank": 3,
+        "country": "印度",
+        "value": "8.3%",
+        "note": "人均僅2.2噸/年，不到全球均值一半，反映發展階段能源消費強度較低"
+      },
+      {
+        "rank": 4,
+        "country": "歐盟（合併計）",
+        "value": "6.3%（2,426 Mt CO2）",
+        "note": ""
+      }
+    ]
+  },
+  "taiwan_power_shortage": {
+    "as_of": "2026年8月（台電、環境部、媒體公開資訊彙整）",
+    "reserve_margin_note": "政府2024-07-15公布預測：2024-2027年間有3年備轉容量率低於4%。2025-05-17核三2號機除役後至6-12日，備轉容量率一度5天落在7%；2025-09-17興達電廠氣爆事故後亮「警戒」橘燈，夜間備轉容量率一度降至約4%。台電董事長表示2024-2027供電壓力最大，夜間備轉容量率約7-8%，「有一點緊澀」",
+    "supply_demand_note": "2026年夏季日尖峰負載創新高，實測達4,143.1萬瓩；台電規劃新增裝置容量520萬瓩（興達新燃氣2、3號機＋台中新1、2號機）陸續試運轉。全國AI資料中心申請案79件、累計用電需求約4,758MW，已核准40案約3,033MW（約1.6倍馬鞍山核電廠裝置容量）；半導體業2026-2030規劃新增用電將超過5GW，是過去10年年均增量的2-2.5倍。經濟部能源署另指出：過去6年整體用電量僅溫和上漲6.5%，傳統產業用電減少部分被科技業增加抵銷",
+    "incident_note": "2022-03-03「303全台大停電」：興達電廠開關場人為操作失誤釀接地故障，影響549萬戶，約12小時復電（近年歷時最長一次）。2025-09-09「興達電廠氣爆」：2號燃氣機組試運轉管線洩漏起火，無人傷亡，事故後備轉容量率一度降至3%，台電宣布10天全國供電緊急狀態。2026-05-14南投多鄉鎮區域性停電約10分鐘（設備事故，非全國缺電）。查證範圍內未找到2024-2025年因「電力供給總量不足」而執行的全國性計畫性分區限電實際紀錄——僅查到多篇媒體對未來風險的預警報導，非已發生事件，特此區分",
+    "viewpoints": [
+      {
+        "source": "台電（官方立場）",
+        "desc": "全國總量層面主張「不缺電」，但坦承隨北東電網機組除役、未來僅剩和平電廠130萬瓩可用，「區域供需缺口已是事實」；2024-2027年供電壓力最大，夜間備轉容量率約7-8%「有一點緊澀」，但強調可維持備轉容量率目標",
+        "src_url": "https://www.taipower.com.tw/tc/news2.aspx?mid=225",
+        "src_label": "台電最新消息"
+      },
+      {
+        "source": "經濟部能源署（數據分析立場）",
+        "desc": "過去6年整體用電量僅溫和上漲6.5%，傳統產業用電減少部分被科技業增加抵銷；認為台灣真正缺乏的不是「電」本身，而是有韌性、調度彈性的「電網」",
+        "src_url": "https://www.cw.com.tw/article/5142154",
+        "src_label": "天下雜誌引述能源署"
+      },
+      {
+        "source": "產業界／法人疑慮",
+        "desc": "有分析指出燃氣、光電、離岸風電、核電建置進度均不如預期，預估2025-2028年間恐累計短缺235億度電；原規劃2,000MW光電案場仍有944MW缺口未補足。產業界認為政府用「總量科學指標」判定電力充足，但實務體感是從「綠電需求、夜間尖峰、電網穩定度」判斷，兩者判準基礎不同",
+        "src_url": "https://udn.com/news/story/7251/9580287",
+        "src_label": "聯合新聞網"
+      }
     ]
   },
   "smart_management": {

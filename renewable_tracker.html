@@ -4,7 +4,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%220.9em%22 font-size=%2290%22>🌱</text></svg>">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>再生能源追蹤器</title>
+<title>Renewable Tracker</title>
 <style>
 :root {
   --bg:#e8e4de;--surface:#f5f3f0;--card:#faf9f7;--card2:#f0ede9;
@@ -45,8 +45,17 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .rank-value.renew{color:var(--renew);}
 .rank-value.nuclear{color:var(--nuclear);}
 .rank-note{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5;}
+.rank-reason{font-size:11px;color:var(--text2);margin-top:6px;padding-top:6px;border-top:1px dashed var(--border2);line-height:1.55;}
+.rank-reason b{color:var(--smart);font-weight:700;}
 .rank-trend{font-size:11px;font-weight:600;margin-left:6px;}
 .trend-up{color:#306840;}.trend-down{color:#884040;}.trend-flat{color:var(--muted);}
+
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;font-size:11px;color:var(--muted);}
+.legend span{display:inline-flex;align-items:center;gap:5px;}
+.legend-sw{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
+.legend-sw.fossil{background:var(--fossil);}
+.legend-sw.renew{background:var(--renew);}
+.legend-sw.nuclear{background:var(--nuclear);}
 
 .total-banner{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:var(--text2);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .total-banner:empty{display:none;}
@@ -64,6 +73,12 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .case-src a{color:var(--smart);text-decoration:none;}
 .case-src a:hover{text-decoration:underline;}
 
+/* ── 歷年趨勢折線圖 ── */
+.trend-chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:14px;}
+.trend-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:11px;color:var(--text2);}
+.trend-legend span{display:inline-flex;align-items:center;gap:5px;}
+.trend-sw{width:14px;height:2.5px;border-radius:2px;flex-shrink:0;}
+
 .empty-state{text-align:center;color:var(--muted);font-size:13px;padding:24px 0;}
 .src-note{font-size:11px;color:var(--muted2);margin:6px 0 0;}
 footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;color:var(--muted2);}
@@ -72,7 +87,7 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
 <body>
 
 <header>
-  <div class="header-title">🌱 再生能源追蹤器</div>
+  <div class="header-title">🌱 Renewable Tracker</div>
   <div class="date-badge" id="date-badge">載入中…</div>
 </header>
 
@@ -84,15 +99,39 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
 <div id="content" class="hidden">
 
   <div class="sec-title">🌍 全球能源使用狀況<span class="sec-meta" id="mix-meta"></span></div>
+  <div class="legend"><span><span class="legend-sw fossil"></span>化石燃料（煤炭／天然氣）</span><span><span class="legend-sw nuclear"></span>核能</span><span><span class="legend-sw renew"></span>再生能源</span></div>
   <div class="total-banner" id="mix-milestone"></div>
   <div class="rank-grid" id="mix-grid"></div>
   <div class="src-note" id="mix-src"></div>
   <div class="src-note" id="mix-crossref" style="margin-top:2px;"></div>
+  <div id="trend-chart-block"></div>
+  <div id="country-breakdown-block"></div>
 
-  <div class="sec-title">♻️ 再生能源使用狀況<span class="sec-meta" id="renew-meta"></span></div>
-  <div class="total-banner" id="renew-total"></div>
-  <div class="rank-grid" id="renew-grid"></div>
-  <div class="src-note" id="renew-src"></div>
+  <div class="sec-title">♻️ 再生能源使用狀況</div>
+  <div class="case-col-hd" style="color:var(--renew);">🌍 全球占比<span class="sec-meta" id="renew-g-meta" style="margin-left:8px;"></span></div>
+  <div class="total-banner" id="renew-g-total"></div>
+  <div class="rank-grid" id="renew-g-grid"></div>
+  <div class="src-note" id="renew-g-src"></div>
+  <div class="case-col-hd" style="color:var(--renew);margin-top:18px;">🇹🇼 台灣占比<span class="sec-meta" id="renew-tw-meta" style="margin-left:8px;"></span></div>
+  <div class="total-banner" id="renew-tw-total"></div>
+  <div class="rank-grid" id="renew-tw-grid"></div>
+  <div class="src-note" id="renew-tw-src"></div>
+
+  <div class="sec-title">☢️ 核能專區</div>
+  <div class="sec-meta" id="nuclear-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;"></div>
+  <div class="total-banner" id="nuclear-tw-banner"></div>
+  <div class="rank-grid" id="nuclear-country-grid"></div>
+  <div id="nuclear-plants-block"></div>
+  <div class="src-note" id="nuclear-src"></div>
+
+  <div class="sec-title">🏭 碳排放與能源使用狀況</div>
+  <div class="total-banner" id="carbon-total"></div>
+  <div class="rank-grid" id="carbon-country-grid"></div>
+  <div class="src-note" id="carbon-src"></div>
+
+  <div class="sec-title">🔌 台灣真的缺電嗎？</div>
+  <div class="sec-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;color:var(--muted);">只整理各方數據與官方說法，不下結論</div>
+  <div id="taiwan-power-block"></div>
 
   <div class="sec-title">⚡ 電力管理現況 — 智慧化發展</div>
   <div class="case-cols">
@@ -122,10 +161,11 @@ function trendBadge(t){
 
 function rankCard(item, cls){
   return `<div class="rank-card ${cls}">
-    <div class="rank-num">#${item.rank||''}</div>
+    <div class="rank-num">占比 Top${item.rank||''}</div>
     <div class="rank-name">${esc(item.name)}</div>
     <div class="rank-value ${cls}">${item.share_pct!=null?item.share_pct+'%':'—'}${trendBadge(item.trend)}</div>
     ${item.note?`<div class="rank-note">${esc(item.note)}</div>`:''}
+    ${item.trend_reason?`<div class="rank-reason"><b>趨勢原因：</b>${esc(item.trend_reason)}</div>`:''}
   </div>`;
 }
 
@@ -135,6 +175,61 @@ function renewCard(item){
     <div class="rank-value renew">${item.share_pct!=null?item.share_pct+'%':'—'}</div>
     ${item.note?`<div class="rank-note">${esc(item.note)}</div>`:''}
   </div>`;
+}
+
+// ── 歷年趨勢折線圖（純SVG手刻，不依賴外部圖表庫，跟AI Tracker NVIDIA
+// 專區的diagram走同一套風格）──
+const SERIES_COLORS = {'煤炭':'#8a6040','天然氣':'#c09050','核能':'#6a7a8a','水力':'#4a90a0','風力':'#4a8a6a','太陽能':'#c0a030'};
+function trendChartSvg(trend){
+  if(!trend || !(trend.years||[]).length || !(trend.series||[]).length) return '';
+  const W=640,H=300,padL=36,padR=14,padT=14,padB=30;
+  const years = trend.years;
+  const allVals = trend.series.flatMap(s=>s.values.filter(v=>v!=null));
+  const maxV = Math.max(...allVals, 10);
+  const yMax = Math.ceil(maxV/5)*5 + 5;
+  const px = i => padL + i/(years.length-1||1)*(W-padL-padR);
+  const py = v => H-padB - (v/yMax)*(H-padT-padB);
+  const gridHtml = [0,1,2,3,4].map(i=>{
+    const v = yMax*i/4;
+    const y = py(v);
+    return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
+      <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="9" fill="var(--muted2)">${Math.round(v)}%</text>`;
+  }).join('');
+  const xLabelsHtml = years.map((y,i)=>`<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="9" fill="var(--muted2)">${y}</text>`).join('');
+  const linesHtml = trend.series.map(s=>{
+    const color = SERIES_COLORS[s.name]||'var(--muted)';
+    const pts = s.values.map((v,i)=>v!=null?`${px(i)},${py(v)}`:null).filter(Boolean).join(' ');
+    const dots = s.values.map((v,i)=>v!=null?`<circle cx="${px(i)}" cy="${py(v)}" r="2.5" fill="${color}"/>`:'').join('');
+    return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/>${dots}`;
+  }).join('');
+  const legendHtml = trend.series.map(s=>`<span><span class="trend-sw" style="background:${SERIES_COLORS[s.name]||'var(--muted)'}"></span>${esc(s.name)}</span>`).join('');
+  return `<div class="trend-chart-wrap">
+    <div class="sec-meta" style="margin-bottom:6px;">📈 歷年占比趨勢${trend.as_of?'（'+esc(trend.as_of)+'）':''}</div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;">
+      ${gridHtml}${xLabelsHtml}${linesHtml}
+    </svg>
+    <div class="trend-legend">${legendHtml}</div>
+    ${trend.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${trend.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(trend.source_label||'')}</a></div>`:''}
+  </div>`;
+}
+
+// ── 各能源類型的全球主要國家占比 ──
+function countryBreakdownBlock(items){
+  const withCountries = (items||[]).filter(it=>(it.top_countries||[]).length);
+  if(!withCountries.length) return '';
+  const cols = withCountries.map(it=>{
+    const rows = it.top_countries.map((c,i)=>`
+      <div style="display:flex;justify-content:space-between;font-size:11.5px;padding:3px 0;border-bottom:1px solid var(--card2);">
+        <span>${i+1}. ${esc(c.country)}</span>
+        <span style="color:var(--muted);">${c.value!=null?esc(String(c.value)):''}</span>
+      </div>`).join('');
+    return `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow);">
+      <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:${SERIES_COLORS[it.name]||'var(--text)'};">${esc(it.name)} — 全球主要國家</div>
+      ${rows}
+    </div>`;
+  }).join('');
+  return `<div class="sec-meta" style="margin:16px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🌐 依能源別的全球主要國家占比</div>
+    <div class="rank-grid">${cols}</div>`;
 }
 
 function caseCard(item){
@@ -168,17 +263,82 @@ async function init(){
   document.getElementById('mix-src').innerHTML = mix.source_url
     ? `📌 來源：<a href="${mix.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(mix.source_label||'')}</a>` : '';
   document.getElementById('mix-crossref').textContent = mix.cross_ref_note || '';
+  document.getElementById('trend-chart-block').innerHTML = trendChartSvg(data.historical_trend);
+  document.getElementById('country-breakdown-block').innerHTML = countryBreakdownBlock(mix.items);
 
-  const renew = data.renewable_breakdown||{};
-  document.getElementById('renew-meta').textContent = renew.as_of ? `資料時間點：${renew.as_of}` : '';
-  document.getElementById('renew-total').innerHTML = renew.total_share_pct!=null
-    ? `再生能源佔全球發電量 <span class="big">${renew.total_share_pct}%</span>　${esc(renew.total_trend_note||'')}`
+  function fillRenewBlock(prefix, block, unitLabel){
+    document.getElementById(prefix+'-meta').textContent = block.as_of ? `資料時間點：${block.as_of}` : '';
+    document.getElementById(prefix+'-total').innerHTML = block.total_share_pct!=null
+      ? `再生能源佔${unitLabel}發電量 <span class="big">${block.total_share_pct}%</span>　${esc(block.total_trend_note||'')}`
+      : '';
+    document.getElementById(prefix+'-grid').innerHTML = (block.items||[]).length
+      ? block.items.map(renewCard).join('')
+      : '<div class="empty-state">尚無資料</div>';
+    document.getElementById(prefix+'-src').innerHTML = block.source_url
+      ? `📌 來源：<a href="${block.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(block.source_label||'')}</a>` : '';
+  }
+  const renewData = data.renewable_breakdown||{};
+  fillRenewBlock('renew-g', renewData.global||{}, '全球');
+  fillRenewBlock('renew-tw', renewData.taiwan||{}, '台灣');
+
+  const nuclear = data.nuclear||{};
+  document.getElementById('nuclear-meta').textContent = nuclear.as_of ? `資料時間點：${nuclear.as_of}` : '';
+  document.getElementById('nuclear-tw-banner').innerHTML = nuclear.taiwan_status
+    ? `🇹🇼 台灣現況：${esc(nuclear.taiwan_status)}${nuclear.taiwan_share_pct!=null?`（占比 <span class="big" style="color:var(--nuclear);">${nuclear.taiwan_share_pct}%</span>）`:''}`
     : '';
-  document.getElementById('renew-grid').innerHTML = (renew.items||[]).length
-    ? renew.items.map(renewCard).join('')
+  document.getElementById('nuclear-country-grid').innerHTML = (nuclear.global_ranking||[]).length
+    ? nuclear.global_ranking.map(c=>`<div class="rank-card nuclear">
+        <div class="rank-num">發電量 Top${c.rank||''}</div>
+        <div class="rank-name">${esc(c.country)}</div>
+        <div class="rank-value nuclear">${esc(c.value||'—')}</div>
+        ${c.note?`<div class="rank-note">${esc(c.note)}</div>`:''}
+      </div>`).join('')
     : '<div class="empty-state">尚無資料</div>';
-  document.getElementById('renew-src').innerHTML = renew.source_url
-    ? `📌 來源：<a href="${renew.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(renew.source_label||'')}</a>` : '';
+  document.getElementById('nuclear-plants-block').innerHTML = (nuclear.plants||[]).length
+    ? `<div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🏗 代表性電廠概況</div>
+       <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${nuclear.plants.map(p=>`
+        <div class="case-card">
+          <div class="case-name">${esc(p.name)}（${esc(p.country)}）</div>
+          <div class="case-date">🏗 ${esc(p.units||'')}機組 · ${esc(p.capacity||'')} · ${esc(p.status||'')}</div>
+          ${p.note?`<div class="case-desc">${esc(p.note)}</div>`:''}
+        </div>`).join('')}</div>` : '';
+  document.getElementById('nuclear-src').innerHTML = nuclear.source_url
+    ? `📌 來源：<a href="${nuclear.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(nuclear.source_label||'')}</a>` : '';
+
+  const carbon = data.carbon||{};
+  document.getElementById('carbon-total').innerHTML = carbon.global_total
+    ? `全球碳排放總量 <span class="big" style="color:var(--fossil);">${esc(carbon.global_total)}</span>　${esc(carbon.global_trend_note||'')}${carbon.taiwan_total?`<br>🇹🇼 台灣：${esc(carbon.taiwan_total)} ${esc(carbon.taiwan_note||'')}`:''}`
+    : '';
+  document.getElementById('carbon-country-grid').innerHTML = (carbon.country_ranking||[]).length
+    ? carbon.country_ranking.map(c=>`<div class="rank-card fossil">
+        <div class="rank-num">占比 Top${c.rank||''}</div>
+        <div class="rank-name">${esc(c.country)}</div>
+        <div class="rank-value fossil">${esc(c.value||'—')}</div>
+        ${c.note?`<div class="rank-note">${esc(c.note)}</div>`:''}
+      </div>`).join('')
+    : '<div class="empty-state">尚無資料</div>';
+  document.getElementById('carbon-src').innerHTML = carbon.source_url
+    ? `📌 來源：<a href="${carbon.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(carbon.source_label||'')}</a>` : '';
+
+  const tps = data.taiwan_power_shortage||{};
+  const tpsFacts = [
+    tps.reserve_margin_note && {lbl:'📊 備轉容量率', val:tps.reserve_margin_note},
+    tps.supply_demand_note && {lbl:'⚡ 供需數字', val:tps.supply_demand_note},
+    tps.incident_note && {lbl:'🚨 近年事件記錄', val:tps.incident_note},
+  ].filter(Boolean);
+  const tpsFactsHtml = tpsFacts.length ? tpsFacts.map(f=>`
+    <div class="case-card"><div class="case-name">${f.lbl}</div><div class="case-desc">${esc(f.val)}</div></div>`).join('') : '';
+  const tpsViewsHtml = (tps.viewpoints||[]).length ? `
+    <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🗣 各方說法（並陳，不評斷）</div>
+    <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${tps.viewpoints.map(v=>`
+      <div class="case-card">
+        <div class="case-name">${esc(v.source)}</div>
+        <div class="case-desc">${esc(v.desc)}</div>
+        ${v.src_url?`<div class="case-src">來源：<a href="${v.src_url}" target="_blank" rel="noopener">${esc(v.src_label||'連結')}</a></div>`:''}
+      </div>`).join('')}</div>` : '';
+  document.getElementById('taiwan-power-block').innerHTML = (tpsFactsHtml || tpsViewsHtml)
+    ? `<div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:4px;">${tpsFactsHtml}</div>${tpsViewsHtml}`
+    : '<div class="empty-state">尚無資料</div>';
 
   const sm = data.smart_management||{};
   document.getElementById('case-intl').innerHTML = (sm.international||[]).length
