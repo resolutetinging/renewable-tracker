@@ -27,7 +27,7 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .loading-text{font-size:14px;color:var(--muted);}
 .hidden{display:none!important;}
 
-.sec-title{font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);font-weight:700;margin-top:30px;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.sec-title{font-size:17px;text-transform:uppercase;letter-spacing:.9px;color:var(--text);font-weight:800;margin-top:34px;margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid var(--border2);display:flex;align-items:center;justify-content:space-between;}
 .sec-title:first-of-type{margin-top:0;}
 .sec-meta{font-size:11px;color:var(--muted2);text-transform:none;letter-spacing:normal;font-weight:400;}
 
@@ -91,6 +91,7 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 
 /* ── 歷年趨勢折線圖 ── */
 .trend-chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:14px;}
+.chart-tooltip{position:fixed;pointer-events:none;background:var(--text);color:var(--card);font-size:12px;padding:5px 9px;border-radius:6px;opacity:0;transition:opacity .1s;z-index:999;white-space:nowrap;}
 .trend-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:11px;color:var(--text2);}
 .trend-legend span{display:inline-flex;align-items:center;gap:5px;}
 .trend-sw{width:14px;height:2.5px;border-radius:2px;flex-shrink:0;}
@@ -110,9 +111,14 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
 </head>
 <body>
 
+<div class="chart-tooltip" id="chart-tooltip"></div>
+
 <header>
   <div class="header-title">🌱 Renewable Tracker</div>
-  <div class="date-badge" id="date-badge">載入中…</div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span class="date-badge" id="pending-badge" style="display:none;background:#f0e8d0;color:#8a6a20;border-color:#e0d0a0;"></span>
+    <div class="date-badge" id="date-badge">載入中…</div>
+  </div>
 </header>
 
 <div class="loading-screen" id="loading-screen">
@@ -131,6 +137,11 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
   <div id="trend-chart-block"></div>
   <div id="country-breakdown-block"></div>
 
+  <div class="sec-title">🇹🇼 台灣能源使用狀況<span class="sec-meta" id="tw-mix-meta"></span></div>
+  <div class="rank-grid" id="tw-mix-grid"></div>
+  <div class="src-note" id="tw-mix-src"></div>
+  <div class="src-note" id="tw-mix-crossref" style="margin-top:2px;"></div>
+
   <div class="sec-title">♻️ 再生能源使用狀況</div>
   <div class="case-col-hd" style="color:var(--renew);">🌍 全球占比<span class="sec-meta" id="renew-g-meta" style="margin-left:8px;"></span></div>
   <div class="total-banner" id="renew-g-total"></div>
@@ -144,12 +155,16 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
   <div class="sec-title">☢️ 核能專區</div>
   <div class="sec-meta" id="nuclear-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;"></div>
   <div class="total-banner" id="nuclear-tw-banner"></div>
+  <div id="nuclear-tw-gating-block"></div>
   <div class="rank-grid" id="nuclear-country-grid"></div>
   <div id="nuclear-plants-block"></div>
   <div class="src-note" id="nuclear-src"></div>
 
   <div class="sec-title">🏭 碳排放與能源使用狀況</div>
   <div class="total-banner" id="carbon-total"></div>
+  <div id="carbon-trend-block"></div>
+  <div id="carbon-bar-block"></div>
+  <div class="sec-meta" style="margin:16px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🔍 主要排放國詳情</div>
   <div class="rank-grid" id="carbon-country-grid"></div>
   <div class="src-note" id="carbon-src"></div>
 
@@ -178,6 +193,22 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
 
 <script>
 function esc(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// 自製圖表tooltip：事件委派在document層，元素重render後也不用重綁事件
+(function initChartTooltip(){
+  const tip = document.getElementById('chart-tooltip');
+  document.addEventListener('mousemove', e=>{
+    const hit = e.target.closest && e.target.closest('.chart-hit');
+    if(hit){
+      tip.textContent = hit.getAttribute('data-tip')||'';
+      tip.style.left = (e.clientX+14)+'px';
+      tip.style.top = (e.clientY+14)+'px';
+      tip.style.opacity = '1';
+    } else {
+      tip.style.opacity = '0';
+    }
+  });
+})();
 
 function trendBadge(t){
   if(t==='up') return '<span class="rank-trend trend-up">▲ 上升</span>';
@@ -219,7 +250,11 @@ function renewCard(item){
 // ── 歷年趨勢折線圖（純SVG手刻，不依賴外部圖表庫，跟AI Tracker NVIDIA
 // 專區的diagram走同一套風格）──
 const SERIES_COLORS = {'煤炭':'#8a6040','天然氣':'#c09050','核能':'#6a7a8a','水力':'#4a90a0','風力':'#4a8a6a','太陽能':'#c0a030'};
-function trendChartSvg(trend){
+function trendChartSvg(trend, opts){
+  opts = opts || {};
+  const titleLabel = opts.titleLabel || '📈 歷年占比趨勢';
+  const unit = trend.unit!=null ? trend.unit : '%';
+  const fallbackColor = opts.fallbackColor || 'var(--muted)';
   if(!trend || !(trend.years||[]).length || !(trend.series||[]).length) return '';
   const W=640,H=300,padL=36,padR=14,padT=14,padB=30;
   const years = trend.years;
@@ -234,33 +269,60 @@ function trendChartSvg(trend){
     const v = yMax*i/4;
     const y = py(v);
     return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
-      <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="7.5" fill="var(--muted2)">${Math.round(v)}%</text>`;
+      <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="7.5" fill="var(--muted2)">${Math.round(v)}${unit}</text>`;
   }).join('');
   const xLabelsHtml = years.map((y,i)=>`<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="7.5" fill="var(--muted2)">${y}</text>`).join('');
+  // 原生SVG<title>tooltip依賴瀏覽器chrome層渲染，實測不可靠（同一個bug
+  // 回報兩次），改用自製浮動tooltip（見全域chartTooltipInit()+.chart-hit
+  // data-tip，事件委派在document層，不用逐點綁事件）。
   const linesHtml = trend.series.map(s=>{
-    const color = SERIES_COLORS[s.name]||'var(--muted)';
+    const color = SERIES_COLORS[s.name]||fallbackColor;
     const pts = s.values.map((v,i)=>v!=null?`${px(i)},${py(v)}`:null).filter(Boolean).join(' ');
-    // 每個資料點疊一個透明的大範圍hit-circle承載<title>，滑鼠移到附近就能
-    // 看到瀏覽器原生tooltip顯示年份/類別/%數，不用額外寫JS事件處理。
-    // 注意：SVG預設pointer-events是visiblePainted，fill="transparent"不算
-    // 「已上色」，不加pointer-events="all"的話這個hit-circle根本收不到
-    // hover事件——這是上一版tooltip滑過去沒反應的真正原因。
-    const dots = s.values.map((v,i)=>v!=null?`<circle cx="${px(i)}" cy="${py(v)}" r="7" fill="transparent" pointer-events="all" style="cursor:pointer;"><title>${esc(s.name)}　${esc(String(years[i]))}年：${v}%</title></circle><circle cx="${px(i)}" cy="${py(v)}" r="2.5" fill="${color}" style="pointer-events:none;"/>`:'').join('');
+    const dots = s.values.map((v,i)=>v!=null?`<circle cx="${px(i)}" cy="${py(v)}" r="7" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${esc(s.name+'　'+years[i]+'年：'+v+unit)}" style="cursor:pointer;"/><circle cx="${px(i)}" cy="${py(v)}" r="2.5" fill="${color}" style="pointer-events:none;"/>`:'').join('');
     return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/>${dots}`;
   }).join('');
-  const legendHtml = trend.series.map(s=>`<span><span class="trend-sw" style="background:${SERIES_COLORS[s.name]||'var(--muted)'}"></span>${esc(s.name)}</span>`).join('');
+  const legendHtml = trend.series.length>1 ? trend.series.map(s=>`<span><span class="trend-sw" style="background:${SERIES_COLORS[s.name]||fallbackColor}"></span>${esc(s.name)}</span>`).join('') : '';
   return `<div class="trend-chart-wrap">
-    <div class="sec-meta" style="margin-bottom:6px;">📈 歷年占比趨勢${trend.as_of?'（'+esc(trend.as_of)+'）':''}</div>
+    <div class="sec-meta" style="margin-bottom:6px;">${titleLabel}${trend.as_of?'（'+esc(trend.as_of)+'）':''}</div>
     <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;">
       ${gridHtml}${xLabelsHtml}${linesHtml}
     </svg>
-    <div class="trend-legend">${legendHtml}</div>
-    ${trend.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${trend.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(trend.source_label||'')}</a></div>`:''}
+    ${legendHtml?`<div class="trend-legend">${legendHtml}</div>`:''}
+    ${trend.note?`<div class="src-note" style="margin-top:6px;">${esc(trend.note)}</div>`:''}
+    ${trend.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${trend.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(trend.source_label||'')}</a></div>`:''}
   </div>`;
 }
 
 // ── 各能源類型的全球主要國家占比（國名一行、%與補充說明另起一行，
 //    避免長文字擠在同一行造成視覺混亂） ──
+// ── 通用水平直條圖（碳排國家占比等排名類資料用）──
+function barChartSvg(data, opts){
+  opts = opts || {};
+  const items = (data && data.items) || [];
+  if(!items.length) return '';
+  const unit = opts.unit!=null ? opts.unit : '%';
+  const color = opts.color || 'var(--fossil)';
+  const titleLabel = opts.titleLabel || '';
+  const W = 640, rowH = 30, padL = 90, padR = 70, padTop = 8, padBottom = 8;
+  const maxV = Math.max(...items.map(it=>it.pct||0), 1);
+  const H = items.length*rowH + padTop + padBottom;
+  const barMaxW = W - padL - padR;
+  const rows = items.map((it,i)=>{
+    const y = padTop + i*rowH;
+    const bw = Math.max((it.pct||0)/maxV*barMaxW, 2);
+    const tip = esc(it.country+'：'+it.pct+unit+(it.value_mt!=null?'（'+it.value_mt.toLocaleString()+' Mt CO2）':''));
+    return `<text x="${padL-8}" y="${y+rowH/2+4}" text-anchor="end" font-size="11" fill="var(--text2)">${esc(it.country)}</text>
+      <rect x="${padL}" y="${y+6}" width="${bw}" height="${rowH-12}" rx="3" fill="${color}" class="chart-hit" data-tip="${tip}" style="cursor:pointer;"/>
+      <text x="${padL+bw+8}" y="${y+rowH/2+4}" font-size="11" fill="var(--text2)" font-weight="700">${it.pct}${unit}</text>`;
+  }).join('');
+  return `<div class="trend-chart-wrap">
+    ${titleLabel?`<div class="sec-meta" style="margin-bottom:6px;">${titleLabel}${data.as_of?'（'+esc(data.as_of)+'）':''}</div>`:''}
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;">${rows}</svg>
+    ${data.note?`<div class="src-note" style="margin-top:8px;">${esc(data.note)}</div>`:''}
+    ${data.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${data.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(data.source_label||'')}</a></div>`:''}
+  </div>`;
+}
+
 function countryBreakdownBlock(items){
   const withCountries = (items||[]).filter(it=>(it.top_countries||[]).length);
   if(!withCountries.length) return '';
@@ -271,7 +333,7 @@ function countryBreakdownBlock(items){
         ${c.value!=null?`<div class="cb-value">${esc(String(c.value))}</div>`:''}
       </div>`).join('');
     return `<div class="cb-card">
-      <div class="cb-hd" style="color:${SERIES_COLORS[it.name]||'var(--text)'};">${esc(it.name)} — 全球主要國家</div>
+      <div class="cb-hd" style="color:${SERIES_COLORS[it.name]||'var(--text)'};">${esc(it.name)}</div>
       ${rows}
     </div>`;
   }).join('');
@@ -306,6 +368,8 @@ function nuclearProfileCard(p){
     ${p.operating_status?`<div class="np-block"><b>營運狀況</b>${bulletize(p.operating_status)}</div>`:''}
     ${p.operating_plans?`<div class="np-block"><b>營運計畫</b>${bulletize(p.operating_plans)}</div>`:''}
     ${p.policy?`<div class="np-block"><b>核能政策</b>${bulletize(p.policy)}</div>`:''}
+    ${p.waste_disposal?`<div class="np-block"><b>核廢處理</b>${bulletize(p.waste_disposal)}</div>`:''}
+    ${p.public_opinion?`<div class="np-block"><b>國民意見</b>${bulletize(p.public_opinion)}</div>`:''}
     ${p.note?`<div class="np-block"><b>備註</b>${bulletize(p.note)}</div>`:''}
   </div>`;
 }
@@ -335,6 +399,15 @@ async function init(){
   document.getElementById('trend-chart-block').innerHTML = trendChartSvg(data.historical_trend);
   document.getElementById('country-breakdown-block').innerHTML = countryBreakdownBlock(mix.items);
 
+  const twMix = data.taiwan_mix||{};
+  document.getElementById('tw-mix-meta').textContent = twMix.as_of ? `資料時間點：${twMix.as_of}` : '';
+  document.getElementById('tw-mix-grid').innerHTML = (twMix.items||[]).length
+    ? twMix.items.map(it=>rankCard(it,it.kind||'fossil')).join('')
+    : '<div class="empty-state">尚無資料</div>';
+  document.getElementById('tw-mix-src').innerHTML = twMix.source_url
+    ? `📌 來源：<a href="${twMix.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(twMix.source_label||'')}</a>` : '';
+  document.getElementById('tw-mix-crossref').textContent = twMix.cross_ref_note || '';
+
   function fillRenewBlock(prefix, block, unitLabel){
     document.getElementById(prefix+'-meta').textContent = block.as_of ? `資料時間點：${block.as_of}` : '';
     document.getElementById(prefix+'-total').innerHTML = block.total_share_pct!=null
@@ -356,6 +429,14 @@ async function init(){
     ? `🇹🇼 台灣現況　核能占比 <span class="big" style="color:var(--nuclear);">${nuclear.taiwan_share_pct!=null?nuclear.taiwan_share_pct+'%':'—'}</span>
        <div style="margin-top:6px;">${bulletize(nuclear.taiwan_status)}</div>`
     : '';
+  document.getElementById('nuclear-tw-gating-block').innerHTML = (nuclear.taiwan_future_gating||[]).length
+    ? `<div class="sec-meta" style="margin:10px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🚦 若未來討論重啟：checkpoint一覽</div>
+       <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${nuclear.taiwan_future_gating.map(g=>`
+        <div class="case-card">
+          <div class="case-name">${esc(g.checkpoint)}</div>
+          <div class="case-desc">${bulletize(g.detail)}</div>
+          ${g.src_url?`<div class="case-src">來源：<a href="${g.src_url}" target="_blank" rel="noopener">${esc(g.src_label||'連結')}</a></div>`:''}
+        </div>`).join('')}</div>` : '';
   document.getElementById('nuclear-country-grid').innerHTML = (nuclear.global_ranking||[]).length
     ? nuclear.global_ranking.map(c=>`<div class="rank-card nuclear">
         <div class="rank-num">發電量 Top${c.rank||''}</div>
@@ -376,6 +457,8 @@ async function init(){
        ${carbon.global_trend_note?`<div style="margin-top:5px;">${bulletize(carbon.global_trend_note)}</div>`:''}
        ${carbon.taiwan_total?`<div style="margin-top:8px;">🇹🇼 台灣：<b>${esc(carbon.taiwan_total)}</b>${carbon.taiwan_note?`<div style="margin-top:3px;">${bulletize(carbon.taiwan_note)}</div>`:''}</div>`:''}`
     : '';
+  document.getElementById('carbon-trend-block').innerHTML = trendChartSvg(carbon.historical_trend, {titleLabel:'📈 全球碳排放歷年趨勢', fallbackColor:'var(--fossil)'});
+  document.getElementById('carbon-bar-block').innerHTML = barChartSvg(carbon.country_breakdown_chart, {titleLabel:'📊 全球碳排放國家占比', color:'var(--fossil)'});
   document.getElementById('carbon-country-grid').innerHTML = (carbon.country_ranking||[]).length
     ? carbon.country_ranking.map(c=>`<div class="rank-card fossil">
         <div class="rank-num">占比 Top${c.rank||''}</div>
@@ -432,6 +515,18 @@ async function init(){
 
   document.getElementById('loading-screen').classList.add('hidden');
   document.getElementById('content').classList.remove('hidden');
+
+  // 週查證候選異動提示（best-effort，檔案不存在或格式異常就靜默略過，
+  // 不影響主要內容渲染）
+  try{
+    const pr = await fetch('data/renewable_pending_review.json?v='+Date.now()).then(r=>r.ok?r.json():null);
+    const n = pr && Array.isArray(pr.items) ? pr.items.length : 0;
+    if(n > 0){
+      const badge = document.getElementById('pending-badge');
+      badge.textContent = `🔔 本週有 ${n} 項候選異動待複核`;
+      badge.style.display = '';
+    }
+  }catch(e){ /* 週查證尚未啟用或本次查無資料，忽略 */ }
 }
 init();
 </script>

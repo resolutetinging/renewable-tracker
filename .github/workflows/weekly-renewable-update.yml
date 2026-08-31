@@ -1,0 +1,44 @@
+name: 🌱 Weekly Renewable Tracker Update
+
+on:
+  schedule:
+    - cron: '0 16 * * 0'  # 每週日 16:00 UTC（台北時間週一 00:00），比照AI Tracker的
+                           # weekly-nvidia-update.yml排程慣例
+  workflow_dispatch:        # 手動備用
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Pull latest (clean tree)
+        run: git pull --rebase origin main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install groq ddgs
+
+      - name: Run Renewable Tracker weekly check
+        env:
+          GROQ_API_KEY:       ${{ secrets.GROQ_API_KEY }}
+          NOTIFY_EMAIL:       ${{ secrets.NOTIFY_EMAIL }}
+          GMAIL_USER:         ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python scripts/update_renewable.py
+
+      - name: Commit updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🌱 Renewable Tracker weekly check"
+          file_pattern: 'data/renewable_status.json data/renewable_pending_review.json'
