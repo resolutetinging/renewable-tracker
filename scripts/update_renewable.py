@@ -102,7 +102,22 @@ def bulletize_email(text):
     parts = [p.strip() for p in re.split(r'(?<=[。；])', text) if p.strip()]
     if len(parts) <= 1:
         return text
-    return ''.join(f'<div style="margin-top:3px;">• {p}</div>' for p in parts)
+    return ''.join(
+        f'<div style="margin-top:3px;padding-left:14px;text-indent:-14px;">• {p}</div>'
+        for p in parts
+    )
+
+
+def smart_truncate(text, limit=160):
+    """硬字元數截斷會切在句子/單詞中間（例如「兩家公」），改成優先在limit內找
+    最後一個句號/分號斷開；找不到才退回硬截斷+刪節號，避免文字看起來斷掉。"""
+    if not text or len(text) <= limit:
+        return text or ''
+    cut = text[:limit]
+    last_end = max(cut.rfind('。'), cut.rfind('；'))
+    if last_end >= limit * 0.4:
+        return cut[:last_end + 1]
+    return cut.rstrip() + '…'
 
 
 def build_monitored_snapshot(status):
@@ -269,7 +284,7 @@ def build_overview_html(monitored_snapshot):
             date_region = ' · '.join(x for x in [it.get('date'), it.get('region')] if x)
             detail = it.get('desc') or it.get('ai_development_status') or it.get('operating_status') or ''
             date_html = f'<div style="margin-top:4px;font-size:11px;color:#9e9890;">{date_region}</div>' if date_region else ''
-            detail_html = f'<div style="margin-top:5px;padding-left:12px;font-size:12px;color:#6a6460;line-height:1.6;">{bulletize_email(detail[:160])}</div>' if detail else ''
+            detail_html = f'<div style="margin-top:5px;padding-left:12px;font-size:12px;color:#6a6460;line-height:1.6;">{bulletize_email(smart_truncate(detail, 160))}</div>' if detail else ''
             rows += f'''<div style="background:#faf9f7;border-left:3px solid #4a8a6a;border-radius:0 6px 6px 0;padding:10px 14px;margin:8px 0;">
               <div style="font-size:13px;font-weight:700;color:#2c2a28;line-height:1.5;">{name}</div>
               {date_html}
@@ -301,7 +316,7 @@ def build_overview_html(monitored_snapshot):
         <div style="margin:16px 0;">
           <div style="font-size:11.5px;font-weight:700;color:#4a8a6a;margin-bottom:6px;">🔌 台灣真的缺電嗎？（現行風險燈號：{risk or '—'}）</div>
           <div style="background:#faf9f7;border-left:3px solid #4a8a6a;border-radius:0 6px 6px 0;padding:10px 14px;margin:8px 0;font-size:12px;color:#6a6460;line-height:1.6;">
-            {bulletize_email((tps.get('reserve_margin_note') or '')[:200])}
+            {bulletize_email(smart_truncate(tps.get('reserve_margin_note') or '', 200))}
           </div>
         </div>'''
     return f'''
@@ -468,14 +483,17 @@ def main():
         send_email([], f'本週自動查證因技術問題失敗（{fail_summary}），現有資料未變動，將於下次排程自動重試。', monitored)
         return
 
-    no_change_summary = '；'.join(no_change_parts)
-    if not all_items and not no_change_summary:
-        no_change_summary = '本週查證後判斷現有資料仍準確。'
+    # email只顯示一句固定摘要，不逐類拼接LLM各自產生的「沒變」句子——4句話拼接
+    # 常因join用的「；」跟句子本身已有的「。」疊在一起，被bulletize_email拆出只有
+    # 「；」的空bullet，而且4個類別各講一次「沒變」對讀者也是純噪音，沒有額外資訊。
+    # 各類別的原始no_change_summary仍完整存進pending.json，供人工複核時參考。
+    no_change_summary = '本週查證後判斷現有資料仍準確。' if not all_items else ''
 
     pending = {
         'checked_at': DATE_STR,
         'items': all_items,
         'no_change_summary': no_change_summary,
+        'no_change_detail_by_category': no_change_parts,
         'category_failures': category_failures,
     }
     save_json(PENDING_PATH, pending)
