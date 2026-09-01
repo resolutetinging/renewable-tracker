@@ -327,9 +327,9 @@ function trendChartSvg(trend, opts){
     const v = yMax*i/4;
     const y = py(v);
     return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
-      <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="9.5" fill="var(--muted2)">${Math.round(v)}</text>`;
+      <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="11.3" fill="var(--muted2)">${Math.round(v)}</text>`;
   }).join('');
-  const xLabelsHtml = years.map((y,i)=>`<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="9.5" fill="var(--muted2)">${y}</text>`).join('');
+  const xLabelsHtml = years.map((y,i)=>`<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="11.3" fill="var(--muted2)">${y}</text>`).join('');
   // 原生SVG<title>tooltip依賴瀏覽器chrome層渲染，實測不可靠（同一個bug
   // 回報兩次），改用自製浮動tooltip（見全域chartTooltipInit()+.chart-hit
   // data-tip，事件委派在document層，不用逐點綁事件）。
@@ -342,7 +342,7 @@ function trendChartSvg(trend, opts){
   const legendHtml = trend.series.length>1 ? trend.series.map(s=>`<span><span class="trend-sw" style="background:${SERIES_COLORS[s.name]||fallbackColor}"></span>${esc(s.name)}</span>`).join('') : '';
   return `<div class="trend-chart-wrap">
     <div class="sec-meta" style="margin-bottom:6px;">${titleLabel}（單位：${esc(unit.trim())}）${trend.as_of?'　'+esc(trend.as_of):''}</div>
-    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;">
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:680px;height:auto;display:block;">
       ${gridHtml}${xLabelsHtml}${linesHtml}
     </svg>
     ${legendHtml?`<div class="trend-legend">${legendHtml}</div>`:''}
@@ -369,13 +369,13 @@ function barChartSvg(data, opts){
     const y = padTop + i*rowH;
     const bw = Math.max((it.pct||0)/maxV*barMaxW, 2);
     const tip = esc(it.country+'：'+it.pct+unit+(it.value_mt!=null?'（'+it.value_mt.toLocaleString()+' Mt CO2）':''));
-    return `<text x="${padL-8}" y="${y+rowH/2+4}" text-anchor="end" font-size="9.5" fill="var(--text2)">${esc(it.country)}</text>
+    return `<text x="${padL-8}" y="${y+rowH/2+4}" text-anchor="end" font-size="11.3" fill="var(--text2)">${esc(it.country)}</text>
       <rect x="${padL}" y="${y+6}" width="${bw}" height="${rowH-12}" rx="3" fill="${color}" class="chart-hit" data-tip="${tip}" style="cursor:pointer;"/>
-      <text x="${padL+bw+8}" y="${y+rowH/2+4}" font-size="9.5" fill="var(--text2)" font-weight="700">${it.pct}${unit}</text>`;
+      <text x="${padL+bw+8}" y="${y+rowH/2+4}" font-size="11.3" fill="var(--text2)" font-weight="700">${it.pct}${unit}</text>`;
   }).join('');
   return `<div class="trend-chart-wrap">
     ${titleLabel?`<div class="sec-meta" style="margin-bottom:6px;">${titleLabel}${data.as_of?'（'+esc(data.as_of)+'）':''}</div>`:''}
-    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;">${rows}</svg>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:680px;height:auto;display:block;">${rows}</svg>
     ${data.note?`<div class="src-note" style="margin-top:8px;">${esc(data.note)}</div>`:''}
     ${data.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${data.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(data.source_label||'')}</a></div>`:''}
   </div>`;

@@ -701,7 +701,7 @@
     "as_of": "2026年8月（各國官方公告、企業財報、IEA/Ember/ENTSO-E等機構報告彙整）",
     "source_label": "IEA《Electricity 2026》／《Energy and AI》、Energy Institute《2026 Statistical Review of World Energy》、各國能源主管機關與企業公告",
     "source_url": "https://www.iea.org/reports/electricity-2026",
-    "intro_note": "AI資料中心用電量快速成長，2025年全球資料中心用電約787.8 TWh（Energy Institute《2026 Statistical Review》，S&P Global資料，該報告75年來首度揭露全球資料中心用電數字），已開始在多國造成電網容量吃緊、供電審查凍結等實際影響，能源供給能否跟上AI擴張速度成為各國共同課題",
+    "intro_note": "AI資料中心用電量快速成長，2025年全球資料中心用電約787.8 TWh（Energy Institute《2026 Statistical Review》，S&P Global資料，該報告75年來首度揭露全球資料中心用電數字）。已開始在多國造成電網容量吃緊、供電審查凍結等實際影響。能源供給能否跟上AI擴張速度，成為各國共同課題。",
     "country_profiles": [
       {
         "country": "美國",
@@ -1055,7 +1055,7 @@
     "as_of": "2024-2025年（美國地質調查局USGS《Mineral Commodity Summaries 2025》／歐盟執委會JRC《Critical Raw Materials Study 2023》彙整）",
     "source_label": "USGS Mineral Commodity Summaries 2025",
     "source_url": "https://www.usgs.gov/centers/national-minerals-information-center/mineral-commodity-summaries",
-    "intro_note": "電池(鋰／鈷／鎳)與風機永磁材料(稀土)的原物料供應鏈呈現一致模式：開採端集中國家因礦物而異(剛果／印尼／中國各據山頭)，但精煉／加工端幾乎全部匯聚到中國——稀土(85-100%)、鈷(60%)、鋰(56%)中國精煉占比都過半甚至逼近壟斷，唯獨鎳因精煉端相對分散而是四者中供應風險評分最低的一項",
+    "intro_note": "電池(鋰／鈷／鎳)與風機永磁材料(稀土)的原物料供應鏈呈現一致模式。開採端集中國家因礦物而異(剛果／印尼／中國各據山頭)，但精煉／加工端幾乎全部匯聚到中國。稀土(85-100%)、鈷(60%)、鋰(56%)中國精煉占比都過半甚至逼近壟斷。唯獨鎳因精煉端相對分散，是四者中供應風險評分最低的一項。",
     "minerals": [
       {
         "name": "鋰（Lithium）",
