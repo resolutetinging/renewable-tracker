@@ -1,21 +1,7 @@
 {
   "checked_at": "2026-09-14",
-  "items": [
-    {
-      "category": "ai_energy_impact",
-      "action": "add",
-      "target": "",
-      "fields": {
-        "country": "菲律賓",
-        "as_of": "2026年9月",
-        "ai_development_status": "菲律賓政府規劃34.4億美元的AI基礎建設計畫，目標到2033年建置1.5 GW的資料中心容量，以支援AI運算需求。",
-        "energy_availability": "無直接新聞佐證的電力供應細節"
-      },
-      "reason": "新聞指出菲律賓將投入34.4億美元於AI基礎建設，目標2026-2033年達成1.5 GW資料中心容量，屬於AI發展對能源需求的最新資訊。",
-      "source": "https://www.techrepublic.com/article/news-apac-philippines-ai-infrastructure-timeline-data-centers/"
-    }
-  ],
-  "no_change_summary": "",
+  "items": [],
+  "no_change_summary": "本週候選異動（菲律賓AI能源影響）已由使用者複核並套用，energy_availability欄位經比對原始新聞來源修正後寫入正式資料。",
   "no_change_detail_by_category": [
     "本週查證後，現有資料仍準確，未發現需更新之項目。",
     "本週查證後，現有核能專區資料均未發現需更新之內容。",
