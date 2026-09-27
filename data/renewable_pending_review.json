@@ -1,27 +1,12 @@
 {
-  "checked_at": "2026-09-21",
-  "items": [
-    {
-      "category": "smart_management_intl",
-      "action": "add",
-      "target": "",
-      "fields": {
-        "name": "NVIDIA, Google, Emerald AI – AI Energy Management Alliance",
-        "date": "2026-09-16",
-        "region": "全球",
-        "desc": "NVIDIA、Google 與 Emerald AI 共同發起 AI Energy Management Alliance（AEMA），聯合 18 家合作夥伴，致力於讓 AI 資料中心具備彈性電網參與能力，透過即時調整用電與回饋電網，提高電力系統彈性。",
-        "src_url": "https://www.unite.ai/nvidia-google-and-emerald-ai-form-ai-energy-management-alliance/",
-        "src_label": "Unite.AI"
-      },
-      "reason": "多則新聞報導於 2026 年 9 月宣布成立 AI Energy Management Alliance，為新合作項目，現有資料中未列出此案例，需新增。",
-      "source": "https://www.unite.ai/nvidia-google-and-emerald-ai-form-ai-energy-management-alliance/"
-    }
-  ],
-  "no_change_summary": "",
+  "checked_at": "2026-09-28",
+  "items": [],
+  "no_change_summary": "本週查證後判斷現有資料仍準確。",
   "no_change_detail_by_category": [
-    "本週查證後，現有資料仍準確，未發現可更新之具體新聞佐證。",
+    "本分類本週查證後判斷現有資料仍準確",
+    "本週查證後，現有資料仍準確，未發現可佐證的欄位異動。",
     "本週未蒐集到相關新聞，核能專區各國營運狀況資料仍保持準確。",
-    "本週未蒐集到相關新聞，現有資料仍準確。"
+    "本週未蒐集到相關新聞片段，現有資料仍準確，無需異動。"
   ],
   "category_failures": []
 }
