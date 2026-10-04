@@ -1,12 +1,22 @@
 {
-  "checked_at": "2026-09-28",
-  "items": [],
-  "no_change_summary": "本週查證後判斷現有資料仍準確。",
+  "checked_at": "2026-10-05",
+  "items": [
+    {
+      "category": "ai_energy_impact",
+      "action": "add",
+      "target": "",
+      "fields": {
+        "US_vistra_nuclear_loan": "美國政府計畫向Vistra Corp.提供約42億美元貸款，以提升其現有核電廠的發電量，因應AI資料中心快速增長的電力需求"
+      },
+      "reason": "新聞指出美國因AI需求而透過核能提升電力供應，提供具體貸款金額與受益公司，屬於本分類中未列出的最新政策與投資資訊",
+      "source": "https://www.tekedia.com/us-plans-to-give-vistra-4-2-billion-loan-as-ai-drives-power-demand-via-nuclear-power/"
+    }
+  ],
+  "no_change_summary": "",
   "no_change_detail_by_category": [
-    "本分類本週查證後判斷現有資料仍準確",
-    "本週查證後，現有資料仍準確，未發現可佐證的欄位異動。",
-    "本週未蒐集到相關新聞，核能專區各國營運狀況資料仍保持準確。",
-    "本週未蒐集到相關新聞片段，現有資料仍準確，無需異動。"
+    "本週查證後，現有電力管理現況（國際/台灣案例）資料仍準確，無需更新。",
+    "本週查證後，現有核能專區資料仍準確，未發現需更新之欄位。",
+    "本週未蒐集到相關新聞，現有資料仍準確。"
   ],
   "category_failures": []
 }
