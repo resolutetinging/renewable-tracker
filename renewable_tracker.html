@@ -237,7 +237,7 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
 <footer>再生能源追蹤器 · 資料為靜態參考，非每日自動更新 · v1</footer>
 
 <script>
-function esc(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 // 10-05 XSS：URL scheme 白名單（只准 http/https），不符回 '#'，並做 HTML escape
 // class 白名單：只准 fossil/renew/nuclear
 function kindCls(k){ return ['fossil','renew','nuclear'].includes(k) ? k : 'fossil'; }
