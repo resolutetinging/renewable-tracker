@@ -18,7 +18,7 @@ data/renewable_status.json（那是實際顯示在頁面上、看起來權威的
 data/renewable_pending_review.json，實際套用需要使用者告知Claude人工複核後手動
 更新renewable_status.json。
 """
-import json, os, re, time, smtplib
+import json, os, re, time, smtplib, html
 from datetime import datetime, timezone, timedelta
 from groq import Groq
 from groq import APIStatusError as GroqAPIStatusError
@@ -39,6 +39,33 @@ CATEGORY_LABELS = {
     'taiwan_power_shortage': '台灣真的缺電嗎',
 }
 ACTION_LABELS = {'update': '更新既有項目', 'add': '新增項目'}
+# 10-05：週信顯示用的欄位中文名。LLM 偶爾自創英文代號當欄位名（如 US_vistra_nuclear_loan），
+# 對照不到中文、又長得像程式代號（英數底線）的欄位名就不顯示，只顯示內容。
+FIELD_LABELS = {
+    'ai_development_status': 'AI發展現況', 'energy_availability': '能源供應', 'as_of': '資料時間',
+    'country': '國家', 'name': '名稱', 'desc': '說明', 'detail': '細節', 'note': '備註',
+    'policy': '政策', 'operating_status': '營運狀況', 'operating_plans': '營運規劃',
+    'public_opinion': '民意', 'waste_disposal': '核廢料處置', 'taiwan_status': '台灣現況',
+    'taiwan_future_gating': '台灣未來關鍵條件', 'reserve_margin_note': '備轉容量率',
+    'supply_demand_note': '供需狀況', 'incident_note': '事故紀錄', 'risk_assessment': '風險評估',
+    'viewpoints': '各方觀點', 'rationale': '理由', 'level': '等級', 'region': '地區',
+    'source_label': '來源', 'source_url': '來源網址',
+}
+
+
+def _e(x):
+    return html.escape(str(x), quote=True)
+
+
+def _safe_url(u):
+    u = str(u or '').strip()
+    return u if re.match(r'^https?://', u, re.I) else ''
+
+
+def _field_label(k):
+    if k in FIELD_LABELS:
+        return FIELD_LABELS[k]
+    return None if re.fullmatch(r'[A-Za-z0-9_\-]+', str(k)) else str(k)
 
 MONITORED_KEYS = ['smart_management', 'ai_energy_impact', 'nuclear_country_profiles', 'taiwan_power_shortage']
 
@@ -222,14 +249,17 @@ def call_groq_diff_one(category_label, category_data, category_enum, news_snippe
     {{
       "category": "{category_enum}",
       "action": "update|add",
-      "target": "若action=update，填現有資料裡對應項目的識別名稱（國家名/案例名稱/欄位名等）；若action=add則留空",
-      "fields": {{"要更新或新增的欄位名": "新內容", "...": "..."}},
+      "target": "要更新或新增到哪個現有項目，填中文識別名稱（例如國家名「美國」、案例名稱）；若是全新項目，填一個簡短中文標題。不可留空",
+      "fields": {{"欄位名": "新內容"}},
       "reason": "為何提出這個異動，具體說明新聞依據",
       "source": "新聞來源URL"
     }}
   ],
   "no_change_summary": "若items為空陣列，一句話說明本分類本週查證後判斷現有資料仍準確；若items非空則留空字串"
-}}"""
+}}
+
+fields 的欄位名必須沿用上方現有資料裡已存在的欄位名（例如 energy_availability、ai_development_status），不可自創英文代號；
+要補充到既有項目時，target 填該項目的中文識別名稱（例如「美國」），fields 填要更新的既有欄位與完整新內容。"""
     # 沿用update_nvidia.py既有的413防護模式：413時縮減news_snippets對半重試，最多
     # 縮5輪，5輪都失敗才拋出例外。120b/20b兩個model在免費tier的TPM/RPM完全相同
     # （皆8K TPM/30RPM，2026-09-01查證），這裡保留雙model輪替純粹是取即時可用性
@@ -349,24 +379,32 @@ def send_email(items, no_change_summary, monitored_snapshot, category_failures=N
         for it in items:
             cat = CATEGORY_LABELS.get(it.get('category', ''), it.get('category', ''))
             act = ACTION_LABELS.get(it.get('action', ''), it.get('action', ''))
-            src = f'<div style="margin-top:6px;font-size:11px;"><a href="{it["source"]}" style="color:#4a8a6a;">來源連結 →</a></div>' if it.get('source') else ''
+            # 10-05：LLM/新聞內容一律 escape 再進 HTML；來源連結只放行 http(s)
+            src_url = _safe_url(it.get('source'))
+            src = f'<div style="margin-top:6px;font-size:11px;"><a href="{_e(src_url)}" style="color:#4a8a6a;">來源連結 →</a></div>' if src_url else ''
             fields = it.get('fields') or {}
             fields_html = ''.join(
-                f'<div style="font-size:12px;color:#6a6460;margin-top:4px;"><b>{k}：</b>'
-                f'{bulletize_email(v) if isinstance(v, str) and len(v) > 40 else v}</div>'
+                f'<div style="font-size:12px;color:#6a6460;margin-top:4px;">'
+                + (f'<b>{_e(_field_label(k))}：</b>' if _field_label(k) else '')
+                + f'{bulletize_email(_e(v)) if isinstance(v, str) and len(v) > 40 else _e(v)}</div>'
                 for k, v in fields.items()
             )
+            title = (it.get('target') or '').strip()
+            if not title:
+                labels = [_field_label(k) for k in fields if _field_label(k)]
+                title = '、'.join(labels) if labels else '新增項目'
+            title = f'{cat}｜{title}' if it.get('action') == 'add' and title != '新增項目' and cat not in title else title
             cards += f'''
             <div style="background:#faf9f7;border-left:3px solid #4a8a6a;padding:14px 16px;margin:10px 0;border-radius:0 6px 6px 0;">
               <div style="display:flex;gap:8px;margin-bottom:6px;">
-                <span style="font-size:11px;font-weight:700;color:#4a8a6a;background:#4a8a6a18;padding:2px 8px;border-radius:10px;">{cat}</span>
-                <span style="font-size:11px;color:#888;">{act}</span>
+                <span style="font-size:11px;font-weight:700;color:#4a8a6a;background:#4a8a6a18;padding:2px 8px;border-radius:10px;">{_e(cat)}</span>
+                <span style="font-size:11px;color:#888;">{_e(act)}</span>
               </div>
-              <div style="font-size:14px;font-weight:700;color:#2c2a28;margin-bottom:6px;">{it.get("target","") or "（新增項目）"}</div>
+              <div style="font-size:14px;font-weight:700;color:#2c2a28;margin-bottom:6px;">{_e(title)}</div>
               {fields_html}
               <div style="background:#f0ede9;border-radius:5px;padding:8px 12px;font-size:12px;color:#6a6460;margin-top:8px;">
                 <span style="font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#9e9890;display:block;margin-bottom:4px;">查證依據</span>
-                {bulletize_email(it.get("reason",""))}
+                {bulletize_email(_e(it.get("reason","")))}
               </div>
               {src}
             </div>'''
