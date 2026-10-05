@@ -238,6 +238,10 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
 
 <script>
 function esc(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+// 10-05 XSS：URL scheme 白名單（只准 http/https），不符回 '#'，並做 HTML escape
+// class 白名單：只准 fossil/renew/nuclear
+function kindCls(k){ return ['fossil','renew','nuclear'].includes(k) ? k : 'fossil'; }
+function safeUrl(u){ u=String(u==null?'':u); return esc(/^https?:\/\//i.test(u) ? u : '#'); }
 
 // 自製圖表tooltip：事件委派在document層，元素重render後也不用重綁事件
 (function initChartTooltip(){
@@ -285,9 +289,9 @@ function bulletize(text){
 // 卡片結構固定順序：能源類別→數值&%→資料時間→內容說明→趨勢說明
 function rankCard(item, cls){
   return `<div class="rank-card ${cls}">
-    <div class="rank-num">占比 Top${item.rank||''}</div>
+    <div class="rank-num">占比 Top${esc(item.rank||'')}</div>
     <div class="rank-name">${esc(item.name)}</div>
-    <div class="rank-value ${cls}">${item.share_pct!=null?item.share_pct+'%':'—'}${trendBadge(item.trend)}</div>
+    <div class="rank-value ${cls}">${item.share_pct!=null?esc(item.share_pct)+'%':'—'}${trendBadge(item.trend)}</div>
     ${item.data_year?`<div class="rank-time">🗓 ${esc(item.data_year)}</div>`:''}
     ${item.note?`<div class="rank-note">${bulletize(item.note)}</div>`:''}
     ${item.trend_reason?`<div class="rank-reason"><b>趨勢原因：</b>${bulletize(item.trend_reason)}</div>`:''}
@@ -297,7 +301,7 @@ function rankCard(item, cls){
 function renewCard(item){
   return `<div class="rank-card renew">
     <div class="rank-name">${esc(item.name)}</div>
-    <div class="rank-value renew">${item.share_pct!=null?item.share_pct+'%':'—'}</div>
+    <div class="rank-value renew">${item.share_pct!=null?esc(item.share_pct)+'%':'—'}</div>
     ${item.data_year?`<div class="rank-time">🗓 ${esc(item.data_year)}</div>`:''}
     ${item.note?`<div class="rank-note">${bulletize(item.note)}</div>`:''}
   </div>`;
@@ -330,7 +334,7 @@ function trendChartSvg(trend, opts){
     return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
       <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="11.3" fill="var(--muted2)">${Math.round(v)}</text>`;
   }).join('');
-  const xLabelsHtml = years.map((y,i)=>`<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="11.3" fill="var(--muted2)">${y}</text>`).join('');
+  const xLabelsHtml = years.map((y,i)=>`<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="11.3" fill="var(--muted2)">${esc(y)}</text>`).join('');
   // 原生SVG<title>tooltip依賴瀏覽器chrome層渲染，實測不可靠（同一個bug
   // 回報兩次），改用自製浮動tooltip（見全域chartTooltipInit()+.chart-hit
   // data-tip，事件委派在document層，不用逐點綁事件）。
@@ -348,7 +352,7 @@ function trendChartSvg(trend, opts){
     </svg>
     ${legendHtml?`<div class="trend-legend">${legendHtml}</div>`:''}
     ${trend.note?`<div class="src-note" style="margin-top:6px;">${esc(trend.note)}</div>`:''}
-    ${trend.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${trend.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(trend.source_label||'')}</a></div>`:''}
+    ${trend.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${safeUrl(trend.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(trend.source_label||'')}</a></div>`:''}
   </div>`;
 }
 
@@ -372,13 +376,13 @@ function barChartSvg(data, opts){
     const tip = esc(it.country+'：'+it.pct+unit+(it.value_mt!=null?'（'+it.value_mt.toLocaleString()+' Mt CO2）':''));
     return `<text x="${padL-8}" y="${y+rowH/2+4}" text-anchor="end" font-size="11.3" fill="var(--text2)">${esc(it.country)}</text>
       <rect x="${padL}" y="${y+6}" width="${bw}" height="${rowH-12}" rx="3" fill="${color}" class="chart-hit" data-tip="${tip}" style="cursor:pointer;"/>
-      <text x="${padL+bw+8}" y="${y+rowH/2+4}" font-size="11.3" fill="var(--text2)" font-weight="700">${it.pct}${unit}</text>`;
+      <text x="${padL+bw+8}" y="${y+rowH/2+4}" font-size="11.3" fill="var(--text2)" font-weight="700">${esc(it.pct)}${esc(unit)}</text>`;
   }).join('');
   return `<div class="trend-chart-wrap">
     ${titleLabel?`<div class="sec-meta" style="margin-bottom:6px;">${titleLabel}${data.as_of?'（'+esc(data.as_of)+'）':''}</div>`:''}
     <svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:680px;height:auto;display:block;">${rows}</svg>
     ${data.note?`<div class="src-note" style="margin-top:8px;">${esc(data.note)}</div>`:''}
-    ${data.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${data.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(data.source_label||'')}</a></div>`:''}
+    ${data.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${safeUrl(data.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(data.source_label||'')}</a></div>`:''}
   </div>`;
 }
 
@@ -387,16 +391,16 @@ function barChartSvg(data, opts){
 function costSnapshotBlock(snapshot){
   const items = (snapshot && snapshot.items) || [];
   if(!items.length) return '';
-  const rows = items.map(it=>`<div class="rank-card ${it.kind||'fossil'}">
+  const rows = items.map(it=>`<div class="rank-card ${kindCls(it.kind)}">
     <div class="rank-name">${esc(it.name)}</div>
-    <div class="rank-value ${it.kind||'fossil'}">$${esc(it.range)}</div>
+    <div class="rank-value ${kindCls(it.kind)}">$${esc(it.range)}</div>
     <div class="rank-note">美元／MWh</div>
     ${it.cost_driver_note?`<div class="rank-reason"><b>成本驅動因素：</b>${bulletize(it.cost_driver_note)}</div>`:''}
   </div>`).join('');
   return `<div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">📊 同年度跨技術成本快照${snapshot.as_of?'（'+esc(snapshot.as_of)+'）':''}</div>
     <div class="rank-grid">${rows}</div>
     ${snapshot.note?`<div class="src-note" style="margin-top:8px;">${esc(snapshot.note)}</div>`:''}
-    ${snapshot.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${snapshot.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(snapshot.source_label||'')}</a></div>`:''}`;
+    ${snapshot.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${safeUrl(snapshot.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(snapshot.source_label||'')}</a></div>`:''}`;
 }
 
 function countryBreakdownBlock(items){
@@ -422,7 +426,7 @@ function caseCard(item){
     <div class="case-name">${esc(item.name)}</div>
     ${item.date?`<div class="case-date">🕐 ${esc(item.date)}${item.region?' · '+esc(item.region):''}</div>`:''}
     <div class="case-desc">${bulletize(item.desc)}</div>
-    ${item.src_url?`<div class="case-src">來源：<a href="${item.src_url}" target="_blank" rel="noopener">${esc(item.src_label||'連結')}</a></div>`:''}
+    ${item.src_url?`<div class="case-src">來源：<a href="${safeUrl(item.src_url)}" target="_blank" rel="noopener">${esc(item.src_label||'連結')}</a></div>`:''}
   </div>`;
 }
 
@@ -449,7 +453,7 @@ function aiEnergyCard(p){
 // 核能國別檔案卡：營運狀況／營運計畫／核能政策固定分區呈現
 function nuclearProfileCard(p){
   return `<div class="case-card">
-    <div class="case-name">${esc(p.country)}${p.national_share_pct!=null?` <span style="color:var(--nuclear);font-weight:700;">核能占比 ${p.national_share_pct}%</span>`:''}</div>
+    <div class="case-name">${esc(p.country)}${p.national_share_pct!=null?` <span style="color:var(--nuclear);font-weight:700;">核能占比 ${esc(p.national_share_pct)}%</span>`:''}</div>
     ${p.as_of?`<div class="case-date">🗓 ${esc(p.as_of)}</div>`:''}
     ${p.operating_status?`<div class="np-block"><b>營運狀況</b>${bulletize(p.operating_status)}</div>`:''}
     ${p.operating_plans?`<div class="np-block"><b>營運計畫</b>${bulletize(p.operating_plans)}</div>`:''}
@@ -477,10 +481,10 @@ async function init(){
   document.getElementById('mix-meta').textContent = mix.as_of ? `資料時間點：${mix.as_of}` : '';
   document.getElementById('mix-milestone').innerHTML = mix.milestone_note ? bulletize(mix.milestone_note) : '';
   document.getElementById('mix-grid').innerHTML = (mix.items||[]).length
-    ? mix.items.map(it=>rankCard(it,it.kind||'fossil')).join('')
+    ? mix.items.map(it=>rankCard(it,kindCls(it.kind))).join('')
     : '<div class="empty-state">尚無資料</div>';
   document.getElementById('mix-src').innerHTML = mix.source_url
-    ? `📌 來源：<a href="${mix.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(mix.source_label||'')}</a>` : '';
+    ? `📌 來源：<a href="${safeUrl(mix.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(mix.source_label||'')}</a>` : '';
   document.getElementById('mix-crossref').textContent = mix.cross_ref_note || '';
   document.getElementById('trend-chart-block').innerHTML = trendChartSvg(data.historical_trend);
   document.getElementById('country-breakdown-block').innerHTML = countryBreakdownBlock(mix.items);
@@ -488,10 +492,10 @@ async function init(){
   const twMix = data.taiwan_mix||{};
   document.getElementById('tw-mix-meta').textContent = twMix.as_of ? `資料時間點：${twMix.as_of}` : '';
   document.getElementById('tw-mix-grid').innerHTML = (twMix.items||[]).length
-    ? twMix.items.map(it=>rankCard(it,it.kind||'fossil')).join('')
+    ? twMix.items.map(it=>rankCard(it,kindCls(it.kind))).join('')
     : '<div class="empty-state">尚無資料</div>';
   document.getElementById('tw-mix-src').innerHTML = twMix.source_url
-    ? `📌 來源：<a href="${twMix.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(twMix.source_label||'')}</a>` : '';
+    ? `📌 來源：<a href="${safeUrl(twMix.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(twMix.source_label||'')}</a>` : '';
   document.getElementById('tw-mix-crossref').textContent = twMix.cross_ref_note || '';
 
   const lcoe = data.lcoe||{};
@@ -501,14 +505,14 @@ async function init(){
   function fillRenewBlock(prefix, block, unitLabel){
     document.getElementById(prefix+'-meta').textContent = block.as_of ? `資料時間點：${block.as_of}` : '';
     document.getElementById(prefix+'-total').innerHTML = block.total_share_pct!=null
-      ? `再生能源佔${unitLabel}發電量 <span class="big">${block.total_share_pct}%</span>
+      ? `再生能源佔${esc(unitLabel)}發電量 <span class="big">${esc(block.total_share_pct)}%</span>
          ${block.total_trend_note?`<div style="margin-top:5px;">${bulletize(block.total_trend_note)}</div>`:''}`
       : '';
     document.getElementById(prefix+'-grid').innerHTML = (block.items||[]).length
       ? block.items.map(renewCard).join('')
       : '<div class="empty-state">尚無資料</div>';
     document.getElementById(prefix+'-src').innerHTML = block.source_url
-      ? `📌 來源：<a href="${block.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(block.source_label||'')}</a>` : '';
+      ? `📌 來源：<a href="${safeUrl(block.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(block.source_label||'')}</a>` : '';
   }
   const renewData = data.renewable_breakdown||{};
   fillRenewBlock('renew-g', renewData.global||{}, '全球');
@@ -528,23 +532,23 @@ async function init(){
   document.getElementById('storage-taiwan-card').innerHTML = storage.taiwan_note
     ? `<div class="case-name">🇹🇼 台灣儲能現況</div>
        <div class="case-desc">${bulletize(storage.taiwan_note)}</div>
-       ${storage.taiwan_src_url?`<div class="case-src">來源：<a href="${storage.taiwan_src_url}" target="_blank" rel="noopener">${esc(storage.taiwan_src_label||'連結')}</a></div>`:''}`
+       ${storage.taiwan_src_url?`<div class="case-src">來源：<a href="${safeUrl(storage.taiwan_src_url)}" target="_blank" rel="noopener">${esc(storage.taiwan_src_label||'連結')}</a></div>`:''}`
     : '';
   document.getElementById('storage-src').innerHTML = storage.source_url
-    ? `📌 來源：<a href="${storage.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(storage.source_label||'')}</a>` : '';
+    ? `📌 來源：<a href="${safeUrl(storage.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(storage.source_label||'')}</a>` : '';
 
   const minerals = data.critical_minerals||{};
   document.getElementById('minerals-meta').textContent = minerals.as_of ? `資料時間點：${minerals.as_of}` : '';
   document.getElementById('minerals-block').innerHTML = (minerals.minerals||[]).length
     ? `${minerals.intro_note?`<div class="total-banner">${bulletize(minerals.intro_note)}</div>`:''}
        <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">${minerals.minerals.map(mineralCard).join('')}</div>
-       ${minerals.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${minerals.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(minerals.source_label||'')}</a></div>`:''}`
+       ${minerals.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${safeUrl(minerals.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(minerals.source_label||'')}</a></div>`:''}`
     : '<div class="empty-state">尚無資料</div>';
 
   const nuclear = data.nuclear||{};
   document.getElementById('nuclear-meta').textContent = nuclear.as_of ? `資料時間點：${nuclear.as_of}` : '';
   document.getElementById('nuclear-tw-banner').innerHTML = nuclear.taiwan_status
-    ? `🇹🇼 台灣現況　核能占比 <span class="big" style="color:var(--nuclear);">${nuclear.taiwan_share_pct!=null?nuclear.taiwan_share_pct+'%':'—'}</span>
+    ? `🇹🇼 台灣現況　核能占比 <span class="big" style="color:var(--nuclear);">${nuclear.taiwan_share_pct!=null?esc(nuclear.taiwan_share_pct)+'%':'—'}</span>
        <div style="margin-top:6px;">${bulletize(nuclear.taiwan_status)}</div>`
     : '';
   document.getElementById('nuclear-tw-gating-block').innerHTML = (nuclear.taiwan_future_gating||[]).length
@@ -553,11 +557,11 @@ async function init(){
         <div class="case-card">
           <div class="case-name">${esc(g.checkpoint)}</div>
           <div class="case-desc">${bulletize(g.detail)}</div>
-          ${g.src_url?`<div class="case-src">來源：<a href="${g.src_url}" target="_blank" rel="noopener">${esc(g.src_label||'連結')}</a></div>`:''}
+          ${g.src_url?`<div class="case-src">來源：<a href="${safeUrl(g.src_url)}" target="_blank" rel="noopener">${esc(g.src_label||'連結')}</a></div>`:''}
         </div>`).join('')}</div>` : '';
   document.getElementById('nuclear-country-grid').innerHTML = (nuclear.global_ranking||[]).length
     ? nuclear.global_ranking.map(c=>`<div class="rank-card nuclear">
-        <div class="rank-num">發電量 Top${c.rank||''}</div>
+        <div class="rank-num">發電量 Top${esc(c.rank||'')}</div>
         <div class="rank-name">${esc(c.country)}</div>
         <div class="rank-value nuclear">${esc(c.value||'—')}</div>
         ${c.note?`<div class="rank-note">${bulletize(c.note)}</div>`:''}
@@ -567,7 +571,7 @@ async function init(){
     ? `<div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🏗 各國核能營運狀況／計畫／政策</div>
        <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">${nuclear.country_profiles.map(nuclearProfileCard).join('')}</div>` : '';
   document.getElementById('nuclear-src').innerHTML = nuclear.source_url
-    ? `📌 來源：<a href="${nuclear.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(nuclear.source_label||'')}</a>` : '';
+    ? `📌 來源：<a href="${safeUrl(nuclear.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(nuclear.source_label||'')}</a>` : '';
 
   const carbon = data.carbon||{};
   document.getElementById('carbon-total').innerHTML = carbon.global_total
@@ -579,7 +583,7 @@ async function init(){
   document.getElementById('carbon-bar-block').innerHTML = barChartSvg(carbon.country_breakdown_chart, {titleLabel:'📊 全球碳排放國家占比', color:'var(--fossil)'});
   document.getElementById('carbon-country-grid').innerHTML = (carbon.country_ranking||[]).length
     ? carbon.country_ranking.map(c=>`<div class="rank-card fossil">
-        <div class="rank-num">占比 Top${c.rank||''}</div>
+        <div class="rank-num">占比 Top${esc(c.rank||'')}</div>
         <div class="rank-name">${esc(c.country)}</div>
         <div class="rank-value fossil">${esc(c.value||'—')}</div>
         ${c.note?`<div class="rank-note">${bulletize(c.note)}</div>`:''}
@@ -588,7 +592,7 @@ async function init(){
       </div>`).join('')
     : '<div class="empty-state">尚無資料</div>';
   document.getElementById('carbon-src').innerHTML = carbon.source_url
-    ? `📌 來源：<a href="${carbon.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(carbon.source_label||'')}</a>` : '';
+    ? `📌 來源：<a href="${safeUrl(carbon.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(carbon.source_label||'')}</a>` : '';
 
   const targets = data.national_targets||{};
   document.getElementById('targets-meta').textContent = targets.as_of ? `資料時間點：${targets.as_of}` : '';
@@ -604,7 +608,7 @@ async function init(){
          <td>${bulletize(c.current_progress)}</td>
        </tr>`).join('')}
        </tbody></table></div>
-       ${targets.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${targets.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(targets.source_label||'')}</a></div>`:''}`
+       ${targets.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${safeUrl(targets.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(targets.source_label||'')}</a></div>`:''}`
     : '<div class="empty-state">尚無資料</div>';
 
   const tps = data.taiwan_power_shortage||{};
@@ -621,14 +625,14 @@ async function init(){
     tps.incident_note && {lbl:'🚨 近年事件記錄', val:tps.incident_note},
   ].filter(Boolean);
   const tpsFactsHtml = tpsFacts.length ? tpsFacts.map(f=>`
-    <div class="case-card"><div class="case-name">${f.lbl}</div><div class="case-desc">${bulletize(f.val)}</div></div>`).join('') : '';
+    <div class="case-card"><div class="case-name">${esc(f.lbl)}</div><div class="case-desc">${bulletize(f.val)}</div></div>`).join('') : '';
   const tpsViewsHtml = (tps.viewpoints||[]).length ? `
     <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🗣 各方說法（並陳，不評斷）</div>
     <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${tps.viewpoints.map(v=>`
       <div class="case-card">
         <div class="case-name">${esc(v.source)}</div>
         <div class="case-desc">${bulletize(v.desc)}</div>
-        ${v.src_url?`<div class="case-src">來源：<a href="${v.src_url}" target="_blank" rel="noopener">${esc(v.src_label||'連結')}</a></div>`:''}
+        ${v.src_url?`<div class="case-src">來源：<a href="${safeUrl(v.src_url)}" target="_blank" rel="noopener">${esc(v.src_label||'連結')}</a></div>`:''}
       </div>`).join('')}</div>` : '';
   document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsFactsHtml || tpsViewsHtml)
     ? `${riskBannerHtml}<div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:4px;">${tpsFactsHtml}</div>${tpsViewsHtml}`
@@ -639,7 +643,7 @@ async function init(){
   document.getElementById('ai-energy-block').innerHTML = (aiEnergy.country_profiles||[]).length
     ? `${aiEnergy.intro_note?`<div class="total-banner">${bulletize(aiEnergy.intro_note)}</div>`:''}
        <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">${aiEnergy.country_profiles.map(aiEnergyCard).join('')}</div>
-       ${aiEnergy.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${aiEnergy.source_url}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(aiEnergy.source_label||'')}</a></div>`:''}`
+       ${aiEnergy.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${safeUrl(aiEnergy.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(aiEnergy.source_label||'')}</a></div>`:''}`
     : '<div class="empty-state">尚無資料</div>';
 
   const sm = data.smart_management||{};
