@@ -668,6 +668,14 @@
         "desc": "Google宣布與Entergy Arkansas、Minnesota Power、DTE Energy（加上先前已簽的Indiana Michigan Power、Tennessee Valley Authority）等5家美國電力公司完成長期能源合約中的需量反應承諾，總計達1GW，為任一大型科技公司單一最大規模的資料中心需量反應承諾。做法：Google可限制或轉移部分機器學習運算負載，在特定時段降低資料中心用電、穩定電網。",
         "src_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/demand-response-data-center-milestone/",
         "src_label": "Google 官方部落格"
+      },
+      {
+        "name": "Google × Voltus — PJM 電網 1GW 虛擬電廠",
+        "date": "2026-10-22",
+        "region": "美國",
+        "desc": "Google與Voltus宣布擴大合作，在PJM電網區域建置1GW虛擬電廠，由今年稍早的100MW協議擴大10倍，Google稱是目前已知超大規模雲端業者部署的最大分散式容量組合之一。PJM服務13州與華盛頓特區共6,700萬人。",
+        "src_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/virtual-power-plant-1-gigawatt/",
+        "src_label": "Google 官方部落格"
       }
     ],
     "taiwan": [

@@ -1,38 +1,7 @@
 {
   "checked_at": "2026-10-26",
-  "items": [
-    {
-      "category": "smart_management_intl",
-      "action": "add",
-      "target": "德州 AI GPU 電池儲能專案",
-      "fields": {
-        "name": "Texas battery built for AI GPU power spikes goes online",
-        "date": "2026-07",
-        "region": "美國",
-        "desc": "Greenflash 在德州建置 400 MW BESS，專為 AI GPU 電力尖峰設計，於 2026 年 7 月商業營運，預估 AI 資料中心對儲能需求將推動 210 億美元市場。",
-        "src_url": "https://www.msn.com/en-us/news/other/texas-battery-built-for-ai-gpu-power-spikes-goes-online-21b-market-forecast-follows/ar-AA2fK06I",
-        "src_label": "MSN"
-      },
-      "reason": "新聞證實德州 400 MW 電池儲能於 2026 年 7 月上線，屬於 AI 資料中心電力智慧管理新案例，現有資料中未列出此項目。",
-      "source": "https://www.msn.com/en-us/news/other/texas-battery-built-for-ai-gpu-power-spikes-goes-online-21b-market-forecast-follows/ar-AA2fK06I"
-    },
-    {
-      "category": "smart_management_intl",
-      "action": "add",
-      "target": "Google 虛擬電廠計畫",
-      "fields": {
-        "name": "Google Builds 1-Gigawatt Virtual Power Plant With Voltus",
-        "date": "2026-10",
-        "region": "美國",
-        "desc": "Google 與 Voltus 合作建置 1 GW 虛擬電廠，透過需求回應與分散式資源穩定 PJM 電網，服務約 6700 萬人。",
-        "src_url": "https://www.techbuzz.ai/articles/google-builds-1-gigawatt-virtual-power-plant-with-voltus",
-        "src_label": "TechBuzz"
-      },
-      "reason": "新聞顯示 Google 於 2026 年 10 月與 Voltus 合作推出 1 GW 虛擬電廠，與既有「Google — 與美國5家電力公司達成1GW資料中心需量反應承諾」不同，屬新案例，需新增。",
-      "source": "https://www.techbuzz.ai/articles/google-builds-1-gigawatt-virtual-power-plant-with-voltus"
-    }
-  ],
-  "no_change_summary": "",
+  "items": [],
+  "no_change_summary": "本週兩筆候選異動已複核：Google × Voltus 1GW虛擬電廠經Google官方部落格（2026-10-22）逐句核對後寫入，「6,700萬人」更正為PJM服務人口；德州Greenflash電池儲能案查無官方商轉公告，「專為AI GPU尖峰設計」與210億美元市場預估亦無官方出處，暫不寫入，待官方公布後由週查證重新提出。",
   "no_change_detail_by_category": [
     "本週查證後，現有資料仍準確，無需更新。",
     "本分類本週查證後判斷現有資料仍準確",
