@@ -2,8 +2,8 @@ name: 🌱 Weekly Renewable Tracker Update
 
 on:
   schedule:
-    - cron: '0 16 * * 0'  # 每週日 16:00 UTC（台北時間週一 00:00），比照AI Tracker的
-                           # weekly-nvidia-update.yml排程慣例
+    - cron: '0 10 * * 3'  # 每週三 10:00 UTC（台北時間週三 18:00）；11-03 由週日 16:00 UTC 移出，
+                           # 避免與 aitracker NVIDIA 週查證、每月 1 日產業導入月查證、每日管線共用 Groq key 撞同一分鐘 TPM
   workflow_dispatch:        # 手動備用
 
 jobs:
