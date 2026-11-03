@@ -329,7 +329,7 @@ function trendChartSvg(trend, opts){
   const titleLabel = opts.titleLabel || '📈 歷年占比趨勢';
   const unit = trend.unit!=null ? trend.unit : '%';
   const fallbackColor = opts.fallbackColor || 'var(--muted)';
-  const W=640,H=300,padL=36,padR=14,padT=14,padB=30;
+  const W=riW(),H=319,padL=38,padR=15,padT=15,padB=32;
   const years = trend.years;
   const allVals = trend.series.flatMap(s=>s.values.filter(v=>v!=null));
   const maxV = Math.max(...allVals, 10);
@@ -344,9 +344,13 @@ function trendChartSvg(trend, opts){
     const v = yMax*i/4;
     const y = py(v);
     return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
-      <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="11.3" fill="var(--muted2)">${Math.round(v)}</text>`;
+      <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="12" fill="var(--muted2)">${Math.round(v)}</text>`;
   }).join('');
-  const xLabelsHtml = years.map((y,i)=>`<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="11.3" fill="var(--muted2)">${esc(y)}</text>`).join('');
+  // x軸標籤依寬度抽稀：由最後一年往前每k個放一個，k依平均年距與最長標籤寬估算
+  const xStep = (W-padL-padR)/(years.length-1||1);
+  const xMaxLen = Math.max(...years.map(y=>String(y).length));
+  const xK = Math.max(1, Math.ceil((xMaxLen*7+10)/xStep));
+  const xLabelsHtml = years.map((y,i)=>((years.length-1-i)%xK===0)?`<text x="${px(i)}" y="${H-padB+17}" text-anchor="middle" font-size="12" fill="var(--muted2)">${esc(y)}</text>`:'').join('');
   // 原生SVG<title>tooltip依賴瀏覽器chrome層渲染，實測不可靠（同一個bug
   // 回報兩次），改用自製浮動tooltip（見全域chartTooltipInit()+.chart-hit
   // data-tip，事件委派在document層，不用逐點綁事件）。
@@ -363,7 +367,7 @@ function trendChartSvg(trend, opts){
   const legendHtml = trend.series.length>1 ? trend.series.map(s=>`<span><span class="trend-sw" style="background:${SERIES_COLORS[s.name]||fallbackColor}"></span>${esc(s.name)}</span>`).join('') : '';
   return `<div class="trend-chart-wrap">
     <div class="sec-meta" style="margin-bottom:6px;">${titleLabel}（單位：${esc(unit.trim())}）${trend.as_of?'　'+esc(trend.as_of):''}</div>
-    <svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:680px;height:auto;display:block;">
+    <svg viewBox="0 0 ${W} ${H}" style="width:${W}px;max-width:100%;height:auto;display:block;">
       ${gridHtml}${xLabelsHtml}${linesHtml}
     </svg>
     ${legendHtml?`<div class="trend-legend">${legendHtml}</div>`:''}
@@ -382,7 +386,7 @@ function barChartSvg(data, opts){
   const unit = opts.unit!=null ? opts.unit : '%';
   const color = opts.color || 'var(--fossil)';
   const titleLabel = opts.titleLabel || '';
-  const W = 640, rowH = 30, padL = 90, padR = 70, padTop = 8, padBottom = 8;
+  const W = riW(), rowH = 32, padL = 96, padR = 74, padTop = 9, padBottom = 9;
   const maxV = Math.max(...items.map(it=>it.pct||0), 1);
   const H = items.length*rowH + padTop + padBottom;
   const barMaxW = W - padL - padR;
@@ -390,13 +394,13 @@ function barChartSvg(data, opts){
     const y = padTop + i*rowH;
     const bw = Math.max((it.pct||0)/maxV*barMaxW, 2);
     const tip = esc(it.country+'：'+it.pct+unit+(it.value_mt!=null?'（'+it.value_mt.toLocaleString()+' Mt CO2）':''));
-    return `<text x="${padL-8}" y="${y+rowH/2+4}" text-anchor="end" font-size="11.3" fill="var(--text2)">${esc(it.country)}</text>
+    return `<text x="${padL-8}" y="${y+rowH/2+4}" text-anchor="end" font-size="12" fill="var(--text2)">${esc(it.country)}</text>
       <rect x="${padL}" y="${y+6}" width="${bw}" height="${rowH-12}" rx="3" fill="${color}" class="chart-hit" data-tip="${tip}" style="cursor:pointer;"/>
-      <text x="${padL+bw+8}" y="${y+rowH/2+4}" font-size="11.3" fill="var(--text2)" font-weight="700">${esc(it.pct)}${esc(unit)}</text>`;
+      <text x="${padL+bw+8}" y="${y+rowH/2+4}" font-size="12" fill="var(--text2)" font-weight="700">${esc(it.pct)}${esc(unit)}</text>`;
   }).join('');
   return `<div class="trend-chart-wrap">
     ${titleLabel?`<div class="sec-meta" style="margin-bottom:6px;">${titleLabel}${data.as_of?'（'+esc(data.as_of)+'）':''}</div>`:''}
-    <svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:680px;height:auto;display:block;">${rows}</svg>
+    <svg viewBox="0 0 ${W} ${H}" style="width:${W}px;max-width:100%;height:auto;display:block;">${rows}</svg>
     ${data.note?`<div class="src-note" style="margin-top:8px;">${esc(data.note)}</div>`:''}
     ${data.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${safeUrl(data.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(data.source_label||'')}</a></div>`:''}
   </div>`;
@@ -577,7 +581,7 @@ function riReserveInsight(rv){
 }
 
 // 新圖寬度：取容器可用寬（最大 680，同既有圖 max-width），字級固定 12px、1:1 渲染，窄螢幕不縮字
-function riW(){ const e=document.getElementById('ri-trend-block'); const w=e&&e.clientWidth ? e.clientWidth-40 : 680; return Math.max(280, Math.min(680, Math.round(w))); }
+function riW(){ const e=document.getElementById('ri-trend-block')||document.getElementById('trend-chart-block'); const w=e&&e.clientWidth ? e.clientWidth-40 : 680; return Math.max(280, Math.min(680, Math.round(w))); }
 function riAxisY(yMax, W, padL, padR, py, fmt){
   return [0,1,2,3,4].map(i=>{ const v=yMax*i/4, y=py(v);
     return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
@@ -591,6 +595,17 @@ function riWrap(title, svg, insight, notes, legend){
     ${legend?`<div class="trend-legend">${legend}</div>`:''}
     ${(notes||[]).map(n=>`<div class="src-note" style="margin-top:6px;">${n}</div>`).join('')}
   </div>`;
+}
+// 視窗寬度改變時統一重畫所有圖（寬度有變才重畫）；各區塊以 riOnResize 註冊自己的重畫函式
+const RI_RZ = []; let riRzW = null, riRzT = null;
+function riOnResize(fn){
+  RI_RZ.push(fn);
+  if(riRzW!==null) return;
+  riRzW = riW();
+  window.addEventListener('resize', ()=>{ clearTimeout(riRzT); riRzT = setTimeout(()=>{
+    if(riW()===riRzW) return; riRzW = riW();
+    RI_RZ.forEach(f=>{ try{ f(); }catch(e){} });
+  }, 200); });
 }
 function riLink(u, label){ return `<a href="${safeUrl(u)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(label)}</a>`; }
 
@@ -778,11 +793,7 @@ async function loadIndicators(){
   const h = document.getElementById('ri-hero-block'), t = document.getElementById('ri-trend-block');
   try{ if(h) h.innerHTML = riHeroCard(ind); }catch(e){ if(h) h.innerHTML = RI_PENDING; }
   try{ if(t) t.innerHTML = riTrendBlock(ind); }catch(e){ if(t) t.innerHTML = RI_PENDING; }
-  let rzW = riW(), rzT = null;
-  window.addEventListener('resize', ()=>{ clearTimeout(rzT); rzT = setTimeout(()=>{
-    if(riW()===rzW) return; rzW = riW();
-    try{ if(t) t.innerHTML = riTrendBlock(ind); }catch(e){}
-  }, 200); });
+  riOnResize(()=>{ if(t) t.innerHTML = riTrendBlock(ind); });
 }
 
 async function init(){
@@ -807,7 +818,8 @@ async function init(){
   document.getElementById('mix-src').innerHTML = mix.source_url
     ? `📌 來源：<a href="${safeUrl(mix.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(mix.source_label||'')}</a>` : '';
   document.getElementById('mix-crossref').textContent = mix.cross_ref_note || '';
-  document.getElementById('trend-chart-block').innerHTML = trendChartSvg(data.historical_trend);
+  const drawTrendG = ()=>{ document.getElementById('trend-chart-block').innerHTML = trendChartSvg(data.historical_trend); };
+  drawTrendG(); riOnResize(drawTrendG);
   document.getElementById('country-breakdown-block').innerHTML = countryBreakdownBlock(mix.items);
 
   const twMix = data.taiwan_mix||{};
@@ -820,7 +832,8 @@ async function init(){
   document.getElementById('tw-mix-crossref').textContent = twMix.cross_ref_note || '';
 
   const lcoe = data.lcoe||{};
-  document.getElementById('lcoe-trend-block').innerHTML = trendChartSvg(lcoe.trend, {titleLabel:'📉 再生能源發電成本歷年趨勢（全球實際成本）', fallbackColor:'var(--renew)'});
+  const drawLcoe = ()=>{ document.getElementById('lcoe-trend-block').innerHTML = trendChartSvg(lcoe.trend, {titleLabel:'📉 再生能源發電成本歷年趨勢（全球實際成本）', fallbackColor:'var(--renew)'}); };
+  drawLcoe(); riOnResize(drawLcoe);
   document.getElementById('lcoe-snapshot-block').innerHTML = costSnapshotBlock(lcoe.snapshot);
 
   // 單一來源：台灣再生占比只存在 taiwan_mix 的「再生能源」卡；全球水／風／光占比只存在
@@ -907,8 +920,11 @@ async function init(){
        ${carbon.global_trend_note?`<div style="margin-top:5px;">${bulletize(carbon.global_trend_note)}</div>`:''}
        ${carbon.taiwan_total?`<div style="margin-top:8px;">🇹🇼 台灣：<b>${esc(carbon.taiwan_total)}</b>${carbon.taiwan_note?`<div style="margin-top:3px;">${bulletize(carbon.taiwan_note)}</div>`:''}</div>`:''}`
     : '';
-  document.getElementById('carbon-trend-block').innerHTML = trendChartSvg(carbon.historical_trend, {titleLabel:'📈 全球碳排放歷年趨勢', fallbackColor:'var(--fossil)'});
-  document.getElementById('carbon-bar-block').innerHTML = barChartSvg(carbon.country_breakdown_chart, {titleLabel:'📊 全球碳排放國家占比', color:'var(--fossil)'});
+  const drawCarbon = ()=>{
+    document.getElementById('carbon-trend-block').innerHTML = trendChartSvg(carbon.historical_trend, {titleLabel:'📈 全球碳排放歷年趨勢', fallbackColor:'var(--fossil)'});
+    document.getElementById('carbon-bar-block').innerHTML = barChartSvg(carbon.country_breakdown_chart, {titleLabel:'📊 全球碳排放國家占比', color:'var(--fossil)'});
+  };
+  drawCarbon(); riOnResize(drawCarbon);
   document.getElementById('carbon-country-grid').innerHTML = (carbon.country_ranking||[]).length
     ? carbon.country_ranking.map(c=>`<div class="rank-card fossil">
         <div class="rank-num">占比 Top${esc(c.rank||'')}</div>
@@ -988,6 +1004,8 @@ async function init(){
 
   document.getElementById('loading-screen').classList.add('hidden');
   document.getElementById('content').classList.remove('hidden');
+  // 內容原本隱藏時量不到寬度，顯示後用實際容器寬重畫一次
+  riRzW = riW(); RI_RZ.forEach(f=>{ try{ f(); }catch(e){} });
   loadIndicators();
 
   // 週查證候選異動提示（best-effort，檔案不存在或格式異常就靜默略過，
