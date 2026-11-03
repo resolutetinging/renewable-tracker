@@ -675,7 +675,9 @@ function riStackSvg(blk, labelFn, tickFn, shareLabel){
   const pts = shares.map((v,i)=> riNum(v)!=null ? (bx(i)+bw/2)+','+sy(v) : null).filter(Boolean);
   const line = pts.length>1 ? `<polyline points="${pts.join(' ')}" fill="none" stroke="#2c2a28" stroke-width="1.8" stroke-dasharray="4 2"/>` : '';
   const dots = shares.map((v,i)=> riNum(v)!=null ? `<circle cx="${bx(i)+bw/2}" cy="${sy(v)}" r="2.2" fill="#2c2a28"/>` : '').join('');
-  const rAx = [0,2,4].map(k=>{ const v=sTop*k/4; return `<text x="${W-padR+4}" y="${sy(v)+4}" font-size="12" fill="var(--text2)">${Math.round(v)}%</text>`; }).join('');
+  // 右軸刻度每 5 個百分點一格（0%、5%、10%…），避免出現 8% 這類不整齊的刻度
+  const rTicks = []; for(let v=0; v<=sTop+1e-9; v+=5) rTicks.push(v);
+  const rAx = rTicks.map(v=>`<text x="${W-padR+4}" y="${sy(v)+4}" font-size="12" fill="var(--text2)">${v}%</text>`).join('');
   // x 軸自動抽稀：由最後一筆往前每 k 個標一次，k 依標籤寬（字數×6.5px）＋8px 間距與每格寬度算出，保證不疊字
   const lblW = Math.max(...labels.map(l=>String(labelFn(l)).length))*6.7 + 8;
   const kStep = Math.max(1, Math.ceil(lblW/slot));
@@ -696,7 +698,7 @@ function riTwAnnualBlock(tm){
   const a = tm && tm.annual;
   if(!riValidStack(a,'years')) return RI_PENDING;
   const blk = {labels:a.years.map(String), series:a.series, share:Array.isArray(a.re_share)?a.re_share:[]};
-  const r = riStackSvg(blk, l=>l.slice(2), (l,i)=> i%3===0 || i===blk.labels.length-1, '再生占比');
+  const r = riStackSvg(blk, l=>l, (l,i)=> i%3===0 || i===blk.labels.length-1, '再生占比');
   return riWrap('🇹🇼 台灣再生能源發電量　歷年（'+esc(a.years[0])+'–'+esc(a.years[a.years.length-1])+'，單位：億度）', r.svg, null,
     [`📌 來源：${riLink(RI_SRC_ESIST,'經濟部能源署（能源統計資料庫）')}；占比為再生發電量占全國總發電量。`], r.legend);
 }
