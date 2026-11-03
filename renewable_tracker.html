@@ -58,8 +58,8 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .rank-reason b{color:var(--smart);font-weight:700;}
 .rank-trend{font-size:11px;font-weight:600;margin-left:6px;}
 .trend-up{color:#306840;}.trend-down{color:#884040;}.trend-flat{color:var(--muted);}
-.mini-list{margin:0;padding-left:15px;}
-.mini-list li{margin-bottom:2px;}
+.txt-bullets{margin:0;padding-left:16px;}
+.txt-bullets li{margin-bottom:3px;line-height:inherit;}
 
 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;font-size:11px;color:var(--muted);}
 .legend span{display:inline-flex;align-items:center;gap:5px;}
@@ -289,13 +289,25 @@ function trendBadge(t){
   return '';
 }
 
-// 把含多個句子的說明文字拆成bullet list；只有一句就照舊用單行文字，
-// 避免短說明也被硬拆成只有一項的清單顯得多餘。
+// 把含多個句子的說明文字拆成bullet list：依「。」「；」斷句，括號／引號內不斷；
+// 只有一句或總長不足 40 字就維持單行文字。先 esc 再組 HTML。
+function splitSentences(text){
+  const out=[]; let cur='', depth=0;
+  for(const ch of String(text)){
+    if('（(【[「『'.includes(ch)) depth++;
+    else if('）)】]」』'.includes(ch)) depth=Math.max(0,depth-1);
+    cur+=ch;
+    if(depth===0 && (ch==='。'||ch==='；')){ out.push(cur); cur=''; }
+  }
+  if(cur.trim()) out.push(cur);
+  return out.map(x=>x.trim().replace(/[。；]$/,'').trim()).filter(Boolean);
+}
 function bulletize(text){
   if(!text) return '';
-  const parts = String(text).split(/(?<=[。；])/).map(s=>s.trim()).filter(Boolean);
-  if(parts.length<=1) return esc(text);
-  return `<ul class="mini-list">${parts.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>`;
+  const t=String(text);
+  const parts=splitSentences(t);
+  if(parts.length<=1 || t.length<40) return esc(t);
+  return `<ul class="txt-bullets">${parts.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>`;
 }
 
 // 卡片結構固定順序：能源類別→數值&%→資料時間→內容說明→趨勢說明
@@ -749,12 +761,18 @@ function riReserveBlock(rv){
     `縱軸上限 ${CAP}%${clipped?`，另有 ${clipped} 天數值高於 ${CAP}%（含極端值）於圖上緣截斷，提示框顯示原值`:''}。`,
     `📌 來源：${riLink(RI_SRC_TPC,'台灣電力公司開放資料（每日備轉容量率）')}`
   ];
+  const rxH = t=>`<div style="margin-top:6px;"><b>${t}</b></div>`;
+  const rxL = arr=>`<ul class="txt-bullets">${arr.map(x=>`<li>${x}</li>`).join('')}</ul>`;
   const explain = `<div class="total-banner" style="margin:12px 0 0;font-size:12.5px;">`
     + `<div style="font-weight:700;margin-bottom:4px;">💡 什麼是備轉容量率？</div>`
-    + `<div><b>定義</b>：備轉容量＝系統運轉淨尖峰供電能力－系統瞬時尖峰負載，也就是當天用電最高峰時，還能立即調度、但尚未用到的發電餘裕；備轉容量率＝備轉容量÷系統瞬時尖峰負載×100%。</div>`
-    + `<div style="margin-top:4px;"><b>台電供電燈號</b>：綠燈「供電充裕」≥10%；黃燈「供電吃緊」10%～6%；橘燈「供電警戒」≤6%；紅燈「限電警戒」備轉容量 90 萬瓩以下；黑燈「限電準備」備轉容量 50 萬瓩以下（紅、黑兩燈以容量萬瓩判定，不看百分比）。</div>`
-    + `<div style="margin-top:4px;"><b>怎麼看</b>：數字越高，代表尖峰時刻還有越多備用發電能力，可以應付機組臨時故障或用電高於預期；維持在 10% 以上即為台電判定的「供電充裕」。台電未公布 10%、6% 門檻的訂定理由。</div>`
-    + `<div style="margin-top:4px;"><b>別和「備用容量率」搞混</b>：備用容量率＝（系統規劃淨尖峰能力－系統尖峰負載）÷系統尖峰負載，是每年電源開發的長期規劃指標，政府核准的合理目標值為 15%；備轉容量率則是每日、以扣除檢修與故障機組後的實際運轉能力計算的調度指標。</div>`
+    + `<div><b>定義</b></div>`
+    + rxL(['備轉容量＝系統運轉淨尖峰供電能力－系統瞬時尖峰負載，也就是當天用電最高峰時，還能立即調度、但尚未用到的發電餘裕','備轉容量率＝備轉容量÷系統瞬時尖峰負載×100%'])
+    + rxH('台電供電燈號')
+    + rxL(['綠燈「供電充裕」：≥10%','黃燈「供電吃緊」：10%～6%','橘燈「供電警戒」：≤6%','紅燈「限電警戒」：備轉容量 90 萬瓩以下','黑燈「限電準備」：備轉容量 50 萬瓩以下','紅、黑兩燈以容量萬瓩判定，不看百分比'])
+    + rxH('怎麼看')
+    + rxL(['數字越高，代表尖峰時刻還有越多備用發電能力，可以應付機組臨時故障或用電高於預期','維持在 10% 以上即為台電判定的「供電充裕」','台電未公布 10%、6% 門檻的訂定理由'])
+    + rxH('別和「備用容量率」搞混')
+    + rxL(['備用容量率＝（系統規劃淨尖峰能力－系統尖峰負載）÷系統尖峰負載，是每年電源開發的長期規劃指標，政府核准的合理目標值為 15%','備轉容量率則是每日、以扣除檢修與故障機組後的實際運轉能力計算的調度指標'])
     + `<div class="src-note" style="margin-top:6px;">📌 來源：${riLink(RI_SRC_TPC_RESERVE_DEF,'台電今日預估尖峰備轉容量率（含定義與供電燈號）')}、${riLink(RI_SRC_TPC_PLAN,'台電備用容量之說明')}</div>`
     + `</div>`;
   const legend = `<span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px;"><span style="display:inline-block;width:16px;height:2px;background:#5a7fa8;opacity:.35;"></span>每日值</span><span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:16px;height:3px;background:#2f5f8f;"></span>7 日移動平均</span>`;
