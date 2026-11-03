@@ -489,7 +489,7 @@ function nuclearProfileCard(p){
 const RI_SRC_IRENA = 'https://pxweb.irena.org/pxweb/en/IRENASTAT/IRENASTAT__Power%20Capacity%20and%20Generation';
 const RI_SRC_ESIST = 'https://www.esist.org.tw/a0303/02/api/pages/database/api';
 const RI_SRC_TPC = 'https://service.taipower.com.tw/data/opendata/apply/file/d006005/001.csv';
-const RI_SRC_TPC_LIGHT = 'https://www.taipower.com.tw/d006/loadGraph/loadGraph/load_reserve_.html';
+const RI_SRC_TPC_LIGHT = 'https://www.taipower.com.tw/d006/loadGraph/loadGraph/load_reserveT_.html';
 const RI_SRC_TPC_RESERVE_DEF = 'https://www.taipower.com.tw/d006/loadGraph/loadGraph/load_reserveT_.html';
 const RI_SRC_TPC_PLAN = 'https://www.taipower.com.tw/2289/2363/2367/2372/10316/normalPost';
 const RI_SRC_EUROSTAT = 'https://ec.europa.eu/eurostat/databrowser/view/nrg_ind_ren/default/table';
@@ -750,7 +750,7 @@ function riReserveBlock(rv){
     + `<div style="margin-top:4px;"><b>台電供電燈號</b>：綠燈「供電充裕」≥10%；黃燈「供電吃緊」10%～6%；橘燈「供電警戒」≤6%；紅燈「限電警戒」備轉容量 90 萬瓩以下；黑燈「限電準備」備轉容量 50 萬瓩以下（紅、黑兩燈以容量萬瓩判定，不看百分比）。</div>`
     + `<div style="margin-top:4px;"><b>怎麼看</b>：數字越高，代表尖峰時刻還有越多備用發電能力，可以應付機組臨時故障或用電高於預期；維持在 10% 以上即為台電判定的「供電充裕」。台電未公布 10%、6% 門檻的訂定理由。</div>`
     + `<div style="margin-top:4px;"><b>別和「備用容量率」搞混</b>：備用容量率＝（系統規劃淨尖峰能力－系統尖峰負載）÷系統尖峰負載，是每年電源開發的長期規劃指標，政府核准的合理目標值為 15%；備轉容量率則是每日、以扣除檢修與故障機組後的實際運轉能力計算的調度指標。</div>`
-    + `<div class="src-note" style="margin-top:6px;">📌 來源：${riLink(RI_SRC_TPC_RESERVE_DEF,'台電今日預估尖峰備轉容量率')}、${riLink(RI_SRC_TPC_LIGHT,'台電供電燈號')}、${riLink(RI_SRC_TPC_PLAN,'台電備用容量之說明')}</div>`
+    + `<div class="src-note" style="margin-top:6px;">📌 來源：${riLink(RI_SRC_TPC_RESERVE_DEF,'台電今日預估尖峰備轉容量率（含定義與供電燈號）')}、${riLink(RI_SRC_TPC_PLAN,'台電備用容量之說明')}</div>`
     + `</div>`;
   return riWrap('🔌 台灣每日備轉容量率（'+esc(rv.days[0])+' 至 '+esc(rv.days[n-1])+'，單位：%）', svg, ins&&ins.text, notes, '', explain);
 }
