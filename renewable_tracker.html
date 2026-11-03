@@ -719,6 +719,9 @@ function riReserveBlock(rv){
   const grid = riAxisY(CAP,W,padL,padR,py);
   const pts = []; let clipped = 0;
   rv.values.forEach((v,i)=>{ v=riNum(v); if(v!=null){ pts.push(px(i)+','+py(v)); if(v>CAP) clipped++; } });
+  // 7 日移動平均（含當日往前 7 筆有值資料，不足 7 筆不畫），讓密集日資料的走勢較易判讀
+  const ma = []; const win = [];
+  rv.values.forEach((v,i)=>{ v=riNum(v); if(v==null) return; win.push(v); if(win.length>7) win.shift(); if(win.length===7) ma.push(px(i)+','+py(win.reduce((a,b)=>a+b,0)/7)); });
   const ref = (v,color,txt)=>`<line x1="${padL}" y1="${py(v)}" x2="${W-padR}" y2="${py(v)}" stroke="${color}" stroke-width="1.2" stroke-dasharray="5 3"/><text x="${W-padR+4}" y="${py(v)+4}" font-size="12" fill="${color}" font-weight="700">${txt}</text>`;
   // X 軸：每個月 1 日標「YY-MM」，每 3 個月一次
   // 最小間距 46px（標籤約 32px 寬＋8px），不足則略過，保證不疊字
@@ -737,7 +740,7 @@ function riReserveBlock(rv){
     const tip = (s===e? rv.days[s] : rv.days[s]+' 至 '+rv.days[e])+'　最低 '+riFmt(mn,2)+'%｜最高 '+riFmt(mx,2)+'%｜平均 '+riFmt(vs.reduce((a,b)=>a+b,0)/vs.length,2)+'%';
     hits += `<rect x="${px(s)-(px(1)-px(0))/2}" y="${padT}" width="${(px(e)-px(s))+(px(1)-px(0))}" height="${H-padT-padB}" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${esc(tip)}" style="cursor:pointer;"/>`;
   }
-  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;height:auto;display:block;">${grid}${ref(10,'#4a8a6a','10% 充裕')}${ref(6,'#a07040','6% 警戒')}<polyline points="${pts.join(' ')}" fill="none" stroke="#5a7fa8" stroke-width="1.3" stroke-linejoin="round"/>${xl}${hits}</svg>`;
+  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;height:auto;display:block;">${grid}${ref(10,'#4a8a6a','10% 充裕')}${ref(6,'#a07040','6% 警戒')}<polyline points="${pts.join(' ')}" fill="none" stroke="#5a7fa8" stroke-width="1.3" stroke-linejoin="round" opacity=".35"/><polyline points="${ma.join(' ')}" fill="none" stroke="#2f5f8f" stroke-width="2.2" stroke-linejoin="round"/>${xl}${hits}</svg>`;
   const ins = riReserveInsight(rv);
   const notes = [
     `燈號門檻依台電供電燈號分級：備轉容量率 ≥10% 供電充裕（綠燈）、6–10% 供電吃緊（黃燈）、≤6% 供電警戒（橘燈）；詳見 ${riLink(RI_SRC_TPC_LIGHT,'台電今日預估尖峰備轉容量率頁')}。`,
@@ -752,7 +755,8 @@ function riReserveBlock(rv){
     + `<div style="margin-top:4px;"><b>別和「備用容量率」搞混</b>：備用容量率＝（系統規劃淨尖峰能力－系統尖峰負載）÷系統尖峰負載，是每年電源開發的長期規劃指標，政府核准的合理目標值為 15%；備轉容量率則是每日、以扣除檢修與故障機組後的實際運轉能力計算的調度指標。</div>`
     + `<div class="src-note" style="margin-top:6px;">📌 來源：${riLink(RI_SRC_TPC_RESERVE_DEF,'台電今日預估尖峰備轉容量率（含定義與供電燈號）')}、${riLink(RI_SRC_TPC_PLAN,'台電備用容量之說明')}</div>`
     + `</div>`;
-  return riWrap('🔌 台灣每日備轉容量率（'+esc(rv.days[0])+' 至 '+esc(rv.days[n-1])+'，單位：%）', svg, ins&&ins.text, notes, '', explain);
+  const legend = `<span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px;"><span style="display:inline-block;width:16px;height:2px;background:#5a7fa8;opacity:.35;"></span>每日值</span><span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:16px;height:3px;background:#2f5f8f;"></span>7 日移動平均</span>`;
+  return riWrap('🔌 台灣每日備轉容量率（'+esc(rv.days[0])+' 至 '+esc(rv.days[n-1])+'，單位：%）', svg, ins&&ins.text, notes, legend, explain);
 }
 
 // 頁首對照卡
