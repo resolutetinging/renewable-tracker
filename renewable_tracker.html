@@ -576,15 +576,17 @@ function riReserveInsight(rv){
     text: `近 90 天（${start} 至 ${last}）備轉容量率低於 10% 共 ${cur} 天，${prevTxt}；期間最低 ${riFmt(minV,2)}%（${minD}）`};
 }
 
+// 新圖寬度：取容器可用寬（最大 680，同既有圖 max-width），字級固定 12px、1:1 渲染，窄螢幕不縮字
+function riW(){ const e=document.getElementById('ri-trend-block'); const w=e&&e.clientWidth ? e.clientWidth-40 : 680; return Math.max(280, Math.min(680, Math.round(w))); }
 function riAxisY(yMax, W, padL, padR, py, fmt){
   return [0,1,2,3,4].map(i=>{ const v=yMax*i/4, y=py(v);
     return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
-    <text x="${padL-4}" y="${y+4}" text-anchor="end" font-size="12.5" fill="var(--muted2)">${fmt?fmt(v):Math.round(v)}</text>`; }).join('');
+    <text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="12" fill="var(--muted2)">${fmt?fmt(v):Math.round(v)}</text>`; }).join('');
 }
 function riWrap(title, svg, insight, notes, legend){
   return `<div class="trend-chart-wrap">
     <div class="sec-meta" style="margin-bottom:6px;">${title}</div>
-    ${insight?`<div class="total-banner" style="margin:0 0 8px;font-size:12.5px;">${esc(insight)}</div>`:''}
+    ${insight?`<div class="total-banner" style="margin:0 0 8px;">${esc(insight)}</div>`:''}
     ${svg}
     ${legend?`<div class="trend-legend">${legend}</div>`:''}
     ${(notes||[]).map(n=>`<div class="src-note" style="margin-top:6px;">${n}</div>`).join('')}
@@ -595,7 +597,7 @@ function riLink(u, label){ return `<a href="${safeUrl(u)}" target="_blank" rel="
 // 圖 a：各國再生發電占比折線
 function riShareChartSvg(re){
   if(!riValidShare(re)) return RI_PENDING;
-  const W=380,H=270,padL=30,padR=70,padT=12,padB=26;
+  const W=riW(),H=300,padL=36,padR=96,padT=14,padB=30;
   const years = re.years, n = years.length;
   const all = re.series.flatMap(s=>(s.values||[]).map(riNum).filter(v=>v!=null));
   if(!all.length) return RI_PENDING;
@@ -603,7 +605,7 @@ function riShareChartSvg(re){
   const px = i => padL + i/(n-1)*(W-padL-padR);
   const py = v => H-padB - v/yMax*(H-padT-padB);
   const grid = riAxisY(yMax,W,padL,padR,py);
-  const xl = years.map((y,i)=> (y%5===0) ? `<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="12.5" fill="var(--muted2)">${esc(y)}</text>` : '').join('');
+  const xl = years.map((y,i)=> (y%5===0) ? `<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="12" fill="var(--muted2)">${esc(y)}</text>` : '').join('');
   const others = re.series.filter(s=>s.key!=='TW'), tw = re.series.find(s=>s.key==='TW');
   const draw = (s, color, w)=>{
     const runs=[]; let cur=[];
@@ -613,17 +615,17 @@ function riShareChartSvg(re){
   };
   const palette = {WORLD:'#4a4744', CN:'#9e9890', US:'#7a8a96', JP:'#a89a82', IN:'#8a9a8a', EU:'#b0a090'};
   let lines = others.map(s=>draw(s, palette[s.key]||'#9e9890', 1.6)).join('') + (tw?draw(tw,'#c0603a',3):'');
-  // 線尾標籤：依終值排序，最小間距 13 防重疊
+  // 線尾標籤：依終值排序，最小間距 16 防重疊
   const ends = re.series.map(s=>{ let li=-1; for(let i=s.values.length-1;i>=0;i--) if(riNum(s.values[i])!=null){ li=i; break; } return li<0?null:{s, v:s.values[li], y:py(s.values[li]), li}; }).filter(Boolean).sort((a,b)=>a.y-b.y);
-  for(let i=1;i<ends.length;i++) if(ends[i].y-ends[i-1].y<13) ends[i].y = ends[i-1].y+13;
+  for(let i=1;i<ends.length;i++) if(ends[i].y-ends[i-1].y<16) ends[i].y = ends[i-1].y+16;
   const labels = ends.map(e=>{ const isTw = e.s.key==='TW'; const x = px(e.li)+5;
-    return `<text x="${x}" y="${e.y+4}" font-size="12.5" fill="${isTw?'#c0603a':'var(--text2)'}" font-weight="${isTw?800:500}">${esc(e.s.label)} ${riFmt(e.v)}${e.s.key==='EU'?'*':''}</text>`; }).join('');
+    return `<text x="${x}" y="${e.y+4}" font-size="12" fill="${isTw?'#c0603a':'var(--text2)'}" font-weight="${isTw?800:500}">${esc(e.s.label)} ${riFmt(e.v)}${e.s.key==='EU'?'*':''}</text>`; }).join('');
   // 每年一條垂直熱區：寬度＝年距、高度＝整個繪圖區
   const step = (W-padL-padR)/(n-1);
   const hits = years.map((y,i)=>{
     const parts = re.series.map(s=>({l:s.label+(s.key==='EU'?'*':''), v:riNum(s.values[i])})).filter(p=>p.v!=null).sort((a,b)=>b.v-a.v).map(p=>p.l+' '+riFmt(p.v)+'%');
     return `<rect x="${px(i)-step/2}" y="${padT}" width="${step}" height="${H-padT-padB}" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${esc(y+'　'+parts.join('｜'))}" style="cursor:pointer;"/>`; }).join('');
-  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px;height:auto;display:block;">${grid}${xl}${lines}${labels}${hits}</svg>`;
+  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;height:auto;display:block;">${grid}${xl}${lines}${labels}${hits}</svg>`;
   const ins = riShareInsight(re);
   const notes = [
     `* 歐盟：來源為 Eurostat（${riLink(RI_SRC_EUROSTAT,'nrg_ind_ren')}），口徑與其餘六者（IRENA）不同，僅供參考、不宜直接比較；2000–2003 年無資料。`,
@@ -634,7 +636,7 @@ function riShareChartSvg(re){
 
 // 圖 b：台灣再生發電堆疊長條（共用於年度與逐月）
 function riStackSvg(blk, labelFn, tickFn, shareLabel){
-  const W=380,H=250,padL=34,padR=34,padT=12,padB=26;
+  const W=riW(),H=300,padL=36,padR=44,padT=14,padB=30;
   const labels = blk.labels, n = labels.length;
   const ser = blk.series;
   const tots = labels.map((_,i)=>ser.reduce((x,s)=>x+(riNum(s.values[i])||0),0));
@@ -655,15 +657,18 @@ function riStackSvg(blk, labelFn, tickFn, shareLabel){
   const pts = shares.map((v,i)=> riNum(v)!=null ? (bx(i)+bw/2)+','+sy(v) : null).filter(Boolean);
   const line = pts.length>1 ? `<polyline points="${pts.join(' ')}" fill="none" stroke="#2c2a28" stroke-width="1.8" stroke-dasharray="4 2"/>` : '';
   const dots = shares.map((v,i)=> riNum(v)!=null ? `<circle cx="${bx(i)+bw/2}" cy="${sy(v)}" r="2.2" fill="#2c2a28"/>` : '').join('');
-  const rAx = [0,2,4].map(k=>{ const v=sTop*k/4; return `<text x="${W-padR+4}" y="${sy(v)+4}" font-size="12.5" fill="var(--text2)">${Math.round(v)}%</text>`; }).join('');
-  const xl = labels.map((l,i)=> tickFn(l,i) ? `<text x="${bx(i)+bw/2}" y="${H-padB+16}" text-anchor="middle" font-size="12.5" fill="var(--muted2)">${esc(labelFn(l))}</text>` : '').join('');
+  const rAx = [0,2,4].map(k=>{ const v=sTop*k/4; return `<text x="${W-padR+4}" y="${sy(v)+4}" font-size="12" fill="var(--text2)">${Math.round(v)}%</text>`; }).join('');
+  // x 軸自動抽稀：由最後一筆往前每 k 個標一次，k 依標籤寬（字數×6.5px）＋8px 間距與每格寬度算出，保證不疊字
+  const lblW = Math.max(...labels.map(l=>String(labelFn(l)).length))*6.7 + 8;
+  const kStep = Math.max(1, Math.ceil(lblW/slot));
+  const xl = labels.map((l,i)=> ((n-1-i)%kStep===0) ? `<text x="${bx(i)+bw/2}" y="${H-padB+16}" text-anchor="middle" font-size="12" fill="var(--muted2)">${esc(labelFn(l))}</text>` : '').join('');
   const hits = labels.map((l,i)=>{
     const parts = ser.map(s=>s.label+' '+riFmt(riNum(s.values[i]),2)).join('｜');
     const tip = l+'　合計 '+riFmt(tots[i])+' 億度｜'+parts+(riNum(shares[i])!=null?'｜'+shareLabel+' '+riFmt(shares[i],2)+'%':'');
     return `<rect x="${padL+i*slot}" y="${padT}" width="${slot}" height="${H-padT-padB}" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${esc(tip)}" style="cursor:pointer;"/>`; }).join('');
   const legend = ser.map(s=>`<span><span class="trend-sw" style="background:${RI_STACK_COLORS[s.key]||'#9a8a6a'};height:8px;"></span>${esc(s.label)}</span>`).join('')
     + `<span><span class="trend-sw" style="background:#2c2a28;"></span>${esc(shareLabel)}（右軸）</span>`;
-  return {svg:`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px;height:auto;display:block;">${riAxisY(yMax,W,padL,padR,py)}${bars}${line}${dots}${rAx}${xl}${hits}</svg>`, legend};
+  return {svg:`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;height:auto;display:block;">${riAxisY(yMax,W,padL,padR,py)}${bars}${line}${dots}${rAx}${xl}${hits}</svg>`, legend};
 }
 function riValidStack(b, labelsKey){
   return !!(b && Array.isArray(b[labelsKey]) && b[labelsKey].length && Array.isArray(b.series) && b.series.length
@@ -689,16 +694,21 @@ function riTwMonthlyBlock(tm){
 // 圖 c：台灣每日備轉容量率
 function riReserveBlock(rv){
   if(!rv || !Array.isArray(rv.days) || !Array.isArray(rv.values) || rv.days.length!==rv.values.length || rv.days.length<2) return RI_PENDING;
-  const W=380,H=240,padL=30,padR=56,padT=12,padB=26, CAP=40;
+  const W=riW(),H=300,padL=36,padR=72,padT=14,padB=30, CAP=40;
   const n = rv.days.length;
   const px = i => padL + i/(n-1)*(W-padL-padR);
   const py = v => H-padB - Math.min(v,CAP)/CAP*(H-padT-padB);
   const grid = riAxisY(CAP,W,padL,padR,py);
   const pts = []; let clipped = 0;
   rv.values.forEach((v,i)=>{ v=riNum(v); if(v!=null){ pts.push(px(i)+','+py(v)); if(v>CAP) clipped++; } });
-  const ref = (v,color,txt)=>`<line x1="${padL}" y1="${py(v)}" x2="${W-padR}" y2="${py(v)}" stroke="${color}" stroke-width="1.2" stroke-dasharray="5 3"/><text x="${W-padR+4}" y="${py(v)+4}" font-size="12.5" fill="${color}" font-weight="700">${txt}</text>`;
+  const ref = (v,color,txt)=>`<line x1="${padL}" y1="${py(v)}" x2="${W-padR}" y2="${py(v)}" stroke="${color}" stroke-width="1.2" stroke-dasharray="5 3"/><text x="${W-padR+4}" y="${py(v)+4}" font-size="12" fill="${color}" font-weight="700">${txt}</text>`;
   // X 軸：每個月 1 日標「YY-MM」，每 3 個月一次
-  const xl = rv.days.map((d,i)=> (d.slice(8)==='01' && (Number(d.slice(5,7))-1)%3===0) ? `<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="12.5" fill="var(--muted2)">${esc(d.slice(2,7))}</text>` : '').join('');
+  // 最小間距 46px（標籤約 32px 寬＋8px），不足則略過，保證不疊字
+  let lastTx = -1e9;
+  const xl = rv.days.map((d,i)=>{
+    if(!(d.slice(8)==='01' && (Number(d.slice(5,7))-1)%3===0)) return '';
+    const x = px(i); if(x-lastTx<46) return ''; lastTx = x;
+    return `<text x="${x}" y="${H-padB+16}" text-anchor="middle" font-size="12" fill="var(--muted2)">${esc(d.slice(2,7))}</text>`; }).join('');
   // 熱區：每 ~12 天一段（寬度約 12 單位），提示該段最低／平均與日期範圍
   const seg = Math.max(1, Math.ceil(n/ ((W-padL-padR)/12)));
   let hits = '';
@@ -709,7 +719,7 @@ function riReserveBlock(rv){
     const tip = (s===e? rv.days[s] : rv.days[s]+' 至 '+rv.days[e])+'　最低 '+riFmt(mn,2)+'%｜最高 '+riFmt(mx,2)+'%｜平均 '+riFmt(vs.reduce((a,b)=>a+b,0)/vs.length,2)+'%';
     hits += `<rect x="${px(s)-(px(1)-px(0))/2}" y="${padT}" width="${(px(e)-px(s))+(px(1)-px(0))}" height="${H-padT-padB}" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${esc(tip)}" style="cursor:pointer;"/>`;
   }
-  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px;height:auto;display:block;">${grid}${ref(10,'#4a8a6a','10% 充裕')}${ref(6,'#a07040','6% 警戒')}<polyline points="${pts.join(' ')}" fill="none" stroke="#5a7fa8" stroke-width="1.3" stroke-linejoin="round"/>${xl}${hits}</svg>`;
+  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;height:auto;display:block;">${grid}${ref(10,'#4a8a6a','10% 充裕')}${ref(6,'#a07040','6% 警戒')}<polyline points="${pts.join(' ')}" fill="none" stroke="#5a7fa8" stroke-width="1.3" stroke-linejoin="round"/>${xl}${hits}</svg>`;
   const ins = riReserveInsight(rv);
   const notes = [
     `燈號門檻依台電供電燈號分級：備轉容量率 ≥10% 供電充裕（綠燈）、6–10% 供電吃緊（黃燈）、<6% 供電警戒（橘燈）；詳見 ${riLink(RI_SRC_TPC_LIGHT,'台電今日預估尖峰備轉容量率頁')}。`,
@@ -768,6 +778,11 @@ async function loadIndicators(){
   const h = document.getElementById('ri-hero-block'), t = document.getElementById('ri-trend-block');
   try{ if(h) h.innerHTML = riHeroCard(ind); }catch(e){ if(h) h.innerHTML = RI_PENDING; }
   try{ if(t) t.innerHTML = riTrendBlock(ind); }catch(e){ if(t) t.innerHTML = RI_PENDING; }
+  let rzW = riW(), rzT = null;
+  window.addEventListener('resize', ()=>{ clearTimeout(rzT); rzT = setTimeout(()=>{
+    if(riW()===rzW) return; rzW = riW();
+    try{ if(t) t.innerHTML = riTrendBlock(ind); }catch(e){}
+  }, 200); });
 }
 
 async function init(){
