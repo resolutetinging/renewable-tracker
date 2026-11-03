@@ -142,6 +142,7 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
 <div id="content" class="hidden">
 
   <nav class="toc">
+    <a href="#sec-ri">📊 再生能源趨勢（官方資料）</a>
     <a href="#sec-mix">🌍 全球能源使用狀況</a>
     <a href="#sec-tw-mix">🇹🇼 台灣能源使用狀況</a>
     <a href="#sec-lcoe">💰 能源成本趨勢</a>
@@ -155,6 +156,11 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
     <a href="#sec-ai-energy">🤖 AI對能源用量的影響</a>
     <a href="#sec-smart">⚡ 電力管理現況</a>
   </nav>
+
+  <div id="ri-hero-block" style="margin-bottom:6px;"></div>
+
+  <div class="sec-title" id="sec-ri">📊 再生能源趨勢（官方資料）</div>
+  <div id="ri-trend-block"></div>
 
   <div class="sec-title" id="sec-mix">🌍 全球能源使用狀況<span class="sec-meta" id="mix-meta"></span></div>
   <div class="legend"><span><span class="legend-sw fossil"></span>化石燃料（煤炭／天然氣）</span><span><span class="legend-sw nuclear"></span>核能</span><span><span class="legend-sw renew"></span>再生能源</span></div>
@@ -268,6 +274,12 @@ function safeUrl(u){ u=String(u==null?'':u); return esc(/^https?:\/\//i.test(u) 
       tip.style.opacity = '0';
     }
   });
+  // 觸控裝置沒有 mousemove：點擊熱區時改派 mousemove 顯示提示，點其他處則收起
+  document.addEventListener('click', e=>{
+    const hit = e.target.closest && e.target.closest('.chart-hit');
+    if(hit) hit.dispatchEvent(new MouseEvent('mousemove',{bubbles:true,clientX:e.clientX,clientY:e.clientY}));
+    else tip.style.opacity = '0';
+  });
 })();
 
 function trendBadge(t){
@@ -313,10 +325,10 @@ const SERIES_COLORS = {'煤炭':'#8a6040','天然氣':'#c09050','核能':'#6a7a8
   '太陽能光電':'#c0a030','陸域風電':'#4a8a6a','離岸風電':'#2a6a52'};
 function trendChartSvg(trend, opts){
   opts = opts || {};
+  if(!trend || !(trend.years||[]).length || !(trend.series||[]).length) return '';
   const titleLabel = opts.titleLabel || '📈 歷年占比趨勢';
   const unit = trend.unit!=null ? trend.unit : '%';
   const fallbackColor = opts.fallbackColor || 'var(--muted)';
-  if(!trend || !(trend.years||[]).length || !(trend.series||[]).length) return '';
   const W=640,H=300,padL=36,padR=14,padT=14,padB=30;
   const years = trend.years;
   const allVals = trend.series.flatMap(s=>s.values.filter(v=>v!=null));
@@ -340,9 +352,13 @@ function trendChartSvg(trend, opts){
   // data-tip，事件委派在document層，不用逐點綁事件）。
   const linesHtml = trend.series.map(s=>{
     const color = SERIES_COLORS[s.name]||fallbackColor;
-    const pts = s.values.map((v,i)=>v!=null?`${px(i)},${py(v)}`:null).filter(Boolean).join(' ');
+    // null值（無資料）處斷線：連續有值的點才連成一段，不跨過缺口硬連
+    const runs = []; let cur = [];
+    s.values.forEach((v,i)=>{ if(v!=null) cur.push(`${px(i)},${py(v)}`); else { if(cur.length) runs.push(cur); cur=[]; } });
+    if(cur.length) runs.push(cur);
+    const lines = runs.filter(r=>r.length>1).map(r=>`<polyline points="${r.join(' ')}" fill="none" stroke="${color}" stroke-width="2"/>`).join('');
     const dots = s.values.map((v,i)=>v!=null?`<circle cx="${px(i)}" cy="${py(v)}" r="7" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${esc(s.name+'　'+v+unit)}" style="cursor:pointer;"/><circle cx="${px(i)}" cy="${py(v)}" r="2.5" fill="${color}" style="pointer-events:none;"/>`:'').join('');
-    return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/>${dots}`;
+    return `${lines}${dots}`;
   }).join('');
   const legendHtml = trend.series.length>1 ? trend.series.map(s=>`<span><span class="trend-sw" style="background:${SERIES_COLORS[s.name]||fallbackColor}"></span>${esc(s.name)}</span>`).join('') : '';
   return `<div class="trend-chart-wrap">
@@ -464,6 +480,296 @@ function nuclearProfileCard(p){
   </div>`;
 }
 
+// ── 官方指標趨勢（renewable_indicators.json）：頁首對照卡＋三組趨勢圖 ──
+// 解讀句全部由程式依資料計算，不經 LLM；任何 key 缺漏回傳 null，畫面顯示「資料準備中」。
+const RI_SRC_IRENA = 'https://pxweb.irena.org/pxweb/en/IRENASTAT/IRENASTAT__Power%20Capacity%20and%20Generation';
+const RI_SRC_ESIST = 'https://www.esist.org.tw/a0303/02/api/pages/database/api';
+const RI_SRC_TPC = 'https://service.taipower.com.tw/data/opendata/apply/file/d006005/001.csv';
+const RI_SRC_TPC_LIGHT = 'https://www.taipower.com.tw/d006/loadGraph/loadGraph/load_reserve_.html';
+const RI_SRC_EUROSTAT = 'https://ec.europa.eu/eurostat/databrowser/view/nrg_ind_ren/default/table';
+const RI_STACK_COLORS = {solar:'#c0a030', wind:'#4a8a6a', hydro:'#4a90a0', other:'#9a8a6a'};
+const RI_PENDING = '<div class="trend-chart-wrap"><div class="empty-state">資料準備中</div></div>';
+function riNum(v){ return (typeof v==='number' && isFinite(v)) ? v : null; }
+function riFmt(v,n){ return v==null ? '—' : Number(v).toFixed(n==null?1:n); }
+function riSigned(v,n){ return v==null ? '—' : (v>=0?'+':'−') + Math.abs(v).toFixed(n==null?1:n); }
+function riFindSeries(block, key){
+  const s = block && Array.isArray(block.series) ? block.series.find(x=>x && x.key===key) : null;
+  return s && Array.isArray(s.values) ? s : null;
+}
+function riValidShare(re){
+  return !!(re && Array.isArray(re.years) && re.years.length>1 && Array.isArray(re.series) && re.series.length);
+}
+function riYearVal(s, years, y){ const i = years.indexOf(y); return i<0 ? null : riNum(s.values[i]); }
+
+// 解讀句 1：全球 vs 台灣（2019→2024，IRENA）
+function riHeroInsight(re){
+  if(!riValidShare(re)) return null;
+  const w = riFindSeries(re,'WORLD'), t = riFindSeries(re,'TW');
+  if(!w || !t) return null;
+  const y1 = re.years[re.years.length-1], y0 = y1-5;
+  const w0=riYearVal(w,re.years,y0), w1=riYearVal(w,re.years,y1), t0=riYearVal(t,re.years,y0), t1=riYearVal(t,re.years,y1);
+  if([w0,w1,t0,t1].some(v=>v==null)) return null;
+  const dw=w1-w0, dt=t1-t0, g0=w0-t0, g1=w1-t1;
+  const verb = Math.abs(g1-g0)<0.05 ? '持平' : (g1>g0 ? '擴大' : '縮小');
+  return {y0, y1, w0, w1, t0, t1, dw, dt, g0, g1,
+    text: `${y0}→${y1} 全球 ${riSigned(dw)} 個百分點、台灣 ${riSigned(dt)}，差距由 ${riFmt(g0)} 個百分點${verb}為 ${riFmt(g1)} 個百分點（IRENA）`};
+}
+// 解讀句 2：各國近 5 年增幅
+function riShareInsight(re){
+  if(!riValidShare(re)) return null;
+  const y1 = re.years[re.years.length-1], y0 = y1-5;
+  const rows = re.series.map(s=>{
+    const a = riYearVal(s,re.years,y0), b = riYearVal(s,re.years,y1);
+    return (a==null||b==null) ? null : {key:s.key, label:s.label, a, b, d:b-a};
+  }).filter(Boolean);
+  const tw = rows.find(r=>r.key==='TW');
+  if(rows.length<2 || !tw) return null;
+  const byGain = rows.slice().sort((p,q)=>q.d-p.d);
+  const rank = byGain.findIndex(r=>r.key==='TW')+1;
+  const hi = byGain[0], lo = byGain[byGain.length-1];
+  return {rank, n:rows.length, hi, lo, tw,
+    text: `${y0}→${y1} 增幅最大為${hi.label}（${riSigned(hi.d)} 個百分點）、最小為${lo.label}（${riSigned(lo.d)}）；台灣 ${riSigned(tw.d)} 個百分點，${rows.length} 個國家／地區中增幅第 ${rank}；${y1} 年占比第 ${rows.slice().sort((p,q)=>q.b-p.b).findIndex(r=>r.key==='TW')+1}`};
+}
+function riMonthTotals(tm){
+  if(!tm || !Array.isArray(tm.months) || !Array.isArray(tm.series) || !tm.series.length) return null;
+  const n = tm.months.length;
+  const tot = tm.months.map((m,i)=>{
+    let sum=0; for(const s of tm.series){ const v = s && s.values ? riNum(s.values[i]) : null; if(v==null) return null; sum+=v; } return sum;
+  });
+  return {n, tot};
+}
+// 解讀句 3：台灣最新月 vs 去年同月；今年累計 vs 去年同期
+function riMonthlyInsight(tm){
+  const mt = riMonthTotals(tm); if(!mt) return null;
+  const {n, tot} = mt; const last = tm.months[n-1];
+  const m = /^(\d{4})-(\d{2})$/.exec(last||''); if(!m) return null;
+  const prevM = (Number(m[1])-1)+'-'+m[2], pi = tm.months.indexOf(prevM);
+  if(pi<0 || tot[n-1]==null || tot[pi]==null || !Array.isArray(tm.re_share)) return null;
+  const yoy = (tot[n-1]/tot[pi]-1)*100;
+  const s1 = riNum(tm.re_share[n-1]), s0 = riNum(tm.re_share[pi]);
+  if(s1==null||s0==null) return null;
+  // 今年 1 月到最新月累計 vs 去年同期（資料僅 21 個月，無法算完整「近12個月年增」）
+  let ytd=null, ytdPrev=null, ytdTxt='';
+  const mm = Number(m[2]), yr = Number(m[1]);
+  const idxs = []; for(let k=1;k<=mm;k++){ const a = tm.months.indexOf(yr+'-'+String(k).padStart(2,'0')), b = tm.months.indexOf((yr-1)+'-'+String(k).padStart(2,'0')); if(a<0||b<0||tot[a]==null||tot[b]==null){ idxs.length=0; break; } idxs.push([a,b]); }
+  if(idxs.length===mm){ ytd = idxs.reduce((x,p)=>x+tot[p[0]],0); ytdPrev = idxs.reduce((x,p)=>x+tot[p[1]],0);
+    ytdTxt = `；${yr} 年 1–${mm} 月累計 ${riFmt(ytd)} 億度，較去年同期 ${riSigned((ytd/ytdPrev-1)*100)}%`; }
+  return {last, prevM, cur:tot[n-1], prev:tot[pi], yoy, s1, s0, ytd, ytdPrev,
+    text: `${last} 再生發電 ${riFmt(tot[n-1])} 億度，較去年同月（${prevM}）${riSigned(yoy)}%；占比 ${riFmt(s1,2)}%，較去年同月 ${riSigned(s1-s0,2)} 個百分點${ytdTxt}`};
+}
+function riDayShift(ds, days){ const d = new Date(ds+'T00:00:00Z'); d.setUTCDate(d.getUTCDate()+days); return d.toISOString().slice(0,10); }
+// 解讀句 4：備轉容量率近 90 天
+function riReserveInsight(rv){
+  if(!rv || !Array.isArray(rv.days) || !Array.isArray(rv.values) || rv.days.length!==rv.values.length || rv.days.length<2) return null;
+  const n = rv.days.length, last = rv.days[n-1];
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(last)) return null;
+  const start = riDayShift(last,-89), pEnd = riDayShift(last,-365), pStart = riDayShift(last,-365-89);
+  let cur=0, curN=0, prev=0, prevN=0, minV=null, minD=null;
+  rv.days.forEach((d,i)=>{
+    const v = riNum(rv.values[i]); if(v==null) return;
+    if(d>=start && d<=last){ curN++; if(v<10) cur++; if(minV==null||v<minV){ minV=v; minD=d; } }
+    else if(d>=pStart && d<=pEnd){ prevN++; if(v<10) prev++; }
+  });
+  if(!curN) return null;
+  const prevTxt = prevN ? `去年同期（${pStart} 至 ${pEnd}）${prev} 天${prevN<90?`（該期僅 ${prevN} 天有資料）`:''}` : '去年同期無資料';
+  return {last, start, cur, curN, prev, prevN, minV, minD,
+    text: `近 90 天（${start} 至 ${last}）備轉容量率低於 10% 共 ${cur} 天，${prevTxt}；期間最低 ${riFmt(minV,2)}%（${minD}）`};
+}
+
+function riAxisY(yMax, W, padL, padR, py, fmt){
+  return [0,1,2,3,4].map(i=>{ const v=yMax*i/4, y=py(v);
+    return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
+    <text x="${padL-4}" y="${y+4}" text-anchor="end" font-size="12.5" fill="var(--muted2)">${fmt?fmt(v):Math.round(v)}</text>`; }).join('');
+}
+function riWrap(title, svg, insight, notes, legend){
+  return `<div class="trend-chart-wrap">
+    <div class="sec-meta" style="margin-bottom:6px;">${title}</div>
+    ${insight?`<div class="total-banner" style="margin:0 0 8px;font-size:12.5px;">${esc(insight)}</div>`:''}
+    ${svg}
+    ${legend?`<div class="trend-legend">${legend}</div>`:''}
+    ${(notes||[]).map(n=>`<div class="src-note" style="margin-top:6px;">${n}</div>`).join('')}
+  </div>`;
+}
+function riLink(u, label){ return `<a href="${safeUrl(u)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(label)}</a>`; }
+
+// 圖 a：各國再生發電占比折線
+function riShareChartSvg(re){
+  if(!riValidShare(re)) return RI_PENDING;
+  const W=380,H=270,padL=30,padR=70,padT=12,padB=26;
+  const years = re.years, n = years.length;
+  const all = re.series.flatMap(s=>(s.values||[]).map(riNum).filter(v=>v!=null));
+  if(!all.length) return RI_PENDING;
+  const yMax = Math.ceil(Math.max(...all)/10)*10;
+  const px = i => padL + i/(n-1)*(W-padL-padR);
+  const py = v => H-padB - v/yMax*(H-padT-padB);
+  const grid = riAxisY(yMax,W,padL,padR,py);
+  const xl = years.map((y,i)=> (y%5===0) ? `<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="12.5" fill="var(--muted2)">${esc(y)}</text>` : '').join('');
+  const others = re.series.filter(s=>s.key!=='TW'), tw = re.series.find(s=>s.key==='TW');
+  const draw = (s, color, w)=>{
+    const runs=[]; let cur=[];
+    s.values.forEach((v,i)=>{ v=riNum(v); if(v!=null) cur.push(px(i)+','+py(v)); else { if(cur.length) runs.push(cur); cur=[]; } });
+    if(cur.length) runs.push(cur);
+    return runs.filter(r=>r.length>1).map(r=>`<polyline points="${r.join(' ')}" fill="none" stroke="${color}" stroke-width="${w}" stroke-linejoin="round"/>`).join('');
+  };
+  const palette = {WORLD:'#4a4744', CN:'#9e9890', US:'#7a8a96', JP:'#a89a82', IN:'#8a9a8a', EU:'#b0a090'};
+  let lines = others.map(s=>draw(s, palette[s.key]||'#9e9890', 1.6)).join('') + (tw?draw(tw,'#c0603a',3):'');
+  // 線尾標籤：依終值排序，最小間距 13 防重疊
+  const ends = re.series.map(s=>{ let li=-1; for(let i=s.values.length-1;i>=0;i--) if(riNum(s.values[i])!=null){ li=i; break; } return li<0?null:{s, v:s.values[li], y:py(s.values[li]), li}; }).filter(Boolean).sort((a,b)=>a.y-b.y);
+  for(let i=1;i<ends.length;i++) if(ends[i].y-ends[i-1].y<13) ends[i].y = ends[i-1].y+13;
+  const labels = ends.map(e=>{ const isTw = e.s.key==='TW'; const x = px(e.li)+5;
+    return `<text x="${x}" y="${e.y+4}" font-size="12.5" fill="${isTw?'#c0603a':'var(--text2)'}" font-weight="${isTw?800:500}">${esc(e.s.label)} ${riFmt(e.v)}${e.s.key==='EU'?'*':''}</text>`; }).join('');
+  // 每年一條垂直熱區：寬度＝年距、高度＝整個繪圖區
+  const step = (W-padL-padR)/(n-1);
+  const hits = years.map((y,i)=>{
+    const parts = re.series.map(s=>({l:s.label+(s.key==='EU'?'*':''), v:riNum(s.values[i])})).filter(p=>p.v!=null).sort((a,b)=>b.v-a.v).map(p=>p.l+' '+riFmt(p.v)+'%');
+    return `<rect x="${px(i)-step/2}" y="${padT}" width="${step}" height="${H-padT-padB}" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${esc(y+'　'+parts.join('｜'))}" style="cursor:pointer;"/>`; }).join('');
+  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px;height:auto;display:block;">${grid}${xl}${lines}${labels}${hits}</svg>`;
+  const ins = riShareInsight(re);
+  const notes = [
+    `* 歐盟：來源為 Eurostat（${riLink(RI_SRC_EUROSTAT,'nrg_ind_ren')}），口徑與其餘六者（IRENA）不同，僅供參考、不宜直接比較；2000–2003 年無資料。`,
+    `📌 來源：${riLink(RI_SRC_IRENA,'IRENA IRENASTAT（再生能源占總發電量）')}`
+  ];
+  return riWrap('📈 各國再生能源發電占比 '+esc(years[0])+'–'+esc(years[n-1])+'（單位：%）', svg, ins&&ins.text, notes);
+}
+
+// 圖 b：台灣再生發電堆疊長條（共用於年度與逐月）
+function riStackSvg(blk, labelFn, tickFn, shareLabel){
+  const W=380,H=250,padL=34,padR=34,padT=12,padB=26;
+  const labels = blk.labels, n = labels.length;
+  const ser = blk.series;
+  const tots = labels.map((_,i)=>ser.reduce((x,s)=>x+(riNum(s.values[i])||0),0));
+  const maxT = Math.max(...tots,1);
+  const mag = Math.pow(10, Math.floor(Math.log10(maxT*1.05))), yMax = Math.ceil(maxT*1.05/(mag*0.4))*(mag*0.4);
+  const py = v => H-padB - v/yMax*(H-padT-padB);
+  const slot = (W-padL-padR)/n, bw = Math.max(slot*0.7,3);
+  const bx = i => padL + i*slot + (slot-bw)/2;
+  const shares = blk.share || [];
+  const sMax = Math.max(...shares.map(riNum).filter(v=>v!=null), 1);
+  const sTop = Math.ceil(sMax/5)*5;
+  const sy = v => H-padB - v/sTop*(H-padT-padB);
+  const bars = labels.map((l,i)=>{
+    let acc=0;
+    return ser.map(s=>{ const v=riNum(s.values[i])||0; const y0=py(acc), y1=py(acc+v); acc+=v;
+      return v>0 ? `<rect x="${bx(i)}" y="${y1}" width="${bw}" height="${Math.max(y0-y1,0)}" fill="${RI_STACK_COLORS[s.key]||'#9a8a6a'}"/>` : ''; }).join('');
+  }).join('');
+  const pts = shares.map((v,i)=> riNum(v)!=null ? (bx(i)+bw/2)+','+sy(v) : null).filter(Boolean);
+  const line = pts.length>1 ? `<polyline points="${pts.join(' ')}" fill="none" stroke="#2c2a28" stroke-width="1.8" stroke-dasharray="4 2"/>` : '';
+  const dots = shares.map((v,i)=> riNum(v)!=null ? `<circle cx="${bx(i)+bw/2}" cy="${sy(v)}" r="2.2" fill="#2c2a28"/>` : '').join('');
+  const rAx = [0,2,4].map(k=>{ const v=sTop*k/4; return `<text x="${W-padR+4}" y="${sy(v)+4}" font-size="12.5" fill="var(--text2)">${Math.round(v)}%</text>`; }).join('');
+  const xl = labels.map((l,i)=> tickFn(l,i) ? `<text x="${bx(i)+bw/2}" y="${H-padB+16}" text-anchor="middle" font-size="12.5" fill="var(--muted2)">${esc(labelFn(l))}</text>` : '').join('');
+  const hits = labels.map((l,i)=>{
+    const parts = ser.map(s=>s.label+' '+riFmt(riNum(s.values[i]),2)).join('｜');
+    const tip = l+'　合計 '+riFmt(tots[i])+' 億度｜'+parts+(riNum(shares[i])!=null?'｜'+shareLabel+' '+riFmt(shares[i],2)+'%':'');
+    return `<rect x="${padL+i*slot}" y="${padT}" width="${slot}" height="${H-padT-padB}" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${esc(tip)}" style="cursor:pointer;"/>`; }).join('');
+  const legend = ser.map(s=>`<span><span class="trend-sw" style="background:${RI_STACK_COLORS[s.key]||'#9a8a6a'};height:8px;"></span>${esc(s.label)}</span>`).join('')
+    + `<span><span class="trend-sw" style="background:#2c2a28;"></span>${esc(shareLabel)}（右軸）</span>`;
+  return {svg:`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px;height:auto;display:block;">${riAxisY(yMax,W,padL,padR,py)}${bars}${line}${dots}${rAx}${xl}${hits}</svg>`, legend};
+}
+function riValidStack(b, labelsKey){
+  return !!(b && Array.isArray(b[labelsKey]) && b[labelsKey].length && Array.isArray(b.series) && b.series.length
+    && b.series.every(s=>s && Array.isArray(s.values) && s.values.length===b[labelsKey].length));
+}
+function riTwAnnualBlock(tm){
+  const a = tm && tm.annual;
+  if(!riValidStack(a,'years')) return RI_PENDING;
+  const blk = {labels:a.years.map(String), series:a.series, share:Array.isArray(a.re_share)?a.re_share:[]};
+  const r = riStackSvg(blk, l=>l.slice(2), (l,i)=> i%3===0 || i===blk.labels.length-1, '再生占比');
+  return riWrap('🇹🇼 台灣再生能源發電量　歷年（'+esc(a.years[0])+'–'+esc(a.years[a.years.length-1])+'，單位：億度）', r.svg, null,
+    [`📌 來源：${riLink(RI_SRC_ESIST,'經濟部能源署（能源統計資料庫）')}；占比為再生發電量占全國總發電量。`], r.legend);
+}
+function riTwMonthlyBlock(tm){
+  if(!riValidStack(tm,'months')) return RI_PENDING;
+  const blk = {labels:tm.months, series:tm.series, share:Array.isArray(tm.re_share)?tm.re_share:[]};
+  const r = riStackSvg(blk, l=>l.slice(2), (l,i)=> i%3===0 || i===blk.labels.length-1, '再生占比');
+  const ins = riMonthlyInsight(tm);
+  return riWrap('🇹🇼 台灣再生能源發電量　逐月（'+esc(tm.months[0])+' 至 '+esc(tm.months[tm.months.length-1])+'，單位：億度）', r.svg, ins&&ins.text,
+    [`📌 來源：${riLink(RI_SRC_ESIST,'經濟部能源署（能源統計資料庫）')}；占比為再生發電量占全國總發電量。`], r.legend);
+}
+
+// 圖 c：台灣每日備轉容量率
+function riReserveBlock(rv){
+  if(!rv || !Array.isArray(rv.days) || !Array.isArray(rv.values) || rv.days.length!==rv.values.length || rv.days.length<2) return RI_PENDING;
+  const W=380,H=240,padL=30,padR=56,padT=12,padB=26, CAP=40;
+  const n = rv.days.length;
+  const px = i => padL + i/(n-1)*(W-padL-padR);
+  const py = v => H-padB - Math.min(v,CAP)/CAP*(H-padT-padB);
+  const grid = riAxisY(CAP,W,padL,padR,py);
+  const pts = []; let clipped = 0;
+  rv.values.forEach((v,i)=>{ v=riNum(v); if(v!=null){ pts.push(px(i)+','+py(v)); if(v>CAP) clipped++; } });
+  const ref = (v,color,txt)=>`<line x1="${padL}" y1="${py(v)}" x2="${W-padR}" y2="${py(v)}" stroke="${color}" stroke-width="1.2" stroke-dasharray="5 3"/><text x="${W-padR+4}" y="${py(v)+4}" font-size="12.5" fill="${color}" font-weight="700">${txt}</text>`;
+  // X 軸：每個月 1 日標「YY-MM」，每 3 個月一次
+  const xl = rv.days.map((d,i)=> (d.slice(8)==='01' && (Number(d.slice(5,7))-1)%3===0) ? `<text x="${px(i)}" y="${H-padB+16}" text-anchor="middle" font-size="12.5" fill="var(--muted2)">${esc(d.slice(2,7))}</text>` : '').join('');
+  // 熱區：每 ~12 天一段（寬度約 12 單位），提示該段最低／平均與日期範圍
+  const seg = Math.max(1, Math.ceil(n/ ((W-padL-padR)/12)));
+  let hits = '';
+  for(let s=0; s<n; s+=seg){
+    const e = Math.min(n-1, s+seg-1); const vs = rv.values.slice(s,e+1).map(riNum).filter(v=>v!=null);
+    if(!vs.length) continue;
+    const mn = Math.min(...vs), mx = Math.max(...vs);
+    const tip = (s===e? rv.days[s] : rv.days[s]+' 至 '+rv.days[e])+'　最低 '+riFmt(mn,2)+'%｜最高 '+riFmt(mx,2)+'%｜平均 '+riFmt(vs.reduce((a,b)=>a+b,0)/vs.length,2)+'%';
+    hits += `<rect x="${px(s)-(px(1)-px(0))/2}" y="${padT}" width="${(px(e)-px(s))+(px(1)-px(0))}" height="${H-padT-padB}" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${esc(tip)}" style="cursor:pointer;"/>`;
+  }
+  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px;height:auto;display:block;">${grid}${ref(10,'#4a8a6a','10% 充裕')}${ref(6,'#a07040','6% 警戒')}<polyline points="${pts.join(' ')}" fill="none" stroke="#5a7fa8" stroke-width="1.3" stroke-linejoin="round"/>${xl}${hits}</svg>`;
+  const ins = riReserveInsight(rv);
+  const notes = [
+    `燈號門檻依台電供電燈號分級：備轉容量率 ≥10% 供電充裕（綠燈）、6–10% 供電吃緊（黃燈）、<6% 供電警戒（橘燈）；詳見 ${riLink(RI_SRC_TPC_LIGHT,'台電今日預估尖峰備轉容量率頁')}。`,
+    `縱軸上限 ${CAP}%${clipped?`，另有 ${clipped} 天數值高於 ${CAP}%（含極端值）於圖上緣截斷，提示框顯示原值`:''}。`,
+    `📌 來源：${riLink(RI_SRC_TPC,'台灣電力公司開放資料（每日備轉容量率）')}`
+  ];
+  return riWrap('🔌 台灣每日備轉容量率（'+esc(rv.days[0])+' 至 '+esc(rv.days[n-1])+'，單位：%）', svg, ins&&ins.text, notes);
+}
+
+// 頁首對照卡
+function riHeroCard(ind){
+  let hero=null, mi=null, rv=null, lastM=null, lastR=null;
+  try{ hero = riHeroInsight(ind && ind.re_share); }catch(e){}
+  try{ mi = riMonthlyInsight(ind && ind.tw_monthly); }catch(e){}
+  const tm = ind && ind.tw_monthly, r = ind && ind.tw_reserve;
+  if(!hero && !(tm && Array.isArray(tm.months) && tm.months.length) && !(r && Array.isArray(r.days) && r.days.length)) return RI_PENDING;
+  const tile = (name, val, sub)=>`<div class="rank-card renew"><div class="rank-name">${name}</div><div class="rank-value renew">${val}</div><div class="rank-time">${sub}</div></div>`;
+  const tiles = [];
+  if(hero){
+    tiles.push(tile('🌍 全球再生發電占比', riFmt(hero.w1)+'%', esc(hero.y1)+' 年｜近 5 年 '+riSigned(hero.dw)+' 個百分點｜'+riLink(RI_SRC_IRENA,'IRENA')));
+    tiles.push(tile('🇹🇼 台灣再生發電占比（IRENA 口徑）', riFmt(hero.t1)+'%', esc(hero.y1)+' 年｜近 5 年 '+riSigned(hero.dt)+' 個百分點｜'+riLink(RI_SRC_IRENA,'IRENA')));
+  }
+  try{
+    if(tm && Array.isArray(tm.months) && Array.isArray(tm.re_share) && tm.months.length && riNum(tm.re_share[tm.months.length-1])!=null){
+      const k = tm.months.length-1;
+      tiles.push(tile('🇹🇼 台灣最新單月再生占比', riFmt(tm.re_share[k],2)+'%', esc(tm.months[k])+(mi?'｜較去年同月 '+riSigned(mi.s1-mi.s0,2)+' 個百分點':'')+'｜'+riLink(RI_SRC_ESIST,'能源署')));
+    }
+  }catch(e){}
+  try{
+    if(r && Array.isArray(r.days) && Array.isArray(r.values) && r.days.length && riNum(r.values[r.days.length-1])!=null){
+      const k = r.days.length-1;
+      tiles.push(tile('🔌 台灣最新備轉容量率', riFmt(r.values[k],2)+'%', esc(r.days[k])+'｜'+riLink(RI_SRC_TPC,'台電')));
+    }
+  }catch(e){}
+  if(!tiles.length) return RI_PENDING;
+  return `<div class="sec-meta" style="margin-bottom:6px;">全球與台灣對照（官方資料）</div>
+    ${hero?`<div class="total-banner">${esc(hero.text)}</div>`:''}
+    <div class="rank-grid">${tiles.join('')}</div>
+    <div class="src-note">註：台灣 ${hero?esc(hero.y1):''} 年 IRENA 口徑與能源署（全國總發電量）口徑不同，數值不直接相等；兩者各自標示來源與年份。</div>`;
+}
+function riTrendBlock(ind){
+  const parts = [
+    ()=>riShareChartSvg(ind && ind.re_share),
+    ()=>riTwAnnualBlock(ind && ind.tw_monthly),
+    ()=>riTwMonthlyBlock(ind && ind.tw_monthly),
+    ()=>riReserveBlock(ind && ind.tw_reserve)
+  ];
+  return parts.map(f=>{ try{ return f(); }catch(e){ return RI_PENDING; } }).join('');
+}
+async function loadIndicators(){
+  let ind = null;
+  try{
+    const r = await fetch('data/renewable_indicators.json?v='+Date.now());
+    if(r.ok) ind = await r.json();
+  }catch(e){ ind = null; }
+  const h = document.getElementById('ri-hero-block'), t = document.getElementById('ri-trend-block');
+  try{ if(h) h.innerHTML = riHeroCard(ind); }catch(e){ if(h) h.innerHTML = RI_PENDING; }
+  try{ if(t) t.innerHTML = riTrendBlock(ind); }catch(e){ if(t) t.innerHTML = RI_PENDING; }
+}
+
 async function init(){
   let data;
   try{
@@ -502,11 +808,15 @@ async function init(){
   document.getElementById('lcoe-trend-block').innerHTML = trendChartSvg(lcoe.trend, {titleLabel:'📉 再生能源發電成本歷年趨勢（全球實際成本）', fallbackColor:'var(--renew)'});
   document.getElementById('lcoe-snapshot-block').innerHTML = costSnapshotBlock(lcoe.snapshot);
 
-  function fillRenewBlock(prefix, block, unitLabel){
+  // 單一來源：台灣再生占比只存在 taiwan_mix 的「再生能源」卡；全球水／風／光占比只存在
+  // global_mix 的各卡。再生能源區塊在渲染時引用，不另存數字。
+  const twRenewItem = (twMix.items||[]).find(it=>it.kind==='renew' && it.name==='再生能源');
+  const twRenewPct = twRenewItem ? twRenewItem.share_pct : null;
+  function fillRenewBlock(prefix, block, unitLabel, totalPct, extraHtml){
     document.getElementById(prefix+'-meta').textContent = block.as_of ? `資料時間點：${block.as_of}` : '';
-    document.getElementById(prefix+'-total').innerHTML = block.total_share_pct!=null
-      ? `再生能源佔${esc(unitLabel)}發電量 <span class="big">${esc(block.total_share_pct)}%</span>
-         ${block.total_trend_note?`<div style="margin-top:5px;">${bulletize(block.total_trend_note)}</div>`:''}`
+    document.getElementById(prefix+'-total').innerHTML = totalPct!=null
+      ? `再生能源佔${esc(unitLabel)}發電量 <span class="big">${esc(totalPct)}%</span>
+         ${block.total_trend_note?`<div style="margin-top:5px;">${bulletize(block.total_trend_note)}</div>`:''}${extraHtml||''}`
       : '';
     document.getElementById(prefix+'-grid').innerHTML = (block.items||[]).length
       ? block.items.map(renewCard).join('')
@@ -515,8 +825,11 @@ async function init(){
       ? `📌 來源：<a href="${safeUrl(block.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(block.source_label||'')}</a>` : '';
   }
   const renewData = data.renewable_breakdown||{};
-  fillRenewBlock('renew-g', renewData.global||{}, '全球');
-  fillRenewBlock('renew-tw', renewData.taiwan||{}, '台灣');
+  const gRenewSummary = (mix.items||[]).filter(it=>it.kind==='renew' && it.share_pct!=null)
+    .map(it=>`${esc(it.name)}${esc(it.share_pct)}%`).join('／');
+  fillRenewBlock('renew-g', renewData.global||{}, '全球', (renewData.global||{}).total_share_pct,
+    gRenewSummary ? `<div style="margin-top:5px;">${gRenewSummary}（2024年，各項占比與主要國家詳見「全球能源使用狀況」）</div>` : '');
+  fillRenewBlock('renew-tw', renewData.taiwan||{}, '台灣', twRenewPct);
 
   const storage = data.storage||{};
   document.getElementById('storage-meta').textContent = storage.as_of ? `資料時間點：${storage.as_of}` : '';
@@ -548,7 +861,7 @@ async function init(){
   const nuclear = data.nuclear||{};
   document.getElementById('nuclear-meta').textContent = nuclear.as_of ? `資料時間點：${nuclear.as_of}` : '';
   document.getElementById('nuclear-tw-banner').innerHTML = nuclear.taiwan_status
-    ? `🇹🇼 台灣現況　核能占比 <span class="big" style="color:var(--nuclear);">${nuclear.taiwan_share_pct!=null?esc(nuclear.taiwan_share_pct)+'%':'—'}</span>
+    ? `🇹🇼 台灣現況（2025-05-17核三2號機除役後）　核能占比 <span class="big" style="color:var(--nuclear);">${nuclear.taiwan_share_pct!=null?esc(nuclear.taiwan_share_pct)+'%':'—'}</span>
        <div style="margin-top:6px;">${bulletize(nuclear.taiwan_status)}</div>`
     : '';
   document.getElementById('nuclear-tw-gating-block').innerHTML = (nuclear.taiwan_future_gating||[]).length
@@ -595,6 +908,12 @@ async function init(){
     ? `📌 來源：<a href="${safeUrl(carbon.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(carbon.source_label||'')}</a>` : '';
 
   const targets = data.national_targets||{};
+  // {{tw_renew_pct}}／{{tw_renew_gap}}：由台灣能源使用狀況的再生占比現算，避免多處手寫同一數字
+  function fillTwTokens(t){
+    if(t==null || twRenewPct==null) return String(t==null?'':t).replace(/\{\{tw_renew_(pct|gap)\}\}/g,'—');
+    return String(t).replace(/\{\{tw_renew_pct\}\}/g, String(twRenewPct))
+      .replace(/\{\{tw_renew_gap\}\}/g, String(Math.round((20-twRenewPct)*100)/100));
+  }
   document.getElementById('targets-meta').textContent = targets.as_of ? `資料時間點：${targets.as_of}` : '';
   document.getElementById('national-targets-block').innerHTML = (targets.countries||[]).length
     ? `${targets.note?`<div class="src-note" style="margin-bottom:8px;">ℹ️ ${esc(targets.note)}</div>`:''}
@@ -605,7 +924,7 @@ async function init(){
          <td class="dt-country">${esc(c.country)}</td>
          <td>${bulletize(c.net_zero_year)}</td>
          <td>${bulletize(c.renewable_target)}</td>
-         <td>${bulletize(c.current_progress)}</td>
+         <td>${bulletize(fillTwTokens(c.current_progress))}</td>
        </tr>`).join('')}
        </tbody></table></div>
        ${targets.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${safeUrl(targets.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(targets.source_label||'')}</a></div>`:''}`
@@ -654,6 +973,7 @@ async function init(){
 
   document.getElementById('loading-screen').classList.add('hidden');
   document.getElementById('content').classList.remove('hidden');
+  loadIndicators();
 
   // 週查證候選異動提示（best-effort，檔案不存在或格式異常就靜默略過，
   // 不影響主要內容渲染）
