@@ -1,17 +1,6 @@
 {
   "checked_at": "2026-11-12",
-  "items": [
-    {
-      "category": "ai_energy_impact",
-      "action": "update",
-      "target": "美國",
-      "fields": {
-        "energy_availability": "近期報導指出美國仍有約6至7年未開發的電力容量可供AI資料中心使用，顯示目前電網緊張情況可能較先前預估緩和。"
-      },
-      "reason": "新聞《America Has 6–7 Years of Untapped Power for AI Data Centers, Constellation CEO...》指出美國存在多年未利用的電力資源，提供了最新的電力供應評估。",
-      "source": "https://finance.yahoo.com/energy/articles/america-6-7-years-untapped-022949127.html"
-    }
-  ],
+  "items": [],
   "no_change_summary": "",
   "no_change_detail_by_category": [
     "本週查證後，現有資料仍準確，無需更新。",
