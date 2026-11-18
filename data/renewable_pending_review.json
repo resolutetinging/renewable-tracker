@@ -1,11 +1,22 @@
 {
-  "checked_at": "2026-11-12",
-  "items": [],
+  "checked_at": "2026-11-19",
+  "items": [
+    {
+      "category": "nuclear_profiles",
+      "action": "update",
+      "target": "美國",
+      "fields": {
+        "waste_disposal": "法定架構為1982年《核廢料政策法》；尤卡山最終處置場計畫2010年起無限期擱置，已投入逾150億美元。全美逾9萬公噸用過核燃料存放於39州79個場址，約55%已轉乾式貯存，多屬中期貯存非最終解決方案。近期美國國會推動《安全儲存已使用核燃料法案》（Rep. Levin 重新提出），旨在改善已使用核燃料的安全儲存。"
+      },
+      "reason": "新聞報導美國眾議員Levin重新提出《安全儲存已使用核燃料法案》，顯示美國在核廢料儲存政策上有新立法動向，需在廢料處置欄位加入此資訊。",
+      "source": "https://levin.house.gov/media/press-releases/rep-levin-reintroduces-bill-to-improve-safe-storage-of-spent-nuclear-fuel"
+    }
+  ],
   "no_change_summary": "",
   "no_change_detail_by_category": [
-    "本週查證後，現有資料仍準確，無需更新。",
     "本分類本週查證後判斷現有資料仍準確",
-    "本週未蒐集到相關新聞，現有資料仍準確，無需異動。"
+    "本週查證後，現有資料仍準確，未發現可直接更新的欄位。",
+    "本週未蒐集到相關新聞，現有資料仍準確。"
   ],
   "category_failures": []
 }
