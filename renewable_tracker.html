@@ -221,7 +221,7 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
 
   <div class="sec-title" id="sec-storage">🔋 電力儲能發展<span class="sec-meta" id="storage-meta"></span></div>
   <div class="total-banner" id="storage-total"></div>
-  <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🌐 2025年新增裝置容量排名</div>
+  <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🌐 2025年新增電池容量可移轉多少新增太陽能發電量</div>
   <div class="rank-grid" id="storage-country-grid"></div>
   <div class="case-cols" style="grid-template-columns:1fr;margin-top:14px;"><div class="case-card" id="storage-taiwan-card"></div></div>
   <div class="src-note" id="storage-src"></div>
@@ -376,7 +376,7 @@ function renewCard(item){
     <div class="rank-name">${esc(item.name)}</div>
     <div class="rank-value renew">${item.share_pct!=null?esc(item.share_pct)+'%':'—'}</div>
     ${item.data_year?`<div class="rank-time">🗓 ${esc(item.data_year)}</div>`:''}
-    ${item.note?`<div class="rank-note">${bulletize(item.note)}</div>`:''}
+    ${(item.note||(item.note_sources||[]).length)?`<div class="rank-note">${item.note?bulletize(item.note):''}${srcInline(item.note_sources)}</div>`:''}
   </div>`;
 }
 
@@ -558,14 +558,14 @@ function countryBreakdownBlock(items){
     const rows = it.top_countries.map((c,i)=>`
       <div class="cb-row">
         <div class="cb-country">${i+1}. ${esc(c.country)}</div>
-        ${c.value!=null?`<div class="cb-value">${esc(String(c.value))}</div>`:''}
+        ${c.value!=null?`<div class="cb-value">${esc(String(c.value))}${srcInline(c.sources)}</div>`:''}
       </div>`).join('');
     return `<div class="cb-card">
       <div class="cb-hd" style="color:${SERIES_COLORS[it.name]||'var(--text)'};">${esc(it.name)}</div>
       ${rows}
     </div>`;
   }).join('');
-  return `<div class="sec-meta" style="margin:16px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🌐 依能源別的全球主要國家占比</div>
+  return `<div class="sec-meta" style="margin:16px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🌐 依能源別的主要國家（2025年，Ember）</div>
     <div class="rank-grid">${cols}</div>`;
 }
 
@@ -593,9 +593,9 @@ function ptsBlock(label,v){ const h=ptsHtml(v); return h?`<div class="np-block">
 function mineralCard(m){
   return `<div class="case-card">
     <div class="case-name">${esc(m.name)}</div>
-    ${m.mining_concentration?`<div class="np-block"><b>開採端集中度</b>${bulletize(m.mining_concentration)}</div>`:''}
-    ${m.processing_concentration?`<div class="np-block"><b>精煉／加工端集中度</b>${bulletize(m.processing_concentration)}</div>`:''}
-    ${m.supply_risk_note?`<div class="np-block"><b>供應風險</b>${bulletize(m.supply_risk_note)}</div>`:''}
+    ${ptsBlock('開採端集中度',m.mining_concentration)}
+    ${ptsBlock('精煉／加工端集中度',m.processing_concentration)}
+    ${ptsBlock('供應風險',m.supply_risk_note)}
   </div>`;
 }
 
@@ -972,7 +972,7 @@ async function init(){
 
   const mix = data.global_mix||{};
   document.getElementById('mix-meta').textContent = mix.as_of ? `資料時間點：${mix.as_of}` : '';
-  document.getElementById('mix-milestone').innerHTML = mix.milestone_note ? bulletize(mix.milestone_note) : '';
+  document.getElementById('mix-milestone').innerHTML = mix.milestone_note ? bulletize(mix.milestone_note)+srcInline(mix.milestone_sources) : '';
   document.getElementById('mix-grid').innerHTML = (mix.items||[]).length
     ? mix.items.map(it=>rankCard(it,kindCls(it.kind))).join('')
     : '<div class="empty-state">尚無資料</div>';
@@ -1009,7 +1009,7 @@ async function init(){
     document.getElementById(prefix+'-meta').textContent = block.as_of ? `資料時間點：${block.as_of}` : '';
     document.getElementById(prefix+'-total').innerHTML = totalPct!=null
       ? `再生能源佔${esc(unitLabel)}發電量 <span class="big">${esc(totalPct)}%</span>
-         ${block.total_trend_note?`<div style="margin-top:5px;">${bulletize(block.total_trend_note)}</div>`:''}${extraHtml||''}`
+         ${block.total_trend_note?`<div style="margin-top:5px;">${bulletize(block.total_trend_note)}${srcInline(block.total_sources)}</div>`:''}${extraHtml||''}`
       : '';
     document.getElementById(prefix+'-grid').innerHTML = (block.items||[]).length
       ? block.items.map(renewCard).join('')
@@ -1021,24 +1021,22 @@ async function init(){
   const gRenewSummary = (mix.items||[]).filter(it=>it.kind==='renew' && it.share_pct!=null)
     .map(it=>`${esc(it.name)}${esc(it.share_pct)}%`).join('／');
   fillRenewBlock('renew-g', renewData.global||{}, '全球', (renewData.global||{}).total_share_pct,
-    gRenewSummary ? `<div style="margin-top:5px;">${gRenewSummary}（2024年，各項占比與主要國家詳見「全球能源使用狀況」）</div>` : '');
+    gRenewSummary ? `<div style="margin-top:5px;">${gRenewSummary}（2025年，各項占比與來源詳見「全球能源使用狀況」）</div>` : '');
   fillRenewBlock('renew-tw', renewData.taiwan||{}, '台灣', twRenewPct);
 
   const storage = data.storage||{};
   document.getElementById('storage-meta').textContent = storage.as_of ? `資料時間點：${storage.as_of}` : '';
-  document.getElementById('storage-total').innerHTML = storage.global_note ? bulletize(storage.global_note) : '';
-  document.getElementById('storage-country-grid').innerHTML = (storage.leaders||[]).length
-    ? storage.leaders.map((c,i)=>`<div class="rank-card renew">
-        <div class="rank-num">新增裝置容量 Top${i+1}</div>
+  document.getElementById('storage-total').innerHTML = ptsHtml(storage.global_points);
+  document.getElementById('storage-country-grid').innerHTML = (storage.shift_markets||[]).length
+    ? storage.shift_markets.map(c=>`<div class="rank-card renew">
         <div class="rank-name">${esc(c.country)}</div>
         <div class="rank-value renew">${esc(c.value||'—')}</div>
-        ${c.note?`<div class="rank-note">${bulletize(c.note)}</div>`:''}
+        ${c.note?`<div class="rank-note">${bulletize(c.note)}${srcInline(c.sources)}</div>`:''}
       </div>`).join('')
     : '<div class="empty-state">尚無資料</div>';
-  document.getElementById('storage-taiwan-card').innerHTML = storage.taiwan_note
+  document.getElementById('storage-taiwan-card').innerHTML = (storage.taiwan_points||[]).length
     ? `<div class="case-name">🇹🇼 台灣儲能現況</div>
-       <div class="case-desc">${bulletize(storage.taiwan_note)}</div>
-       ${storage.taiwan_src_url?`<div class="case-src">來源：<a href="${safeUrl(storage.taiwan_src_url)}" target="_blank" rel="noopener">${esc(storage.taiwan_src_label||'連結')}</a></div>`:''}`
+       <div class="case-desc">${ptsHtml(storage.taiwan_points)}</div>`
     : '';
   document.getElementById('storage-src').innerHTML = storage.source_url
     ? `📌 來源：<a href="${safeUrl(storage.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(storage.source_label||'')}</a>` : '';
@@ -1046,7 +1044,7 @@ async function init(){
   const minerals = data.critical_minerals||{};
   document.getElementById('minerals-meta').textContent = minerals.as_of ? `資料時間點：${minerals.as_of}` : '';
   document.getElementById('minerals-block').innerHTML = (minerals.minerals||[]).length
-    ? `${minerals.intro_note?`<div class="total-banner">${bulletize(minerals.intro_note)}</div>`:''}
+    ? `${minerals.intro_note?`<div class="total-banner">${ptsHtml(minerals.intro_note)}</div>`:''}
        <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">${minerals.minerals.map(mineralCard).join('')}</div>
        ${minerals.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${safeUrl(minerals.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(minerals.source_label||'')}</a></div>`:''}`
     : '<div class="empty-state">尚無資料</div>';

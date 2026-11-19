@@ -1,11 +1,10 @@
 {
   "last_updated": "2026-08-31",
   "global_mix": {
-    "as_of": "煤炭／天然氣為2025年數字（Ember GER2026）；水力／核能／風力／太陽能為2024年數字（Ember尚未發布2025年逐項細分）",
+    "as_of": "2025年（Ember Global Electricity Review 2026）",
     "source_label": "Ember Global Electricity Review 2026",
     "source_url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/",
-    "milestone_note": "🎉 再生能源合計33.8%已超越煤炭33.0%，是現代電力系統史上首次（Ember，2025年資料）",
-    "cross_ref_note": "IEA《Electricity 2026》另一套統計口徑：煤炭34%／天然氣21%／再生能源合計34%／低碳能源(再生+核能)合計43%——跟Ember數字有零點幾個百分點差異，屬統計方法論差異非查證錯誤，兩來源並陳供參考。另外，太陽能／風力／核能2025年可反推估算值分別約8.7%／8.5%／8.9%（由絕對發電量TWh變化反推），但因反推涉及複合誤差，本表仍採用直接查證到的2024年官方數字，不用反推值取代。",
+    "milestone_note": "再生能源合計33.8%（10,730 TWh）首度超越煤炭33.0%（10,476 TWh），是現代電力系統中的首次",
     "items": [
       {
         "rank": 1,
@@ -13,28 +12,54 @@
         "share_pct": 33.0,
         "trend": "down",
         "kind": "fossil",
-        "note": "首次跌破三分之一；較2024年-0.6%（-63 TWh）",
-        "trend_reason": "全球降幅主要來自再生能源取代效應，而非中國主動削減——中國「十五五」規劃(2026-2030)雖將非化石能源發電占比目標由42.3%提高到50%，卻同時把煤炭政策由「達峰後下降」改為「促進煤炭消費達峰」，維持煤炭高原期",
+        "note": "首次跌破三分之一；2025年煤電-63 TWh（-0.6%）。中國與印度仍是兩大燃煤發電國，合計占全球煤電69%",
+        "note_sources": [
+          {
+            "label": "Ember GER2026 §3.8 煤炭",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#coal"
+          }
+        ],
+        "trend_reason": "中國煤電-71 TWh（-1.2%）、印度-44 TWh（-2.9%）為最大降幅：中國因清潔電力成長超過需求成長；印度因風光大增，加上氣溫較涼使需求成長較低。美國煤電+85 TWh（+13%），因天然氣現貨價上漲56%，發電由氣轉煤",
+        "reason_sources": [
+          {
+            "label": "Ember GER2026 §3.8 煤炭",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#coal"
+          }
+        ],
         "top_countries": [
           {
             "country": "中國",
-            "value": "5,775 TWh（55.6%）"
+            "value": "煤電-71 TWh（-1.2%）；煤電占中國發電量由2015年70%降至2025年54%",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.8 煤炭",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#coal"
+              },
+              {
+                "label": "Ember GER2026 §4.1 中國",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/major-countries-and-regions#china"
+              }
+            ]
           },
           {
             "country": "印度",
-            "value": "1,516.9 TWh（14.6%）"
+            "value": "煤電-44 TWh（-2.9%）；煤電占印度發電量71%",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.8 煤炭",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#coal"
+              }
+            ]
           },
           {
             "country": "美國",
-            "value": "652.2 TWh（6.3%）"
-          },
-          {
-            "country": "印尼",
-            "value": "259.7 TWh（2.5%）"
-          },
-          {
-            "country": "日本",
-            "value": "258.7 TWh（2.5%）"
+            "value": "煤電+85 TWh（+13%）",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.8 煤炭",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#coal"
+              }
+            ]
           }
         ],
         "data_year": "2025年（Ember GER2026）"
@@ -45,28 +70,54 @@
         "share_pct": 21.8,
         "trend": "down",
         "kind": "fossil",
-        "note": "較2020年23.9%連續5年下滑；2025單年+0.5%（+36 TWh）",
-        "trend_reason": "太陽能發電成長速度是天然氣的17倍（2025年太陽能新增636TWh、天然氣僅新增38TWh）；歐盟RePowerEU計畫（2022年俄烏戰爭後推出）修訂再生能源指令、目標2030年占比42.5%，加速各國擺脫天然氣進口依賴。降幅最大5國：日本(-127TWh)、英國(-85TWh)、印度(-69TWh)、西班牙(-59TWh)、義大利(-48TWh)",
+        "note": "自2020年峰值23.9%起連續5年下滑；2025年氣電+0.5%（+36 TWh），為2020年以來最低增幅，發電量6,919 TWh創歷史新高",
+        "note_sources": [
+          {
+            "label": "Ember GER2026 §3.5 天然氣",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#gas"
+          }
+        ],
+        "trend_reason": "太陽能新增量（+636 TWh）是天然氣新增量（+36 TWh）的18倍。美國氣電-63 TWh（-3.4%）降幅最大，因氣價上漲使氣轉煤；泰國-13 TWh、俄羅斯-13 TWh、日本-8.5 TWh",
+        "reason_sources": [
+          {
+            "label": "Ember GER2026 §3.5 天然氣",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#gas"
+          },
+          {
+            "label": "Ember GER2026 §3.2 供給概況",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#supply-overview"
+          }
+        ],
         "top_countries": [
           {
             "country": "美國",
-            "value": "約1,865 TWh（占全球26%）"
+            "value": "1,807 TWh，超過全球氣電的四分之一，是全球最大氣電發電國",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.5 天然氣",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#gas"
+              }
+            ]
           },
           {
-            "country": "俄羅斯",
-            "value": "約513 TWh（2023年數字）；反推2025年約552 TWh，約占全球8.0%（跨年份換算，僅供参考）"
+            "country": "台灣",
+            "value": "氣電+16 TWh（+13%），增量全球最大，補足核電最後一部機組於2025年上半年停機的缺口",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.5 天然氣",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#gas"
+              }
+            ]
           },
           {
-            "country": "伊朗",
-            "value": "約340–367 TWh；以2024年估算值366.7 TWh反推約占全球5.3%（跨年份換算，僅供参考）"
-          },
-          {
-            "country": "日本",
-            "value": "約304 TWh，約占全球4.4%（換算年份未完全對齊，僅供参考）"
-          },
-          {
-            "country": "中國",
-            "value": "283 TWh（占全球天然氣發電4.1%；僅占中國自身發電量3%）"
+            "country": "土耳其",
+            "value": "氣電+15 TWh（+24%），增量全球第二",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.5 天然氣",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#gas"
+              }
+            ]
           }
         ],
         "data_year": "2025年（Ember GER2026）"
@@ -74,120 +125,222 @@
       {
         "rank": 3,
         "name": "水力",
-        "share_pct": 14.3,
+        "share_pct": 14,
         "trend": "flat",
         "kind": "renew",
-        "note": "全球最大低碳電力單項來源",
+        "note": "2025年水力發電4,437 TWh創紀錄，但僅+3 TWh（+0.1%），占比降至14%的歷史新低",
+        "note_sources": [
+          {
+            "label": "Ember GER2026 §3.7 水力",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#hydro"
+          }
+        ],
+        "trend_reason": "水力發電成長跟不上用電需求成長。中國+45 TWh（降雨高於平均）、印度+21 TWh為增量前二；乾旱使巴西-25 TWh、土耳其-17 TWh；歐盟-43 TWh（南部水源短缺）",
+        "reason_sources": [
+          {
+            "label": "Ember GER2026 §3.7 水力",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#hydro"
+          }
+        ],
         "top_countries": [
           {
             "country": "中國",
-            "value": "約1,350–1,480 TWh，約占全球29.5–32.3%（不同來源有落差）"
+            "value": "1,399 TWh，全球最大水力發電國；水力占中國發電量13%",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.7 水力",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#hydro"
+              }
+            ]
           },
           {
             "country": "巴西",
-            "value": "約388–413 TWh，約占全球8.5–9.0%"
+            "value": "水力占巴西發電量52%；2025年水力發電-25 TWh",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.7 水力",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#hydro"
+              }
+            ]
           },
           {
             "country": "加拿大",
-            "value": "約345 TWh，約占全球7.5%（近年因乾旱條件下滑）"
-          },
-          {
-            "country": "美國",
-            "value": "242 TWh，約占全球5.3%（較2023年-1%）"
-          },
-          {
-            "country": "俄羅斯",
-            "value": "約180–196.5 TWh，約占全球3.9–4.3%"
+            "value": "水力占加拿大發電量53%",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.7 水力",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#hydro"
+              }
+            ]
           }
         ],
-        "data_year": "2024年（Ember GER2026，2025年細分未完整發布）",
-        "trend_reason": "2025年主力產區中國四川、雲南乾旱減產，全球水力發電成長趨於停滯，同期歐洲降雨偏豐發電創十年新高，反映氣候變遷導致降雨不穩定對水力發電的直接衝擊"
+        "data_year": "2025年（Ember GER2026）"
       },
       {
         "rank": 4,
         "name": "核能",
-        "share_pct": 9.0,
+        "share_pct": 8.9,
         "trend": "down",
         "kind": "nuclear",
-        "note": "占比9.0%為逾45年來低點；發電量2,768 TWh（2024年）仍創歷史新高",
-        "data_year": "2024年（Ember GER2026；2025年為反推估算值約8.9%，未採用）",
-        "trend_reason": "核能發電量成長（2024年+2.5%）追不上全球電力需求成長，占比因而下滑；發電量仍受中國積極新建機組（十五五規劃目標2030年達110GWe）、美國行政命令推動擴建延役、日本重啟機組支撐，抵銷歐洲老舊機組除役影響"
+        "note": "2025年核能發電2,812 TWh創歷史新高（+1.3%，+35 TWh），但占比8.9%為1980年代初以來最低",
+        "note_sources": [
+          {
+            "label": "Ember GER2026 §3.6 核能",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#nuclear"
+          }
+        ],
+        "trend_reason": "核能發電成長低於電力需求成長，占比因而下滑。增量來自中國+37 TWh（新機組併網）、法國+11.6 TWh、日本+9.2 TWh；台灣-8.9 TWh（最後一部機組於5月停機）、比利時-7 TWh",
+        "reason_sources": [
+          {
+            "label": "Ember GER2026 §3.6 核能",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#nuclear"
+          },
+          {
+            "label": "Ember GER2026 §1 2025年回顧",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/2025-in-review"
+          }
+        ],
+        "top_countries": [
+          {
+            "country": "美國",
+            "value": "785 TWh，全球最大核能發電國",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.6 核能",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#nuclear"
+              }
+            ]
+          },
+          {
+            "country": "中國",
+            "value": "488 TWh，全球第二；核能占中國發電量4.6%",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.6 核能",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#nuclear"
+              }
+            ]
+          },
+          {
+            "country": "法國",
+            "value": "核能占法國發電量69%，為全球最高",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.6 核能",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#nuclear"
+              }
+            ]
+          }
+        ],
+        "data_year": "2025年（Ember GER2026）"
       },
       {
         "rank": 5,
         "name": "風力",
-        "share_pct": 8.1,
+        "share_pct": 8.5,
         "trend": "up",
         "kind": "renew",
-        "note": "較2024年+8.2%（+205 TWh）",
-        "trend_reason": "歐盟RePowerEU計畫、中國「十五五」規劃（目標2030年風力+太陽能裝置容量達2,800GW）等政策目標驅動裝置量持續擴大",
+        "note": "2025年風力發電2,715 TWh（+205 TWh，+8.2%），增量居各電源第二，僅次於太陽能；占比8.5%創歷史新高",
+        "note_sources": [
+          {
+            "label": "Ember GER2026 §3.4 風力",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#wind"
+          }
+        ],
+        "trend_reason": "中國貢獻全球風電增量的68%（+138 TWh，+14%）；印度+22 TWh，為單年最大增幅；美國增量放緩（+12.5 TWh，較2024年增量低59%）；歐盟-12 TWh（風速偏低）",
+        "reason_sources": [
+          {
+            "label": "Ember GER2026 §3.4 風力",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#wind"
+          }
+        ],
         "top_countries": [
           {
             "country": "中國",
-            "value": "997.04 TWh（占全球40.0%）"
-          },
-          {
-            "country": "美國",
-            "value": "451.90 TWh（占全球18.1%）"
-          },
-          {
-            "country": "德國",
-            "value": "134.30 TWh（占全球5.4%）"
-          },
-          {
-            "country": "巴西",
-            "value": "105.61 TWh（占全球4.2%）"
+            "value": "1,135 TWh，占全球風電42%",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.4 風力",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#wind"
+              }
+            ]
           },
           {
             "country": "印度",
-            "value": "90.73 TWh（占全球3.6%）"
+            "value": "104 TWh，超越英國成為全球第五大風電發電國",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.4 風力",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#wind"
+              }
+            ]
           }
         ],
-        "data_year": "2024年（Ember GER2026；2025年為反推估算值約8.5%，未採用）"
+        "data_year": "2025年（Ember GER2026）"
       },
       {
         "rank": 6,
         "name": "太陽能",
-        "share_pct": 6.9,
+        "share_pct": 8.7,
         "trend": "up",
         "kind": "renew",
-        "note": "較2024年+30%（+636 TWh），成長最快，單獨貢獻全球用電成長的75%",
-        "trend_reason": "2025年太陽能新增發電量636TWh，成長速度為天然氣的17倍；中國2025年太陽能新增336TWh（占全球新增近半），印度太陽能新增裝置容量首度超越美國；歐盟太陽能於2024年首度在電力結構中超越煤炭（11% vs 不到10%）",
+        "note": "2025年太陽能發電2,778 TWh（+636 TWh，+30%），首度超越風力；單獨滿足全球用電成長的75%；占比由2015年1.1%升至8.7%",
+        "note_sources": [
+          {
+            "label": "Ember GER2026 §3.3 太陽能",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#solar"
+          }
+        ],
+        "trend_reason": "增量（+636 TWh）是天然氣增量（+36 TWh）的18倍。中國+336 TWh（占全球增量過半，+40%）、美國+85 TWh（+28%）、印度+53 TWh（+37%）；印度2025年新增太陽能裝置容量首度超越美國",
+        "reason_sources": [
+          {
+            "label": "Ember GER2026 §3.3 太陽能",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#solar"
+          },
+          {
+            "label": "Ember GER2026 §4.4 印度",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/major-countries-and-regions#india"
+          }
+        ],
         "top_countries": [
           {
             "country": "中國",
-            "value": "839.04 TWh（占全球太陽能發電39%）"
+            "value": "1,175 TWh，大於OECD合計（1,078 TWh）",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.3 太陽能",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#solar"
+              }
+            ]
           },
           {
             "country": "美國",
-            "value": "303.75 TWh（約占全球14.1%，回推值）"
-          },
-          {
-            "country": "印度",
-            "value": "135.37 TWh（約占全球6.3%，回推值）"
-          },
-          {
-            "country": "日本",
-            "value": "97.12 TWh（約占全球4.5%，回推值）"
-          },
-          {
-            "country": "德國",
-            "value": "72.43 TWh（約占全球3.4%，回推值）"
+            "value": "389 TWh，全球第二",
+            "sources": [
+              {
+                "label": "Ember GER2026 §3.3 太陽能",
+                "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#solar"
+              }
+            ]
           }
         ],
-        "data_year": "2024年（Ember GER2026；2025年為反推估算值8.7%，未採用）"
+        "data_year": "2025年（Ember GER2026）"
+      }
+    ],
+    "milestone_sources": [
+      {
+        "label": "Ember GER2026 §1.4 再生能源首度超越煤炭",
+        "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/2025-in-review#renewables-overtake-coal-for-first-time-in-the-mod"
       }
     ]
   },
   "historical_trend": {
-    "as_of": "關鍵年份快照，非完整逐年序列（查證時IEA/Ember/OWID逐年完整表格皆無法取得）",
-    "source_label": "Ember Global Electricity Review系列報告 + Carbon Brief",
+    "as_of": "2015年與2025年（僅列Ember報告明確寫出的數字）",
+    "source_label": "Ember Global Electricity Review 2026",
     "source_url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/",
-    "note": "2025年僅列Ember直接公布的煤炭、天然氣占比；水力、風力、太陽能、核能2025年逐項占比尚未公布，圖上不列點、線條停在2024年。",
+    "note": "2015年煤炭38.7%、太陽能1.1%，及2025年各電源占比，均出自Ember GER2026（§1.4、§3.2–3.8）；報告未逐項列出的年份與電源不列點。",
     "years": [
       2015,
-      2023,
-      2024,
       2025
     ],
     "series": [
@@ -195,8 +348,6 @@
         "name": "煤炭",
         "values": [
           38.7,
-          null,
-          34,
           33.0
         ]
       },
@@ -204,8 +355,6 @@
         "name": "天然氣",
         "values": [
           null,
-          null,
-          22,
           21.8
         ]
       },
@@ -213,80 +362,141 @@
         "name": "核能",
         "values": [
           null,
-          null,
-          9.0,
-          null
+          8.9
         ]
       },
       {
         "name": "水力",
         "values": [
           null,
-          14.3,
-          14.3,
-          null
+          14
         ]
       },
       {
         "name": "風力",
         "values": [
           null,
-          7.8,
-          8.1,
-          null
+          8.5
         ]
       },
       {
         "name": "太陽能",
         "values": [
-          null,
-          5.5,
-          6.9,
-          null
+          1.1,
+          8.7
         ]
       }
     ]
   },
   "renewable_breakdown": {
     "global": {
-      "as_of": "整體占比33.8%為2025年確定數字（Ember GER2026）；水力／風力／太陽能個別占比為2024年數字，見「全球能源使用狀況」",
+      "as_of": "2025年（Ember GER2026）",
       "source_label": "Ember Global Electricity Review 2026",
       "source_url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/",
       "total_share_pct": 33.8,
-      "total_trend_note": "首度超越煤炭（33.0%），是現代電力系統史上首次；十年來自2015年23%成長到2025年33.8%（+10.8個百分點）",
+      "total_trend_note": "首度超越煤炭（33.0%）；2015年至2025年的十年間，再生能源占比由23.0%升至33.8%，增加逾十個百分點",
       "items": [
         {
-          "name": "其他再生能源（生質能／地熱等）",
-          "share_pct": null,
-          "note": "查不到個別公開拆解百分比，Ember報告歸入再生能源大類未拆分，不採用推算值"
+          "name": "風力＋太陽能合計",
+          "share_pct": 17.3,
+          "data_year": "2025年（Ember GER2026）",
+          "note": "約為2015年（4.5%）的近4倍；風力與太陽能合計已占再生能源發電量一半以上",
+          "note_sources": [
+            {
+              "label": "Ember GER2026 §3.2 供給概況",
+              "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#supply-overview"
+            }
+          ]
+        }
+      ],
+      "total_sources": [
+        {
+          "label": "Ember GER2026 §1.4 再生能源首度超越煤炭",
+          "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/2025-in-review#renewables-overtake-coal-for-first-time-in-the-mod"
+        },
+        {
+          "label": "Ember GER2026 §1 2025年回顧",
+          "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/2025-in-review"
         }
       ]
     },
     "taiwan": {
-      "as_of": "總占比：2025年，全國發電量口徑（能源署）；台電系統口徑為12.7%（不含轉供直供，範圍較窄）。細分項目：2023/8–2024/7滾動12個月（能源署能源統計專區），期間與總占比不同",
-      "source_label": "經濟部能源署",
-      "source_url": "https://www.re.org.tw/news/more.aspx?cid=198&id=7042",
-      "total_trend_note": "總占比（2025年，全國發電量口徑）、20%目標進度與歷年能源結構變化，詳見「台灣能源使用狀況」與「各國氣候與能源轉型目標對照」。下列細分項目為2023/8–2024/7滾動12個月數字，期間與總占比不同，加總（11.49%）不等於總占比。",
+      "as_of": "2025年，全國發電量口徑（經濟部能源署《能源統計手冊2025年版》）",
+      "source_label": "經濟部能源署 — 能源統計手冊2025年版",
+      "source_url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf",
+      "total_trend_note": "以下細分項目均為2025年全國發電量占比，與上方總占比同一口徑",
       "items": [
         {
-          "name": "太陽能",
-          "share_pct": 4.92,
-          "note": "2023/8–2024/7滾動12個月（細分項目期間），能源署能源統計專區"
+          "name": "太陽光電",
+          "share_pct": 5.78,
+          "data_year": "2025年（全國發電量口徑）",
+          "note_sources": [
+            {
+              "label": "經濟部能源署《能源統計手冊2025年版》3-01（全國發電量占比）",
+              "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+            }
+          ]
         },
         {
           "name": "風力",
-          "share_pct": 2.78,
-          "note": "2023/8–2024/7滾動12個月"
+          "share_pct": 4.21,
+          "data_year": "2025年（全國發電量口徑）",
+          "note_sources": [
+            {
+              "label": "經濟部能源署《能源統計手冊2025年版》3-01（全國發電量占比）",
+              "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+            }
+          ]
         },
         {
-          "name": "水力",
-          "share_pct": 2.56,
-          "note": "2023/8–2024/7滾動12個月"
+          "name": "慣常水力",
+          "share_pct": 1.9,
+          "data_year": "2025年（全國發電量口徑）",
+          "note_sources": [
+            {
+              "label": "經濟部能源署《能源統計手冊2025年版》3-01（全國發電量占比）",
+              "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+            }
+          ]
         },
         {
-          "name": "其他（垃圾、沼氣等）",
-          "share_pct": 1.23,
-          "note": "2023/8–2024/7滾動12個月"
+          "name": "廢棄物",
+          "share_pct": 1.33,
+          "data_year": "2025年（全國發電量口徑）",
+          "note_sources": [
+            {
+              "label": "經濟部能源署《能源統計手冊2025年版》3-01（全國發電量占比）",
+              "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+            }
+          ]
+        },
+        {
+          "name": "生質能",
+          "share_pct": 0.09,
+          "data_year": "2025年（全國發電量口徑）",
+          "note_sources": [
+            {
+              "label": "經濟部能源署《能源統計手冊2025年版》3-01（全國發電量占比）",
+              "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+            }
+          ]
+        },
+        {
+          "name": "地熱",
+          "share_pct": 0.01,
+          "data_year": "2025年（全國發電量口徑）",
+          "note_sources": [
+            {
+              "label": "經濟部能源署《能源統計手冊2025年版》3-01（全國發電量占比）",
+              "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+            }
+          ]
+        }
+      ],
+      "total_sources": [
+        {
+          "label": "經濟部能源署《能源統計手冊2025年版》3-01（全國發電量占比）",
+          "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
         }
       ]
     }
@@ -2360,13 +2570,13 @@
           ]
         }
       ],
-      "note": "僅IRENA追蹤的四項再生能源技術有完整逐年全球實際成本序列；化石燃料／核能缺乏對應的全球實際成本逐年追蹤機制（核能常見的Lazard LCOE+資料以美國市場為主、非全球加權平均，方法論不可比，故未納入本圖），不同技術類別間的直接比較請見下方「同年度跨技術快照」，避免跨資料源（全球實際成本 vs 單一國家未來電廠推算成本）混用造成不成立的趨勢線"
+      "note": "本圖選取IRENA報告中的太陽能光電、陸域風電、離岸風電、水力四項技術的全球加權平均發電成本；跨技術比較請見下方同年度快照"
     },
     "snapshot": {
       "as_of": "2026年7月（Lazard LCOE+ 2026，v19.0，美國市場unsubsidized區間，同一機構同一方法論）",
       "source_label": "Lazard — Levelized Cost of Energy+ (July 2026)",
       "source_url": "https://www.lazard.com/media/kcfconhf/lazards-lcoeplus_vf.pdf",
-      "note": "刻意選用同一年度、同一機構方法論的跨技術比較表，避免混用不同來源造成誤導；核能新建區間反映近年少數在建案例造價偏高，既有已攤提電廠的營運成本則低得多（Lazard另估算約31美元/MWh）。各項成本驅動因素說明引自Lazard報告的假設表與說明頁（資本成本、容量因數、燃料價格假設）；煤炭因缺乏公開新建案資料，區間為Lazard v14.0結果經通膨調整。",
+      "note": "刻意選用同一年度、同一機構方法論的跨技術比較表。核能新建區間依美國Vogtle 3、4號機的成本估計；Lazard估算既有核電廠的邊際成本（區間中點）約31美元/MWh。煤炭因缺乏公開新建案資料，區間為Lazard v14.0結果經通膨調整。",
       "items": [
         {
           "name": "太陽能光電（公用事業）",
@@ -2396,7 +2606,7 @@
           "name": "燃氣（尖峰）",
           "range": "144–276",
           "kind": "fossil",
-          "cost_driver_note": "報告假設的燃氣尖峰機組容量因數僅10%–15%、資本成本約每瓩1,100–1,650美元、天然氣價格每百萬Btu 3.45美元。報告指出傳統發電的成本結構含較高的燃料與變動成本，發電量少則固定成本難以攤提。"
+          "cost_driver_note": "報告假設的燃氣尖峰機組容量因數僅10%–15%、資本成本約每瓩1,100–1,650美元、天然氣價格每百萬Btu 3.45美元。報告指出傳統發電的成本結構含較高的燃料與變動成本。"
         },
         {
           "name": "核能（新建）",
@@ -2408,70 +2618,322 @@
     }
   },
   "storage": {
-    "as_of": "2025年（IEA／BloombergNEF／中國CNESA／美國EIA彙整，逐項資料信心度不一，已於note標註）",
-    "source_label": "IEA — Global Energy Review 2026",
-    "source_url": "https://www.iea.org/reports/global-energy-review-2026/technology-battery-storage",
-    "global_note": "2025年全球儲能新增裝置容量108 GW（IEA）／112 GW、307 GWh（BloombergNEF，統計口徑略有差異），較2024年成長約40%；累計裝置容量是2021年的11倍（IEA）。中國、美國兩國合計占全球累計裝置容量約74.6%（GlobalData，信心中等）。IEA政策情境估計2030年將達760GW至1,200GW",
-    "leaders": [
+    "as_of": "全球：2025年（Ember GER2026）；台灣：ESG遠見整理經濟部《全國電力供需報告》，統計至2026年3月底",
+    "source_label": "Ember — Global Electricity Review 2026（§2.2 電池）",
+    "source_url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/global-electricity-insights#batteries-are-making-daytime-solar-into-anytime-so",
+    "global_points": [
       {
-        "country": "中國",
-        "value": "約63 GW（新增）",
-        "note": "占全球約60%，較2024年成長約1/3；「新型儲能」累計144.7GW（+85%），含抽蓄水力的全部儲能累計213.3GW；占全球BESS裝置容量過半"
+        "text": "2025年全球電池儲能新增容量估計達250 GWh，較前一年成長46%；儲能用電池組價格降至歷史新低的70美元/kWh，較2024年下降45%",
+        "sources": [
+          {
+            "label": "Ember GER2026 §2.2 電池",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/global-electricity-insights#batteries-are-making-daytime-solar-into-anytime-so"
+          }
+        ]
       },
       {
-        "country": "美國",
-        "value": "19 GW（新增）",
-        "note": "占全球約16%，較2024年成長約60%；電網系統累計裝置容量43.6GW（2025年底，EIA官方數據），2026年年中已近52GW"
+        "text": "2025年全球新增的247 GWh電池容量，足以將約14%的新增太陽能發電量由白天移轉到其他時段（2024年為13%、2022年為5%）",
+        "sources": [
+          {
+            "label": "Ember GER2026 §2.2 電池",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/global-electricity-insights#batteries-are-making-daytime-solar-into-anytime-so"
+          }
+        ]
+      }
+    ],
+    "shift_markets": [
+      {
+        "country": "智利",
+        "value": "76%",
+        "note": "2025年新增約4 GWh電池容量，足以移轉76%的新增太陽能發電量",
+        "sources": [
+          {
+            "label": "Ember GER2026 §2.2 電池",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/global-electricity-insights#batteries-are-making-daytime-solar-into-anytime-so"
+          }
+        ]
       },
       {
         "country": "澳洲",
-        "value": "近8 GW（新增）",
-        "note": "較2024年成長近9倍；電池儲能占本國可調度裝置容量比重18%，全球最高滲透率"
+        "value": "53%",
+        "note": "2025年新增約9 GWh電池容量，足以移轉53%的新增太陽能發電量；2025年第四季傍晚尖峰（18:00-20:00）由電池設定電價的時間占36%，高於2024年同期的18%",
+        "sources": [
+          {
+            "label": "Ember GER2026 §2.2 電池",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/global-electricity-insights#batteries-are-making-daytime-solar-into-anytime-so"
+          }
+        ]
       },
       {
-        "country": "歐洲",
-        "value": "約6.2 GW（新增）",
-        "note": "較2024年略降，但電網級占比翻倍達4.6GW"
+        "country": "美國",
+        "value": "約20%",
+        "note": "新增電池容量足以移轉約20%的新增太陽能發電量，加州、德州等多個市場快速擴建；加州自2021年起新增的電池容量多於太陽能",
+        "sources": [
+          {
+            "label": "Ember GER2026 §2.2 電池",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/global-electricity-insights#batteries-are-making-daytime-solar-into-anytime-so"
+          }
+        ]
       },
       {
-        "country": "中東",
-        "value": "逾3 GW（新增）",
-        "note": "主要為沙烏地阿拉伯，較2024年成長逾3倍"
+        "country": "歐盟",
+        "value": "9%",
+        "note": "2025年新增約15 GWh公用事業規模電池容量，足以移轉9%的新增太陽能發電量；專案儲備創紀錄，可能使電池容量增為四倍",
+        "sources": [
+          {
+            "label": "Ember GER2026 §2.2 電池",
+            "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/global-electricity-insights#batteries-are-making-daytime-solar-into-anytime-so"
+          }
+        ]
       }
     ],
-    "taiwan_note": "政府訂2025年儲能總目標1,500MW（電網端1,000MW＋發電端500MW），電網端目標已超額達成（官方未公布確切超越後數字）；國發會2030淨零路徑已將目標大幅上修至5,500MW。光電結合儲能競標累計分配容量約198.6MW，已完工併網76.08MW（2026年3月底）。2025年底新增用戶端儲能補助新制，補助產業用戶設置國產電池儲能移轉尖離峰用電，目標2026-2027年每年推動300MWh。全台最大儲能系統仍是既有日月潭抽蓄水力，新規劃的大甲溪流域抽蓄水力機組目前處於環評階段",
-    "taiwan_src_url": "https://esg.gvm.com.tw/article/120055",
-    "taiwan_src_label": "經濟部《114年度全國電力資源供需報告》，經ESG遠見整理"
+    "taiwan_points": [
+      {
+        "text": "併網型儲能2025年1GW設置目標已超額達成",
+        "sources": [
+          {
+            "label": "ESG遠見：最新《全國電力供需報告》10大重點（重點九）",
+            "url": "https://esg.gvm.com.tw/article/120055"
+          }
+        ]
+      },
+      {
+        "text": "光電結合儲能系統截至2026年3月底，累積分配儲能達198.629MW",
+        "sources": [
+          {
+            "label": "ESG遠見：最新《全國電力供需報告》10大重點（重點九）",
+            "url": "https://esg.gvm.com.tw/article/120055"
+          }
+        ]
+      },
+      {
+        "text": "用戶端儲能：2025年底公告補助要點，協助工業區、科學園區等產業用戶設置「國產電池芯儲能設備」進行尖離峰移轉，目標2026～2027年每年推動300MWh，2028～2029年每年推動200MWh",
+        "sources": [
+          {
+            "label": "ESG遠見：最新《全國電力供需報告》10大重點（重點九）",
+            "url": "https://esg.gvm.com.tw/article/120055"
+          }
+        ]
+      },
+      {
+        "text": "全台最大儲能系統是抽蓄水力；既有的日月潭抽蓄水力已落實白天抽水蓄電、夜間放水發電的調節模式，新規劃的大甲溪流域抽蓄水力機組目前處於環評階段",
+        "sources": [
+          {
+            "label": "ESG遠見：最新《全國電力供需報告》10大重點（重點九）",
+            "url": "https://esg.gvm.com.tw/article/120055"
+          }
+        ]
+      }
+    ]
   },
   "critical_minerals": {
-    "as_of": "2025年（美國地質調查局USGS《Mineral Commodity Summaries 2026》，2026年2月發布／歐盟執委會JRC《Critical Raw Materials Study 2023》彙整）",
+    "as_of": "開採端與美國進口依存度：2025年（USGS《Mineral Commodity Summaries 2026》，2026年2月發布）；加工端占比與評分：歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（2016–2020年）",
     "source_label": "USGS Mineral Commodity Summaries 2026",
     "source_url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
-    "intro_note": "電池(鋰／鈷／鎳)與風機永磁材料(稀土)的原物料供應鏈呈現一致模式。開採端集中國家因礦物而異(剛果／印尼／中國各據山頭)，但精煉／加工端幾乎全部匯聚到中國。稀土(85-100%)、鈷(60%)、鋰(56%)中國精煉占比都過半甚至逼近壟斷。唯獨鎳因精煉端相對分散，是四者中供應風險評分最低的一項。",
+    "intro_note": [
+      {
+        "text": "開採端數字取自USGS（2025年），加工端數字取自歐盟報告（2016–2020年平均）；年份與口徑不同，不宜直接相減",
+        "sources": [
+          {
+            "label": "USGS MCS 2026 鋰",
+            "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-lithium.pdf"
+          },
+          {
+            "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+            "url": "https://doi.org/10.2873/725585"
+          }
+        ]
+      },
+      {
+        "text": "歐盟報告列出的加工端占比最高國家：鋰、鈷、釹、鏑、鎳皆為中國（鋰56.2%、鈷59.6%、釹84.9%、鏑100.0%、鎳33.4%）",
+        "sources": [
+          {
+            "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+            "url": "https://doi.org/10.2873/725585"
+          }
+        ]
+      }
+    ],
     "minerals": [
       {
         "name": "鋰（Lithium）",
-        "mining_concentration": "全球開採(2025e，29萬噸，不含美國)：澳洲31.7%／中國21.4%／智利19.3%／辛巴威9.7%／阿根廷7.9%（USGS）",
-        "processing_concentration": "全球精煉(2016-2020五年平均)：中國56.2%／智利32.1%／阿根廷10.5%（EU JRC）——開採分散但精煉過半集中中國，是典型「開採分散、精煉集中」案例",
-        "supply_risk_note": "EU JRC官方評分：供應風險1.9／經濟重要性3.9（10分制，中低），官方評估「加工」是此礦物的關鍵瓶頸階段；美國2025年鋰淨進口依存度逾50%"
+        "mining_concentration": [
+          {
+            "text": "2025年全球鋰礦開採合計290千噸（鋰含量；美國產量未公開）：澳洲92千噸、中國62千噸、智利56千噸、辛巴威28千噸、阿根廷23千噸",
+            "sources": [
+              {
+                "label": "USGS MCS 2026 鋰",
+                "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-lithium.pdf"
+              }
+            ]
+          }
+        ],
+        "processing_concentration": [
+          {
+            "text": "2016–2020年平均，全球鋰加工端供給占比：中國56.2%、智利32.1%、阿根廷10.5%",
+            "sources": [
+              {
+                "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+                "url": "https://doi.org/10.2873/725585"
+              }
+            ]
+          }
+        ],
+        "supply_risk_note": [
+          {
+            "text": "歐盟評估：供應風險（SR）1.9、經濟重要性（EI）3.9",
+            "sources": [
+              {
+                "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+                "url": "https://doi.org/10.2873/725585"
+              }
+            ]
+          },
+          {
+            "text": "美國2025年鋰淨進口依存度逾50%",
+            "sources": [
+              {
+                "label": "USGS MCS 2026 鋰",
+                "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-lithium.pdf"
+              }
+            ]
+          }
+        ]
       },
       {
         "name": "鈷（Cobalt）",
-        "mining_concentration": "全球開採(2025e，31萬噸)：剛果民主共和國73%／印尼14%（USGS）",
-        "processing_concentration": "全球精煉(2016-2020五年平均)：中國59.6%／芬蘭11.4%／比利時5.3%／加拿大4.9%（EU JRC）；中國精煉原料主要來自剛果與印尼進口的部分精煉鈷",
-        "supply_risk_note": "EU JRC官方評分：供應風險2.8／經濟重要性6.8——開採端(剛果73%)與精煉端(中國60%)皆高度集中，兩階段都屬高風險；美國2025年鈷淨進口依存度79%"
+        "mining_concentration": [
+          {
+            "text": "2025年全球鈷礦開採合計310千噸（鈷含量）：剛果民主共和國230千噸、印尼44千噸",
+            "sources": [
+              {
+                "label": "USGS MCS 2026 鈷",
+                "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-cobalt.pdf"
+              }
+            ]
+          }
+        ],
+        "processing_concentration": [
+          {
+            "text": "2016–2020年平均，全球鈷加工端供給占比：中國59.6%、芬蘭11.4%、比利時5.3%、加拿大4.9%",
+            "sources": [
+              {
+                "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+                "url": "https://doi.org/10.2873/725585"
+              }
+            ]
+          }
+        ],
+        "supply_risk_note": [
+          {
+            "text": "歐盟評估：供應風險（SR）2.8、經濟重要性（EI）6.8",
+            "sources": [
+              {
+                "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+                "url": "https://doi.org/10.2873/725585"
+              }
+            ]
+          },
+          {
+            "text": "美國2025年鈷淨進口依存度79%",
+            "sources": [
+              {
+                "label": "USGS MCS 2026 鈷",
+                "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-cobalt.pdf"
+              }
+            ]
+          }
+        ]
       },
       {
-        "name": "稀土元素（含永磁材料釹／鏑）",
-        "mining_concentration": "全球開採(2025e，全稀土合計39萬噸)：中國69.2%／美國13.1%／澳洲7.4%（USGS）",
-        "processing_concentration": "釹(風機永磁材料核心)精煉(2016-2020五年平均)：中國84.9%／馬來西亞10.5%（EU JRC）；重稀土代表元素鏑的精煉端中國占100%；歐盟官方指出「重稀土元素供應100%來自中國」",
-        "supply_risk_note": "EU JRC官方評分：釹供應風險4.5／經濟重要性7.2；鏑供應風險5.6／經濟重要性7.8——是查證的4種礦物中風險分數最高的單一元素；美國2025年稀土化合物與金屬淨進口依存度67%，2021–24年進口來源中國占71%"
+        "name": "稀土元素（含釹／鏑）",
+        "mining_concentration": [
+          {
+            "text": "2025年全球稀土開採合計390千噸（稀土氧化物當量）：中國270千噸、美國51千噸、澳洲29千噸",
+            "sources": [
+              {
+                "label": "USGS MCS 2026 稀土",
+                "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-rare-earths.pdf"
+              }
+            ]
+          }
+        ],
+        "processing_concentration": [
+          {
+            "text": "2016–2020年平均，全球加工端供給占比：釹—中國84.9%、馬來西亞10.5%；鏑—中國100.0%",
+            "sources": [
+              {
+                "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+                "url": "https://doi.org/10.2873/725585"
+              }
+            ]
+          }
+        ],
+        "supply_risk_note": [
+          {
+            "text": "歐盟評估：釹供應風險（SR）4.5、經濟重要性（EI）7.2；鏑SR 5.6、EI 7.8",
+            "sources": [
+              {
+                "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+                "url": "https://doi.org/10.2873/725585"
+              }
+            ]
+          },
+          {
+            "text": "美國2025年稀土化合物與金屬淨進口依存度67%；2021–24年稀土化合物與金屬的進口來源中，中國占71%",
+            "sources": [
+              {
+                "label": "USGS MCS 2026 稀土",
+                "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-rare-earths.pdf"
+              }
+            ]
+          }
+        ]
       },
       {
         "name": "鎳（Nickel）",
-        "mining_concentration": "全球開採(2025e，390萬噸)：印尼66.7%／菲律賓6.9%／俄羅斯5.1%／加拿大3.6%／新喀里多尼亞3.6%（USGS）",
-        "processing_concentration": "全球精煉(2016-2020五年平均)：中國33.4%／印尼12.2%／日本8.6%／俄羅斯7.1%（EU JRC）——精煉端相對分散，中國占比遠低於稀土／鈷／鋰",
-        "supply_risk_note": "EU JRC官方評分：供應風險僅0.5（4種礦物中最低），列為「戰略原物料」而非門檻更嚴的「關鍵原物料」；美國2025年鎳淨進口依存度41%（含回收料之總表觀消費口徑）"
+        "mining_concentration": [
+          {
+            "text": "2025年全球鎳礦開採合計3,900千噸（鎳含量）：印尼2,600千噸、菲律賓270千噸、俄羅斯200千噸、加拿大140千噸、新喀里多尼亞140千噸",
+            "sources": [
+              {
+                "label": "USGS MCS 2026 鎳",
+                "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-nickel.pdf"
+              }
+            ]
+          }
+        ],
+        "processing_concentration": [
+          {
+            "text": "2016–2020年平均，全球鎳加工端供給占比：中國33.4%、印尼12.2%、日本8.6%、俄羅斯7.1%",
+            "sources": [
+              {
+                "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+                "url": "https://doi.org/10.2873/725585"
+              }
+            ]
+          }
+        ],
+        "supply_risk_note": [
+          {
+            "text": "歐盟評估：供應風險（SR）0.5、經濟重要性（EI）5.7；鎳列為「戰略原物料」，但未達「關鍵原物料」門檻",
+            "sources": [
+              {
+                "label": "歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（全球供給占比，2016–2020年；供應風險／經濟重要性評分）",
+                "url": "https://doi.org/10.2873/725585"
+              }
+            ]
+          },
+          {
+            "text": "美國2025年鎳淨進口依存度41%（含不鏽鋼與合金廢料；USGS註明不含廢料則近100%）",
+            "sources": [
+              {
+                "label": "USGS MCS 2026 鎳",
+                "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-nickel.pdf"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
