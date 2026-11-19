@@ -296,6 +296,7 @@ function safeUrl(u){ u=String(u==null?'':u); return esc(/^https?:\/\//i.test(u) 
 function trendBadge(t){
   if(t==='up') return '<span class="rank-trend trend-up">▲ 上升</span>';
   if(t==='down') return '<span class="rank-trend trend-down">▼ 下降</span>';
+  if(t==='flat') return '<span class="rank-trend trend-flat">― 持平</span>';
   if(t) return `<span class="rank-trend trend-flat">${esc(t)}</span>`;
   return '';
 }
