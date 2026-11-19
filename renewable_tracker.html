@@ -1201,11 +1201,28 @@ function initToc(){
   const update=()=>{ ticking=false;
     const line=window.innerHeight*0.3; let cur=secs[0];
     if(window.scrollY>4){ for(const el of secs){ if(el.getBoundingClientRect().top<=line) cur=el; else break; } }
+    // 捲到底：標亮最後一個區塊
+    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-2) cur=secs[secs.length-1];
     setActive(cur.id); };
-  window.addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
+  // 點目錄連結：立即標亮該項，平滑捲動結束前（捲動停止 150ms 或最長 1 秒）不讓 scroll 判定覆蓋
+  let lockUntil=0, lockTimer=null;
+  const unlock=()=>{ lockUntil=0; if(!ticking){ ticking=true; requestAnimationFrame(update); } };
+  const onTocClick=e=>{
+    const a=e.target.closest('a[href^="#sec-"]'); if(!a) return;
+    setActive(a.getAttribute('href').slice(1));
+    lockUntil=Date.now()+1000; clearTimeout(lockTimer); lockTimer=setTimeout(unlock,1000);
+  };
+  toc.addEventListener('click',onTocClick);
+  panel.addEventListener('click',onTocClick);
+  window.addEventListener('scroll',()=>{
+    if(lockUntil){
+      if(Date.now()>=lockUntil){ unlock(); return; }
+      clearTimeout(lockTimer); lockTimer=setTimeout(unlock,150); return;
+    }
+    if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
   window.addEventListener('resize',update);
   // 各區塊資料是非同步渲染，高度變動時重算（否則初次載入未捲動前會標錯）
-  if('ResizeObserver' in window) new ResizeObserver(()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } }).observe(document.body);
+  if('ResizeObserver' in window) new ResizeObserver(()=>{ if(!lockUntil && !ticking){ ticking=true; requestAnimationFrame(update); } }).observe(document.body);
   update();
 }
 initToc();
