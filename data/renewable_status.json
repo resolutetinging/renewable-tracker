@@ -339,64 +339,444 @@
     "country_profiles": [
       {
         "country": "美國",
-        "as_of": "2026-07（World Nuclear Association最新頁面）",
-        "national_share_pct": 18,
-        "operating_status": "94座運轉中反應爐，總裝置容量96,952 MWe（全球最大）；代表電廠Palo Verde（3機組，約3,937–4,000 MW，1988年商轉，容量因數高達92%，美國最大、全球第9大）",
-        "operating_plans": "新建：Kemmerer 1（懷俄明州，2026-03核准建照）、Clinch River（田納西州，2026-06完成安全評估）、Fermi America（德州）規劃4座AP1000首台目標2032年商轉。延役重啟：Palisades目標2026年、Three Mile Island 1目標2027年、Duane Arnold目標2029年初重啟",
-        "policy": "積極擴建。2022年《通膨削減法》提供核電投資稅收優惠；2025年5月川普總統簽署系列行政命令，目標2050年將核電容量從現行約100GWe增至400GWe",
-        "waste_disposal": "法定架構為1982年《核廢料政策法》；尤卡山最終處置場計畫2010年起無限期擱置，已投入逾150億美元。全美逾9萬公噸用過核燃料存放於39州79個場址，約55%已轉乾式貯存，多屬中期貯存非最終解決方案。因聯邦未依約移除燃料，已賠付業者違約金（金額各來源不一，介於111億至392億美元）。加州眾議員 Levin 於2026年11月18日重新提出《百年貯存罐壽命法案》（100 Year Canister Life Act），要求新核准的乾式貯存罐須符合至少100年安全標準",
-        "public_opinion": "多份2025年民調皆顯示支持度上升：Gallup 61%支持／35%反對（近2010年歷史新高）；Pew Research約六成支持興建更多核電廠（較2020年43%上升）；Bisconti Research 72%支持／28%反對。三份民調皆提及Google／微軟／Meta等科技公司核能採購承諾為背景因素之一"
+        "as_of": "2026-11-13（WNA頁面更新日）",
+        "national_share_pct": 17,
+        "operating_status": [
+          {
+            "text": "運轉中反應爐94座，總裝置容量96,952 MWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "2025年核能發電818 TWh，占總發電量17%",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "operating_plans": [
+          {
+            "text": "Kemmerer 1：建造許可於2026年3月核准",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "Clinch River：2026年9月核發建造執照（NRC於2026年6月完成安全評估）",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "Fermi America：規劃4座AP1000，首台目標2032年運轉，其餘2034、2035、2036年",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "Palisades：Holtec尚未公布新的重啟日期",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "Crane（原Three Mile Island 1）：淨容量819 MWe；2025年11月美國能源部對Constellation發放10億美元貸款支持重啟；預期2027年商業運轉",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "Duane Arnold：2026年1月Linn County核准分區變更，重啟預期為2029年初",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "policy": [
+          {
+            "text": "行政命令：2050年前將核電容量由100 GWe增至400 GWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "waste_disposal": [
+          {
+            "text": "加州眾議員 Levin 於2026年11月18日重新提出《百年貯存罐壽命法案》（100 Year Canister Life Act），要求新核准的乾式貯存罐須符合至少100年安全標準",
+            "sources": [
+              {
+                "label": "Levin 眾議員辦公室新聞稿",
+                "url": "https://levin.house.gov/media/press-releases/rep-levin-reintroduces-bill-to-improve-safe-storage-of-spent-nuclear-fuel"
+              }
+            ]
+          }
+        ],
+        "public_opinion": [
+          {
+            "text": "Gallup（2025年3月）：61%支持使用核能、35%反對；Bisconti Research（2025）：72%支持、28%反對；Pew：59%支持增加使用核能",
+            "sources": [
+              {
+                "label": "美國核能學會 ANS：Recent surveys confirm high levels of U.S. nuclear support（2025-07-01）",
+                "url": "https://www.ans.org/news/2025-07-01/article-7163/recent-surveys-confirm-high-levels-of-us-nuclear-support/"
+              }
+            ]
+          }
+        ]
       },
       {
         "country": "中國",
-        "as_of": "2026-08（World Nuclear Association最新頁面）",
-        "national_share_pct": 5,
-        "operating_status": "64座運轉中反應爐，總裝置容量63,985 MWe；另有37座在建機組（總容量38,578 MWe，居全球之冠）。代表電廠紅沿河核電廠（6機組，6,710 MW，2022年6月全部機組達滿載運轉）",
-        "operating_plans": "「十五五」規劃（2026-2030，2026年3月批准）目標2030年裝置容量達110GWe，長期目標2035年達200GWe；2025年4月國務院核准10座新反應爐（8座華龍一號＋2座CAP1000），投資約人民幣2,000億元",
-        "policy": "積極擴建。「十四五」規劃（2021-2025）原訂2025年底達70GWe，實際運轉約62GWe；2026年7月碳達峰行動方案訂2030年非化石能源占比達25%",
-        "waste_disposal": "官方政策為閉式核燃料循環，優先發展再處理。北山地下實驗室（甘肅）2026年1月完成隧道全部掘進，總投資約27億人民幣，若研究證實場址適合，目標2050年前後興建最終處置場；目前已於甘肅／廣東／四川設低中階廢料處置場",
-        "public_opinion": "查無官方全國性民調數字；一篇2018年學術研究顯示60%受訪者認為境內核電廠安全，但53%認為核廢料難以處置。近期重大爭議事件均為核燃料後處理廠選址抗爭（2013年廣東江門、2016年江蘇連雲港），均非最終處置場本身"
+        "as_of": "2026-11-18（WNA頁面更新日）",
+        "national_share_pct": 4,
+        "operating_status": [
+          {
+            "text": "運轉中反應爐65座，總裝置容量65,085 MWe；在建41座，42,633 MWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：中國（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/china-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "2024年核能發電451 TWh，占比4%",
+            "sources": [
+              {
+                "label": "World Nuclear Association：中國（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/china-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "operating_plans": [
+          {
+            "text": "「十五五」規劃（2026–2030，2026年3月批准）目標2030年核電裝置容量達110 GWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：中國（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/china-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "policy": [
+          {
+            "text": "「十四五」規劃（2021–2025）原訂2025年底達70 GWe（毛容量）；2025年底實際運轉容量約62 GWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：中國（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/china-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "2026年7月碳達峰行動方案目標：非化石能源占能源消費總量比重提高至25%",
+            "sources": [
+              {
+                "label": "World Nuclear Association：中國（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/china-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "waste_disposal": [
+          {
+            "text": "政策為閉式核燃料循環",
+            "sources": [
+              {
+                "label": "World Nuclear Association：中國（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/china-nuclear-power"
+              }
+            ]
+          }
+        ]
       },
       {
         "country": "法國",
-        "as_of": "2026年（World Nuclear Association最新頁面）",
+        "as_of": "2026-04-01（WNA頁面更新日）",
         "national_share_pct": 67,
-        "operating_status": "57座運轉中反應爐，總裝置容量63,000 MWe；代表電廠Gravelines（6機組，5,460 MW，1980–1985年陸續商轉）。2024年核能發電380 TWh，占比67%（與本頁全球排名區塊標示的68.79%為不同資料年份口徑差異，非查證錯誤）",
-        "operating_plans": "EPR2計畫共6座反應爐，分兩兩座落於Penly、Gravelines、Bugey三廠址（EDF估計總投資€72.8億）。Penly廠址預計2027年首次澆築混凝土，首台機組原訂2035年商轉、現已延至2038年",
-        "policy": "積極擴建並確保能源獨立。2026年2月公布第三份多年期能源計畫（PPE3），目標維持核能占比超過50%至2050年（2023年已取消「降至50%」舊目標），訂2030-2035年核能年產量目標380-420 TWh；2026年將決策是否加碼興建8座EPR2",
-        "waste_disposal": "Cigéo深地層處置計畫（Bure）2022年列為公共利益宣告，2023年最高行政法院駁回撤銷訴訟；ANDRA已提交建造許可申請，2025年12月獲安全評估正面意見，公開調查預計2026下半年舉行。地方長期存在反對運動（2016-2018年森林佔領事件等）。首批廢棄物入場時間點來源不一：2025年（原目標，已延宕）或2050年（較新頁面），本查證未能確認最新定案",
-        "public_opinion": "ASNR 2025年調查：48%支持興建新核電廠、25%反對；反對首要理由是放射性廢棄物問題（31%）。EPR2新建案（Penly／Gravelines／Bugey）地方仍有反對團體連署，批評公眾諮詢範圍小於官方緊急應變計畫範圍、成本已上修至728億歐元（原估517億歐元）"
+        "operating_status": [
+          {
+            "text": "18座核電廠共57座運轉中反應爐，總裝置容量63,000 MWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：法國（2026-04-01更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/france"
+              }
+            ]
+          },
+          {
+            "text": "2024年核能發電380 TWh，占比67%",
+            "sources": [
+              {
+                "label": "World Nuclear Association：法國（2026-04-01更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/france"
+              }
+            ]
+          }
+        ],
+        "operating_plans": [
+          {
+            "text": "EPR2：規劃於Penly、Gravelines、Bugey三廠址新建6座反應爐",
+            "sources": [
+              {
+                "label": "World Nuclear Association：法國（2026-04-01更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/france"
+              }
+            ]
+          },
+          {
+            "text": "EDF於2025年12月將EPR2總成本估計修訂為728億歐元（原估500–600億歐元）",
+            "sources": [
+              {
+                "label": "World Nuclear Association：法國（2026-04-01更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/france"
+              }
+            ]
+          },
+          {
+            "text": "Penly預計2027年首次澆築混凝土；首台機組原規劃2035年運轉（現為2038年）",
+            "sources": [
+              {
+                "label": "World Nuclear Association：法國（2026-04-01更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/france"
+              }
+            ]
+          }
+        ],
+        "policy": [
+          {
+            "text": "2026年2月公布的多年期能源計畫（PPE3）訂2030–2035年核能年產量目標380–420 TWh",
+            "sources": [
+              {
+                "label": "World Nuclear Association：法國（2026-04-01更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/france"
+              }
+            ]
+          },
+          {
+            "text": "另將啟動研究再增建8座反應爐的可能性，搭配SMR部署",
+            "sources": [
+              {
+                "label": "World Nuclear Association：法國（2026-04-01更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-a-f/france"
+              }
+            ]
+          }
+        ]
       },
       {
         "country": "南韓",
-        "as_of": "2026-06（World Nuclear Association最新頁面）",
-        "national_share_pct": 30,
-        "operating_status": "26座運轉中反應爐，總裝置容量25,609 MWe；代表電廠Hanul核電廠（8機組，9.14 GW）。2024年核能發電189 TWh，占比30%（同期煤炭33%、天然氣25%）",
-        "operating_plans": "Shin Hanul 3號機2025年5月開工，預計2032年完工；4號機2026年5月開工，預計2033年完工。Saeul 3號機2026年4月達臨界，商轉預計2026年8月；Saeul 4號機預計2026年底完工",
-        "policy": "積極擴建。2025年2月定案「第11次電力供需基本計畫」（2024-2038）明訂核能占比目標：2030年31.8%、2038年35.6%，裝置容量目標2030年28.9GWe、2038年35.2GWe；2026年1月現任政府確認依此計畫推動兩座新大型反應爐",
-        "waste_disposal": "〈高階放射性廢棄物管理特別法〉2025年2月國會通過（歷經3,039天波折），要求中期貯存設施2050年前、永久處置設施2060年前啟用；選址與居民反對仍是主要障礙。各廠貯存壓力嚴峻：古里廠飽和率約93-95%、韓蔚廠85%，全國平均83.6%，立委警告2030年起恐迫使機組停止運轉",
-        "public_opinion": "韓國蓋洛普2025年10月：40%認為應擴大核能、11%應縮減、64%認為國內核電廠安全。2026年1月政府「公論化」政策審議式民調數字分歧頗大（贊成新建54%至90%不等，因媒體與方法論不同），此輪民調方法論本身亦遭反核團體批評為「政策結論的包裝」"
+        "as_of": "2026-11-02（WNA頁面更新日）",
+        "national_share_pct": 29,
+        "operating_status": [
+          {
+            "text": "運轉中反應爐26座，總裝置容量25,609 MWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：南韓（2026-11-02更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/south-korea"
+              }
+            ]
+          },
+          {
+            "text": "2025年總發電643 TWh，其中煤206 TWh（32%）、核能185 TWh（29%）",
+            "sources": [
+              {
+                "label": "World Nuclear Association：南韓（2026-11-02更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/south-korea"
+              }
+            ]
+          }
+        ],
+        "operating_plans": [
+          {
+            "text": "Shin Hanul 3號機於2025年5月開工，4號機於2026年5月開工",
+            "sources": [
+              {
+                "label": "World Nuclear Association：南韓（2026-11-02更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/south-korea"
+              }
+            ]
+          }
+        ],
+        "policy": [
+          {
+            "text": "第11次電力供需基本計畫：核能發電占比2030年達31.8%、2038年達35.6%；核能裝置容量由2023年24.7 GWe增至2030年28.9 GWe、2038年35.2 GWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：南韓（2026-11-02更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/south-korea"
+              }
+            ]
+          },
+          {
+            "text": "2026年1月政府確認將推動興建兩座新大型反應爐",
+            "sources": [
+              {
+                "label": "World Nuclear Association：南韓（2026-11-02更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/south-korea"
+              }
+            ]
+          }
+        ]
       },
       {
         "country": "日本",
-        "as_of": "2026-04（World Nuclear Association最新頁面）",
+        "as_of": "2026-09-22（WNA頁面更新日）",
         "national_share_pct": 8,
-        "operating_status": "33座運轉中反應爐（含近期重啟），總裝置容量31,679 MWe；累計已重啟15座、另10座重啟審查中。柏崎刈羽核電廠（全球容量最大單一核電廠，7機組8.2GW）6號機已於2026年重啟並達商轉。2023年核能發電84.1 TWh，占比8%",
-        "operating_plans": "新建進行中2座（島根3號機、大間1號機）；持續推進其餘機組重啟審查",
-        "policy": "轉向積極。2025年2月核准「第七次戰略能源計畫」移除此前「減少核能依賴」措辭，自2011年福島事故以來首度重新允許新反應爐建設；維持2040年核能占比目標約20%，2030年目標20-22%（相較2023年僅約7-9%）",
-        "waste_disposal": "最終處置場選址：北海道寿都町／神恵内村自2020年進行「文獻調查」，截至查證時點仍未進入下一階段；全國長期無地方政府自願承諾。六ヶ所村再處理廠原定2008年商轉，因技術問題多次延宕，2026年最新計畫預估2032年達最大產能，總成本已達2.94兆日圓",
-        "public_opinion": "具體最新全國民調數字多數查不到（讀賣新聞／朝日新聞原文無法擷取）；可查得片段：2023年2月朝日新聞51%贊成重啟核電廠／42%反對。柏崎刈羽核電廠2025年12月獲准重啟，福島核處理水排放是近年最大國際爭議（南韓逾80%民眾反對、中國擴大水產進口禁令）"
+        "operating_status": [
+          {
+            "text": "可運轉反應爐33座，總裝置容量31,679 MWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：日本（2026-09-22更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-g-n/japan-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "2023年核能發電84.1 TWh，占比8%",
+            "sources": [
+              {
+                "label": "World Nuclear Association：日本（2026-09-22更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-g-n/japan-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "已有15座反應爐重啟，另7座處於重啟核准程序中",
+            "sources": [
+              {
+                "label": "World Nuclear Association：日本（2026-09-22更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-g-n/japan-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "柏崎刈羽6號機於2026年1月重啟，2026年4月恢復商業運轉",
+            "sources": [
+              {
+                "label": "World Nuclear Association：日本（2026-09-22更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-g-n/japan-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "operating_plans": [
+          {
+            "text": "在建2座（大間、島根3號機），合計2,653 MWe，均已提出重啟／審查申請",
+            "sources": [
+              {
+                "label": "World Nuclear Association：日本（2026-09-22更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-g-n/japan-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "policy": [
+          {
+            "text": "第七次戰略能源計畫（2025年2月內閣核准）維持2040年核能占比約20%的目標，並移除「盡可能降低對核能依賴」的措辭",
+            "sources": [
+              {
+                "label": "World Nuclear Association：日本（2026-09-22更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-g-n/japan-nuclear-power"
+              }
+            ]
+          }
+        ]
       },
       {
         "country": "俄羅斯",
-        "as_of": "2026-07（World Nuclear Association最新頁面）",
-        "national_share_pct": 19,
-        "operating_status": "34座運轉中反應爐，總裝置容量27,969 MWe；另有7座在建反應爐（計5,002 MWe）。代表電廠Kalinin核電廠（4機組，4,000 MW，VVER型，1&2號機組自2000年起已獲延役許可）。2023年核能發電217 TWh，占比19%",
-        "operating_plans": "9個廠址18座新機組正處於不同實施階段，其中3座（Primorye初步廠址VVER-1000、Beloyarsk的BN-1200、Smolensk II）預計2027年首次核混凝土澆築；規劃中23座機組合計約21,000 MWe。庫茲涅茨克II-1號機已於2026年5月投入商運",
-        "policy": "積極擴建。2024年12月批准《統一能源系統總體規劃》訂目標2042年核能占比達23.5%；2025年4月批准《俄羅斯聯邦至2050年能源戰略》訂2045年核能占比目標25%，規劃新建38座機組（含大型機組、VVER-600中型機組與SMR小型模組化反應爐）",
-        "note": "俄羅斯官方能源部門資訊透明度較低，本頁資料以World Nuclear Association整理數據為主，部分機組確切商轉時程該協會亦未提供完整清單",
-        "waste_disposal": "正於克拉斯諾亞爾斯克邊疆區開發地下研究實驗室研究高階廢料處置可行性，原訂2024年完成整項計畫但查證時點仍在招標程序中。NO RAO為唯一經授權執行最終處置機構，約3,200萬立方公尺廢料需處置，投資計畫延伸至2035年",
-        "public_opinion": "查無獨立民調數字（Levada Center／VCIOM頁面均無法存取，Rosatom官方亦查無正式聲明）。近期爭議事件均與烏克蘭戰爭相關：2022年佔領車諾比核電廠與札波羅熱核電廠，2025年1月美國財政部制裁Rosatom高階主管"
+        "as_of": "2026-11-18（WNA頁面更新日）",
+        "national_share_pct": 18,
+        "operating_status": [
+          {
+            "text": "運轉中反應爐34座，總裝置容量27,969 MWe；在建7座，5,002 MWe",
+            "sources": [
+              {
+                "label": "World Nuclear Association：俄羅斯（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/russia-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "2024年核能發電216 TWh，占比18%",
+            "sources": [
+              {
+                "label": "World Nuclear Association：俄羅斯（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/russia-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "Kalinin 1號機執照於2025年7月再延長19年至2044年6月；Kalinin 2號機執照已於2017年11月延長至2038年",
+            "sources": [
+              {
+                "label": "World Nuclear Association：俄羅斯（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/russia-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "operating_plans": [
+          {
+            "text": "9個廠址共18座新機組處於不同實施階段，其中3座正準備於2027年首次澆築核級混凝土",
+            "sources": [
+              {
+                "label": "World Nuclear Association：俄羅斯（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/russia-nuclear-power"
+              }
+            ]
+          }
+        ],
+        "policy": [
+          {
+            "text": "2024年12月核定的總體規劃將2042年核能發電占比目標上調至24%（2024年9月草案為23.5%）",
+            "sources": [
+              {
+                "label": "World Nuclear Association：俄羅斯（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/russia-nuclear-power"
+              }
+            ]
+          },
+          {
+            "text": "2025年4月批准至2050年的能源戰略：2045年核能占比目標25%，並指示建造38座新核電機組",
+            "sources": [
+              {
+                "label": "World Nuclear Association：俄羅斯（2026-11-18更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-o-s/russia-nuclear-power"
+              }
+            ]
+          }
+        ]
       }
     ],
     "taiwan_future_gating": [
@@ -1108,23 +1488,23 @@
         "name": "NVIDIA × Emerald AI × 多家能源巨頭 — AI工廠變身電網彈性資產",
         "date": "2026-03-23",
         "region": "美國",
-        "desc": "NVIDIA與Emerald AI（NVIDIA有投資的AI電網調度新創）宣布與AES、Constellation、Invenergy、NextEra Energy、Nscale Energy & Power、Vistra等多家大型能源公司合作，打造能更快併網、同時作為電網彈性資產運作的新型AI工廠。",
-        "src_url": "https://www.globenewswire.com/news-release/2026/03/23/3260239/0/en/nvidia-and-emerald-ai-join-leading-energy-companies-to-pioneer-flexible-ai-factories-as-grid-assets.html",
-        "src_label": "GlobeNewswire"
+        "desc": "NVIDIA與Emerald AI宣布與AES、Constellation、Invenergy、NextEra Energy、Nscale Energy & Power、Vistra等能源公司合作，打造能更快併網、同時作為電網彈性資產運作的新型AI工廠。",
+        "src_url": "https://nvidianews.nvidia.com/news/nvidia-and-emerald-ai-join-leading-energy-companies-to-pioneer-flexible-ai-factories-as-grid-assets",
+        "src_label": "NVIDIA 新聞稿"
       },
       {
         "name": "National Grid × Emerald AI — 英國首次AI資料中心電網彈性試驗",
-        "date": "2026年",
+        "date": "2026-03-03",
         "region": "英國",
-        "desc": "英國國家電網與Emerald AI宣布策略合作，在Nebius倫敦AI Factory進行英國首次示範（合作方另含EPRI、NVIDIA），證明高效能AI基礎設施可在不影響關鍵任務運算下作為電網回應型資產運作。估算：英國到2030年將有超過6GW資料中心新建量，具電力彈性的AI資料中心屆時可釋回電網超過2GW容量。",
-        "src_url": "https://www.nationalgrid.com/national-grid-and-emerald-ai-announce-strategic-partnership-demonstrate-ai-power-flexibility-uk",
-        "src_label": "National Grid"
+        "desc": "Emerald AI、EPRI、National Grid、Nebius與NVIDIA合作，2025年12月於Nebius倫敦資料中心進行為期五天的測試，測試中用電需求最多降低40%。",
+        "src_url": "https://electricalreview.co.uk/2026/03/03/uk-first-ai-grid-trial-cuts-london-data-centre-power-demand-by-up-to-40/",
+        "src_label": "Electrical Review"
       },
       {
-        "name": "Google — 與美國5家電力公司達成1GW資料中心需量反應承諾",
+        "name": "Google — 與美國電力公司簽署合計1GW資料中心需量反應",
         "date": "2026-03-19",
         "region": "美國",
-        "desc": "Google宣布與Entergy Arkansas、Minnesota Power、DTE Energy（加上先前已簽的Indiana Michigan Power、Tennessee Valley Authority）等5家美國電力公司完成長期能源合約中的需量反應承諾，總計達1GW，為任一大型科技公司單一最大規模的資料中心需量反應承諾。做法：Google可限制或轉移部分機器學習運算負載，在特定時段降低資料中心用電、穩定電網。",
+        "desc": "Google宣布已與電力公司簽署合計1GW的資料中心需量反應，納入長期能源合約；合作電力公司為Indiana Michigan Power、Tennessee Valley Authority、Entergy Arkansas、Minnesota Power、DTE Energy。做法：Google可限制或轉移部分機器學習運算負載，降低資料中心用電、穩定電網。",
         "src_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/demand-response-data-center-milestone/",
         "src_label": "Google 官方部落格"
       },
@@ -1132,7 +1512,7 @@
         "name": "Google × Voltus — PJM 電網 1GW 虛擬電廠",
         "date": "2026-10-22",
         "region": "美國",
-        "desc": "Google與Voltus宣布擴大合作，在PJM電網區域建置1GW虛擬電廠，由今年稍早的100MW協議擴大10倍，Google稱是目前已知超大規模雲端業者部署的最大分散式容量組合之一。PJM服務13州與華盛頓特區共6,700萬人。",
+        "desc": "Google與Voltus宣布在PJM電網區域建置1GW虛擬電廠，承接今年稍早的100MW協議；Google稱其為已知最大的分散式容量組合之一。PJM服務13州與華盛頓特區共6,700萬人。",
         "src_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/virtual-power-plant-1-gigawatt/",
         "src_label": "Google 官方部落格"
       }
@@ -1150,67 +1530,161 @@
         "name": "台普威（雲豹能源子公司）搶攻AI資料中心儲能商機",
         "date": "2026-08-24",
         "region": "台灣／日本",
-        "desc": "台普威已與台灣、日本資料中心開發商及營運商接洽，並挑選試點專案驗證技術，計畫以電池儲能系統（BESS，毫秒級充放電能力）切入AI資料中心市場：日本鎖定2MW以下案場、台灣鎖定約2–5MW案場，相關案場預計2027年啟動。台普威上半年營收11.09億元，毛利率由去年同期11.3%提升至34.2%。",
+        "desc": "台普威已與台、日等地AIDC開發及營運商交涉中；日本案場約在2MW以下、台灣介於2MW至5MW之間，預計AIDC搭配儲能案場明年開工。報導指毫秒級負載波動特性使儲能成為關鍵配套。台普威今年上半年合併營收新台幣11.09億元，毛利率34.2%。",
         "src_url": "https://www.cna.com.tw/news/afe/202608240219.aspx",
         "src_label": "中央社"
-      },
-      {
-        "name": "經濟部能源署／台電：電池儲能參與綠電轉供POC機制",
-        "date": "2026-06-26（技術會議），預計2026-09定案",
-        "region": "台灣",
-        "desc": "能源署與台電推動電池儲能系統參與綠電轉供的概念驗證機制：白天儲存多餘綠電、夜間放電補足用戶需求。6月26日已召開技術會議，工作小組正研擬技術細節、結算機制與憑證認證，規畫涵蓋一般轉供與彈性轉供兩種方式，初期聚焦表前電池儲能系統。經濟部已新增「特殊電業」類別規範參與電力交易平台的儲能系統與需量反應措施。",
-        "src_url": "https://poxa.io/report/20260518",
-        "src_label": "經濟部能源署動態彙整"
       }
     ]
   },
   "ai_energy_impact": {
-    "as_of": "2026年8月（各國官方公告、企業財報、IEA/Ember/ENTSO-E等機構報告彙整）",
-    "source_label": "IEA《Electricity 2026》／《Energy and AI》、Energy Institute《2026 Statistical Review of World Energy》、各國能源主管機關與企業公告",
-    "source_url": "https://www.iea.org/reports/electricity-2026",
-    "intro_note": "AI資料中心用電量快速成長，2025年全球資料中心用電約787.8 TWh（Energy Institute《2026 Statistical Review》，S&P Global資料，該報告75年來首度揭露全球資料中心用電數字）。已開始在多國造成電網容量吃緊、供電審查凍結等實際影響。能源供給能否跟上AI擴張速度，成為各國共同課題。",
+    "as_of": "2026-11-19（逐點標註來源與日期）",
+    "intro_note": "2025年全球資料中心用電約788 TWh。",
+    "intro_sources": [
+      {
+        "label": "Crypto Briefing（2026-08-27，轉述 Energy Institute《2026 Statistical Review of World Energy》）",
+        "url": "https://cryptobriefing.com/us-data-center-power-demand-surge/"
+      }
+    ],
     "country_profiles": [
       {
         "country": "美國",
-        "as_of": "2026年8月",
-        "ai_development_status": "Google/Microsoft/Amazon/Meta四大雲端巨頭2026年資本支出計畫合計約7,250億美元，較2025年約4,100億美元成長77%，主要投入AI資料中心、GPU與電力建設（ValueAddVC彙整財報guidance，2026-02）。美國2025年掌握全球約75%高效能AI運算能力、全球約51%超大規模AI資料中心（Carnegie Endowment，2026-06）。代表性專案：OpenAI/SoftBank/Oracle主導的Stargate計畫（4年5,000億美元、目標10GW運算容量）、xAI在田納西州曼菲斯的Colossus（現約20萬張GPU，規劃擴至百萬張）。川普政府2025-07-23發布「Winning the Race: America's AI Action Plan」，明確將能源視為AI競賽瓶頸，指示加速天然氣、核能等基載電力與電網許可審查（白宮官方文件）",
-        "energy_availability": "PJM電網容量市場拍賣價格從2024/25年度每MW-day 28.92美元飆升至2026/27年度329.17美元（維吉尼亞北部Dominion分區更達444.26美元），分析估計資料中心需求貢獻此輪漲幅約63%（IEEFA，2025）。美國2025年資料中心用電量約312.6 TWh，占全球資料中心用電約39.7%（Energy Institute，2026-08）。美國能源部支持研究估計資料中心用電占全美總用電比例將從2023年約4.4%成長至2028年6.7-12%。核能復役案例：Constellation Energy與Microsoft簽20年售電合約重啟賓州三哩島一號機（更名Crane Clean Energy Center，供電835MW，取得能源部10億美元聯邦貸款，預計2027-2028年併網）"
+        "energy_availability": [
+          {
+            "text": "PJM容量市場拍賣價格由2024/25年度每MW-day 28.92美元升至2026/27年度329.17美元",
+            "sources": [
+              {
+                "label": "NUS Consulting：PJM Capacity Auction 2026/27",
+                "url": "https://www.nusconsulting.com/energy-news/pjm-capacity-auction-2026-2027/"
+              }
+            ]
+          },
+          {
+            "text": "2025年美國資料中心用電量312.6 TWh，占全球資料中心用電39.7%",
+            "sources": [
+              {
+                "label": "Crypto Briefing（2026-08-27，轉述 Energy Institute《2026 Statistical Review of World Energy》）",
+                "url": "https://cryptobriefing.com/us-data-center-power-demand-surge/"
+              }
+            ]
+          },
+          {
+            "text": "Crane（原Three Mile Island 1）重啟：淨容量819 MWe，2025年11月美國能源部發放10億美元貸款，預期2027年商業運轉",
+            "sources": [
+              {
+                "label": "World Nuclear Association：美國（2026-11-13更新）",
+                "url": "https://world-nuclear.org/information-library/country-profiles/countries-t-z/usa-nuclear-power"
+              }
+            ]
+          }
+        ]
       },
       {
         "country": "中國",
-        "as_of": "2026年8月",
-        "ai_development_status": "「東數西算」工程已帶動社會投資超過1兆人民幣，「十五五」期間算力網路建設將再增約4兆人民幣；截至2026年3月底全國智能算力規模達188萬P，已建成逾70條算力走廊（中新網，2026-06）。字節跳動2026年資本支出規劃約1,600億人民幣；阿里巴巴規劃2025-2027三年內投入3,800-4,800億人民幣於雲端與AI晶片。IEA《Energy and AI》指出2024年全球資料中心用電415 TWh中，美國占45%、中國占25%，為僅次美國的第二大資料中心用電國",
-        "energy_availability": "「東數西算」要求國家樞紐內新項目至少80%電力來自可再生能源（例如寧夏2026-05啟動500MW風光專線供電予中國大唐雲資料中心），但資料中心多集中東部城市，該區域約70%電力仍來自燃煤，整體電力系統燃煤占比60.5%（Al Jazeera/Carbon Brief，2026）。2030年資料中心用電需求估計差異頗大：官方預估400 TWh、高盛估上看600 TWh、Rystad Energy估289 TWh、Wood Mackenzie估774 TWh，各機構估算落差顯著。官方規劃至2035年再生能源與核能合計占資料中心電力供應60%"
+        "energy_availability": [
+          {
+            "text": "2030年中國資料中心用電量預測區間為400–600 TWh；高盛預估由目前約200 TWh增至近600 TWh（Bloomberg轉述）",
+            "sources": [
+              {
+                "label": "Carbon Brief：How China is managing the rising energy demand from data centres（2025-04-16）",
+                "url": "https://www.carbonbrief.org/explainer-how-china-is-managing-the-rising-energy-demand-from-data-centres/"
+              }
+            ]
+          }
+        ]
       },
       {
-        "country": "歐盟",
-        "as_of": "2026年8月",
-        "ai_development_status": "執委會「InvestAI」倡議目標動員2,000億歐元投入AI投資；EuroHPC JU於2026-07-30啟動「AI Gigafactories」徵案，提供最高100億歐元公共資金、計畫建置7座AI超級工廠。科技巨頭已在歐盟多國巨額投資：Microsoft德國32億歐元/西班牙66.9億歐元、Amazon德國法蘭克福約94.4億+84.7億美元。歐洲在全球資料中心裝置容量占比目前約13%，預估2030年降至約10%，容量僅約美國三分之一、中國三分之二（Data Centre Review，2026-07）",
-        "energy_availability": "ENTSO-E於2026-05報告：歐盟資料中心用電量預估從2024年87 TWh成長至2030年至少134 TWh，境內超過1萬座資料中心、IT裝置容量約12.7 GW。目前資料中心約占歐盟整體用電量3%，但成員國差異極大——愛爾蘭已超過20%。愛爾蘭資料中心2025年用電量已接近全國住宅用電總和，電力監理機關CRU自2021-11起對新資料中心併網事實上凍結，直到2025-12才鬆綁（新規要求至少80%用電來自本地再生能源）。荷蘭曾暫停資料中心新併網，並發生資料中心優先取得電網容量致住宅與學校無法併網的案例；丹麥2026年初也傳出電網因資料中心需求暴增面臨停審新案壓力"
+        "country": "歐洲（ENTSO-E 口徑，含歐盟）",
+        "energy_availability": [
+          {
+            "text": "歐洲資料中心用電量由2024年87 TWh增至2030年至少134 TWh（2035年預估199–254 TWh）",
+            "sources": [
+              {
+                "label": "ENTSO-E：Data centres and the power system（2026年5月）",
+                "url": "https://eepublicdownloads.blob.core.windows.net/public-cdn-container/clean-documents/Reports/2026/ENTSO-E_Data_Centres_260520.pdf"
+              }
+            ]
+          },
+          {
+            "text": "歐洲有超過10,500座資料中心（IT功率至少50 kW），IT容量合計約12.7 GW，其中約9.9 GW在歐盟27國",
+            "sources": [
+              {
+                "label": "ENTSO-E：Data centres and the power system（2026年5月）",
+                "url": "https://eepublicdownloads.blob.core.windows.net/public-cdn-container/clean-documents/Reports/2026/ENTSO-E_Data_Centres_260520.pdf"
+              }
+            ]
+          }
+        ]
       },
       {
         "country": "日本",
-        "as_of": "2026年8月",
-        "ai_development_status": "Microsoft宣布未來四年在日本投入100億美元建設雲端與AI基礎設施（Bloomberg，2026-04），加計AWS與Oracle既有承諾，三家業者對日投資合計已達約260億美元。SoftBank除與OpenAI合作Stargate計畫承諾超過400億美元，也將於2026-10推出搭載NVIDIA GB200 NVL72的AI雲端服務。日本政府以「AI・半導體產業基盤強化フレーム」提供未來7年超過10兆日圓公共支持，2025-12-23內閣會議通過首份《人工知能基本計画》",
-        "energy_availability": "經濟產業省與OCCTO於2025-11公布：東京地區2026年8月（10年一遇酷暑情境）最低供給予備率僅0.9%，較上年度大幅下降6.3個百分點、遠低於3%穩定供給基準，主因多座大型火力機組歲修停轉（此份官方資料未明確將AI需求列為單一主因，需注意此區別）。IEA估計未來五年日本用電需求成長中約一半來自資料中心，Wood Mackenzie估算日本資料中心用電量將從2024年19TWh成長至2034年57-66TWh。核能與AI需求政策連結案例：東京電力宣布計畫在柏崎刈羽原子力發電所周邊開發資料中心，採「電源與資通訊基礎設施一體化」模式"
+        "energy_availability": [
+          {
+            "text": "Wood Mackenzie預估日本資料中心用電量將由2024年19 TWh增至2034年57–66 TWh",
+            "sources": [
+              {
+                "label": "Wood Mackenzie 新聞稿（2025-08-26）",
+                "url": "https://www.woodmac.com/press-releases/japan-data-centers-power-demand/"
+              }
+            ]
+          }
+        ]
       },
       {
         "country": "南韓",
-        "as_of": "2026年8月",
-        "ai_development_status": "政府訂「躋身全球AI三強」為國家戰略，2026年成立「國家人工智慧戰略委員會」，推出《人工智慧行動計畫（2026-2028）》，目標2030年GPU規模擴增至26萬顆。三星電子與SK海力士2026上半年半導體設備投資合計約43.198兆韓元，年增35.1%；SK海力士宣布投入720億美元擴建記憶體廠因應AI需求；兩家公司與OpenAI簽意向書，承諾每月為Stargate計畫供應90萬片DRAM晶圓",
-        "energy_availability": "官方最新評估：「三大國家計畫」（龍仁半導體叢聚擴建、全南半導體工業園區、大型AI資料中心）合計將額外增加約26.6吉瓦電力需求，相當於19座大型核電機組發電量，2040年尖峰用電需求預估將達158.4-165吉瓦（南韓氣候能源與環境部，2026-08）。龍仁半導體叢聚電力需求超過14吉瓦、須到2041年才全數到位，政府與KEPCO已簽署三方供電協議並規劃先建3GW LNG電廠過渡；第11次電力供需基本計畫已將此供電需求與核能擴建掛鉤"
-      },
-      {
-        "country": "台灣",
-        "as_of": "2026年8月（供需數字見本頁「台灣真的缺電嗎」，本卡補充半導體業細節）",
-        "ai_development_status": "台積電2奈米製程預計2026年進入量產首年，良率已突破90%；CoWoS先進封裝月產能規劃2026年底上修至約12.5萬片（較現況成長約80%），未來5年CoWoS需求年均成長率預估近50%。2026年資本支出上修至520-560億美元高標，七成投入先進製程；台灣2023年在16/14奈米以下先進製程產能全球占比達68%，NVIDIA一家即占用超過5成台積電2026年底新增CoWoS產能",
-        "energy_availability": "AI資料中心申請案與核准容量、半導體業新增用電等供需數字，詳見「台灣真的缺電嗎」區塊的供需數字。台積電傳將重返龍潭科學園區三期布局次世代埃米級製程廠，台電已評估新建大潭電廠10號機組及既有機組延壽改建因應。標普全球評等報告指出台積電2023年用電量近250億度、占台灣總用電量約8%，若出貨量較2023年成長90%，2030年用電量恐達794億度、占台灣總用電比重攀升至23.7%（S&P Global Ratings，2024-10）"
+        "energy_availability": [
+          {
+            "text": "氣候能源環境部：2040年尖峰用電需求預測為158.4 GW（基準情境）至165 GW（高端情境），較4月預測增加26.6–26.8 GW，原因為AI資料中心與半導體叢聚等政府大型計畫",
+            "sources": [
+              {
+                "label": "Asia Business Daily（2026-08-20）",
+                "url": "https://view.asiae.co.kr/en/article/2026082016310760373"
+              }
+            ]
+          },
+          {
+            "text": "上述增加量約相當於19座1.4 GW的APR1400大型反應爐",
+            "sources": [
+              {
+                "label": "Korea JoongAng Daily（2026-08-20）",
+                "url": "https://www.koreajoongangdaily.com/business/newlyprojected-energy-demand-created-by-ai-and-chips-calls-for-19-more-nuclear-reactors/12835871"
+              }
+            ]
+          }
+        ]
       },
       {
         "country": "菲律賓",
-        "as_of": "2026年9月",
-        "ai_development_status": "菲律賓規劃34.4億美元AI基礎建設計畫（公共資金約13.5億美元、私人投資21億美元，其中14.6億美元用於AI運算與資料中心），資料中心容量目標從現況約50MW，2030年擴增至約400MW，2033年達1.5GW（約30倍成長）（TechRepublic，2026-09）",
-        "energy_availability": "電力被文章列為超大規模運算商最關鍵的需求：計畫需支援約15.2萬顆GPU且不可排擠民生用電；目標2033年前太陽能、地熱等再生能源占AI基礎建設總電力40%，並評估核電作為長期選項。電力與水資源限制被視為東南亞區域共同挑戰，馬來西亞等鄰近市場面臨類似問題（TechRepublic，2026-09）"
+        "ai_development_status": [
+          {
+            "text": "菲律賓AI基礎建設總體規劃（2026–2033）預計投資344億美元，其中公共資金135億美元（39%）、私人投資210億美元（61%）",
+            "sources": [
+              {
+                "label": "W.Media（2026-09-15）",
+                "url": "https://w.media/philippines-unveils-us-34-4-billion-ai-infrastructure-masterplan/"
+              }
+            ]
+          },
+          {
+            "text": "資料中心容量由基準約50 MW增至2033年1.5 GW，第一階段2030年前約400 MW",
+            "sources": [
+              {
+                "label": "W.Media（2026-09-15）",
+                "url": "https://w.media/philippines-unveils-us-34-4-billion-ai-infrastructure-masterplan/"
+              }
+            ]
+          }
+        ],
+        "energy_availability": [
+          {
+            "text": "規劃可支持約15.2萬顆GPU；目標2033年前太陽能與地熱供應AI基礎建設用電的40%；能源部將評估核電作為較長期選項",
+            "sources": [
+              {
+                "label": "W.Media（2026-09-15）",
+                "url": "https://w.media/philippines-unveils-us-34-4-billion-ai-infrastructure-masterplan/"
+              }
+            ]
+          }
+        ]
       }
     ]
   },

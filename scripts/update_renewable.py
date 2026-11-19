@@ -67,6 +67,16 @@ def _field_label(k):
         return FIELD_LABELS[k]
     return None if re.fullmatch(r'[A-Za-z0-9_\-]+', str(k)) else str(k)
 
+def _prompt_view(obj):
+    """逐點附來源的欄位 [{text, sources}] 送週查證時只留文字、不送來源連結，控制 8K TPM 的 prompt 大小。"""
+    if isinstance(obj, list):
+        if obj and all(isinstance(p, dict) and 'text' in p and 'sources' in p for p in obj):
+            return [p['text'] for p in obj]
+        return [_prompt_view(x) for x in obj]
+    if isinstance(obj, dict):
+        return {k: _prompt_view(v) for k, v in obj.items() if k != 'intro_sources'}
+    return obj
+
 MONITORED_KEYS = ['smart_management', 'ai_energy_impact', 'nuclear_country_profiles', 'taiwan_power_shortage']
 
 def _tps_prompt_data(tps):
@@ -102,14 +112,14 @@ CATEGORY_CONFIG = [
     {
         'key': 'ai_energy_impact',
         'label': 'AI發展對能源用量的影響',
-        'get_data': lambda status: status.get('ai_energy_impact', {}),
+        'get_data': lambda status: _prompt_view(status.get('ai_energy_impact', {})),
         'category_enum': 'ai_energy_impact',
         'news_labels': ['AI能源用量影響'],
     },
     {
         'key': 'nuclear_country_profiles',
         'label': '核能專區（各國營運狀況）',
-        'get_data': lambda status: (status.get('nuclear') or {}).get('country_profiles', []),
+        'get_data': lambda status: _prompt_view((status.get('nuclear') or {}).get('country_profiles', [])),
         'category_enum': 'nuclear_profiles',
         'news_labels': ['核能營運/政策/核廢'],
     },
@@ -317,6 +327,13 @@ fields 的欄位名必須沿用上方現有資料裡已存在的欄位名（例�
     return json.loads(raw)
 
 
+def _pts_text(v):
+    """欄位可能是字串，或逐點附來源的 [{text, sources}]；信件摘要一律轉成純文字。"""
+    if isinstance(v, list):
+        return '；'.join(str(p.get('text', '')) for p in v if isinstance(p, dict) and p.get('text'))
+    return v or ''
+
+
 def build_overview_html(monitored_snapshot):
     """每週信件固定包含監控範圍現況總結，不管本週有沒有候選異動，比照
     update_nvidia.py的build_overview_html設計。"""
@@ -325,7 +342,8 @@ def build_overview_html(monitored_snapshot):
         for it in items or []:
             name = it.get('name') or it.get('country') or ''
             date_region = ' · '.join(x for x in [it.get('date'), it.get('region')] if x)
-            detail = it.get('desc') or it.get('ai_development_status') or it.get('operating_status') or ''
+            detail = (it.get('desc') or _pts_text(it.get('ai_development_status'))
+                      or _pts_text(it.get('energy_availability')) or _pts_text(it.get('operating_status')) or '')
             date_html = f'<div style="margin-top:4px;font-size:11px;color:#9e9890;">{date_region}</div>' if date_region else ''
             detail_html = f'<div style="margin-top:5px;padding-left:12px;font-size:12px;color:#6a6460;line-height:1.6;">{bulletize_email(smart_truncate(detail, 160))}</div>' if detail else ''
             rows += f'''<div style="background:#faf9f7;border-left:3px solid #4a8a6a;border-radius:0 6px 6px 0;padding:10px 14px;margin:8px 0;">
