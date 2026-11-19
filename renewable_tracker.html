@@ -3,7 +3,7 @@
 <head>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%220.9em%22 font-size=%2290%22>🌱</text></svg>">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Renewable Tracker</title>
 <style>
 :root {
@@ -33,6 +33,22 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .toc a{font-size:11.5px;color:var(--text2);background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:5px 12px;text-decoration:none;white-space:nowrap;}
 .toc a:hover{background:var(--renew);color:#fff;border-color:var(--renew);}
 .sec-title:first-of-type{margin-top:0;}
+.toc a.active,#toc-panel a.active{background:var(--renew);color:#fff;border-color:var(--renew);}
+#toc-fab,#toc-panel{display:none;}
+/* 寬螢幕：目錄固定在左側，內容往右讓位 */
+@media(min-width:1100px){
+  body{padding-left:264px;}
+  .toc{position:fixed;left:24px;top:20px;bottom:20px;width:224px;margin:0;flex-direction:column;flex-wrap:nowrap;gap:6px;overflow-y:auto;align-content:flex-start;z-index:20;}
+  .toc a{border-radius:8px;white-space:normal;flex:none;}
+}
+/* 窄螢幕：頁首目錄隱藏（同一份連結由 JS 複製到右下角面板，避免橫向捲動與重複佔版） */
+@media(max-width:1099px){
+  .toc{display:none;}
+  #toc-fab{display:block;position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:60;background:var(--renew);color:#fff;border:none;border-radius:20px;padding:9px 16px;font-size:12px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer;font-family:inherit;}
+  #toc-panel{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(max(16px,env(safe-area-inset-bottom)) + 46px);z-index:60;width:min(260px,calc(100vw - 32px));max-height:min(60vh,calc(100vh - 100px));overflow-y:auto;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.2);}
+  #toc-panel.open{display:flex;}
+  #toc-panel a{font-size:11.5px;color:var(--text2);background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;text-decoration:none;}
+}
 .sec-meta{font-size:11px;color:var(--muted2);text-transform:none;letter-spacing:normal;font-weight:400;}
 
 /* ── 排名卡片（區塊1／區塊2共用） ──
@@ -149,7 +165,7 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
 
 <div id="content" class="hidden">
 
-  <nav class="toc">
+  <nav class="toc" id="toc">
     <a href="#sec-ri">📊 再生能源趨勢（官方資料）</a>
     <a href="#sec-mix">🌍 全球能源使用狀況</a>
     <a href="#sec-tw-mix">🇹🇼 台灣能源使用狀況</a>
@@ -164,6 +180,8 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
     <a href="#sec-ai-energy">🤖 AI對能源用量的影響</a>
     <a href="#sec-smart">⚡ 電力管理現況</a>
   </nav>
+  <button type="button" id="toc-fab" aria-expanded="false" aria-controls="toc-panel">☰ 目錄</button>
+  <div id="toc-panel" role="navigation" aria-label="目錄"></div>
 
   <div id="ri-hero-block" style="margin-bottom:6px;"></div>
 
@@ -1158,6 +1176,31 @@ async function init(){
   }catch(e){ /* 週查證尚未啟用或本次查無資料，忽略 */ }
 }
 init();
+
+// 目錄：寬螢幕固定左側＋scrollspy；窄螢幕右下角懸浮按鈕開關面板（連結由 #toc 複製，單一來源）
+function initToc(){
+  const toc=document.getElementById('toc'), fab=document.getElementById('toc-fab'), panel=document.getElementById('toc-panel');
+  if(!toc||!fab||!panel) return;
+  const links=[...toc.querySelectorAll('a[href^="#sec-"]')];
+  links.forEach(a=>panel.appendChild(a.cloneNode(true)));
+  const all=[...toc.querySelectorAll('a'),...panel.querySelectorAll('a')];
+  const setActive=id=>all.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
+  const setOpen=o=>{panel.classList.toggle('open',o);fab.setAttribute('aria-expanded',o?'true':'false');};
+  fab.addEventListener('click',e=>{e.stopPropagation();setOpen(!panel.classList.contains('open'));});
+  panel.addEventListener('click',e=>{if(e.target.closest('a')) setOpen(false);});
+  document.addEventListener('click',e=>{if(!panel.contains(e.target)&&e.target!==fab) setOpen(false);});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') setOpen(false);});
+  const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  if(!('IntersectionObserver' in window)) return;
+  const vis=new Set();
+  const io=new IntersectionObserver(ents=>{
+    ents.forEach(en=>{ if(en.isIntersecting) vis.add(en.target.id); else vis.delete(en.target.id); });
+    const cur=secs.find(el=>vis.has(el.id));
+    if(cur) setActive(cur.id);
+  },{rootMargin:'0px 0px -70% 0px'});
+  secs.forEach(el=>io.observe(el));
+}
+initToc();
 </script>
 </body>
 </html>
