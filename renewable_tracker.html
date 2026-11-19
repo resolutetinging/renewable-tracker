@@ -1191,14 +1191,16 @@ function initToc(){
   document.addEventListener('click',e=>{if(!panel.contains(e.target)&&e.target!==fab) setOpen(false);});
   document.addEventListener('keydown',e=>{if(e.key==='Escape') setOpen(false);});
   const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
-  if(!('IntersectionObserver' in window)) return;
-  const vis=new Set();
-  const io=new IntersectionObserver(ents=>{
-    ents.forEach(en=>{ if(en.isIntersecting) vis.add(en.target.id); else vis.delete(en.target.id); });
-    const cur=secs.find(el=>vis.has(el.id));
-    if(cur) setActive(cur.id);
-  },{rootMargin:'0px 0px -70% 0px'});
-  secs.forEach(el=>io.observe(el));
+  if(!secs.length) return;
+  // 目前區塊＝標題已捲過視窗上方 30% 的最後一個；都還沒捲到（頁首）時標第一項
+  let ticking=false;
+  const update=()=>{ ticking=false;
+    const line=window.innerHeight*0.3; let cur=secs[0];
+    for(const el of secs){ if(el.getBoundingClientRect().top<=line) cur=el; else break; }
+    setActive(cur.id); };
+  window.addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
+  window.addEventListener('resize',update);
+  update();
 }
 initToc();
 </script>
