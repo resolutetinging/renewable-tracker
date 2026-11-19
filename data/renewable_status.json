@@ -19,7 +19,7 @@
             "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#coal"
           }
         ],
-        "trend_reason": "中國煤電-71 TWh（-1.2%）、印度-44 TWh（-2.9%）為最大降幅：中國因清潔電力成長超過需求成長；印度因風光大增，加上氣溫較涼使需求成長較低。美國煤電+85 TWh（+13%），因天然氣現貨價上漲56%，發電由氣轉煤",
+        "trend_reason": "中國煤電-71 TWh（-1.2%）、印度-44 TWh（-2.9%）為最大降幅：中國因清潔電力成長超過需求成長；印度因風光大增，加上天氣較溫和（milder weather）使需求成長較低。美國煤電+85 TWh（+13%），因天然氣現貨價上漲56%，發電由氣轉煤",
         "reason_sources": [
           {
             "label": "Ember GER2026 §3.8 煤炭",
@@ -135,7 +135,7 @@
             "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends#hydro"
           }
         ],
-        "trend_reason": "水力發電成長跟不上用電需求成長。中國+45 TWh（降雨高於平均）、印度+21 TWh為增量前二；乾旱使巴西-25 TWh、土耳其-17 TWh；歐盟-43 TWh（南部水源短缺）",
+        "trend_reason": "水力發電成長跟不上用電需求成長。中國+45 TWh（新增裝置與降雨充沛，high rainfall）、印度+21 TWh為增量前二；乾旱使巴西-25 TWh、土耳其-17 TWh；歐盟-43 TWh（南部水源短缺）",
         "reason_sources": [
           {
             "label": "Ember GER2026 §3.7 水力",
@@ -2576,7 +2576,7 @@
       "as_of": "2026年7月（Lazard LCOE+ 2026，v19.0，美國市場unsubsidized區間，同一機構同一方法論）",
       "source_label": "Lazard — Levelized Cost of Energy+ (July 2026)",
       "source_url": "https://www.lazard.com/media/kcfconhf/lazards-lcoeplus_vf.pdf",
-      "note": "刻意選用同一年度、同一機構方法論的跨技術比較表。核能新建區間依美國Vogtle 3、4號機的成本估計；Lazard估算既有核電廠的邊際成本（區間中點）約31美元/MWh。煤炭因缺乏公開新建案資料，區間為Lazard v14.0結果經通膨調整。",
+      "note": "核能新建區間依美國Vogtle 3、4號機的成本估計；Lazard估算既有核電廠的邊際成本（區間中點）約31美元/MWh。煤炭因缺乏公開新建案資料，區間為Lazard v14.0結果經通膨調整。",
       "items": [
         {
           "name": "太陽能光電（公用事業）",
