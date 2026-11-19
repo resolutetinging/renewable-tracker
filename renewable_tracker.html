@@ -1121,13 +1121,20 @@ async function init(){
       ${risk.rationale?`<div style="margin-top:6px;">${bulletize(risk.rationale)}</div>`:''}
       ${risk.criteria_note?`<div style="margin-top:5px;font-size:11px;color:var(--muted2);">ℹ️ ${esc(risk.criteria_note)}</div>`:''}
     </div>` : '';
-  const tpsFacts = [
-    tps.reserve_margin_note && {lbl:'📊 備轉容量率', val:tps.reserve_margin_note},
-    tps.supply_demand_note && {lbl:'⚡ 供需數字', val:tps.supply_demand_note},
-    tps.incident_note && {lbl:'🚨 近年事件記錄', val:tps.incident_note},
-  ].filter(Boolean);
-  const tpsFactsHtml = tpsFacts.length ? tpsFacts.map(f=>`
-    <div class="case-card"><div class="case-name">${esc(f.lbl)}</div><div class="case-desc">${bulletize(f.val)}</div></div>`).join('') : '';
+  const tpsItemLi = a=>`<li>${esc(a.text)}${(a.sources||[]).map(x=>` <span class="case-src">（<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label||'來源')}</a>）</span>`).join('')}</li>`;
+  const tpsSubHd = t=>`<div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">${t}</div>`;
+  const tpsMetricHtml = (tps.metric_note||[]).length ? `
+    ${tpsSubHd('📐 兩個指標不同，不可直接比較')}
+    <div class="case-card"><ul class="txt-bullets">${tps.metric_note.map(tpsItemLi).join('')}</ul></div>` : '';
+  const tl = tps.timeline||{};
+  const tpsPeriods = [
+    {k:'past', t:'📅 已發生（實績）'},
+    {k:'near', t:'🗓 近期（2026–2027）'},
+    {k:'long', t:'🔭 中長期（2028 以後）'},
+  ];
+  const tpsTimelineHtml = tpsPeriods.filter(p=>(tl[p.k]||[]).length).map(p=>`
+    ${tpsSubHd(p.t)}
+    <div class="case-card"><ul class="txt-bullets">${tl[p.k].map(tpsItemLi).join('')}</ul></div>`).join('');
   const tpsViewsHtml = (tps.viewpoints||[]).length ? `
     <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🗣 各方說法（並陳，不評斷）</div>
     <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${tps.viewpoints.map(v=>`
@@ -1136,11 +1143,8 @@ async function init(){
         <div class="case-desc">${bulletize(v.desc)}</div>
         ${v.src_url?`<div class="case-src">來源：<a href="${safeUrl(v.src_url)}" target="_blank" rel="noopener">${esc(v.src_label||'連結')}</a></div>`:''}
       </div>`).join('')}</div>` : '';
-  const tpsAiHtml = (tps.ai_demand||[]).length ? `
-    <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🤖 AI 與產業用電需求</div>
-    <div class="case-card"><ul class="txt-bullets">${tps.ai_demand.map(a=>`<li>${esc(a.text)}${(a.sources||[]).map(x=>` <span class="case-src">（<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label||'來源')}</a>）</span>`).join('')}</li>`).join('')}</ul></div>` : '';
-  document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsFactsHtml || tpsViewsHtml || tpsAiHtml)
-    ? `${riskBannerHtml}<div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:4px;">${tpsFactsHtml}</div>${tpsViewsHtml}${tpsAiHtml}`
+  document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsMetricHtml || tpsTimelineHtml || tpsViewsHtml)
+    ? `${riskBannerHtml}${tpsMetricHtml}${tpsTimelineHtml}${tpsViewsHtml}`
     : '<div class="empty-state">尚無資料</div>';
 
   const aiEnergy = data.ai_energy_impact||{};

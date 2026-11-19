@@ -47,7 +47,7 @@ FIELD_LABELS = {
     'policy': '政策', 'operating_status': '營運狀況', 'operating_plans': '營運規劃',
     'public_opinion': '民意', 'waste_disposal': '核廢料處置', 'taiwan_status': '台灣現況',
     'taiwan_future_gating': '台灣未來關鍵條件', 'reserve_margin_note': '備轉容量率',
-    'supply_demand_note': '供需狀況', 'incident_note': '事故紀錄', 'risk_assessment': '風險評估',
+    'supply_demand_note': '供需狀況', 'incident_note': '事故紀錄', 'timeline': '時間軸', 'metric_note': '指標說明', 'past': '已發生', 'near': '近期', 'long': '中長期', 'risk_assessment': '風險評估',
     'viewpoints': '各方觀點', 'rationale': '理由', 'level': '等級', 'region': '地區',
     'source_label': '來源', 'source_url': '來源網址', 'ai_demand': 'AI與產業用電需求', 'text': '內容',
 }
@@ -68,6 +68,17 @@ def _field_label(k):
     return None if re.fullmatch(r'[A-Za-z0-9_\-]+', str(k)) else str(k)
 
 MONITORED_KEYS = ['smart_management', 'ai_energy_impact', 'nuclear_country_profiles', 'taiwan_power_shortage']
+
+def _tps_prompt_data(tps):
+    """缺電專區送週查證的精簡資料：timeline 只留文字、排除 ai:true 靜態點，不送 metric_note。"""
+    out = {k: v for k, v in tps.items() if k not in ('timeline', 'metric_note')}
+    tl = tps.get('timeline') or {}
+    out['timeline'] = {
+        period: [it.get('text', '') for it in items if not it.get('ai')]
+        for period, items in tl.items()
+    }
+    return out
+
 
 # 2026-09-01修TPM超限bug：原本4大類一次打包送1次Groq請求（13,489字元），查證Groq
 # 官方文件（console.groq.com/docs/rate-limits，2026-09-01查證）openai/gpt-oss-120b
@@ -105,8 +116,9 @@ CATEGORY_CONFIG = [
     {
         'key': 'taiwan_power_shortage',
         'label': '台灣真的缺電嗎',
-        # ai_demand 為已逐項核對來源的靜態資料，不送入週查證 prompt（控制 8K TPM 的 prompt 大小）
-        'get_data': lambda status: {k: v for k, v in status.get('taiwan_power_shortage', {}).items() if k != 'ai_demand'},
+        # timeline 各點只送文字（不含 sources）；標 ai:true 的點為已逐項核對來源的靜態資料，
+        # 不送入週查證 prompt（控制 8K TPM 的 prompt 大小）
+        'get_data': lambda status: _tps_prompt_data(status.get('taiwan_power_shortage', {})),
         'category_enum': 'taiwan_power_shortage',
         'news_labels': ['台灣缺電/備轉容量'],
     },
