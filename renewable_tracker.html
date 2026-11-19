@@ -1066,9 +1066,9 @@ async function init(){
         </div>`).join('')}</div>` : '';
   const ra = nuclear.restart_assessment||{};
   const raLi = a=>`<li>${esc(a.text)}${(a.sources||[]).map(x=>` <span class="case-src">（<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label||'來源')}</a>）</span>`).join('')}</li>`;
-  const raCard = (title, arr) => (arr||[]).length ? `<div class="case-card"><div class="case-name">${esc(title)}</div><ul class="txt-bullets">${arr.map(raLi).join('')}</ul></div>` : '';
+  const raCard = (title, arr) => (arr||[]).length ? `<div class="case-card"><div class="case-name">${esc(title)}</div><div class="case-desc"><ul class="txt-bullets">${arr.map(raLi).join('')}</ul></div></div>` : '';
   const raGaps = ra.data_gaps && (ra.data_gaps.items||[]).length
-    ? `<div class="case-card" style="margin-top:10px;"><div class="case-name">${esc(ra.data_gaps.title||'')}</div><ul class="txt-bullets">${ra.data_gaps.items.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>` : '';
+    ? `<div class="case-card" style="margin-top:10px;"><div class="case-name">${esc(ra.data_gaps.title||'')}</div><div class="case-desc"><ul class="txt-bullets">${ra.data_gaps.items.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>` : '';
   document.getElementById('nuclear-restart-block').innerHTML = (ra.facts||[]).length || (ra.pros||[]).length || (ra.cons||[]).length
     ? `<div class="sec-meta" style="margin:14px 0 4px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">⚖️ 核電重啟正反評估${ra.as_of?`<span style="font-weight:400;color:var(--muted);">（${esc(ra.as_of)}）</span>`:''}</div>
        ${ra.scope_note?`<div class="sec-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;color:var(--muted);">${esc(ra.scope_note)}</div>`:''}
@@ -1150,7 +1150,7 @@ async function init(){
   const tpsSubHd = t=>`<div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">${t}</div>`;
   const tpsMetricHtml = (tps.metric_note||[]).length ? `
     ${tpsSubHd('📐 兩個指標不同，不可直接比較')}
-    <div class="case-card"><ul class="txt-bullets">${tps.metric_note.map(tpsItemLi).join('')}</ul></div>` : '';
+    <div class="case-card"><div class="case-desc"><ul class="txt-bullets">${tps.metric_note.map(tpsItemLi).join('')}</ul></div></div>` : '';
   const tl = tps.timeline||{};
   const tpsPeriods = [
     {k:'past', t:'📅 已發生（實績）'},
@@ -1159,7 +1159,7 @@ async function init(){
   ];
   const tpsTimelineHtml = tpsPeriods.filter(p=>(tl[p.k]||[]).length).map(p=>`
     ${tpsSubHd(p.t)}
-    <div class="case-card"><ul class="txt-bullets">${tl[p.k].map(tpsItemLi).join('')}</ul></div>`).join('');
+    <div class="case-card"><div class="case-desc"><ul class="txt-bullets">${tl[p.k].map(tpsItemLi).join('')}</ul></div></div>`).join('');
   const tpsViewsHtml = (tps.viewpoints||[]).length ? `
     <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🗣 台電說法</div>
     <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${tps.viewpoints.map(v=>`
