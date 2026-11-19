@@ -292,7 +292,7 @@
     }
   },
   "nuclear": {
-    "as_of": "全球：2024年（World Nuclear Association／IAEA PRIS，2025-09-30更新）；台灣：至2025-05-17",
+    "as_of": "全球：2024年（World Nuclear Association／IAEA PRIS，2025-09-30更新）；台灣：2025-05-17核三2號機安全停機",
     "source_label": "World Nuclear Association — Nuclear Generation by Country",
     "source_url": "https://world-nuclear.org/information-library/facts-and-figures/nuclear-generation-by-country",
     "global_ranking": [
@@ -300,41 +300,42 @@
         "rank": 1,
         "country": "美國",
         "value": "782.0 TWh",
-        "note": "占本國電力結構約18.2%；裝置容量97GW／94座反應爐（全球最大）"
+        "note": "占本國電力結構約18.2%"
       },
       {
         "rank": 2,
         "country": "中國",
         "value": "417.5 TWh",
-        "note": "占本國電力結構僅約5%（總發電基數龐大）；裝置容量55GW／57座反應爐"
+        "note": "占本國電力結構約4.7%"
       },
       {
         "rank": 3,
         "country": "法國",
         "value": "364.4 TWh",
-        "note": "占本國電力結構68.79%，全球占比最高；裝置容量63GW／57座反應爐"
+        "note": "占本國電力結構67.3%"
       },
       {
         "rank": 4,
         "country": "俄羅斯",
         "value": "202.1 TWh",
-        "note": "裝置容量27GW"
+        "note": "占本國電力結構約17.8%"
       },
       {
         "rank": 5,
         "country": "南韓",
         "value": "179.4 TWh",
-        "note": "占本國電力結構約30%；裝置容量26GW"
+        "note": "占本國電力結構約31.7%"
       },
       {
         "rank": 6,
         "country": "日本",
         "value": "84.9 TWh",
-        "note": ""
+        "note": "占本國電力結構約8.0%"
       }
     ],
-    "taiwan_status": "2025年5月17日核三2號機除役後正式進入「非核家園」，除役後核能占比為0%（2025年全年平均為1.12%，全國發電量口徑，見「台灣能源使用狀況」）。除役時程：核一廠2018-2019除役、核二廠2021-2023除役、核三廠2024-2025除役；核四廠（龍門）從未商轉，目前封存中，尚無明確重啟計畫",
-    "taiwan_share_pct": 0,
+    "taiwan_status": "2025年5月17日核三2號機40年運轉執照屆滿，當晚進入安全停機；中央社報導，台灣屆時正式進入「非核家園」。2025年全年核能占比為1.12%（全國發電量口徑，見「台灣能源使用狀況」）",
+    "taiwan_status_sources": [{"label": "中央社（2025-05-17）", "url": "https://www.cna.com.tw/news/afe/202505170134.aspx"}, {"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}],
+    "taiwan_share_pct": null,
     "country_profiles": [
       {
         "country": "美國",
@@ -401,39 +402,81 @@
     "taiwan_future_gating": [
       {
         "checkpoint": "環評規定：延役是否納入環評",
-        "detail": "現行法規僅核電廠「興建」「增機」或「除役」須環評，「延役」未被納入；環境部長2025-05-14公開表示這個邏輯「他自己聽了也覺得奇怪」，部內正檢討環評制度，蒐集意見後將討論是否修法。核一、二、三廠運轉執照本身是在環評制度建立前核發、從未經環評審查",
-        "src_url": "https://e-info.org.tw/node/241283",
-        "src_label": "環境資訊中心 2025-05-14"
+        "detail": "現行《應實施環境影響評估細目及範圍認定標準》僅核電廠「興建」「增加機組」或「反應器除役」須環評，「延役」未被納入；環境部長彭啟明2025-05-14表示：「我自己當上部長，聽到這樣的邏輯，也覺得很奇怪。」部內正檢討環評制度，將討論是否修法。民進黨立委林淑芬主張，核一、二、三廠從來沒有經過環評審查，其運轉執照是在環評制度建立前核發",
+        "sources": [
+          {
+            "label": "環境資訊中心 2025-05-14",
+            "url": "https://e-info.org.tw/node/241283"
+          }
+        ]
       },
       {
         "checkpoint": "低階核廢料最終處置場選址",
         "detail": "依法須經地方公投通過才能成為正式場址；2012年經濟部公告台東達仁、金門烏坵為建議候選場址，因當地居民反對、地方政府不同意舉辦地方公投，選址至今未完成",
-        "src_url": "https://www.cet-taiwan.org/node/4507",
-        "src_label": "地球公民基金會"
+        "sources": [
+          {
+            "label": "地球公民基金會",
+            "url": "https://www.cet-taiwan.org/node/4507"
+          }
+        ]
       },
       {
         "checkpoint": "高階核廢料（用過燃料棒）最終處置無解",
         "detail": "選址評估尚未開始，法源不完備；截至2024年1月底已製造出1萬9千多束高放射性廢棄物，尚無最終處置場。依台電計算，最快也要2055年才能完成高階最終處置場的建造與運轉試驗",
-        "src_url": "https://www.cet-taiwan.org/node/4507",
-        "src_label": "地球公民基金會"
+        "sources": [
+          {
+            "label": "地球公民基金會",
+            "url": "https://www.cet-taiwan.org/node/4507"
+          }
+        ]
       },
       {
-        "checkpoint": "修法已完成，技術安全審查進行中",
-        "detail": "2025年5月《核子反應器設施管制法》修正案三讀通過，授權運轉執照屆滿前可申請延役最長20年、已停機機組可申請重啟。核安會須先訂定審核辦法，台電須完成自主安全檢查並經國際同儕審視；2025年11月核二、核三經核定「具再運轉可行性」，2026年8月進入核三廠審查階段",
-        "src_url": "https://e-info.org.tw/node/241997",
-        "src_label": "環境資訊中心 2025-08-24"
+        "checkpoint": "修法與核安會審查程序",
+        "detail": "2025年5月修正《核子反應器設施管制法》；核安會須訂定《核子反應器設施運轉執照申請審核辦法》，台電須完成自主檢查，包含國際同儕審視",
+        "sources": [
+          {
+            "label": "環境資訊中心 2025-08-23",
+            "url": "https://e-info.org.tw/node/241997"
+          }
+        ]
+      },
+      {
+        "checkpoint": "核一、二、三廠再運轉可行性評估",
+        "detail": "經濟部於2025年11月27日核定台電核電廠現況評估報告：核一廠不具再運轉可行性；核二、核三廠具再運轉可行性，台電因此啟動自主安全檢查。再運轉計畫與檢查結果仍須送核安會審查，核准並發給運轉執照後才能重啟",
+        "sources": [
+          {
+            "label": "聯合新聞網／經濟日報（2026-03-21）",
+            "url": "https://udn.com/news/story/7238/9394717"
+          }
+        ]
       },
       {
         "checkpoint": "公投是重啟決策的關鍵民意程序",
-        "detail": "通過門檻為同意票多於不同意票，且同意票須達投票權人總額四分之一以上（逾500萬張）。2018年「以核養綠」公投通過；2021年「重啟核四」未通過；2025年「核三延役」同意票430萬多於不同意票，但未達四分之一門檻，未通過；2026年11月將有「廢除非核家園」公投合併地方選舉舉行",
-        "src_url": "https://e-info.org.tw/node/243770",
-        "src_label": "環境資訊中心 2026-08-14"
+        "detail": "2025年核三延役公投：同意票約430萬、不同意票約150萬，未達投票權人總額四分之一（須500多萬張同意票）的門檻，未通過；2021年重啟核四公投：同意票300多萬、不同意票400多萬，未通過。另有一項公投將於2026年11月28日與九合一地方選舉同日投票",
+        "sources": [
+          {
+            "label": "環境資訊中心 2025-08-23",
+            "url": "https://e-info.org.tw/node/241997"
+          },
+          {
+            "label": "環境資訊中心 2026-08-14",
+            "url": "https://e-info.org.tw/node/243770"
+          }
+        ]
       },
       {
         "checkpoint": "核四廠技術可行性障礙",
-        "detail": "建廠執照已於2020年12月31日失效，須重新申請並檢附初期安全分析報告；2013年確認廠區正下方存在活動斷層，2019年確認外海斷層具活動性，須重新評估耐震力。經濟部2021年估算重啟期程需逾10年（N+10年）",
-        "src_url": "https://www.moeaea.gov.tw",
-        "src_label": "經濟部能源署 2021-12-16新聞澄清"
+        "detail": "原能會主委謝曉星2021-03表示，核四興建執照已在2020年底到期，若要原地續建需重新進行地質調查。台電2021-12-08書面報告：核四廠區正下方有2公里S斷層、貫穿1號機及2號機汽機廠房（中央地質調查所2013年11月確認），外海斷層經2019年9月確認具活動性、推估長93.9公里，重啟工程所需時間初估超過10年",
+        "sources": [
+          {
+            "label": "中央社（2021-03-12）",
+            "url": "https://www.cna.com.tw/news/firstnews/202103120245.aspx"
+          },
+          {
+            "label": "科技新報（2021-12-08）",
+            "url": "https://technews.tw/2021/12/08/restarting-fourth-nuclear-power-plant-is-more-difficult/"
+          }
+        ]
       }
     ],
     "restart_assessment": {
@@ -679,55 +722,57 @@
     }
   },
   "carbon": {
-    "as_of": "全球：2025年（Global Carbon Project，2025-11-13發布）；台灣：2024年（環境部氣候變遷署）",
+    "as_of": "全球：2025年預估（Global Carbon Project，2025-11-13發布）；台灣：2024年（環境部國家溫室氣體排放清冊，2026-06-03公布）；國別與歷年序列：Our World in Data（2026-11-19下載）",
     "source_label": "Global Carbon Budget 2025",
     "source_url": "https://globalcarbonbudget.org/fossil-fuel-co2-emissions-hit-record-high-in-2025/",
-    "global_total": "381億噸CO2（化石燃料）／422億噸CO2（含土地利用變化）",
-    "global_trend_note": "較2024年+1.1%，創歷史新高；近十年(2015-2024)年均成長率僅0.3%，遠低於前十年(2005-2014)的1.9%；全球剩餘1.5°C碳預算僅夠再排約4年",
-    "taiwan_total": "251.4百萬噸CO2e（2024年）",
-    "taiwan_note": "較2005基準年減少6.59%；人均12.90 tCO2eq/人/年，高於全球平均，主因能源結構高度依賴進口化石燃料（2025年台電系統口徑火力發電占比81.3%，含燃氣、燃煤、燃油；全國發電量口徑為84.49%，見「台灣能源使用狀況」），核電歸零後火力吃重更深",
+    "global_total": "381億噸CO2（化石燃料，2025年預估）／41億噸CO2（土地利用變化，2025年預估）",
+    "global_trend_note": "化石燃料CO2排放較2024年預估增加1.1%，創歷史新高。化石燃料與土地利用變化合計的CO2排放，近十年年均成長0.3%，前一個十年為年均1.9%。剩餘1.5°C碳預算約1,700億噸CO2，以2025年排放水準約僅夠4年",
+    "taiwan_total": "251.4百萬噸CO2e（2024年淨排放，扣除碳匯）",
+    "taiwan_note": "較基準年（2005年）減少6.59%",
+    "taiwan_src_url": "https://money.udn.com/money/story/7307/9544359",
+    "taiwan_src_label": "聯合新聞網報導環境部國家溫室氣體排放清冊（2026-06-04）",
     "country_ranking": [
       {
         "rank": 1,
         "country": "中國",
-        "value": "約32%（12,289 Mt CO2）",
-        "note": "人均8.7噸/年；電力結構仍以煤炭為主，總量居高不下",
-        "main_source": "電力部門仍高度依賴煤炭，2024年燃煤發電占全球55.6%；製造業／工業部門約占能源部門排放35%，發電基數龐大加上煤炭仍是電力系統壓艙石，是總量居高不下的根本原因",
-        "policy": "「雙碳」目標：2030年前碳達峰、2060年前碳中和（2020年9月宣布）；具體要求2030年單位GDP碳排放較2005年下降逾65%，2060年非化石能源消費占比達80%以上（核心文件：2021年10月〈完整準確全面貫徹新發展理念做好碳達峰碳中和工作的指導意見〉）",
-        "data_year": "2024"
+        "value": "32.09%（12,401.1 Mt CO2）",
+        "note": "",
+        "data_year": "2024",
+        "src_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
+        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-19下載，2024年資料）"
       },
       {
         "rank": 2,
         "country": "美國",
-        "value": "12.7%",
-        "note": "人均14.2噸/年，約全球均值3倍",
-        "main_source": "交通運輸為最大單一排放部門（2024年僅汽油消費約排放10億噸CO2），電力部門緊追在後（2024年排放年增約0.2%，天然氣與風光發電同步成長）",
-        "policy": "2022年《通膨削減法》(IRA)原提供約4,000億美元清潔能源投資獎勵，官方NDC目標曾為2030年較2005年減50-52%、2050年淨零；惟2025年1月川普就任後已再次啟動退出《巴黎協定》程序並下令暫停IRA資金撥付，截至2026年8月IRA本身尚未被國會全面廢除，但聯邦氣候目標已不具現任政府官方推動力",
-        "data_year": "2024"
+        "value": "12.71%（4,911.7 Mt CO2）",
+        "note": "",
+        "data_year": "2024",
+        "src_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
+        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-19下載，2024年資料）"
       },
       {
         "rank": 3,
         "country": "印度",
-        "value": "8.3%",
-        "note": "人均僅2.2噸/年，不到全球均值一半，反映發展階段能源消費強度較低",
-        "main_source": "煤炭占發電量約75%，貢獻印度燃料相關CO2排放約50%；2025年整體排放成長已放緩至20年最慢（+0.7%），電力部門排放下滑3.8%，但同期鋼鐵(+8%)、水泥(+10%)等工業產能擴張抵銷部分減排效果",
-        "policy": "2070淨零承諾：2021年11月COP26莫迪總理宣布「五樹甘露」(Panchamrit)五項2030年目標——非化石能源裝置容量達500GW、再生能源滿足50%用電需求、較原軌跡累計減碳10億噸、經濟體碳強度降幅逾45%、2070年達淨零，已透過更新版NDC正式提交聯合國",
-        "data_year": "2024"
+        "value": "8.22%（3,175.6 Mt CO2）",
+        "note": "",
+        "data_year": "2024",
+        "src_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
+        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-19下載，2024年資料）"
       },
       {
         "rank": 4,
         "country": "歐盟（合併計）",
-        "value": "6.3%（2,426 Mt CO2）",
+        "value": "6.24%（2,412.0 Mt CO2）",
         "note": "",
-        "main_source": "運輸部門是最大單一排放來源（2023年占約25-27%，2005年以來降幅有限），能源供給部門(電力+供熱)占約23%但已較1990年下降逾40%；工業部門排放主要來自製程用熱（如鋼鐵、造紙業）",
-        "policy": "《歐洲氣候法》具法律約束力：2030年溫室氣體較1990年減至少55%（Fit for 55一攬子立法，2021年7月提出）、2040年減90%、2050年前達氣候中和",
-        "data_year": "2024"
+        "data_year": "2024",
+        "src_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
+        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-19下載，2024年資料）"
       }
     ],
     "historical_trend": {
-      "as_of": "2015–2024年（Global Carbon Budget 2025／Our World in Data，2025-11-13發布）",
-      "source_label": "Global Carbon Project — Global Carbon Budget 2025",
-      "source_url": "https://ourworldindata.org/co2-emissions",
+      "as_of": "2015–2024年（Our World in Data，2026-11-19下載）",
+      "source_label": "Our World in Data — Annual CO₂ emissions（全球）",
+      "source_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
       "unit": "Gt",
       "years": [
         2015,
@@ -743,88 +788,88 @@
       ],
       "series": [
         {
-          "name": "全球碳排放（化石燃料＋工業）",
+          "name": "全球CO2排放（不含土地利用變化）",
           "values": [
-            35.4,
-            35.39,
-            35.97,
-            36.73,
-            37.09,
-            35.16,
-            36.87,
-            37.53,
-            38.09,
-            38.6
+            35.49,
+            35.49,
+            36.07,
+            36.86,
+            37.06,
+            35.1,
+            36.89,
+            37.47,
+            38.14,
+            38.65
           ]
         }
       ],
-      "note": "僅取化石燃料＋工業口徑（不含土地利用變化）；2025年為初步預估381億噸CO2（見上方global_total），因與此序列方法論不同（未扣除水泥碳化吸收匯）暫不併入折線，避免產生不成立的假性跳動"
+      "note": "取Our World in Data資料集的全球CO2排放（不含土地利用變化）；2025年預估值見上方，不併入折線"
     },
     "country_breakdown_chart": {
-      "as_of": "2024年（Global Carbon Project／Our World in Data，與上方historical_trend同源同口徑）",
-      "source_label": "Global Carbon Project — Global Carbon Budget 2025",
-      "source_url": "https://ourworldindata.org/co2-emissions",
-      "note": "不含歐盟整體（歐盟27國合計6.29%／2,426 Mt，其中已含德國572.3 Mt，若與下列個別國家並列會重複計算，故歐盟只在文字中另外註記，不畫進直條圖）",
+      "as_of": "2024年（Our World in Data，2026-11-19下載）",
+      "source_label": "Our World in Data — Annual CO₂ emissions",
+      "source_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
+      "note": "占比為該資料集各國排放量除以全球排放量。不含歐盟整體（歐盟27國合計6.24%／2,412.0 Mt，已含德國，與個別國家並列會重複計算，故不畫進直條圖）",
       "items": [
         {
           "rank": 1,
           "country": "中國",
-          "pct": 31.84,
-          "value_mt": 12289.0
+          "pct": 32.09,
+          "value_mt": 12401.1
         },
         {
           "rank": 2,
           "country": "美國",
-          "pct": 12.7,
-          "value_mt": 4904.1
+          "pct": 12.71,
+          "value_mt": 4911.7
         },
         {
           "rank": 3,
           "country": "印度",
-          "pct": 8.27,
-          "value_mt": 3193.5
+          "pct": 8.22,
+          "value_mt": 3175.6
         },
         {
           "rank": 4,
           "country": "俄羅斯",
-          "pct": 4.61,
-          "value_mt": 1780.5
+          "pct": 4.63,
+          "value_mt": 1788.5
         },
         {
           "rank": 5,
           "country": "日本",
-          "pct": 2.49,
-          "value_mt": 961.9
+          "pct": 2.51,
+          "value_mt": 969.6
         },
         {
           "rank": 6,
-          "country": "印尼",
-          "pct": 2.1,
-          "value_mt": 812.2
+          "country": "伊朗",
+          "pct": 2.18,
+          "value_mt": 842.6
         },
         {
           "rank": 7,
-          "country": "伊朗",
+          "country": "印尼",
           "pct": 2.05,
-          "value_mt": 792.6
+          "value_mt": 791.9
         },
         {
           "rank": 8,
           "country": "沙烏地阿拉伯",
-          "pct": 1.79,
-          "value_mt": 692.1
+          "pct": 1.63,
+          "value_mt": 630.8
         },
         {
           "rank": 9,
           "country": "南韓",
           "pct": 1.51,
-          "value_mt": 583.7
+          "value_mt": 584.8
         },
         {
           "rank": 10,
           "country": "德國",
-          "pct": 1.48,
-          "value_mt": 572.3
+          "pct": 1.49,
+          "value_mt": 573.9
         }
       ]
     }
@@ -1173,7 +1218,7 @@
     "as_of": "2025年，全國發電量口徑（經濟部能源署《能源統計手冊2025年版》）",
     "source_label": "經濟部能源署 — 能源統計手冊2025年版",
     "source_url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf",
-    "cross_ref_note": "台電系統口徑，2025年（不含轉供直供，較窄）：燃氣53.3%／燃煤26.6%／再生能源12.7%／核能1.2%／燃油1.4%／抽蓄水力1.2%／汽電共生3.3%／儲能電池0.3%。與全國口徑（本表採用）差異主要來自民營電廠(IPP)是否計入，屬統計口徑差異非查證錯誤，兩者皆有效並陳供參考",
+    "cross_ref_note": "",
     "import_summary": {
       "as_of": "2025年",
       "source_label": "經濟部能源署 能源供給月資料（自行加總2025年全年）",
@@ -1387,7 +1432,7 @@
           }
         ],
         "note": "較2024年42.33%上升5.36個百分點；105年(2016)為31.5%",
-        "trend_reason": "核能除役後基載缺口需由燃氣填補，加上太陽光電、離岸風電建置進度落後，天然氣被迫「補位」；政策方向為以氣代煤"
+        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}]
       },
       {
         "rank": 2,
@@ -1426,7 +1471,7 @@
           }
         ],
         "note": "較2024年39.16%下降3.87個百分點；105年(2016)為45.9%",
-        "trend_reason": "政府「5、3、2」能源轉型政策目標（燃氣50%／燃煤30%／再生能源20%）持續推動以氣代煤，惟因再生能源進度落後，燃煤降幅未達政策原訂30%目標"
+        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}]
       },
       {
         "rank": 3,
@@ -1464,8 +1509,10 @@
             ]
           }
         ],
-        "note": "較2024年11.79%上升1.53個百分點；此為總占比，「再生能源使用狀況→台灣占比」的細分項目期間為2023/8–2024/7，不可直接對照",
-        "trend_reason": "太陽光電＋風力持續建置帶動成長，但原訂2025年達20%的政策目標大幅落後，原訂2026年11月，經濟部長2026-04表示恐再延後。官方曾以用電量成長（分母變大）與疫情延誤建置進度為由說明；業界分析另指出光電用地趨於飽和、環評三法加嚴、陸域風電地方反對、離岸風電國際原物料成本上漲等結構性因素，官方與業界說法並陳，不評斷孰為主因。"
+        "note": "較2024年11.79%上升1.53個百分點",
+        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}],
+        "trend_reason": "經濟部原訂2成綠電目標將延至2026年11月完成；經濟部長龔明鑫表示光電環評三法通過後確實造成推動困難（中央社，2026-02-05）。龔明鑫於2026年4月向立法院經濟委員會證實，20%目標今年11月恐仍無法達成、將再次延遲；經濟部檢討報導指出，太陽光電受環評三法修法等因素影響，建置速度趨緩（工商時報，2026-04-20）",
+        "reason_sources": [{"label": "中央社經Newtalk（2026-02-05）", "url": "https://newtalk.tw/news/view/2026-02-05/1018780"}, {"label": "工商時報（2026-04-20）", "url": "https://www.ctee.com.tw/news/20260420700057-430104"}]
       },
       {
         "rank": 4,
@@ -1493,7 +1540,8 @@
             ]
           }
         ],
-        "note": "較2024年1.45%微升0.06個百分點，長期維持個位數以下小占比，多用於尖峰調度與離島供電"
+        "note": "較2024年1.45%微升0.06個百分點",
+        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}]
       },
       {
         "rank": 5,
@@ -1513,8 +1561,8 @@
             ]
           }
         ],
-        "note": "2025年全年平均值（核三2號機於2025-01至2025-05-17仍運轉，故全年平均非零；105年(2016)為12.0%）；2025-05-17除役後的核能占比為0%，見本頁核能專區「台灣現況」。兩者時點不同：1.12%為全年平均，0%為除役後狀態",
-        "trend_reason": "非核家園政策；核一(2018-2019除役)、核二(2021-2023除役)、核三(2024-2025除役)依序除役，核四(龍門)從未商轉、目前封存中"
+        "note": "2025年全年平均值；105年(2016)為11.99%。核三2號機於2025-05-17因40年運轉執照屆滿安全停機，見本頁核能專區「台灣現況」",
+        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}, {"label": "中央社（2025-05-17）", "url": "https://www.cna.com.tw/news/afe/202505170134.aspx"}]
       },
       {
         "rank": 6,
@@ -1523,63 +1571,204 @@
         "trend": "flat",
         "kind": "renew",
         "data_year": "2025年（全國發電量口徑）",
-        "note": "較2024年1.06%持平微升0.01個百分點，主要用於電網調度儲能，非傳統發電來源"
+        "note": "較2024年1.06%上升0.01個百分點",
+        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}]
       }
     ]
   },
   "national_targets": {
-    "as_of": "2026年8月（Climate Action Tracker／歐盟官方／Eurostat／既有查證資料彙整）",
-    "source_label": "Climate Action Tracker",
-    "source_url": "https://climateactiontracker.org/countries/",
-    "note": "各國「再生能源占比目標」口徑不一（部分國家用「非化石能源」含核能，部分用狹義再生能源），比對時請留意口徑差異，已在各國內文標註",
+    "as_of": "2026-11-19查證",
+    "note": "各國目標口徑不一（中國為非化石能源占能源消費比重、印度為非化石能源占裝置容量比重、歐盟為再生能源占最終能源消費比重、日本南韓台灣為占發電量比重），比對時請留意；每格來源見連結。本頁尚未取得的項目以「—」標示",
     "countries": [
       {
         "country": "美國",
-        "net_zero_year": "查無現行官方淨零目標——拜登時期2050年承諾已遭川普政府撤回（Climate Action Tracker確認美國目前不具淨零目標）",
-        "renewable_target": "查無現行聯邦層級官方再生能源占比目標（歐巴馬時期2025年25%目標已失效無延續版本）",
-        "current_progress": "2024年再生能源占電力生成22.7%，較2022年21%成長；因無現行官方目標可對照，僅能呈現成長趨勢，無法評斷超前或落後"
+        "net_zero_year": "聯邦層級無淨零目標：CAT指出川普政府未致力於淨零排放，且退出《巴黎協定》實質上使拜登政府2030、2035、2050年減排目標失效；另有19個州各自推動淨零",
+        "net_zero_sources": [
+          {
+            "label": "Climate Action Tracker — 美國",
+            "url": "https://climateactiontracker.org/countries/usa/"
+          }
+        ],
+        "renewable_target": "—（本頁尚未取得聯邦層級再生能源占比目標）",
+        "renewable_target_sources": [],
+        "current_progress": "再生能源約占美國公用事業規模發電量的24%（2025年；1990年約12%）",
+        "current_progress_sources": [
+          {
+            "label": "美國能源資訊署 EIA — Electricity in the U.S.",
+            "url": "https://www.eia.gov/energyexplained/electricity/electricity-in-the-us.php"
+          }
+        ]
       },
       {
         "country": "中國",
-        "net_zero_year": "2060年前碳中和（2020年9月宣布，2021年10月正式提交長期戰略）",
-        "renewable_target": "非化石能源占總能源消費比重目標2030年25%；非化石能源發電占比「十五五」規劃2030年50%（官方多以「非化石能源」含核能為口徑，未見排除核能的再生能源專屬官方目標）",
-        "current_progress": "2025年再生能源(不含核能)發電占比已達37%，較2020年28%成長；官方評估「保持在軌道上」達成25%目標，已超額完成2030 NDC再生能源裝置容量目標"
+        "net_zero_year": "2060年前碳中和（2020年宣布）",
+        "net_zero_sources": [
+          {
+            "label": "Climate Action Tracker — 中國",
+            "url": "https://climateactiontracker.org/countries/china/"
+          }
+        ],
+        "renewable_target": "2035年非化石能源占能源消費總量比重提高至30%以上；風電與太陽能裝置容量提高至2020年的6倍以上、力爭達3,600GW（習近平2025年9月於聯合國氣候峰會宣布）",
+        "renewable_target_sources": [
+          {
+            "label": "Climate Home News（2025-09-24）",
+            "url": "https://www.climatechangenews.com/2025/09/24/china-unveils-underwhelming-emissions-cutting-target-for-2035/"
+          }
+        ],
+        "current_progress": "風電與太陽能裝置容量2026年9月底達2,013GW",
+        "current_progress_sources": [
+          {
+            "label": "Climate Action Tracker — 中國",
+            "url": "https://climateactiontracker.org/countries/china/"
+          }
+        ]
       },
       {
         "country": "歐盟",
-        "net_zero_year": "2050年氣候中和，具法律約束力（《歐洲氣候法》）",
-        "renewable_target": "RED III修訂版：2030年再生能源占最終能源消費42.5%（具約束力），並「合力力求」提升至45%（企圖性目標）",
-        "current_progress": "2025年初步數字26.2%，較2024年25.2%成長；距2030年42.5%目標仍差16.3個百分點，5年內須大幅加速"
+        "net_zero_year": "2050年氣候中和",
+        "net_zero_sources": [
+          {
+            "label": "歐盟執委會 — 再生能源目標",
+            "url": "https://energy.ec.europa.eu/topics/renewable-energy/renewable-energy-directive-targets-and-rules/renewable-energy-targets_en"
+          }
+        ],
+        "renewable_target": "修訂版《再生能源指令》：2030年再生能源占最終能源消費至少42.5%（具約束力），並以45%為期許",
+        "renewable_target_sources": [
+          {
+            "label": "歐盟執委會 — 再生能源目標",
+            "url": "https://energy.ec.europa.eu/topics/renewable-energy/renewable-energy-directive-targets-and-rules/renewable-energy-targets_en"
+          }
+        ],
+        "current_progress": "2024年占最終能源消費總量25.2%（較2023年上升0.7個百分點），距2030年目標42.5%差17.3個百分點",
+        "current_progress_sources": [
+          {
+            "label": "Eurostat 新聞（2025-12-18）",
+            "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20251218-2"
+          }
+        ]
       },
       {
         "country": "日本",
-        "net_zero_year": "2050年（2020年10月菅義偉首相宣布）",
-        "renewable_target": "第七次能源基本計畫（2025年2月核准）訂2040財年再生能源發電占比目標40-50%",
-        "current_progress": "2024年再生能源發電實際占比26.7%（太陽能11.4%／水力7.9%／生質能5.9%／風力1.13%），距2040年40-50%目標仍有相當落差"
+        "net_zero_year": "2050年淨零",
+        "net_zero_sources": [
+          {
+            "label": "Climate Action Tracker — 日本",
+            "url": "https://climateactiontracker.org/countries/japan/"
+          }
+        ],
+        "renewable_target": "第七次能源基本計畫：2040年度再生能源占發電量40–50%",
+        "renewable_target_sources": [
+          {
+            "label": "Enerdata（2025-02-20）",
+            "url": "https://www.enerdata.net/publications/daily-energy-news/japans-7th-strategic-energy-plan-focuses-nuclear-and-renewables-through-2040.html"
+          }
+        ],
+        "current_progress": "2023年度再生能源占發電量22.9%",
+        "current_progress_sources": [
+          {
+            "label": "Enerdata（2025-02-20）",
+            "url": "https://www.enerdata.net/publications/daily-energy-news/japans-7th-strategic-energy-plan-focuses-nuclear-and-renewables-through-2040.html"
+          }
+        ]
       },
       {
         "country": "南韓",
-        "net_zero_year": "2050年（《碳中和法》2021年8月通過、2022年3月生效）",
-        "renewable_target": "第11次電力供需基本計畫（2025年2月定案）訂2030年再生能源占比22%，較2030 NDC原訂30%已下修（另有來源記載20%，數字略有出入，以較新的22%為準）",
-        "current_progress": "2024年再生能源發電占比8.6%，較2019年4.7%成長，距22%目標尚有約13.4個百分點落差；官方稱南韓再生能源占比在OECD與G20國家中屬最低"
+        "net_zero_year": "CAT指出南韓公布的兩套碳中和情境均於2050年達成淨零排放",
+        "net_zero_sources": [
+          {
+            "label": "Climate Action Tracker — 南韓",
+            "url": "https://climateactiontracker.org/countries/south-korea/"
+          }
+        ],
+        "renewable_target": "第11次電力供需基本計畫（2025年2月定案）：2030年再生能源占發電量，CAT記載為22%、韓國報導記載為18.8%（兩來源口徑不同）；2038年29.2%（韓國報導）。2035年NDC訂30%再生電力目標（CAT）",
+        "renewable_target_sources": [
+          {
+            "label": "Climate Action Tracker — 南韓",
+            "url": "https://climateactiontracker.org/countries/south-korea/"
+          },
+          {
+            "label": "亞洲經濟 Asia Economy（2025-02-21）",
+            "url": "https://www.asiae.co.kr/en/article/2025022115041221004"
+          }
+        ],
+        "current_progress": "—（本頁尚未取得現行占比數字；CAT指出南韓再生能源發電占比為OECD與G20國家中最低之一）",
+        "current_progress_sources": [
+          {
+            "label": "Climate Action Tracker — 南韓",
+            "url": "https://climateactiontracker.org/countries/south-korea/"
+          }
+        ]
       },
       {
         "country": "印度",
-        "net_zero_year": "2070年（2021年11月COP26莫迪總理宣布）",
-        "renewable_target": "「五樹甘露」(Panchamrit)目標：再生能源滿足50%用電需求；非化石能源裝置容量2030年500GW",
-        "current_progress": "非化石能源裝置容量已於2024年達45%，官方稱已超前達成50%條件式NDC目標，預估2030年將達60%以上；但發電量占比(含大水力)仍停滯約25%，容量與實際發電量之間存在明顯落差"
+        "net_zero_year": "2070年（2021年COP26莫迪總理宣布）",
+        "net_zero_sources": [
+          {
+            "label": "Climate Action Tracker — 印度",
+            "url": "https://climateactiontracker.org/countries/india/"
+          }
+        ],
+        "renewable_target": "2030年非化石能源占累計電力裝置容量達50%",
+        "renewable_target_sources": [
+          {
+            "label": "Climate Action Tracker — 印度",
+            "url": "https://climateactiontracker.org/countries/india/"
+          }
+        ],
+        "current_progress": "2025年7月已達成上述50%非化石裝置容量目標；再生能源占發電量約29%",
+        "current_progress_sources": [
+          {
+            "label": "Climate Action Tracker — 印度",
+            "url": "https://climateactiontracker.org/countries/india/"
+          }
+        ]
       },
       {
         "country": "俄羅斯",
-        "net_zero_year": "2060年前（2021年10月批准戰略，2022年9月提交聯合國）",
-        "renewable_target": "目標極低：2024年目標為(不含水力)再生能源發電占比4.5%（已未達成），2042年目標僅3.3%，政策重心在核能而非狹義再生能源",
-        "current_progress": "查無目前實際占比具體數字"
+        "net_zero_year": "2060年",
+        "net_zero_sources": [
+          {
+            "label": "Climate Action Tracker — 俄羅斯",
+            "url": "https://climateactiontracker.org/countries/russian-federation/"
+          }
+        ],
+        "renewable_target": "2024年再生能源（不含水力）占發電量目標4.5%，已未達成；2042年風電與太陽能僅占發電量3.3%",
+        "renewable_target_sources": [
+          {
+            "label": "Climate Action Tracker — 俄羅斯",
+            "url": "https://climateactiontracker.org/countries/russian-federation/"
+          }
+        ],
+        "current_progress": "—（本頁尚未取得現行占比）",
+        "current_progress_sources": []
       },
       {
         "country": "台灣",
-        "net_zero_year": "2050年（2022年3月國發會公布路徑，2023年2月修法入《氣候變遷因應法》）",
-        "renewable_target": "「532」目標：燃氣50%／燃煤30%／再生能源20%（目標時程遞延與原因詳見「台灣能源使用狀況」再生能源卡）",
-        "current_progress": "2025年全國發電量口徑再生能源占比{{tw_renew_pct}}%，距20%目標尚有約{{tw_renew_gap}}個百分點落差，未達標"
+        "net_zero_year": "2050淨零轉型為政府目標",
+        "net_zero_sources": [
+          {
+            "label": "行政院 — 2050淨零排放路徑（頁面日期2023-03-14）",
+            "url": "https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/7a65a06e-3f71-4c68-b368-85549fbca5d1"
+          }
+        ],
+        "renewable_target": "再生能源發電占比20%：經濟部原訂延至2026年11月完成；經濟部長於2026年4月向立法院經濟委員會證實，今年11月恐仍無法達成、將再次延遲",
+        "renewable_target_sources": [
+          {
+            "label": "中央社經Newtalk（2026-02-05）",
+            "url": "https://newtalk.tw/news/view/2026-02-05/1018780"
+          },
+          {
+            "label": "工商時報（2026-04-20）",
+            "url": "https://www.ctee.com.tw/news/20260420700057-430104"
+          }
+        ],
+        "current_progress": "2025年全國發電量口徑再生能源占比{{tw_renew_pct}}%",
+        "current_progress_sources": [
+          {
+            "label": "經濟部能源署《能源統計手冊2025年版》",
+            "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+          }
+        ]
       }
     ]
   },

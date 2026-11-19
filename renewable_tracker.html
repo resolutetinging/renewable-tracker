@@ -348,9 +348,9 @@ function rankCard(item, cls){
     <div class="rank-name">${esc(item.name)}</div>
     <div class="rank-value ${cls}">${item.share_pct!=null?esc(item.share_pct)+'%':'—'}${trendBadge(item.trend)}</div>
     ${item.data_year?`<div class="rank-time">🗓 ${esc(item.data_year)}</div>`:''}
-    ${item.note?`<div class="rank-note">${bulletize(item.note)}</div>`:''}
+    ${item.note?`<div class="rank-note">${bulletize(item.note)}${srcInline(item.note_sources)}</div>`:''}
     ${supplyBlock(item.supply)}
-    ${item.trend_reason?`<div class="rank-reason"><b>趨勢原因：</b>${bulletize(item.trend_reason)}</div>`:''}
+    ${item.trend_reason?`<div class="rank-reason"><b>趨勢原因：</b>${bulletize(item.trend_reason)}${srcInline(item.reason_sources)}</div>`:''}
   </div>`;
 }
 
@@ -360,6 +360,8 @@ function srcLinks(sources){
     ? `<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label||'連結')}</a>`
     : esc((x&&x.label)||'')).filter(Boolean).join('、');
 }
+// 行內來源：[{label,url?}] → 「（來源）」小字，空陣列回空字串
+function srcInline(sources){ const s=srcLinks(sources); return s?` <span class="case-src">（${s}）</span>`:''; }
 // 排名卡「燃料供給」條列（supply: [{text,sources[]}]）
 function supplyBlock(supply){
   if(!Array.isArray(supply)||!supply.length) return '';
@@ -1042,8 +1044,8 @@ async function init(){
   const nuclear = data.nuclear||{};
   document.getElementById('nuclear-meta').textContent = nuclear.as_of ? `資料時間點：${nuclear.as_of}` : '';
   document.getElementById('nuclear-tw-banner').innerHTML = nuclear.taiwan_status
-    ? `🇹🇼 台灣現況（2025-05-17核三2號機除役後）　核能占比 <span class="big" style="color:var(--nuclear);">${nuclear.taiwan_share_pct!=null?esc(nuclear.taiwan_share_pct)+'%':'—'}</span>
-       <div style="margin-top:6px;">${bulletize(nuclear.taiwan_status)}</div>`
+    ? `🇹🇼 台灣現況${nuclear.taiwan_share_pct!=null?`　核能占比 <span class="big" style="color:var(--nuclear);">${esc(nuclear.taiwan_share_pct)}%</span>`:''}
+       <div style="margin-top:6px;">${bulletize(nuclear.taiwan_status)}${srcInline(nuclear.taiwan_status_sources)}</div>`
     : '';
   document.getElementById('nuclear-tw-gating-block').innerHTML = (nuclear.taiwan_future_gating||[]).length
     ? `<div class="sec-meta" style="margin:10px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🚦 若未來討論重啟：checkpoint一覽</div>
@@ -1052,6 +1054,7 @@ async function init(){
           <div class="case-name">${esc(g.checkpoint)}</div>
           <div class="case-desc">${bulletize(g.detail)}</div>
           ${g.src_url?`<div class="case-src">來源：<a href="${safeUrl(g.src_url)}" target="_blank" rel="noopener">${esc(g.src_label||'連結')}</a></div>`:''}
+          ${(g.sources||[]).length?`<div class="case-src">來源：${srcLinks(g.sources)}</div>`:''}
         </div>`).join('')}</div>` : '';
   const ra = nuclear.restart_assessment||{};
   const raLi = a=>`<li>${esc(a.text)}${(a.sources||[]).map(x=>` <span class="case-src">（<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label||'來源')}</a>）</span>`).join('')}</li>`;
@@ -1083,7 +1086,7 @@ async function init(){
   document.getElementById('carbon-total').innerHTML = carbon.global_total
     ? `全球碳排放總量 <span class="big" style="color:var(--fossil);">${esc(carbon.global_total)}</span>
        ${carbon.global_trend_note?`<div style="margin-top:5px;">${bulletize(carbon.global_trend_note)}</div>`:''}
-       ${carbon.taiwan_total?`<div style="margin-top:8px;">🇹🇼 台灣：<b>${esc(carbon.taiwan_total)}</b>${carbon.taiwan_note?`<div style="margin-top:3px;">${bulletize(carbon.taiwan_note)}</div>`:''}</div>`:''}`
+       ${carbon.taiwan_total?`<div style="margin-top:8px;">🇹🇼 台灣：<b>${esc(carbon.taiwan_total)}</b>${carbon.taiwan_note?`<div style="margin-top:3px;">${bulletize(carbon.taiwan_note)}</div>`:''}${carbon.taiwan_src_url?`<div class="case-src">來源：<a href="${safeUrl(carbon.taiwan_src_url)}" target="_blank" rel="noopener">${esc(carbon.taiwan_src_label||'連結')}</a></div>`:''}</div>`:''}`
     : '';
   const drawCarbon = ()=>{
     document.getElementById('carbon-trend-block').innerHTML = trendChartSvg(carbon.historical_trend, {titleLabel:'📈 全球碳排放歷年趨勢', fallbackColor:'var(--fossil)'});
@@ -1098,6 +1101,7 @@ async function init(){
         ${c.note?`<div class="rank-note">${bulletize(c.note)}</div>`:''}
         ${c.main_source?`<div class="np-block"><b>碳排主因</b>${bulletize(c.main_source)}</div>`:''}
         ${c.policy?`<div class="rank-reason"><b>對應政策：</b>${bulletize(c.policy)}</div>`:''}
+        ${c.src_url?`<div class="case-src">來源：<a href="${safeUrl(c.src_url)}" target="_blank" rel="noopener">${esc(c.src_label||'連結')}</a></div>`:''}
       </div>`).join('')
     : '<div class="empty-state">尚無資料</div>';
   document.getElementById('carbon-src').innerHTML = carbon.source_url
@@ -1118,9 +1122,9 @@ async function init(){
        </tr></thead><tbody>
        ${targets.countries.map(c=>`<tr>
          <td class="dt-country">${esc(c.country)}</td>
-         <td>${bulletize(c.net_zero_year)}</td>
-         <td>${bulletize(c.renewable_target)}</td>
-         <td>${bulletize(fillTwTokens(c.current_progress))}</td>
+         <td>${bulletize(c.net_zero_year)}${srcInline(c.net_zero_sources)}</td>
+         <td>${bulletize(c.renewable_target)}${srcInline(c.renewable_target_sources)}</td>
+         <td>${bulletize(fillTwTokens(c.current_progress))}${srcInline(c.current_progress_sources)}</td>
        </tr>`).join('')}
        </tbody></table></div>
        ${targets.source_url?`<div class="src-note" style="margin-top:8px;">📌 來源：<a href="${safeUrl(targets.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(targets.source_label||'')}</a></div>`:''}`
