@@ -1118,8 +1118,11 @@ async function init(){
         <div class="case-desc">${bulletize(v.desc)}</div>
         ${v.src_url?`<div class="case-src">來源：<a href="${safeUrl(v.src_url)}" target="_blank" rel="noopener">${esc(v.src_label||'連結')}</a></div>`:''}
       </div>`).join('')}</div>` : '';
-  document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsFactsHtml || tpsViewsHtml)
-    ? `${riskBannerHtml}<div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:4px;">${tpsFactsHtml}</div>${tpsViewsHtml}`
+  const tpsAiHtml = (tps.ai_demand||[]).length ? `
+    <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🤖 AI 與產業用電需求</div>
+    <div class="case-card"><ul class="txt-bullets">${tps.ai_demand.map(a=>`<li>${esc(a.text)}${(a.sources||[]).map(x=>` <span class="case-src">（<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label||'來源')}</a>）</span>`).join('')}</li>`).join('')}</ul></div>` : '';
+  document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsFactsHtml || tpsViewsHtml || tpsAiHtml)
+    ? `${riskBannerHtml}<div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:4px;">${tpsFactsHtml}</div>${tpsViewsHtml}${tpsAiHtml}`
     : '<div class="empty-state">尚無資料</div>';
 
   const aiEnergy = data.ai_energy_impact||{};

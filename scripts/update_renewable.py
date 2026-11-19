@@ -49,7 +49,7 @@ FIELD_LABELS = {
     'taiwan_future_gating': '台灣未來關鍵條件', 'reserve_margin_note': '備轉容量率',
     'supply_demand_note': '供需狀況', 'incident_note': '事故紀錄', 'risk_assessment': '風險評估',
     'viewpoints': '各方觀點', 'rationale': '理由', 'level': '等級', 'region': '地區',
-    'source_label': '來源', 'source_url': '來源網址',
+    'source_label': '來源', 'source_url': '來源網址', 'ai_demand': 'AI與產業用電需求', 'text': '內容',
 }
 
 
@@ -105,7 +105,8 @@ CATEGORY_CONFIG = [
     {
         'key': 'taiwan_power_shortage',
         'label': '台灣真的缺電嗎',
-        'get_data': lambda status: status.get('taiwan_power_shortage', {}),
+        # ai_demand 為已逐項核對來源的靜態資料，不送入週查證 prompt（控制 8K TPM 的 prompt 大小）
+        'get_data': lambda status: {k: v for k, v in status.get('taiwan_power_shortage', {}).items() if k != 'ai_demand'},
         'category_enum': 'taiwan_power_shortage',
         'news_labels': ['台灣缺電/備轉容量'],
     },
