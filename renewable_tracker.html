@@ -1196,33 +1196,31 @@ function initToc(){
   document.addEventListener('keydown',e=>{if(e.key==='Escape') setOpen(false);});
   const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
   if(!secs.length) return;
-  // 目前區塊＝標題已捲過視窗上方 30% 的最後一個；都還沒捲到（頁首）時標第一項
-  let ticking=false;
+  // 目前區塊＝標題已捲過視窗上方 30% 的最後一個；都還沒捲到（頁首）時標第一項；捲到底標最後一項
+  let ticking=false, pin=null, pinTimer=null, pinMax=null;
+  const atBottom=()=>window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-2;
+  // 捲動結束後被點的區塊標題仍在視窗上半部就維持點選項，使用者滾輪／觸控／按鍵或標題離開上半部才交回 scroll 判定
+  const keepPin=()=>{ const el=pin&&document.getElementById(pin); if(!el) return false; const t=el.getBoundingClientRect().top; return t>=-4&&t<=window.innerHeight*0.5; };
+  const unpin=()=>{ pin=null; clearTimeout(pinTimer); clearTimeout(pinMax); pinTimer=null; sched(); };
+  // 點連結：立即標亮；平滑捲動結束（停 150ms，最長 1 秒）前不被 scroll 判定覆蓋
+  const pinTo=id=>{ pin=id; setActive(id); clearTimeout(pinMax);
+    const endPin=()=>{ clearTimeout(pinMax); pinTimer=null; if(!keepPin()) unpin(); };
+    pinMax=setTimeout(endPin,1000); clearTimeout(pinTimer); pinTimer=setTimeout(endPin,150); };
+  const onUserScroll=()=>{ if(pin&&!pinTimer) unpin(); };
+  ['wheel','touchstart','keydown'].forEach(ev=>window.addEventListener(ev,onUserScroll,{passive:true}));
+  all.forEach(a=>a.addEventListener('click',()=>{ const h=a.getAttribute('href'); if(h&&h.startsWith('#sec-')) pinTo(h.slice(1)); }));
+  window.addEventListener('scroll',()=>{ if(pin&&!pinTimer&&!keepPin()) unpin(); if(pinTimer){ clearTimeout(pinTimer); pinTimer=setTimeout(()=>{ clearTimeout(pinMax); pinTimer=null; if(!keepPin()) unpin(); },150); } },{passive:true});
   const update=()=>{ ticking=false;
+    if(pin){ setActive(pin); return; }
     const line=window.innerHeight*0.3; let cur=secs[0];
     if(window.scrollY>4){ for(const el of secs){ if(el.getBoundingClientRect().top<=line) cur=el; else break; } }
-    // 捲到底：標亮最後一個區塊
-    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-2) cur=secs[secs.length-1];
+    if(atBottom()) cur=secs[secs.length-1];
     setActive(cur.id); };
-  // 點目錄連結：立即標亮該項，平滑捲動結束前（捲動停止 150ms 或最長 1 秒）不讓 scroll 判定覆蓋
-  let lockUntil=0, lockTimer=null;
-  const unlock=()=>{ lockUntil=0; if(!ticking){ ticking=true; requestAnimationFrame(update); } };
-  const onTocClick=e=>{
-    const a=e.target.closest('a[href^="#sec-"]'); if(!a) return;
-    setActive(a.getAttribute('href').slice(1));
-    lockUntil=Date.now()+1000; clearTimeout(lockTimer); lockTimer=setTimeout(unlock,1000);
-  };
-  toc.addEventListener('click',onTocClick);
-  panel.addEventListener('click',onTocClick);
-  window.addEventListener('scroll',()=>{
-    if(lockUntil){
-      if(Date.now()>=lockUntil){ unlock(); return; }
-      clearTimeout(lockTimer); lockTimer=setTimeout(unlock,150); return;
-    }
-    if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
-  window.addEventListener('resize',update);
+  const sched=()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll',sched,{passive:true});
+  window.addEventListener('resize',sched);
   // 各區塊資料是非同步渲染，高度變動時重算（否則初次載入未捲動前會標錯）
-  if('ResizeObserver' in window) new ResizeObserver(()=>{ if(!lockUntil && !ticking){ ticking=true; requestAnimationFrame(update); } }).observe(document.body);
+  if('ResizeObserver' in window) new ResizeObserver(sched).observe(document.body);
   update();
 }
 initToc();
