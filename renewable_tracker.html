@@ -1196,10 +1196,12 @@ function initToc(){
   let ticking=false;
   const update=()=>{ ticking=false;
     const line=window.innerHeight*0.3; let cur=secs[0];
-    for(const el of secs){ if(el.getBoundingClientRect().top<=line) cur=el; else break; }
+    if(window.scrollY>4){ for(const el of secs){ if(el.getBoundingClientRect().top<=line) cur=el; else break; } }
     setActive(cur.id); };
   window.addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
   window.addEventListener('resize',update);
+  // 各區塊資料是非同步渲染，高度變動時重算（否則初次載入未捲動前會標錯）
+  if('ResizeObserver' in window) new ResizeObserver(()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } }).observe(document.body);
   update();
 }
 initToc();
