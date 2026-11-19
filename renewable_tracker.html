@@ -1136,7 +1136,7 @@ async function init(){
     ${tpsSubHd(p.t)}
     <div class="case-card"><ul class="txt-bullets">${tl[p.k].map(tpsItemLi).join('')}</ul></div>`).join('');
   const tpsViewsHtml = (tps.viewpoints||[]).length ? `
-    <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🗣 各方說法（並陳，不評斷）</div>
+    <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🗣 台電說法</div>
     <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${tps.viewpoints.map(v=>`
       <div class="case-card">
         <div class="case-name">${esc(v.source)}</div>
