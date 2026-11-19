@@ -435,7 +435,248 @@
         "src_url": "https://www.moeaea.gov.tw",
         "src_label": "經濟部能源署 2021-12-16新聞澄清"
       }
-    ]
+    ],
+    "restart_assessment": {
+      "as_of": "2026-11-19",
+      "scope_note": "評估對象為核三再運轉；核四另見上方「若未來討論重啟：checkpoint一覽」。",
+      "facts": [
+        {
+          "text": "核三廠兩部機額定容量各951 MWe，總裝置容量1,902 MW，每部機每年發電約84億度",
+          "sources": [
+            {
+              "label": "台電《運轉執照換照申請書附件 技術與管理能力及財務基礎評估報告(公開版)》115年8月，第1頁",
+              "url": "https://www.nusc.gov.tw/share/file/regulation/V64df6VyGFCrKDD5bE1k1g__.pdf"
+            }
+          ]
+        },
+        {
+          "text": "核安會於2026-09-24核定核三再運轉計畫，台電後續須提交執行結果報告再送核安會審查；運轉執照換發另需申請。此為計畫核定，尚非核准重啟",
+          "sources": [
+            {
+              "label": "中央社 2026-09-24",
+              "url": "https://www.cna.com.tw/news/afe/202609240313.aspx"
+            }
+          ]
+        },
+        {
+          "text": "自主安全檢查時程：台電預估18至24個月；經濟部長表示最快約需1年半至2年，並稱何時能真正重啟經濟部沒辦法預估",
+          "sources": [
+            {
+              "label": "公視 2026-03-03",
+              "url": "https://news.pts.org.tw/article/797158"
+            },
+            {
+              "label": "自由時報 2026-03-25",
+              "url": "https://ec.ltn.com.tw/article/breakingnews/5381848"
+            }
+          ]
+        },
+        {
+          "text": "併網時程：經濟部次長何晉滄稱「按照時程規劃，大約2028年底左右」（2026-03-20）；另有公視2025-11-28報導稱「最快可能在2027年重啟」，兩個說法並陳",
+          "sources": [
+            {
+              "label": "聯合報／經濟日報 2026-03-20",
+              "url": "https://udn.com/news/story/7238/9393319"
+            },
+            {
+              "label": "公視 2025-11-28",
+              "url": "https://news.pts.org.tw/article/783526"
+            }
+          ]
+        },
+        {
+          "text": "台電計畫書載明第一階段執行結果報告預計116年第2季提送，第二階段依自主安全檢查進度擇時提報",
+          "sources": [
+            {
+              "label": "台電《第三核能發電廠再運轉計畫(公開版)》115年8月，第30頁",
+              "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
+            }
+          ]
+        },
+        {
+          "text": "費用（台電公開版報告）：再運轉計畫整備115年約20億元、116年初步編列約51億元；自主安全檢查115年約24億元、116年初步編列約19億元；後續經費依自主安全檢查結果及設備更新需求核實辦理，總額尚未定",
+          "sources": [
+            {
+              "label": "台電《運轉執照換照申請書附件 技術與管理能力及財務基礎評估報告(公開版)》115年8月，第28頁",
+              "url": "https://www.nusc.gov.tw/share/file/regulation/V64df6VyGFCrKDD5bE1k1g__.pdf"
+            }
+          ]
+        }
+      ],
+      "pros": [
+        {
+          "text": "能源署供需報告預估夜間備用容量率2028年8%、2029年7.1%，目標為15%；經濟部次長稱核三併網時程規劃大約2028年底左右。本頁僅並列這兩個時點",
+          "sources": [
+            {
+              "label": "聯合報 2026-10-27",
+              "url": "https://udn.com/news/story/6656/9838503"
+            },
+            {
+              "label": "聯合報／經濟日報 2026-03-20",
+              "url": "https://udn.com/news/story/7238/9393319"
+            }
+          ]
+        },
+        {
+          "text": "天然氣占2025年全國發電量47.69%，進口占天然氣供給約99.8%，法定安全存量2025年為11天",
+          "sources": [
+            {
+              "label": "經濟部能源署《能源統計手冊2025年版》",
+              "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+            },
+            {
+              "label": "經濟部能源署 能源供給月資料（自行加總2025年）",
+              "url": "https://data.gov.tw/dataset/11765"
+            },
+            {
+              "label": "經濟部能源署",
+              "url": "https://www.moeaea.gov.tw/ECW/populace/content/Content.aspx?menu_id=8748"
+            }
+          ]
+        },
+        {
+          "text": "核三機組每18個月為一個燃料週期",
+          "sources": [
+            {
+              "label": "台電《第三核能發電廠再運轉計畫(公開版)》115年8月，第334頁",
+              "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
+            }
+          ]
+        },
+        {
+          "text": "2025年全國發電量中燃氣47.69%、燃煤35.29%、燃油1.51%，火力合計84.49%",
+          "sources": [
+            {
+              "label": "經濟部能源署《能源統計手冊2025年版》",
+              "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+            }
+          ]
+        },
+        {
+          "text": "既有已攤提核電廠的營運成本，Lazard估算約31美元/MWh（美國市場）；同報告燃氣尖峰為144–276、燃煤為72–177美元/MWh。此數字不含本頁所列再運轉整備與自主安全檢查費用",
+          "sources": [
+            {
+              "label": "Lazard LCOE+ 2026（美國市場，unsubsidized）",
+              "url": "https://www.lazard.com/media/kcfconhf/lazards-lcoeplus_vf.pdf"
+            }
+          ]
+        },
+        {
+          "text": "供需報告預估2026-2035年用電年均成長約2.5%（前次預估1.7%）；台電預估半導體產業用電由2026年約520億度成長至2035年約1,100億度",
+          "sources": [
+            {
+              "label": "中央社 2026-06-18",
+              "url": "https://www.cna.com.tw/news/afe/202606180283.aspx"
+            },
+            {
+              "label": "華視／中央社 2026-10-14",
+              "url": "https://news.cts.com.tw/cna/money/202610/202610143089816.html"
+            }
+          ]
+        }
+      ],
+      "cons": [
+        {
+          "text": "高階核廢料（用過燃料棒）最終處置尚無去處：截至2024年1月已產出逾1.9萬束；台電估計依現有法制最快2055年才能完成最終處置場建造與運轉試驗",
+          "sources": [
+            {
+              "label": "地球公民基金會",
+              "url": "https://www.cet-taiwan.org/node/4507"
+            }
+          ]
+        },
+        {
+          "text": "低階核廢料選址卡關逾10年：依法須經地方公投同意，2012年公告的候選場址因地方反對、地方政府不同意舉辦公投而停滯至今",
+          "sources": [
+            {
+              "label": "地球公民基金會",
+              "url": "https://www.cet-taiwan.org/node/4507"
+            }
+          ]
+        },
+        {
+          "text": "核三用過燃料池每座設計容量2160束，現存1號機1879束、2號機1906束；計畫書稱在乾式貯存設施啟用前仍保有存放兩個完整燃料週期所產生用過核子燃料束的空間",
+          "sources": [
+            {
+              "label": "台電《第三核能發電廠再運轉計畫(公開版)》115年8月，第13–14頁",
+              "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
+            }
+          ]
+        },
+        {
+          "text": "核三廠尚無用過核子燃料乾式貯存設施、仍在規劃中；台電2025-08表示預計當年底發包、約8年後完工、可存放4000束，並稱僅是中期管理方案",
+          "sources": [
+            {
+              "label": "台電《第三核能發電廠再運轉計畫(公開版)》115年8月，第15頁",
+              "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
+            },
+            {
+              "label": "公視 2025-08-23",
+              "url": "https://news.pts.org.tw/article/767079"
+            }
+          ]
+        },
+        {
+          "text": "程序尚未完成：台電須完成自主安全檢查並提交執行結果報告送核安會審查，運轉執照換發另需申請",
+          "sources": [
+            {
+              "label": "中央社 2026-09-24",
+              "url": "https://www.cna.com.tw/news/afe/202609240313.aspx"
+            }
+          ]
+        },
+        {
+          "text": "延役是否須環評尚無定論：現行法規僅「興建」「增機」「除役」須環評，環境部長2025-05-14表示部內正在檢討修法但尚未定案",
+          "sources": [
+            {
+              "label": "環境資訊中心 2025-05-14",
+              "url": "https://e-info.org.tw/node/241283"
+            }
+          ]
+        },
+        {
+          "text": "2025-08-23核三重啟公投：同意4,341,432票、不同意1,511,693票，同意票須達5,005,523票才通過，未達門檻；2026-11-28另有「廢除非核家園」公投與九合一選舉合併投票",
+          "sources": [
+            {
+              "label": "Taiwan News（轉述中選會數字）",
+              "url": "https://www.taiwannews.com.tw/zh/news/6185573"
+            },
+            {
+              "label": "中央社 2026-10-22",
+              "url": "https://cna.com.tw/news/aipl/202610220409.aspx"
+            }
+          ]
+        },
+        {
+          "text": "2026年1月至11月14日備轉容量率無低於6%的日子，7-10月全數綠燈（最低10.19%，2026-10-04）",
+          "sources": [
+            {
+              "label": "台電開放資料 d006005（本頁資料計算）",
+              "url": "https://service.taipower.com.tw/data/opendata/apply/file/d006005/001.csv"
+            }
+          ]
+        },
+        {
+          "text": "若討論新建核電：Lazard估算新建核能為175–255美元/MWh（依美國Vogtle 3、4號機成本）；核三再運轉並非新建，僅供對照",
+          "sources": [
+            {
+              "label": "Lazard LCOE+ 2026（美國市場，unsubsidized）",
+              "url": "https://www.lazard.com/media/kcfconhf/lazards-lcoeplus_vf.pdf"
+            }
+          ]
+        }
+      ],
+      "data_gaps": {
+        "title": "本頁尚未取得的官方資料",
+        "items": [
+          "核三再運轉後每年新增的用過燃料量",
+          "核燃料安全存量天數",
+          "核三再運轉對備用容量率的官方量化評估",
+          "新燃料採購金額"
+        ]
+      },
+      "disclaimer": "以上為依已附來源資料並列正反，不代表立場；核能政策為公共爭議，2026-11-28 另有公投。"
+    }
   },
   "carbon": {
     "as_of": "全球：2025年（Global Carbon Project，2025-11-13發布）；台灣：2024年（環境部氣候變遷署）",
