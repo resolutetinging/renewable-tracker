@@ -56,6 +56,14 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .rank-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.55;}
 .rank-reason{font-size:11px;color:var(--text2);margin-top:auto;padding-top:6px;border-top:1px dashed var(--border2);line-height:1.55;}
 .rank-reason b{color:var(--smart);font-weight:700;}
+.rank-supply{font-size:11px;color:var(--text2);margin-top:6px;line-height:1.55;}
+.rank-supply b{color:var(--fossil);font-weight:700;}
+.rank-supply .supply-src{color:var(--muted2);}
+.rank-supply .supply-src a{color:var(--muted);}
+.future-sec{margin-top:10px;}
+.future-ttl{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.stack-legend span{white-space:nowrap;}
+.stack-sw{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
 .rank-trend{font-size:11px;font-weight:600;margin-left:6px;}
 .trend-up{color:#306840;}.trend-down{color:#884040;}.trend-flat{color:var(--muted);}
 .txt-bullets{margin:0;padding-left:16px;}
@@ -95,7 +103,7 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 
 /* ── 歷年趨勢折線圖 ── */
 .trend-chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:14px;}
-.chart-tooltip{position:fixed;pointer-events:none;background:var(--text);color:var(--card);font-size:12px;padding:5px 9px;border-radius:6px;opacity:0;transition:opacity .1s;z-index:999;white-space:nowrap;}
+.chart-tooltip{position:fixed;pointer-events:none;background:var(--text);color:var(--card);font-size:12px;padding:5px 9px;border-radius:6px;opacity:0;transition:opacity .1s;z-index:999;white-space:pre;}
 .trend-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:11px;color:var(--text2);}
 .trend-legend span{display:inline-flex;align-items:center;gap:5px;}
 .trend-sw{width:14px;height:2.5px;border-radius:2px;flex-shrink:0;}
@@ -172,9 +180,12 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
   <div id="country-breakdown-block"></div>
 
   <div class="sec-title" id="sec-tw-mix">🇹🇼 台灣能源使用狀況<span class="sec-meta" id="tw-mix-meta"></span></div>
+  <div id="tw-import-block"></div>
+  <div id="tw-history-block"></div>
   <div class="rank-grid" id="tw-mix-grid"></div>
   <div class="src-note" id="tw-mix-src"></div>
   <div class="src-note" id="tw-mix-crossref" style="margin-top:2px;"></div>
+  <div id="tw-future-block" style="margin-top:14px;"></div>
 
   <div class="sec-title" id="sec-lcoe">💰 能源成本趨勢（LCOE）</div>
   <div id="lcoe-trend-block"></div>
@@ -318,8 +329,24 @@ function rankCard(item, cls){
     <div class="rank-value ${cls}">${item.share_pct!=null?esc(item.share_pct)+'%':'—'}${trendBadge(item.trend)}</div>
     ${item.data_year?`<div class="rank-time">🗓 ${esc(item.data_year)}</div>`:''}
     ${item.note?`<div class="rank-note">${bulletize(item.note)}</div>`:''}
+    ${supplyBlock(item.supply)}
     ${item.trend_reason?`<div class="rank-reason"><b>趨勢原因：</b>${bulletize(item.trend_reason)}</div>`:''}
   </div>`;
+}
+
+// 來源連結清單：[{label,url?}]；有 url 才做連結（safeUrl 限 http/https），否則只顯示文字
+function srcLinks(sources){
+  return (sources||[]).map(x=>x&&x.url
+    ? `<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label||'連結')}</a>`
+    : esc((x&&x.label)||'')).filter(Boolean).join('、');
+}
+// 排名卡「燃料供給」條列（supply: [{text,sources[]}]）
+function supplyBlock(supply){
+  if(!Array.isArray(supply)||!supply.length) return '';
+  return `<div class="rank-supply"><b>燃料供給：</b><ul class="txt-bullets">${supply.map(p=>{
+    const l=srcLinks(p.sources);
+    return `<li>${esc(p.text)}${l?` <span class="supply-src">（${l}）</span>`:''}</li>`;
+  }).join('')}</ul></div>`;
 }
 
 function renewCard(item){
@@ -415,6 +442,73 @@ function barChartSvg(data, opts){
     <svg viewBox="0 0 ${W} ${H}" style="width:${W}px;max-width:100%;height:auto;display:block;">${rows}</svg>
     ${data.note?`<div class="src-note" style="margin-top:8px;">${esc(data.note)}</div>`:''}
     ${data.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${safeUrl(data.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(data.source_label||'')}</a></div>`:''}
+  </div>`;
+}
+
+// ── 通用堆疊長條圖（x=年度、y=占比0–100%，每年一根依類別堆疊；純SVG，風格同 trendChartSvg）──
+// hist: {categories:[{key,name,kind}], years:[{year,shares:{key:pct}}], as_of, note, source_label, source_url}
+const STACK_COLORS = {coal:'#8a6040', gas:'#c09050', oil:'#5e4630', nuclear:'#6a7a8a', renew:'#4a8a6a', pumped:'#4a90a0'};
+function stackedBarSvg(hist, opts){
+  opts = opts || {};
+  const cats = (hist && hist.categories) || [], yrs = (hist && hist.years) || [];
+  if(!cats.length || !yrs.length) return '';
+  const colorOf = c => STACK_COLORS[c.key] || 'var(--muted)';
+  const W=riW(), H=300, padL=38, padR=10, padT=12, padB=30;
+  const step = (W-padL-padR)/yrs.length, bw = Math.max(3, step*0.72);
+  const bx = i => padL + i*step + (step-bw)/2;
+  const py = v => H-padB - (v/100)*(H-padT-padB);
+  const grid = [0,25,50,75,100].map(v=>`<line x1="${padL}" y1="${py(v)}" x2="${W-padR}" y2="${py(v)}" stroke="var(--border)" stroke-width="1"/>
+    <text x="${padL-6}" y="${py(v)+4}" text-anchor="end" font-size="12" fill="var(--muted2)">${v}</text>`).join('');
+  const xK = Math.max(1, Math.ceil((4*7+8)/step));
+  const xl = yrs.map((y,i)=>((yrs.length-1-i)%xK===0)?`<text x="${bx(i)+bw/2}" y="${H-padB+16}" text-anchor="middle" font-size="12" fill="var(--muted2)">${esc(y.year)}</text>`:'').join('');
+  const bars = yrs.map((y,i)=>{
+    let acc = 0;
+    const segs = cats.map(c=>{
+      const v = Number((y.shares||{})[c.key]) || 0;
+      const y0 = py(acc), y1 = py(acc+v); acc += v;
+      return v>0 ? `<rect x="${bx(i)}" y="${y1}" width="${bw}" height="${Math.max(y0-y1,0)}" fill="${colorOf(c)}" style="pointer-events:none;"/>` : '';
+    }).join('');
+    const tip = esc(y.year+'年\n'+cats.map(c=>c.name+'　'+(Number((y.shares||{})[c.key])||0).toFixed(2)+'%').join('\n'));
+    return `${segs}<rect x="${padL+i*step}" y="${padT}" width="${step}" height="${H-padT-padB}" fill="transparent" pointer-events="all" class="chart-hit" data-tip="${tip}" style="cursor:pointer;"/>`;
+  }).join('');
+  const legend = cats.slice().reverse().map(c=>`<span><span class="stack-sw" style="background:${colorOf(c)}"></span>${esc(c.name)}</span>`).join('');
+  return `<div class="trend-chart-wrap">
+    <div class="sec-meta" style="margin-bottom:6px;">${opts.titleLabel||'📊 歷年發電結構'}（單位：%）${hist.as_of?'　'+esc(hist.as_of):''}</div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:${W}px;max-width:100%;height:auto;display:block;">${grid}${xl}${bars}</svg>
+    <div class="trend-legend stack-legend">${legend}</div>
+    ${hist.note?`<div class="src-note" style="margin-top:6px;">${esc(hist.note)}</div>`:''}
+    ${hist.source_url?`<div class="src-note" style="margin-top:4px;">📌 來源：<a href="${safeUrl(hist.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(hist.source_label||'')}</a></div>`:''}
+  </div>`;
+}
+
+// 摘要：數字一律由 taiwan_mix 資料計算（進口率／自產率取 import_summary，占比取 items）
+function twImportBlock(tw){
+  const s = tw.import_summary, items = tw.items || [];
+  if(!s || s.import_rate_pct==null) return '';
+  const byName = n => items.find(it=>it.name===n);
+  const fuels = (s.import_fuels||[]).map(byName).filter(it=>it && it.share_pct!=null);
+  const fuelSum = fuels.reduce((a,it)=>a+Number(it.share_pct),0);
+  const self = byName(s.self_supply_item);
+  const lines = [];
+  lines.push(`能源進口率約 <b>${esc(Math.round(Number(s.import_rate_pct)))}%</b>（${esc(s.as_of||'')}，自產僅 ${esc(s.self_supply_pct)}%）`);
+  if(self && self.share_pct!=null) lines.push(`發電量中，${esc(self.name)}占 <b>${esc(self.share_pct)}%</b>，是唯一以自產能源為主的發電來源`);
+  if(fuels.length) lines.push(`${esc(fuels.map(it=>it.name).join('＋'))}合計約占發電量 <b>${esc(Math.round(fuelSum))}%</b>，這些燃料幾乎全靠進口`);
+  return `<div class="total-banner"><ul class="txt-bullets">${lines.map(l=>`<li>${l}</li>`).join('')}</ul>
+    ${s.note?`<div class="src-note" style="margin-top:4px;">${esc(s.note)}</div>`:''}
+    ${s.source_url?`<div class="src-note" style="margin-top:2px;">📌 來源：<a href="${safeUrl(s.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(s.source_label||'')}</a></div>`:''}</div>`;
+}
+
+// 未來方向：future.items[{title,points:[{text,sources[]}]}]
+function twFutureBlock(fut){
+  const items = (fut && fut.items) || [];
+  if(!items.length) return '';
+  return `<div class="trend-chart-wrap">
+    <div class="sec-meta" style="margin-bottom:6px;">🔭 台灣能源未來方向${fut.as_of?'　資料時間點：'+esc(fut.as_of):''}</div>
+    ${items.map(it=>`<div class="future-sec"><div class="future-ttl">${esc(it.title)}</div>
+      <ul class="txt-bullets" style="font-size:12px;color:var(--text2);line-height:1.6;">${(it.points||[]).map(p=>{
+        const l=srcLinks(p.sources);
+        return `<li>${esc(p.text)}${l?` <span style="font-size:11px;color:var(--muted2);">（${l}）</span>`:''}</li>`;
+      }).join('')}</ul></div>`).join('')}
   </div>`;
 }
 
@@ -865,6 +959,10 @@ async function init(){
   document.getElementById('tw-mix-src').innerHTML = twMix.source_url
     ? `📌 來源：<a href="${safeUrl(twMix.source_url)}" target="_blank" rel="noopener" style="color:var(--muted)">${esc(twMix.source_label||'')}</a>` : '';
   document.getElementById('tw-mix-crossref').textContent = twMix.cross_ref_note || '';
+  document.getElementById('tw-import-block').innerHTML = twImportBlock(twMix);
+  const drawTwHist = ()=>{ document.getElementById('tw-history-block').innerHTML = stackedBarSvg(twMix.history, {titleLabel:'📊 台灣歷年發電結構'}); };
+  drawTwHist(); riOnResize(drawTwHist);
+  document.getElementById('tw-future-block').innerHTML = twFutureBlock(twMix.future);
 
   const lcoe = data.lcoe||{};
   const drawLcoe = ()=>{ document.getElementById('lcoe-trend-block').innerHTML = trendChartSvg(lcoe.trend, {titleLabel:'📉 再生能源發電成本歷年趨勢（全球實際成本）', fallbackColor:'var(--renew)'}); };

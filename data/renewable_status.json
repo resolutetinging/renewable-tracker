@@ -745,6 +745,181 @@
     "source_label": "經濟部能源署 — 能源統計手冊2025年版",
     "source_url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf",
     "cross_ref_note": "台電系統口徑，2025年（不含轉供直供，較窄）：燃氣53.3%／燃煤26.6%／再生能源12.7%／核能1.2%／燃油1.4%／抽蓄水力1.2%／汽電共生3.3%／儲能電池0.3%。與全國口徑（本表採用）差異主要來自民營電廠(IPP)是否計入，屬統計口徑差異非查證錯誤，兩者皆有效並陳供參考",
+    "import_summary": {
+      "as_of": "2025年",
+      "source_label": "經濟部能源署 能源供給月資料（自行加總2025年全年）",
+      "source_url": "https://data.gov.tw/dataset/11765",
+      "import_rate_pct": 95.3679,
+      "self_supply_pct": 4.63,
+      "import_fuels": [
+        "天然氣",
+        "燃煤"
+      ],
+      "self_supply_item": "再生能源",
+      "note": "能源進口率與能源署另一指標「進口能源依存度」（2025年99.03%）口徑不同，此處採能源進口率"
+    },
+    "history": {
+      "as_of": "2005–2025年，全國發電量口徑",
+      "source_label": "經濟部能源署 — 能源統計手冊2025年版 3-01 發電量",
+      "source_url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf",
+      "note": "再生能源含慣常水力、地熱、太陽光電、風力、生質能、廢棄物；抽蓄水力另列；各年占比四捨五入，加總可能有±0.01的差",
+      "categories": [
+        {"key": "coal", "name": "燃煤", "kind": "fossil"},
+        {"key": "gas", "name": "天然氣", "kind": "fossil"},
+        {"key": "oil", "name": "燃油", "kind": "fossil"},
+        {"key": "nuclear", "name": "核能", "kind": "nuclear"},
+        {"key": "renew", "name": "再生能源", "kind": "renew"},
+        {"key": "pumped", "name": "抽蓄水力", "kind": "renew"}
+      ],
+      "years": [
+        {"year": 2005, "shares": {"coal": 52.76, "gas": 17.1, "oil": 7.56, "nuclear": 17.57, "renew": 3.31, "pumped": 1.69}},
+        {"year": 2006, "shares": {"coal": 52.67, "gas": 17.03, "oil": 8.43, "nuclear": 16.93, "renew": 3.29, "pumped": 1.66}},
+        {"year": 2007, "shares": {"coal": 52.84, "gas": 18.52, "oil": 6.92, "nuclear": 16.67, "renew": 3.42, "pumped": 1.62}},
+        {"year": 2008, "shares": {"coal": 51.28, "gas": 20.36, "oil": 6.31, "nuclear": 17.13, "renew": 3.47, "pumped": 1.45}},
+        {"year": 2009, "shares": {"coal": 52.46, "gas": 20.55, "oil": 4.09, "nuclear": 18.07, "renew": 3.39, "pumped": 1.44}},
+        {"year": 2010, "shares": {"coal": 49.52, "gas": 24.39, "oil": 4.51, "nuclear": 16.85, "renew": 3.5, "pumped": 1.24}},
+        {"year": 2011, "shares": {"coal": 49.36, "gas": 25.46, "oil": 3.76, "nuclear": 16.7, "renew": 3.56, "pumped": 1.15}},
+        {"year": 2012, "shares": {"coal": 48.9, "gas": 26.48, "oil": 3.04, "nuclear": 16.14, "renew": 4.26, "pumped": 1.17}},
+        {"year": 2013, "shares": {"coal": 48.13, "gas": 27.1, "oil": 2.7, "nuclear": 16.5, "renew": 4.3, "pumped": 1.26}},
+        {"year": 2014, "shares": {"coal": 47.49, "gas": 28.11, "oil": 3.08, "nuclear": 16.31, "renew": 3.82, "pumped": 1.2}},
+        {"year": 2015, "shares": {"coal": 45.39, "gas": 30.61, "oil": 4.64, "nuclear": 14.13, "renew": 4.06, "pumped": 1.18}},
+        {"year": 2016, "shares": {"coal": 45.9, "gas": 31.54, "oil": 4.5, "nuclear": 11.99, "renew": 4.82, "pumped": 1.25}},
+        {"year": 2017, "shares": {"coal": 47.34, "gas": 33.84, "oil": 4.71, "nuclear": 8.31, "renew": 4.58, "pumped": 1.23}},
+        {"year": 2018, "shares": {"coal": 47.64, "gas": 33.54, "oil": 2.97, "nuclear": 10.05, "renew": 4.58, "pumped": 1.22}},
+        {"year": 2019, "shares": {"coal": 46.11, "gas": 33.25, "oil": 2.13, "nuclear": 11.79, "renew": 5.55, "pumped": 1.17}},
+        {"year": 2020, "shares": {"coal": 44.94, "gas": 35.65, "oil": 1.58, "nuclear": 11.22, "renew": 5.48, "pumped": 1.13}},
+        {"year": 2021, "shares": {"coal": 44.21, "gas": 37.18, "oil": 1.83, "nuclear": 9.54, "renew": 6.15, "pumped": 1.09}},
+        {"year": 2022, "shares": {"coal": 41.96, "gas": 38.84, "oil": 1.54, "nuclear": 8.24, "renew": 8.36, "pumped": 1.06}},
+        {"year": 2023, "shares": {"coal": 42.13, "gas": 39.46, "oil": 1.33, "nuclear": 6.29, "renew": 9.7, "pumped": 1.08}},
+        {"year": 2024, "shares": {"coal": 39.16, "gas": 42.33, "oil": 1.45, "nuclear": 4.21, "renew": 11.79, "pumped": 1.06}},
+        {"year": 2025, "shares": {"coal": 35.29, "gas": 47.69, "oil": 1.51, "nuclear": 1.12, "renew": 13.32, "pumped": 1.07}}
+      ]
+    },
+    "future": {
+      "as_of": "2026-11-19",
+      "items": [
+        {
+          "title": "再生能源目標與進度",
+          "points": [
+            {
+              "text": "2030年再生能源發電量占比目標30%",
+              "sources": [
+                {
+                  "label": "國發會 立法院書面報告（2026-04-16）",
+                  "url": "https://lis.ly.gov.tw/lydbmeetr/uploadn/115/1150416/313.pdf"
+                }
+              ]
+            },
+            {
+              "text": "2030年容量目標：光電31.2GW、離岸風電10.9GW",
+              "sources": [
+                {
+                  "label": "國發會 立法院書面報告（2026-04-16）",
+                  "url": "https://lis.ly.gov.tw/lydbmeetr/uploadn/115/1150416/313.pdf"
+                }
+              ]
+            },
+            {
+              "text": "截至2026年2月累計：光電15.676GW、離岸風電3.684GW",
+              "sources": [
+                {
+                  "label": "國發會 立法院書面報告（2026-04-16）",
+                  "url": "https://lis.ly.gov.tw/lydbmeetr/uploadn/115/1150416/313.pdf"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "以氣代煤",
+          "points": [
+            {
+              "text": "台中電廠燃煤1、2號機於2026-10-01除役並開始拆除，工期28個月，預計2029年初完成",
+              "sources": [
+                {
+                  "label": "中央社（2026-10-07）",
+                  "url": "https://www.cna.com.tw/news/afe/202610070157.aspx"
+                }
+              ]
+            },
+            {
+              "text": "二期新增4部燃氣機組自2031年起陸續上線，台電稱2034年底前達成台中電廠無煤供電",
+              "sources": [
+                {
+                  "label": "自由財經",
+                  "url": "https://ec.ltn.com.tw/article/breakingnews/5527202"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "核能政策",
+          "points": [
+            {
+              "text": "2025-08-23核三重啟公投：同意4,341,432票、不同意1,511,693票，投票率29.53%；同意票須達5,005,523票才通過，未達門檻，公投不通過",
+              "sources": [
+                {
+                  "label": "Taiwan News（轉述中選會數字）",
+                  "url": "https://www.taiwannews.com.tw/zh/news/6185573"
+                }
+              ]
+            },
+            {
+              "text": "核安會於2026-09-24完成核三再運轉計畫審查，此為計畫審查完成，並非核准重啟；台電自主安全檢查報告尚待提交",
+              "sources": [
+                {
+                  "label": "中央社（2026-09-24）",
+                  "url": "https://www.cna.com.tw/news/afe/202609240313.aspx"
+                }
+              ]
+            },
+            {
+              "text": "2026-11-28「廢除非核家園」公投與九合一選舉合併投票",
+              "sources": [
+                {
+                  "label": "中央社（2026-10-22）",
+                  "url": "https://cna.com.tw/news/aipl/202610220409.aspx"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "2050年電力配比（行政院）",
+          "points": [
+            {
+              "text": "總電力60–70%為再生能源、9–12%為氫能，加上碳捕捉之火力發電20–27%",
+              "sources": [
+                {
+                  "label": "行政院 2050淨零排放路徑（頁面日期2023-03-14）",
+                  "url": "https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/7a65a06e-3f71-4c68-b368-85549fbca5d1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "減碳階段目標（新聞轉述環境部、行政院）",
+          "points": [
+            {
+              "text": "2030年較2005年減量28±2%（行政院2025-05-06核定）；2035年減量38±2%（行政院2025-11-03核定）",
+              "sources": [
+                {
+                  "label": "聯合報",
+                  "url": "https://udn.com/news/story/7266/9124079"
+                },
+                {
+                  "label": "中央社（2025-11-07）",
+                  "url": "https://www.cna.com.tw/news/ahel/202511070126.aspx"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "source_label": "各項來源見每點連結"
+    },
     "items": [
       {
         "rank": 1,
@@ -753,6 +928,35 @@
         "trend": "up",
         "kind": "fossil",
         "data_year": "2025年（全國發電量口徑）",
+        "supply": [
+          {
+            "text": "幾乎全部進口：2025年進口占天然氣供給約99.8%",
+            "sources": [
+              {
+                "label": "經濟部能源署 能源供給月資料（自行加總2025年）",
+                "url": "https://data.gov.tw/dataset/11765"
+              }
+            ]
+          },
+          {
+            "text": "2025年主要進口來源：卡達33.7%、澳洲33.5%、美國9.9%",
+            "sources": [
+              {
+                "label": "公視引經濟部資料（2026-03-05）",
+                "url": "https://ic.tpex.org.tw/introduce.php?ic=W000"
+              }
+            ]
+          },
+          {
+            "text": "法定安全存量：2025年11天、2027年14天",
+            "sources": [
+              {
+                "label": "經濟部能源署",
+                "url": "https://www.moeaea.gov.tw/ECW/populace/content/Content.aspx?menu_id=8748"
+              }
+            ]
+          }
+        ],
         "note": "較2024年42.33%上升5.36個百分點；105年(2016)為31.5%",
         "trend_reason": "核能除役後基載缺口需由燃氣填補，加上太陽光電、離岸風電建置進度落後，天然氣被迫「補位」；政策方向為以氣代煤"
       },
@@ -763,6 +967,35 @@
         "trend": "down",
         "kind": "fossil",
         "data_year": "2025年（全國發電量口徑）",
+        "supply": [
+          {
+            "text": "100%進口：2025年自產為0",
+            "sources": [
+              {
+                "label": "經濟部能源署 能源供給月資料（自行加總2025年）",
+                "url": "https://data.gov.tw/dataset/11765"
+              }
+            ]
+          },
+          {
+            "text": "2025年進口來源：澳洲49.5%、印尼31.3%、哥倫比亞5.8%、南非5.4%、俄羅斯3.4%、加拿大2.9%",
+            "sources": [
+              {
+                "label": "經濟部能源署 煤炭進口來源月資料（自行加總2025年）",
+                "url": "https://data.gov.tw/dataset/161210"
+              }
+            ]
+          },
+          {
+            "text": "電廠燃煤法定安全存量：30天以上",
+            "sources": [
+              {
+                "label": "台電文件",
+                "url": "https://www.taipower.com.tw/upload/302/2017112716302972050.pdf"
+              }
+            ]
+          }
+        ],
         "note": "較2024年39.16%下降3.87個百分點；105年(2016)為45.9%",
         "trend_reason": "政府「5、3、2」能源轉型政策目標（燃氣50%／燃煤30%／再生能源20%）持續推動以氣代煤，惟因再生能源進度落後，燃煤降幅未達政策原訂30%目標"
       },
@@ -773,8 +1006,28 @@
         "trend": "up",
         "kind": "renew",
         "data_year": "2025年（全國發電量口徑）",
+        "supply": [
+          {
+            "text": "自產能源：能源署統計中全數列為自產",
+            "sources": [
+              {
+                "label": "經濟部能源署 能源供給月資料",
+                "url": "https://data.gov.tw/dataset/11765"
+              }
+            ]
+          },
+          {
+            "text": "2025年底總裝置容量22.872GW（光電15.474GW、風力4.517GW、水力2.124GW）",
+            "sources": [
+              {
+                "label": "國發會 立法院書面報告（2026-04-16）",
+                "url": "https://lis.ly.gov.tw/lydbmeetr/uploadn/115/1150416/313.pdf"
+              }
+            ]
+          }
+        ],
         "note": "較2024年11.79%上升1.53個百分點；此為總占比，「再生能源使用狀況→台灣占比」的細分項目期間為2023/8–2024/7，不可直接對照",
-        "trend_reason": "太陽光電＋風力持續建置帶動成長，但原訂2025年達20%的政策目標大幅落後，經濟部已將目標時程遞延至2026年11月。官方曾以用電量成長（分母變大）與疫情延誤建置進度為由說明；業界分析另指出光電用地趨於飽和、環評三法加嚴、陸域風電地方反對、離岸風電國際原物料成本上漲等結構性因素，官方與業界說法並陳，不評斷孰為主因。"
+        "trend_reason": "太陽光電＋風力持續建置帶動成長，但原訂2025年達20%的政策目標大幅落後，原訂2026年11月，經濟部長2026-04表示恐再延後。官方曾以用電量成長（分母變大）與疫情延誤建置進度為由說明；業界分析另指出光電用地趨於飽和、環評三法加嚴、陸域風電地方反對、離岸風電國際原物料成本上漲等結構性因素，官方與業界說法並陳，不評斷孰為主因。"
       },
       {
         "rank": 4,
@@ -783,6 +1036,25 @@
         "trend": "flat",
         "kind": "fossil",
         "data_year": "2025年（全國發電量口徑）",
+        "supply": [
+          {
+            "text": "進口石油依存度99.82%（2025年）",
+            "sources": [
+              {
+                "label": "經濟部能源署 能源指標年資料",
+                "url": "https://data.gov.tw/dataset/8308"
+              }
+            ]
+          },
+          {
+            "text": "法定存量：90天以上",
+            "sources": [
+              {
+                "label": "能源署代理署長說法（新聞轉述）"
+              }
+            ]
+          }
+        ],
         "note": "較2024年1.45%微升0.06個百分點，長期維持個位數以下小占比，多用於尖峰調度與離島供電"
       },
       {
@@ -792,6 +1064,17 @@
         "trend": "down",
         "kind": "nuclear",
         "data_year": "2025年（全國發電量口徑）",
+        "supply": [
+          {
+            "text": "能源署統計將核能列為進口能源：能源供給月資料有「進口能源_核能」欄位，自產能源欄位無核能",
+            "sources": [
+              {
+                "label": "經濟部能源署 能源供給月資料",
+                "url": "https://data.gov.tw/dataset/11765"
+              }
+            ]
+          }
+        ],
         "note": "2025年全年平均值（核三2號機於2025-01至2025-05-17仍運轉，故全年平均非零；105年(2016)為12.0%）；2025-05-17除役後的核能占比為0%，見本頁核能專區「台灣現況」。兩者時點不同：1.12%為全年平均，0%為除役後狀態",
         "trend_reason": "非核家園政策；核一(2018-2019除役)、核二(2021-2023除役)、核三(2024-2025除役)依序除役，核四(龍門)從未商轉、目前封存中"
       },
@@ -803,6 +1086,15 @@
         "kind": "renew",
         "data_year": "2025年（全國發電量口徑）",
         "note": "較2024年1.06%持平微升0.01個百分點，主要用於電網調度儲能，非傳統發電來源"
+      },
+      {
+        "text": "2026年11月再生能源發電占比20%目標：經濟部長2026-04向立法院表示恐無法達成、將再次延遲",
+        "sources": [
+          {
+            "label": "工商時報（2026-04-20）",
+            "url": "https://www.ctee.com.tw/news/20260420700057-430104"
+          }
+        ]
       }
     ]
   },
