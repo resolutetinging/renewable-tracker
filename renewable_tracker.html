@@ -232,7 +232,6 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
   <div class="sec-title" id="sec-nuclear">☢️ 核能專區</div>
   <div class="sec-meta" id="nuclear-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;"></div>
   <div class="total-banner" id="nuclear-tw-banner"></div>
-  <div id="nuclear-tw-gating-block"></div>
   <div id="nuclear-restart-block"></div>
   <div class="rank-grid" id="nuclear-country-grid"></div>
   <div id="nuclear-plants-block"></div>
@@ -1055,27 +1054,22 @@ async function init(){
     ? `🇹🇼 台灣現況${nuclear.taiwan_share_pct!=null?`　核能占比 <span class="big" style="color:var(--nuclear);">${esc(nuclear.taiwan_share_pct)}%</span>`:''}
        <div style="margin-top:6px;">${bulletize(nuclear.taiwan_status)}${srcInline(nuclear.taiwan_status_sources)}</div>`
     : '';
-  document.getElementById('nuclear-tw-gating-block').innerHTML = (nuclear.taiwan_future_gating||[]).length
-    ? `<div class="sec-meta" style="margin:10px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🚦 若未來討論重啟：checkpoint一覽</div>
-       <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${nuclear.taiwan_future_gating.map(g=>`
-        <div class="case-card">
-          <div class="case-name">${esc(g.checkpoint)}</div>
-          <div class="case-desc">${bulletize(g.detail)}</div>
-          ${g.src_url?`<div class="case-src">來源：<a href="${safeUrl(g.src_url)}" target="_blank" rel="noopener">${esc(g.src_label||'連結')}</a></div>`:''}
-          ${(g.sources||[]).length?`<div class="case-src">來源：${srcLinks(g.sources)}</div>`:''}
-        </div>`).join('')}</div>` : '';
-  const ra = nuclear.restart_assessment||{};
-  const raLi = a=>`<li>${esc(a.text)}${(a.sources||[]).map(x=>` <span class="case-src">（<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label||'來源')}</a>）</span>`).join('')}</li>`;
-  const raCard = (title, arr) => (arr||[]).length ? `<div class="case-card"><div class="case-name">${esc(title)}</div><div class="case-desc"><ul class="txt-bullets">${arr.map(raLi).join('')}</ul></div></div>` : '';
-  const raGaps = ra.data_gaps && (ra.data_gaps.items||[]).length
-    ? `<div class="case-card" style="margin-top:10px;"><div class="case-name">${esc(ra.data_gaps.title||'')}</div><div class="case-desc"><ul class="txt-bullets">${ra.data_gaps.items.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>` : '';
-  document.getElementById('nuclear-restart-block').innerHTML = (ra.facts||[]).length || (ra.pros||[]).length || (ra.cons||[]).length
-    ? `<div class="sec-meta" style="margin:14px 0 4px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">⚖️ 核電重啟正反評估${ra.as_of?`<span style="font-weight:400;color:var(--muted);">（${esc(ra.as_of)}）</span>`:''}</div>
-       ${ra.scope_note?`<div class="sec-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;color:var(--muted);">${esc(ra.scope_note)}</div>`:''}
-       ${raCard('📋 基本事實', ra.facts)}
-       <div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-top:10px;align-items:start;">${raCard('支持重啟的理由', ra.pros)}${raCard('反對或疑慮', ra.cons)}</div>
-       ${raGaps}
-       ${ra.disclaimer?`<div class="src-note" style="margin-top:8px;">${esc(ra.disclaimer)}</div>`:''}` : '';
+  const rs = nuclear.restart||{};
+  const rsHd = t=>`<div class="sec-meta" style="margin:10px 0 6px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">${t}</div>`;
+  const rsPlant = p=>{
+    const body = ptsBlock('基本事實',p.facts)+ptsBlock('支持重啟的理由',p.pros)+ptsBlock('反對或疑慮',p.cons);
+    return body?`<div class="case-card"><div class="case-name">${esc(p.name)}</div>${body}</div>`:'';
+  };
+  const rsCommon = (rs.common||[]).map(g=>ptsBlock(esc(g.title),g.points)).join('');
+  const rsGaps = rs.data_gaps && (rs.data_gaps.items||[]).length
+    ? `<div class="case-card"><div class="case-name">${esc(rs.data_gaps.title||'')}</div><div class="np-block"><ul class="txt-bullets">${rs.data_gaps.items.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>` : '';
+  document.getElementById('nuclear-restart-block').innerHTML = rsCommon || (rs.plants||[]).length
+    ? `<div class="sec-meta" style="margin:14px 0 4px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">⚖️ 台灣核電重啟${rs.as_of?`<span style="font-weight:400;color:var(--muted);">（${esc(rs.as_of)}）</span>`:''}</div>
+       ${rs.scope_note?`<div class="sec-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;color:var(--muted);">${esc(rs.scope_note)}</div>`:''}
+       ${rsCommon?`<div class="case-card"><div class="case-name">🚦 共通前提（核三、核四皆適用）</div>${rsCommon}</div>`:''}
+       <div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start;">${(rs.plants||[]).map(rsPlant).join('')}</div>
+       ${rsGaps}
+       ${rs.disclaimer?`<div class="src-note" style="margin-top:8px;">${esc(rs.disclaimer)}</div>`:''}` : '';
   document.getElementById('nuclear-country-grid').innerHTML = (nuclear.global_ranking||[]).length
     ? nuclear.global_ranking.map(c=>`<div class="rank-card nuclear">
         <div class="rank-num">發電量 Top${esc(c.rank||'')}</div>

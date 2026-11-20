@@ -46,7 +46,7 @@ FIELD_LABELS = {
     'country': '國家', 'name': '名稱', 'desc': '說明', 'detail': '細節', 'note': '備註',
     'policy': '政策', 'operating_status': '營運狀況', 'operating_plans': '營運規劃',
     'public_opinion': '民意', 'waste_disposal': '核廢料處置', 'taiwan_status': '台灣現況',
-    'taiwan_future_gating': '台灣未來關鍵條件', 'reserve_margin_note': '備轉容量率',
+    'restart': '台灣核電重啟', 'reserve_margin_note': '備轉容量率',
     'supply_demand_note': '供需狀況', 'incident_note': '事故紀錄', 'timeline': '時間軸', 'metric_note': '指標說明', 'past': '已發生', 'near': '近期', 'long': '中長期', 'risk_assessment': '風險評估',
     'viewpoints': '各方觀點', 'rationale': '理由', 'level': '等級', 'region': '地區',
     'source_label': '來源', 'source_url': '來源網址', 'ai_demand': 'AI與產業用電需求', 'text': '內容',
