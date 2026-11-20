@@ -1680,6 +1680,631 @@
           "核電延役或重啟納入環評之修法草案"
         ]
       },
+      "stakeholders": {
+        "as_of": "2026-11-20",
+        "roles": [
+          {
+            "id": "kmt",
+            "name": "第22案公投提案方（國民黨立院黨團）與正方代表",
+            "group": "國會與政黨",
+            "stance": "支持",
+            "stance_basis": {
+              "text": "這項公投由國民黨立法院黨團提出",
+              "sources": [
+                {
+                  "label": "遠見雜誌 2026-11-13",
+                  "url": "https://www.gvm.com.tw/article/133754"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "陳中舜（正方代表，中經院副研究員）",
+                "text": "希望透過公投取得「全台最大的民意授權」",
+                "date": "2026-11-14",
+                "sources": [
+                  {
+                    "label": "環境資訊中心 2026-11-16",
+                    "url": "https://www.e-info.org.tw/node/244079"
+                  }
+                ]
+              },
+              {
+                "who": "陳中舜",
+                "text": "讓核二、三重啟，乃至於引進新的核電廠，「只是在止損而已」",
+                "date": "2026-11-14",
+                "sources": [
+                  {
+                    "label": "環境資訊中心 2026-11-16",
+                    "url": "https://www.e-info.org.tw/node/244079"
+                  }
+                ]
+              },
+              {
+                "who": "正方（中選會第3場意見發表會）",
+                "text": "台灣早已具備重啟核電的3原則",
+                "date": "2026-11-16",
+                "sources": [
+                  {
+                    "label": "中央社 2026-11-16",
+                    "url": "https://www.cna.com.tw/news/aipl/202611160178.aspx"
+                  }
+                ]
+              }
+            ],
+            "actions": []
+          },
+          {
+            "id": "hengchun",
+            "name": "恆春鎮長、車城鄉長",
+            "group": "地方",
+            "stance": "支持",
+            "stance_basis": {
+              "text": "恆春鎮長尤史經、車城鄉長陳政雄表示贊成",
+              "sources": [
+                {
+                  "label": "聯合報 2026-04-29",
+                  "url": "https://udn.com/news/story/7314/9470341"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "尤史經（恆春鎮長）",
+                "text": "過去核三廠在恆春運轉四十餘年，台電管理得很好",
+                "date": "2026-04-28",
+                "sources": [
+                  {
+                    "label": "聯合報 2026-04-29",
+                    "url": "https://udn.com/news/story/7314/9470341"
+                  }
+                ]
+              },
+              {
+                "who": "陳政雄（車城鄉長）",
+                "text": "台灣半導體及ＡＩ產業用電需求強烈，穩定供電能支撐經濟成長，贊成續用核電",
+                "date": "2026-04-28",
+                "sources": [
+                  {
+                    "label": "聯合報 2026-04-29",
+                    "url": "https://udn.com/news/story/7314/9470341"
+                  }
+                ]
+              }
+            ],
+            "actions": []
+          },
+          {
+            "id": "moea",
+            "name": "經濟部",
+            "group": "政府",
+            "stance": "附條件",
+            "stance_basis": {
+              "text": "核二、三廠則評估具有再運轉可行性，將同步啟動自主安全檢查以及研提再運轉計畫",
+              "sources": [
+                {
+                  "label": "ETtoday 2025-11-28",
+                  "url": "https://finance.ettoday.net/news/3075031"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "龔明鑫（經濟部長）",
+                "text": "核三廠已啟動自主安全檢查，3月份就會送出再運轉計畫，最快2028年可以重啟",
+                "date": "2026-03-10",
+                "sources": [
+                  {
+                    "label": "經濟日報 2026-03-10",
+                    "url": "https://money.udn.com/money/story/7307/9370572"
+                  }
+                ]
+              },
+              {
+                "who": "何晉滄（經濟部次長）",
+                "text": "按照時程規劃，大約2028年底左右",
+                "date": "2026-03-20",
+                "sources": [
+                  {
+                    "label": "聯合報／經濟日報 2026-03-20",
+                    "url": "https://udn.com/news/story/7238/9393319"
+                  }
+                ]
+              },
+              {
+                "who": "賴建信（經濟部次長，代表政院出席公投意見發表會）",
+                "text": "公投沒有辦法替代法定的嚴格審查",
+                "date": "2026-11-14",
+                "sources": [
+                  {
+                    "label": "環境資訊中心 2026-11-16",
+                    "url": "https://www.e-info.org.tw/node/244079"
+                  }
+                ]
+              },
+              {
+                "who": "賴建信",
+                "text": "「何必還要再用公投去處理這個專業上應該處理的問題？」",
+                "date": "2026-11-14",
+                "sources": [
+                  {
+                    "label": "環境資訊中心 2026-11-16",
+                    "url": "https://www.e-info.org.tw/node/244079"
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "text": "2025-11-27 核定台電核電廠現況評估報告，核二、三廠評估具再運轉可行性",
+                "sources": [
+                  {
+                    "label": "ETtoday 2025-11-28",
+                    "url": "https://finance.ettoday.net/news/3075031"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "exec",
+            "name": "總統府、行政院",
+            "group": "政府",
+            "stance": "附條件",
+            "stance_basis": {
+              "text": "卓榮泰指出，第一要求是安全，第二要求才是效率，第三要求則是希望社會能夠有共識",
+              "sources": [
+                {
+                  "label": "聯合報／經濟日報 2026-03-20",
+                  "url": "https://udn.com/news/story/7238/9393319"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "卓榮泰（行政院長）",
+                "text": "政府依照核管法修定之後，才有權利重啟",
+                "date": "2026-03-20",
+                "sources": [
+                  {
+                    "label": "聯合報／經濟日報 2026-03-20",
+                    "url": "https://udn.com/news/story/7238/9393319"
+                  }
+                ]
+              },
+              {
+                "who": "賴清德（總統）",
+                "text": "修法後核三廠2號機不可能在未經實質審查下，直接延役甚至立刻重啟",
+                "date": "2025-05-14",
+                "sources": [
+                  {
+                    "label": "公視新聞 2025-05-14",
+                    "url": "https://news.pts.org.tw/article/751121"
+                  }
+                ]
+              },
+              {
+                "who": "賴清德（環團會後轉述）",
+                "text": "因應國際局勢變化，必須重新考量核電的使用",
+                "date": "2026-04-22",
+                "sources": [
+                  {
+                    "label": "聯合報 2026-04-22",
+                    "url": "https://udn.com/news/story/7266/9456587"
+                  }
+                ]
+              }
+            ],
+            "actions": []
+          },
+          {
+            "id": "taipower",
+            "name": "台電",
+            "group": "事業",
+            "stance": "附條件",
+            "stance_basis": {
+              "text": "台電董事長曾文生表示，「有條件進行相關的自我安全檢查，然後提送核安會做審查，有這個條件的電廠是核二廠跟核三廠。」",
+              "sources": [
+                {
+                  "label": "公視新聞 2025-11-28",
+                  "url": "https://news.pts.org.tw/article/783526"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "許永輝（台電副總經理）",
+                "text": "核電廠無法做到百分之百的安全",
+                "date": "2026-04-29",
+                "sources": [
+                  {
+                    "label": "公視新聞 2026-04-29",
+                    "url": "https://news.pts.org.tw/article/805870"
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "text": "2025-08-23 說明依法執行核三自我安全檢查（再運轉計畫、老化評估、輻射影響、耐震安全評估及終期安全分析報告等）",
+                "sources": [
+                  {
+                    "label": "環境資訊中心 2025-08-23",
+                    "url": "https://e-info.org.tw/node/241997"
+                  }
+                ]
+              },
+              {
+                "text": "計畫書載明第一階段執行結果報告預計2027年第2季提送",
+                "sources": [
+                  {
+                    "label": "台電《第三核能發電廠再運轉計畫(公開版)》2026年8月，第30頁",
+                    "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "dpp",
+            "name": "民進黨立委",
+            "group": "國會與政黨",
+            "stance": "附條件",
+            "stance_basis": {
+              "text": "民進黨立委徐富癸說，台灣開發多元能源，核電是選項之一，但核三除役前發生四十多起事故，台電過去與地方溝通不良，核安疑慮與老舊機組要花多少錢才能再運轉，核安會與台電都應說明",
+              "sources": [
+                {
+                  "label": "聯合報 2026-04-29",
+                  "url": "https://udn.com/news/story/7314/9470341"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "林淑芬（民進黨立委）",
+                "text": "「這個不是舊權利的延伸，這一張執照就是40年，40年以後你還要繼續給它運轉，這個叫新權利的賦予，當然要重啟環評。」",
+                "date": "2025-05-14",
+                "sources": [
+                  {
+                    "label": "公視新聞 2025-05-14",
+                    "url": "https://news.pts.org.tw/article/751121"
+                  }
+                ]
+              }
+            ],
+            "actions": []
+          },
+          {
+            "id": "pingtung",
+            "name": "屏東縣政府",
+            "group": "地方",
+            "stance": "附條件",
+            "stance_basis": {
+              "text": "屏東縣長周春米昨未到說明會現場，她受訪重申「安全、安全再安全」，如果核三運轉成為議題、選項，台電、核安會與行政院都有責任公開資訊，並告訴大家核廢料何去何從",
+              "sources": [
+                {
+                  "label": "聯合報 2026-04-29",
+                  "url": "https://udn.com/news/story/7314/9470341"
+                }
+              ]
+            },
+            "quotes": [],
+            "actions": []
+          },
+          {
+            "id": "nusc",
+            "name": "核能安全委員會",
+            "group": "監管",
+            "stance": "程序把關",
+            "stance_basis": {
+              "text": "若台電公司提出運轉執照換發申請，將依據法規及參照國際標準與作法，嚴格執行安全審查及現場實地查證",
+              "sources": [
+                {
+                  "label": "公視新聞 2025-11-28",
+                  "url": "https://news.pts.org.tw/article/783526"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "陳明真（核安會主委）",
+                "text": "相關審查一定會按部就班，確保完全合乎核安審查標準",
+                "date": "2026-04-22",
+                "sources": [
+                  {
+                    "label": "聯合報 2026-04-22",
+                    "url": "https://udn.com/news/story/7266/9456587"
+                  }
+                ]
+              },
+              {
+                "who": "陳明真",
+                "text": "輻射防護相關的環境影響主責單位還是核安會，其他環境影響部分會和環境部進一步討論",
+                "date": "2026-04-22",
+                "sources": [
+                  {
+                    "label": "聯合報 2026-04-22",
+                    "url": "https://udn.com/news/story/7266/9456587"
+                  }
+                ]
+              },
+              {
+                "who": "核安會",
+                "text": "目前無法推估所需時程，後續有實質審查，將本於專業把關，不會超速審查",
+                "date": "2026-04-28",
+                "sources": [
+                  {
+                    "label": "聯合報 2026-04-29",
+                    "url": "https://udn.com/news/story/7314/9470341"
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "text": "2026-04-28 於恆春舉行「核三廠再運轉審查地方說明會」",
+                "sources": [
+                  {
+                    "label": "聯合報 2026-04-29",
+                    "url": "https://udn.com/news/story/7314/9470341"
+                  }
+                ]
+              },
+              {
+                "text": "2026-09-24 核定核三再運轉計畫，台電後續須提交執行結果報告再送核安會審查",
+                "sources": [
+                  {
+                    "label": "中央社 2026-09-24",
+                    "url": "https://www.cna.com.tw/news/afe/202609240313.aspx"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "moenv",
+            "name": "環境部",
+            "group": "監管",
+            "stance": "程序把關",
+            "stance_basis": {
+              "text": "按照目前環評法規定，核電廠延役並不需要環評",
+              "sources": [
+                {
+                  "label": "聯合新聞網 2026-03-22",
+                  "url": "https://udn.com/news/story/124794/9395693"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "彭啟明（環境部長）",
+                "text": "核電廠是否重啟並不是環境問題，而是核安問題",
+                "date": "2026-03-22",
+                "sources": [
+                  {
+                    "label": "聯合新聞網 2026-03-22",
+                    "url": "https://udn.com/news/story/124794/9395693"
+                  }
+                ]
+              },
+              {
+                "who": "彭啟明",
+                "text": "建議討論個案是否環評之前，也許可以先做政策環評",
+                "date": "2025-11-29",
+                "sources": [
+                  {
+                    "label": "經濟日報 2025-11-29",
+                    "url": "https://money.udn.com/money/story/7307/9171174"
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "text": "2025-05-14 表示目前正在進行環評總體檢，下半年可啟動修法",
+                "sources": [
+                  {
+                    "label": "公視新聞 2025-05-14",
+                    "url": "https://news.pts.org.tw/article/751121"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "anti",
+            "name": "公投反方代表（小民參政歐巴桑聯盟）",
+            "group": "公民團體",
+            "stance": "反對",
+            "stance_basis": {
+              "text": "核電廠並非大型的行動電源，不是說開就開",
+              "sources": [
+                {
+                  "label": "中央社 2026-11-16",
+                  "url": "https://www.cna.com.tw/news/aipl/202611160178.aspx"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "沈佩玲（反方代表，副秘書長）",
+                "text": "正方公投理由混亂、複雜",
+                "date": "2026-11-16",
+                "sources": [
+                  {
+                    "label": "中央社 2026-11-16",
+                    "url": "https://www.cna.com.tw/news/aipl/202611160178.aspx"
+                  }
+                ]
+              }
+            ],
+            "actions": []
+          },
+          {
+            "id": "ngo",
+            "name": "環保團體",
+            "group": "公民團體",
+            "stance": "反對",
+            "stance_basis": {
+              "text": "環團重申堅決反對核三重啟",
+              "sources": [
+                {
+                  "label": "聯合報 2026-08-01",
+                  "url": "https://udn.com/news/story/7266/9664408"
+                }
+              ]
+            },
+            "quotes": [
+              {
+                "who": "環團聯合聲明（地球公民基金會、綠色公民行動聯盟等）",
+                "text": "儘速修法將核電廠再運轉納入應實施環境影響評估的範圍",
+                "date": "2026-08-01",
+                "sources": [
+                  {
+                    "label": "聯合報 2026-08-01",
+                    "url": "https://udn.com/news/story/7266/9664408"
+                  }
+                ]
+              },
+              {
+                "who": "公民團體",
+                "text": "呼籲應該展開二次環評",
+                "date": "2025-11-28",
+                "sources": [
+                  {
+                    "label": "公視新聞 2025-11-28",
+                    "url": "https://news.pts.org.tw/article/783526"
+                  }
+                ]
+              },
+              {
+                "who": "全國廢核行動平台",
+                "text": "重啟不可行",
+                "date": "2025-11-28",
+                "sources": [
+                  {
+                    "label": "環境資訊中心 2025-11-28",
+                    "url": "https://www.e-info.org.tw/node/242602"
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "text": "2026-08-01 核三地方說明會前發表聯合聲明",
+                "sources": [
+                  {
+                    "label": "聯合報 2026-08-01",
+                    "url": "https://udn.com/news/story/7266/9664408"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "conflicts": [
+          {
+            "a": "kmt",
+            "b": "moea",
+            "label": "公投必要性",
+            "point": "公投是否有必要",
+            "a_text": "希望透過公投取得「全台最大的民意授權」",
+            "a_src": [
+              {
+                "label": "環境資訊中心 2026-11-16",
+                "url": "https://www.e-info.org.tw/node/244079"
+              }
+            ],
+            "b_text": "公投沒有辦法替代法定的嚴格審查",
+            "b_src": [
+              {
+                "label": "環境資訊中心 2026-11-16",
+                "url": "https://www.e-info.org.tw/node/244079"
+              }
+            ]
+          },
+          {
+            "a": "moea",
+            "b": "nusc",
+            "label": "重啟時程",
+            "point": "重啟時程預估與審查節奏",
+            "a_text": "按照時程規劃，大約2028年底左右",
+            "a_src": [
+              {
+                "label": "聯合報／經濟日報 2026-03-20",
+                "url": "https://udn.com/news/story/7238/9393319"
+              }
+            ],
+            "b_text": "目前無法推估所需時程，後續有實質審查，將本於專業把關，不會超速審查",
+            "b_src": [
+              {
+                "label": "聯合報 2026-04-29",
+                "url": "https://udn.com/news/story/7314/9470341"
+              }
+            ]
+          },
+          {
+            "a": "moenv",
+            "b": "ngo",
+            "label": "環評爭議",
+            "point": "核電廠再運轉是否須環評",
+            "a_text": "按照目前環評法規定，核電廠延役並不需要環評",
+            "a_src": [
+              {
+                "label": "聯合新聞網 2026-03-22",
+                "url": "https://udn.com/news/story/124794/9395693"
+              }
+            ],
+            "b_text": "儘速修法將核電廠再運轉納入應實施環境影響評估的範圍",
+            "b_src": [
+              {
+                "label": "聯合報 2026-08-01",
+                "url": "https://udn.com/news/story/7266/9664408"
+              }
+            ]
+          },
+          {
+            "a": "kmt",
+            "b": "anti",
+            "label": "公投理由",
+            "point": "公投理由是否成立",
+            "a_text": "台灣早已具備重啟核電的3原則",
+            "a_src": [
+              {
+                "label": "中央社 2026-11-16",
+                "url": "https://www.cna.com.tw/news/aipl/202611160178.aspx"
+              }
+            ],
+            "b_text": "正方公投理由混亂、複雜",
+            "b_src": [
+              {
+                "label": "中央社 2026-11-16",
+                "url": "https://www.cna.com.tw/news/aipl/202611160178.aspx"
+              }
+            ]
+          },
+          {
+            "a": "moea",
+            "b": "ngo",
+            "label": "重啟與否",
+            "point": "核三是否重啟",
+            "a_text": "核二、三廠則評估具有再運轉可行性",
+            "a_src": [
+              {
+                "label": "ETtoday 2025-11-28",
+                "url": "https://finance.ettoday.net/news/3075031"
+              }
+            ],
+            "b_text": "環團重申堅決反對核三重啟",
+            "b_src": [
+              {
+                "label": "聯合報 2026-08-01",
+                "url": "https://udn.com/news/story/7266/9664408"
+              }
+            ]
+          }
+        ]
+      },
       "disclaimer": "以上為依已附來源資料並列正反，不代表立場；核能政策為公共爭議，2026-11-28 另有公投。"
     }
   },

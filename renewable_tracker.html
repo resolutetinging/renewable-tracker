@@ -118,11 +118,44 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .src-dot:hover,.src-dot:focus-visible{background:var(--text);outline:none;}
 .src-dot:focus-visible{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--smart);}
 span.src-dot{background:var(--muted2);cursor:help;}
+span.src-dot:hover,span.src-dot:focus-visible{background:var(--muted);}
 .pt-ln{display:block;padding-left:1em;}
 .judge-box{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:8px;font-size:12px;color:var(--text2);line-height:1.6;}
 .judge-box b{color:var(--text);}
 .np-block{font-size:11.5px;color:var(--text2);line-height:1.6;margin-top:7px;}
 .np-block b{display:block;font-size:10.5px;color:var(--smart);font-weight:700;margin-bottom:2px;}
+/* ── 利害關係人：四欄（依立場）＋衝突連接線；窄螢幕改清單 ── */
+.sh-note{font-size:11px;color:var(--muted);line-height:1.6;margin:2px 0 8px;}
+.sh-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 6px;font-size:11px;color:var(--muted);margin:0 0 10px;line-height:1.8;}
+.sh-pill{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:12px;color:#fff;white-space:nowrap;line-height:1.5;}
+.sh-st-sup{background:#2a6840;}.sh-st-cond{background:#8a6a20;}.sh-st-proc{background:#3d5f86;}.sh-st-opp{background:#8a3830;}
+.sh-board{position:relative;}
+.sh-cols{display:block;}
+.sh-col{display:block;min-width:0;}
+.sh-role{position:relative;z-index:1;background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;margin-bottom:10px;min-width:0;overflow-wrap:anywhere;}
+.sh-role.on{border-color:#8a3830;box-shadow:0 0 0 1px #8a3830;}
+.sh-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;}
+.sh-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.45;}
+.sh-grp{font-size:10.5px;color:var(--muted);margin:1px 0 2px;}
+.sh-role .np-block ul{margin:0;padding-left:14px;}
+.sh-role .np-block li{margin-bottom:3px;}
+.sh-conf{margin-top:8px;padding-top:7px;border-top:1px dashed var(--border2);font-size:11.5px;color:var(--text2);line-height:1.6;}
+.sh-conf-hd{font-weight:700;color:var(--text);}
+.sh-conf-s{display:block;padding-left:1em;}
+.sh-svg,.sh-lbl,.sh-pop{display:none;}
+@media(min-width:1100px){
+  .sh-board{padding-top:50px;}
+  .sh-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:64px;align-items:start;}
+  .sh-svg{display:block;position:absolute;left:0;top:0;z-index:0;pointer-events:none;overflow:visible;}
+  .sh-conf{display:none;}
+  .sh-lbl{display:block;position:absolute;z-index:2;transform:translate(-50%,-50%);font:inherit;font-size:10.5px;font-weight:700;line-height:1.4;color:var(--text2);background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:0 5px;white-space:nowrap;cursor:pointer;}
+  .sh-lbl.on,.sh-lbl:hover,.sh-lbl:focus-visible{border-color:#8a3830;outline:none;color:var(--text);}
+  .sh-pop{position:absolute;z-index:5;width:300px;max-width:100%;background:var(--card);border:1px solid #8a3830;border-radius:8px;box-shadow:0 3px 12px rgba(0,0,0,.18);padding:9px 12px;font-size:11.5px;line-height:1.6;color:var(--text2);}
+  .sh-pop.show{display:block;}
+}
+.sh-pop-t{font-weight:700;color:var(--text);margin-bottom:3px;}
+.sh-pop-s{margin-top:4px;}
+.sh-pop-s b{color:var(--text);}
 /* ── 核電時間軸 ── */
 .tl-row,.tl-head{display:grid;grid-template-columns:104px 22px minmax(0,1.7fr) minmax(0,1fr);column-gap:10px;}
 .tl-head{font-size:10.5px;font-weight:700;color:var(--muted);padding-bottom:6px;border-bottom:2px solid var(--border2);margin-bottom:8px;}
@@ -377,6 +410,7 @@ function safeUrl(u){ u=String(u==null?'':u); return esc(/^https?:\/\//i.test(u) 
     if(dot && window.matchMedia('(hover: none)').matches){
       // 觸控：第一次點只顯示提示（不跳轉），同一圓點第二次點才開連結
       if(armed !== dot){ e.preventDefault(); armed = dot; }
+      else armed = null; // 第二次點擊會開連結：導向後重置，下次再點同一圓點須重新兩段式
     } else armed = null;
     if(hit) hit.dispatchEvent(new MouseEvent('mousemove',{bubbles:true,clientX:e.clientX,clientY:e.clientY}));
     else tip.style.opacity = '0';
@@ -674,6 +708,141 @@ function ptsHtml(v){
   return v?bulletize(v):'';
 }
 function ptsBlock(label,v){ const h=ptsHtml(v); return h?`<div class="np-block"><b>${label}</b>${h}</div>`:''; }
+
+// ── 利害關係人：四欄（依立場）＋衝突連接線（寬螢幕）／卡片清單（窄螢幕） ──
+const SH_CLS = {'支持':'sh-st-sup','附條件':'sh-st-cond','程序把關':'sh-st-proc','反對':'sh-st-opp'};
+const SH_ORDER = ['支持','附條件','程序把關','反對'];
+let shState = null, shRO = null, shHideT = 0, shPinned = -1, shRaf = 0, shBound = false;
+function shRender(sh){
+  const roles = ((sh&&sh.roles)||[]).filter(r=>r&&r.id&&r.name&&SH_CLS[r.stance]);
+  if(!roles.length){ shState = null; return ''; }
+  const byId = {}; roles.forEach(r=>{ byId[r.id]=r; });
+  const conflicts = ((sh&&sh.conflicts)||[]).filter(c=>c&&byId[c.a]&&byId[c.b]&&c.a!==c.b);
+  const side = (c,k)=>({name:byId[c[k]].name, text:c[k+'_text']||'', src:c[k+'_src']||[]});
+  const sideLine = s=>(s.text||(s.src||[]).length) ? `<div class="sh-pop-s"><b>${esc(s.name)}</b>：${semiLines(s.text, srcInline(s.src))}</div>` : '';
+  shState = { conflicts: conflicts.map((c,i)=>({i, a:c.a, b:c.b, label:c.label||String(c.point||'').slice(0,5),
+    pop:`<div class="sh-pop-t">⚔ ${esc(c.point||'')}</div>${sideLine(side(c,'a'))}${sideLine(side(c,'b'))}`})) };
+  const card = r=>{
+    const bas = r.stance_basis&&r.stance_basis.text ? `<div class="np-block"><b>立場依據</b>${semiLines(r.stance_basis.text, srcInline(r.stance_basis.sources))}</div>` : '';
+    const qs = (r.quotes||[]).filter(x=>x&&x.text);
+    const qh = qs.length ? `<div class="np-block"><b>代表發言</b><ul class="txt-bullets">${qs.map(x=>`<li>${x.who?esc(x.who):''}${x.date?`<span style="color:var(--muted);">（${esc(x.date)}）</span>`:''}：${semiLines(x.text, srcInline(x.sources))}</li>`).join('')}</ul></div>` : '';
+    const as = (r.actions||[]).filter(x=>x&&x.text);
+    const ah = as.length ? `<div class="np-block"><b>計畫／作為</b><ul class="txt-bullets">${as.map(x=>`<li>${semiLines(x.text, srcInline(x.sources))}</li>`).join('')}</ul></div>` : '';
+    const mine = conflicts.filter(c=>c.a===r.id||c.b===r.id).map(c=>{
+      const me = c.a===r.id?'a':'b', ot = me==='a'?'b':'a', o = byId[c[ot]];
+      const line = (nm,k)=>(c[k+'_text']||(c[k+'_src']||[]).length) ? `<span class="sh-conf-s">${esc(nm)}：${semiLines(c[k+'_text']||'', srcInline(c[k+'_src']))}</span>` : '';
+      return `<div class="sh-conf"><span class="sh-conf-hd">⚔ 衝突：與${esc(o.name)}——${esc(c.point||'')}</span>${line('本方',me)}${line('對方',ot)}</div>`;
+    }).join('');
+    return `<div class="sh-role" data-rid="${esc(r.id)}"><div class="sh-hd"><div class="sh-name">${esc(r.name)}</div><span class="sh-pill ${SH_CLS[r.stance]}">${esc(r.stance)}</span></div>${r.group?`<div class="sh-grp">${esc(r.group)}</div>`:''}${bas}${qh}${ah}${mine}</div>`;
+  };
+  const cols = SH_ORDER.map(st=>`<div class="sh-col">${roles.filter(r=>r.stance===st).map(card).join('')}</div>`).join('');
+  const lbls = shState.conflicts.map(c=>`<button type="button" class="sh-lbl" data-ci="${c.i}" aria-label="衝突：${esc(c.label)}">${esc(c.label)}</button>`).join('');
+  const legend = SH_ORDER.map(st=>`<span class="sh-pill ${SH_CLS[st]}">${st}</span>`).join('');
+  return `<div class="case-card"><div class="case-name">🧭 利害關係人立場與衝突${sh.as_of?`<span style="font-weight:400;color:var(--muted);font-size:11px;">（${esc(sh.as_of)}）</span>`:''}</div>
+    <div class="sh-legend">${legend}<span>立場標籤為本頁依所附發言歸納（本頁判斷、非當事方自稱）；連線代表兩方公開發言就同一點立場不同，不代表本頁評斷對錯</span></div>
+    <div class="sh-note">有引號者為原文直接引述，無引號者為報導轉述；點選或移到連線上的標籤可看衝突點與雙方來源。本頁尚未取得可核實發言：民眾黨、產業團體、經濟部能源署、核四官方立場。</div>
+    <div class="sh-board" id="sh-board"><svg class="sh-svg" aria-hidden="true"></svg><div class="sh-cols">${cols}</div>${lbls}<div class="sh-pop" id="sh-pop"></div></div></div>`;
+}
+function shLayout(){
+  const board = document.getElementById('sh-board');
+  if(!board||!shState) return;
+  const svg = board.querySelector('.sh-svg'), pop = document.getElementById('sh-pop');
+  const lbls = [...board.querySelectorAll('.sh-lbl')];
+  svg.innerHTML = '';
+  if(!window.matchMedia('(min-width:1100px)').matches || !board.clientWidth){ pop.classList.remove('show'); return; }
+  const br = board.getBoundingClientRect(), W = board.clientWidth, H = board.clientHeight;
+  svg.setAttribute('width',W); svg.setAttribute('height',H); svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  const rel = el=>{ const r=el.getBoundingClientRect(); return {l:r.left-br.left, r:r.right-br.left, t:r.top-br.top, b:r.bottom-br.top}; };
+  const colEls = [...board.querySelectorAll('.sh-col')], cols = colEls.map(rel);
+  const gx = c=> (cols[c].r + cols[c+1].l)/2;
+  const cards = {}; board.querySelectorAll('.sh-role').forEach(el=>{
+    cards[el.getAttribute('data-rid')] = Object.assign({el, ci: colEls.findIndex(c=>c.contains(el))}, rel(el));
+  });
+  const slot = {}, gslot = {}; let ch = 0;
+  const NS = 'http://www.w3.org/2000/svg';
+  const anchorY = C=>{ const id = C.el.getAttribute('data-rid'); const n = slot[id] = (slot[id]||0)+1; return Math.min(C.t+22+16*(n-1), C.b-10); };
+  shState.conflicts.forEach(c=>{
+    let A = cards[c.a], B = cards[c.b]; const lb = lbls[c.i];
+    if(!A||!B||!lb) return;
+    if(A.ci>B.ci){ const t=A; A=B; B=t; }
+    const ya = anchorY(A), yb = anchorY(B);
+    let d, lx, ly;
+    if(A.ci===B.ci){
+      const x = A.r+14; d = `M${A.r},${ya} H${x} V${yb} H${B.r}`; lx = x; ly = (ya+yb)/2;
+    } else if(B.ci-A.ci===1){
+      const x0 = A.r, x1 = B.l, xm = (x0+x1)/2; d = `M${x0},${ya} C${xm},${ya} ${xm},${yb} ${x1},${yb}`; lx = xm; ly = (ya+yb)/2;
+    } else {
+      const g1 = A.ci, g2 = B.ci-1;
+      const o1 = ((gslot[g1]=(gslot[g1]||0)+1)-2)*8, o2 = ((gslot[g2]=(gslot[g2]||0)+1)-2)*8;
+      const y = 12 + 20*ch++, x1 = gx(g1)+o1, x2 = gx(g2)+o2;
+      d = `M${A.r},${ya} H${x1} V${y} H${x2} V${yb} H${B.l}`; lx = (x1+x2)/2; ly = y;
+    }
+    const g = document.createElementNS(NS,'g'); g.setAttribute('data-ci',c.i);
+    const mk = (cls,attrs)=>{ const p=document.createElementNS(NS,'path'); p.setAttribute('d',d); p.setAttribute('class',cls); p.setAttribute('fill','none'); for(const k in attrs) p.setAttribute(k,attrs[k]); return p; };
+    g.appendChild(mk('sh-line',{stroke:'#7a756f','stroke-width':'1.6','stroke-linejoin':'round','stroke-linecap':'round'}));
+    const hit = mk('sh-hit',{stroke:'transparent','stroke-width':'12','pointer-events':'stroke'}); hit.style.cursor='pointer'; g.appendChild(hit);
+    [[A.r,ya],[B.l,yb]].forEach(pt=>{ const dot=document.createElementNS(NS,'circle'); dot.setAttribute('cx',pt[0]); dot.setAttribute('cy',pt[1]); dot.setAttribute('r',3.5); dot.setAttribute('class','sh-end'); dot.setAttribute('fill','#7a756f'); g.appendChild(dot); });
+    svg.appendChild(g);
+    lb.style.left = lx+'px'; lb.style.top = ly+'px';
+  });
+  if(shPinned>=0) shShow(shPinned); else pop.classList.remove('show');
+}
+function shHi(ci,on){
+  const board = document.getElementById('sh-board'); if(!board||!shState) return;
+  const g = board.querySelector('.sh-svg g[data-ci="'+ci+'"]'), lb = board.querySelector('.sh-lbl[data-ci="'+ci+'"]'), c = shState.conflicts[ci];
+  if(g){ const ln=g.querySelector('.sh-line'); ln.setAttribute('stroke', on?'#8a3830':'#7a756f'); ln.setAttribute('stroke-width', on?'2.6':'1.6'); g.querySelectorAll('.sh-end').forEach(e=>e.setAttribute('fill', on?'#8a3830':'#7a756f')); }
+  if(lb) lb.classList.toggle('on',on);
+  if(c) [c.a,c.b].forEach(id=>{ const el=[...board.querySelectorAll('.sh-role')].find(x=>x.getAttribute('data-rid')===id); if(el) el.classList.toggle('on',on); });
+}
+function shShow(ci){
+  const board = document.getElementById('sh-board'), pop = document.getElementById('sh-pop'); if(!board||!pop||!shState) return;
+  const c = shState.conflicts[ci], lb = board.querySelector('.sh-lbl[data-ci="'+ci+'"]'); if(!c||!lb) return;
+  clearTimeout(shHideT);
+  shState.conflicts.forEach(x=>shHi(x.i,false)); shHi(ci,true);
+  pop.innerHTML = c.pop; pop.setAttribute('data-ci',ci); pop.classList.add('show');
+  const W = board.clientWidth, pw = pop.offsetWidth;
+  pop.style.left = Math.max(0,Math.min(W-pw, lb.offsetLeft-pw/2))+'px'; pop.style.top = (lb.offsetTop+14)+'px';
+}
+function shHide(force){
+  clearTimeout(shHideT);
+  shHideT = setTimeout(()=>{
+    if(shPinned>=0 && !force) return;
+    const pop = document.getElementById('sh-pop'); if(pop) pop.classList.remove('show');
+    if(shState) shState.conflicts.forEach(x=>shHi(x.i,false));
+  }, 220);
+}
+function shInit(){
+  if(shRO){ shRO.disconnect(); shRO = null; }
+  const board = document.getElementById('sh-board');
+  shPinned = -1;
+  if(!board||!shState) return;
+  const sched = ()=>{ cancelAnimationFrame(shRaf); shRaf = requestAnimationFrame(shLayout); };
+  if(window.ResizeObserver){ shRO = new ResizeObserver(sched); shRO.observe(board); board.querySelectorAll('.sh-col').forEach(c=>shRO.observe(c)); }
+  if(!shBound){ shBound = true; window.addEventListener('resize', ()=>{ cancelAnimationFrame(shRaf); shRaf = requestAnimationFrame(shLayout); });
+    document.addEventListener('click', e=>{ if(shPinned>=0 && !(e.target.closest && e.target.closest('#sh-board'))){ shPinned=-1; shHide(true); } }); }
+  const ciOf = el=>{ const n = el.closest && el.closest('[data-ci]'); return n ? +n.getAttribute('data-ci') : -1; };
+  board.addEventListener('mouseover', e=>{
+    if(e.target.closest('.sh-pop')){ clearTimeout(shHideT); return; }
+    const ci = ciOf(e.target);
+    if(ci>=0){ if(shPinned<0) shShow(ci); return; }
+    const role = e.target.closest('.sh-role');
+    if(role && shPinned<0){
+      const rid = role.getAttribute('data-rid');
+      shState.conflicts.forEach(c=>shHi(c.i,false)); shState.conflicts.forEach(c=>{ if(c.a===rid||c.b===rid) shHi(c.i,true); });
+    }
+  });
+  board.addEventListener('mouseout', e=>{
+    const rt = e.relatedTarget;
+    if(rt && board.contains(rt) && (rt.closest('.sh-pop')||ciOf(rt)>=0)) return;
+    shHide(false);
+  });
+  board.addEventListener('click', e=>{
+    if(e.target.closest('.sh-pop')) return;
+    const ci = ciOf(e.target);
+    if(ci>=0){ shPinned = (shPinned===ci) ? -1 : ci; if(shPinned>=0) shShow(ci); else shHide(true); }
+  });
+  sched();
+}
 
 // AI發展對能源用量影響：AI發展狀況／可用能源狀況固定分區呈現
 // 關鍵原物料供應鏈卡：開採端／精煉端／供應風險固定分區呈現
@@ -1165,14 +1334,17 @@ async function init(){
   const tlHtml = tlEvents.length
     ? `<div class="case-card"><div class="case-name">🕒 核電時間軸</div><div class="tl-legend"><span class="tl-tag tl-c3">核三</span><span class="tl-tag tl-c4">核四</span><span class="tl-tag tl-cc">共通</span>顏色代表廠別　<span class="tl-tag tl-plan">預計</span>尚未發生</div><div class="tl-head"><div class="tl-h-date">時間</div><div></div><div>大事紀</div><div>影響／挑戰</div></div>${tlEvents.map((e,i)=>(i===tlFlip?tlToday:'')+tlRow(e,i===tlEvents.length-1)).join('')}${tlFlip<0?tlToday:''}</div>` : '';
   const rsPlantsHtml = (rs.plants||[]).map(rsPlant).join('');
-  document.getElementById('nuclear-restart-block').innerHTML = rsCommon || tlHtml || (rs.plants||[]).length
+  const shHtml = shRender(rs.stakeholders);
+  document.getElementById('nuclear-restart-block').innerHTML = rsCommon || tlHtml || shHtml || (rs.plants||[]).length
     ? `<div class="sec-meta" style="margin:14px 0 4px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">⚖️ 台灣核電重啟${rs.as_of?`<span style="font-weight:400;color:var(--muted);">（${esc(rs.as_of)}）</span>`:''}</div>
        ${rs.scope_note?`<div class="sec-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;color:var(--muted);">${esc(rs.scope_note)}</div>`:''}
        ${tlHtml}
+       ${shHtml}
        ${rsCommon?`<div class="case-card"><div class="case-name">🚦 共通前提（核三、核四皆適用）</div>${rsCommon}</div>`:''}
        ${rsPlantsHtml?`<div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start;">${rsPlantsHtml}</div>`:''}
        ${rsGaps}
        ${rs.disclaimer?`<div class="src-note" style="margin-top:8px;">${esc(rs.disclaimer)}</div>`:''}` : '';
+  shInit();
   document.getElementById('nuclear-country-grid').innerHTML = (nuclear.global_ranking||[]).length
     ? nuclear.global_ranking.map(c=>`<div class="rank-card nuclear">
         <div class="rank-num">發電量 Top${esc(c.rank||'')}</div>
