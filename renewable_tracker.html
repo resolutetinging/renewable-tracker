@@ -727,7 +727,7 @@ function shRender(sh){
     const qs = (r.quotes||[]).filter(x=>x&&x.text);
     const qh = qs.length ? `<div class="np-block"><b>代表發言</b><ul class="txt-bullets">${qs.map(x=>`<li>${x.who?esc(x.who):''}${x.date?`<span style="color:var(--muted);">（${esc(x.date)}）</span>`:''}：${semiLines(x.text, srcInline(x.sources))}</li>`).join('')}</ul></div>` : '';
     const as = (r.actions||[]).filter(x=>x&&x.text);
-    const ah = as.length ? `<div class="np-block"><b>計畫／作為</b><ul class="txt-bullets">${as.map(x=>`<li>${semiLines(x.text, srcInline(x.sources))}</li>`).join('')}</ul></div>` : '';
+    const ah = as.length ? `<div class="np-block"><b>計畫／作為</b><ul class="txt-bullets">${as.map(x=>`<li>${x.date?`<span style="color:var(--muted);">${esc(x.date)}</span>：`:''}${semiLines(x.text, srcInline(x.sources))}</li>`).join('')}</ul></div>` : '';
     const mine = conflicts.filter(c=>c.a===r.id||c.b===r.id).map(c=>{
       const me = c.a===r.id?'a':'b', ot = me==='a'?'b':'a', o = byId[c[ot]];
       const line = (nm,k)=>(c[k+'_text']||(c[k+'_src']||[]).length) ? `<span class="sh-conf-s">${esc(nm)}：${semiLines(c[k+'_text']||'', srcInline(c[k+'_src']))}</span>` : '';
