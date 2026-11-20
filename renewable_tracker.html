@@ -123,11 +123,14 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .tl-rail::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--border2);}
 .tl-row:first-child .tl-rail::before{top:8px;}
 .tl-row.tl-last .tl-rail::before{bottom:auto;height:8px;}
-.tl-dot{position:absolute;left:50%;top:4px;width:10px;height:10px;margin-left:-5px;border-radius:50%;box-sizing:border-box;border:2px solid var(--nuclear);background:var(--nuclear);}
+.tl-c3{--tlc:var(--nuclear);}.tl-c4{--tlc:var(--fossil);}.tl-cc{--tlc:var(--renew);}
+.tl-dot{position:absolute;left:50%;top:4px;width:10px;height:10px;margin-left:-5px;border-radius:50%;box-sizing:border-box;border:2px solid var(--tlc,var(--nuclear));background:var(--tlc,var(--nuclear));}
 .tl-row.tl-planned .tl-dot{background:var(--card);}
 .tl-body{font-size:11.5px;color:var(--text2);line-height:1.6;padding-bottom:12px;overflow-wrap:anywhere;}
-.tl-tag{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:12px;margin-right:5px;vertical-align:baseline;background:var(--card2);color:var(--nuclear);border:1px solid var(--nuclear);}
-.tl-tag.tl-plan{background:var(--card);border-style:dashed;}
+.tl-tag{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:12px;margin-right:5px;vertical-align:baseline;background:var(--tlc,var(--nuclear));color:#fff;border:1px solid var(--tlc,var(--nuclear));}
+.tl-tag.tl-plan{background:var(--card);color:var(--muted);border:1px dashed var(--muted2);}
+.tl-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px;font-size:11px;color:var(--muted);margin:2px 0 10px;line-height:1.8;}
+.tl-legend .tl-tag{margin-right:0;}
 .fc-table{min-width:560px;}
 .fc-table td{padding:8px 12px;}
 .fc-table td.fc-grp{background:var(--card2);font-weight:700;color:var(--text);padding:7px 12px;}
@@ -549,7 +552,7 @@ function twFutureBlock(fut){
   const items = (fut && fut.items) || [];
   if(!items.length) return '';
   return `<div class="trend-chart-wrap">
-    <div class="sec-meta" style="margin-bottom:6px;">🔭 台灣能源未來方向${fut.as_of?'　資料時間點：'+esc(fut.as_of):''}</div>
+    <div class="sec-meta" style="margin-bottom:6px;">🔭 台灣整體能源未來走向（不分能源類別）${fut.as_of?'　資料時間點：'+esc(fut.as_of):''}</div>
     ${items.map(it=>`<div class="future-sec"><div class="future-ttl">${esc(it.title)}</div>
       <ul class="txt-bullets" style="font-size:12px;color:var(--text2);line-height:1.6;">${(it.points||[]).map(p=>{
         const l=srcLinks(p.sources);
@@ -1091,10 +1094,11 @@ async function init(){
   const tlEvents = (rs.timeline||[]).filter(e=>e&&e.text).map((e,i)=>({e,i}))
     .sort((x,y)=>String(x.e.sort||'').localeCompare(String(y.e.sort||''))||x.i-y.i).map(o=>o.e);
   const tlFlip = tlEvents.findIndex(e=>e.status==='planned');
-  const tlRow = (e,last)=>`<div class="tl-row ${e.status==='planned'?'tl-planned':'tl-past'}${last?' tl-last':''}"><div class="tl-date">${esc(e.date||'')}</div><div class="tl-rail"><span class="tl-dot"></span></div><div class="tl-body">${e.plant?`<span class="tl-tag">${esc(e.plant)}</span>`:''}${e.status==='planned'?'<span class="tl-tag tl-plan">預計</span>':''}${esc(e.text)}${srcInline(e.sources)}</div></div>`;
+  const tlPc = pl=>pl==='核三'?' tl-c3':pl==='核四'?' tl-c4':pl==='共通'?' tl-cc':'';
+  const tlRow = (e,last)=>`<div class="tl-row ${e.status==='planned'?'tl-planned':'tl-past'}${tlPc(e.plant)}${last?' tl-last':''}"><div class="tl-date">${esc(e.date||'')}</div><div class="tl-rail"><span class="tl-dot"></span></div><div class="tl-body">${e.plant?`<span class="tl-tag">${esc(e.plant)}</span>`:''}${e.status==='planned'?'<span class="tl-tag tl-plan">預計</span>':''}${esc(e.text)}${srcInline(e.sources)}</div></div>`;
   const tlToday = `<div class="tl-row tl-today"><div class="tl-date">今天</div><div class="tl-rail"></div><div class="tl-body">${rs.timeline_today?`資料日 ${esc(rs.timeline_today)}`:'今天'}</div></div>`;
   const tlHtml = tlEvents.length
-    ? `<div class="case-card"><div class="case-name">🕒 核電時間軸</div>${tlEvents.map((e,i)=>(i===tlFlip?tlToday:'')+tlRow(e,i===tlEvents.length-1)).join('')}${tlFlip<0?tlToday:''}</div>` : '';
+    ? `<div class="case-card"><div class="case-name">🕒 核電時間軸</div><div class="tl-legend"><span class="tl-tag tl-c3">核三</span><span class="tl-tag tl-c4">核四</span><span class="tl-tag tl-cc">共通</span>顏色代表廠別　<span class="tl-tag tl-plan">預計</span>尚未發生</div>${tlEvents.map((e,i)=>(i===tlFlip?tlToday:'')+tlRow(e,i===tlEvents.length-1)).join('')}${tlFlip<0?tlToday:''}</div>` : '';
   const rsPlantsHtml = (rs.plants||[]).map(rsPlant).join('');
   document.getElementById('nuclear-restart-block').innerHTML = rsCommon || tlHtml || (rs.plants||[]).length
     ? `<div class="sec-meta" style="margin:14px 0 4px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">⚖️ 台灣核電重啟${rs.as_of?`<span style="font-weight:400;color:var(--muted);">（${esc(rs.as_of)}）</span>`:''}</div>
