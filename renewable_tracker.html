@@ -116,6 +116,27 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .case-src a:hover{text-decoration:underline;}
 .np-block{font-size:11.5px;color:var(--text2);line-height:1.6;margin-top:7px;}
 .np-block b{display:block;font-size:10.5px;color:var(--smart);font-weight:700;margin-bottom:2px;}
+/* ── 核電時間軸 ── */
+.tl-row{display:grid;grid-template-columns:104px 22px minmax(0,1fr);column-gap:8px;}
+.tl-date{text-align:right;font-size:11.5px;font-weight:700;color:var(--text2);line-height:1.6;padding-top:0;overflow-wrap:anywhere;}
+.tl-rail{position:relative;}
+.tl-rail::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--border2);}
+.tl-row:first-child .tl-rail::before{top:8px;}
+.tl-row.tl-last .tl-rail::before{bottom:auto;height:8px;}
+.tl-dot{position:absolute;left:50%;top:4px;width:10px;height:10px;margin-left:-5px;border-radius:50%;box-sizing:border-box;border:2px solid var(--nuclear);background:var(--nuclear);}
+.tl-row.tl-planned .tl-dot{background:var(--card);}
+.tl-body{font-size:11.5px;color:var(--text2);line-height:1.6;padding-bottom:12px;overflow-wrap:anywhere;}
+.tl-tag{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:12px;margin-right:5px;vertical-align:baseline;background:var(--card2);color:var(--nuclear);border:1px solid var(--nuclear);}
+.tl-tag.tl-plan{background:var(--card);border-style:dashed;}
+.tl-today .tl-date{color:var(--smart);}
+.tl-today .tl-rail::after{content:'';position:absolute;left:50%;top:7px;width:10px;height:2px;margin-left:-5px;background:var(--smart);}
+.tl-today .tl-body{padding-bottom:12px;color:var(--smart);font-weight:700;border-top:1px dashed var(--smart);margin-top:7px;padding-top:2px;}
+@media(max-width:520px){
+  .tl-row{grid-template-columns:14px minmax(0,1fr);column-gap:8px;}
+  .tl-date{grid-column:2;grid-row:1;text-align:left;}
+  .tl-rail{grid-column:1;grid-row:1 / span 2;}
+  .tl-body{grid-column:2;grid-row:2;}
+}
 
 /* ── 歷年趨勢折線圖 ── */
 .trend-chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:14px;}
@@ -1063,11 +1084,20 @@ async function init(){
   const rsCommon = (rs.common||[]).map(g=>ptsBlock(esc(g.title),g.points)).join('');
   const rsGaps = rs.data_gaps && (rs.data_gaps.items||[]).length
     ? `<div class="case-card"><div class="case-name">${esc(rs.data_gaps.title||'')}</div><div class="np-block"><ul class="txt-bullets">${rs.data_gaps.items.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>` : '';
-  document.getElementById('nuclear-restart-block').innerHTML = rsCommon || (rs.plants||[]).length
+  const tlEvents = (rs.timeline||[]).filter(e=>e&&e.text).map((e,i)=>({e,i}))
+    .sort((x,y)=>String(x.e.sort||'').localeCompare(String(y.e.sort||''))||x.i-y.i).map(o=>o.e);
+  const tlFlip = tlEvents.findIndex(e=>e.status==='planned');
+  const tlRow = (e,last)=>`<div class="tl-row ${e.status==='planned'?'tl-planned':'tl-past'}${last?' tl-last':''}"><div class="tl-date">${esc(e.date||'')}</div><div class="tl-rail"><span class="tl-dot"></span></div><div class="tl-body">${e.plant?`<span class="tl-tag">${esc(e.plant)}</span>`:''}${e.status==='planned'?'<span class="tl-tag tl-plan">預計</span>':''}${esc(e.text)}${srcInline(e.sources)}</div></div>`;
+  const tlToday = `<div class="tl-row tl-today"><div class="tl-date">今天</div><div class="tl-rail"></div><div class="tl-body">${rs.timeline_today?`資料日 ${esc(rs.timeline_today)}`:'今天'}</div></div>`;
+  const tlHtml = tlEvents.length
+    ? `<div class="case-card"><div class="case-name">🕒 核電時間軸</div>${tlEvents.map((e,i)=>(i===tlFlip?tlToday:'')+tlRow(e,i===tlEvents.length-1)).join('')}${tlFlip<0?tlToday:''}</div>` : '';
+  const rsPlantsHtml = (rs.plants||[]).map(rsPlant).join('');
+  document.getElementById('nuclear-restart-block').innerHTML = rsCommon || tlHtml || (rs.plants||[]).length
     ? `<div class="sec-meta" style="margin:14px 0 4px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">⚖️ 台灣核電重啟${rs.as_of?`<span style="font-weight:400;color:var(--muted);">（${esc(rs.as_of)}）</span>`:''}</div>
        ${rs.scope_note?`<div class="sec-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;color:var(--muted);">${esc(rs.scope_note)}</div>`:''}
+       ${tlHtml}
        ${rsCommon?`<div class="case-card"><div class="case-name">🚦 共通前提（核三、核四皆適用）</div>${rsCommon}</div>`:''}
-       <div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start;">${(rs.plants||[]).map(rsPlant).join('')}</div>
+       ${rsPlantsHtml?`<div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start;">${rsPlantsHtml}</div>`:''}
        ${rsGaps}
        ${rs.disclaimer?`<div class="src-note" style="margin-top:8px;">${esc(rs.disclaimer)}</div>`:''}` : '';
   document.getElementById('nuclear-country-grid').innerHTML = (nuclear.global_ranking||[]).length
