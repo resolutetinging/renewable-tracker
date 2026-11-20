@@ -128,7 +128,12 @@ span.src-dot:hover,span.src-dot:focus-visible{background:var(--muted);}
 .sh-note{font-size:11px;color:var(--muted);line-height:1.6;margin:2px 0 8px;}
 .sh-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 6px;font-size:11px;color:var(--muted);margin:0 0 10px;line-height:1.8;}
 .sh-pill{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:12px;color:#fff;white-space:nowrap;line-height:1.5;}
-.sh-st-sup{background:#2a6840;}.sh-st-cond{background:#8a6a20;}.sh-st-proc{background:#3d5f86;}.sh-st-opp{background:#8a3830;}
+.sh-st-sup{background:#2a6840;}.sh-st-neu{background:#5f5a54;}.sh-st-cond{background:#8a6a20;}.sh-st-proc{background:#3d5f86;}.sh-st-opp{background:#8a3830;}
+.sh-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 10px;}
+.sh-tab{font:inherit;font-size:11.5px;color:var(--text2);background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:5px 12px;cursor:pointer;line-height:1.5;}
+.sh-tab:hover{background:#2a6840;color:#fff;border-color:#2a6840;}
+.sh-tab.on{background:#2a6840;color:#fff;border-color:#2a6840;font-weight:700;}
+.sh-tab:focus-visible{outline:2px solid #3d5f86;outline-offset:2px;}
 .sh-board{position:relative;}
 .sh-cols{display:block;}
 .sh-col{display:block;min-width:0;}
@@ -709,39 +714,77 @@ function ptsHtml(v){
 }
 function ptsBlock(label,v){ const h=ptsHtml(v); return h?`<div class="np-block"><b>${label}</b>${h}</div>`:''; }
 
-// ── 利害關係人：四欄（依立場）＋衝突連接線（寬螢幕）／卡片清單（窄螢幕） ──
-const SH_CLS = {'支持':'sh-st-sup','附條件':'sh-st-cond','程序把關':'sh-st-proc','反對':'sh-st-opp'};
-const SH_ORDER = ['支持','附條件','程序把關','反對'];
-let shState = null, shRO = null, shHideT = 0, shPinned = -1, shRaf = 0, shBound = false;
+// ── 利害關係人：兩個面向（核三再運轉／第22案公投）tab 切換；四欄或三欄（依立場）＋衝突連接線（寬螢幕）／卡片清單（窄螢幕） ──
+const SH_AX = {
+  restart:{ label:'核三再運轉', order:['支持','附條件','程序把關','反對'],
+    cls:{'支持':'sh-st-sup','附條件':'sh-st-cond','程序把關':'sh-st-proc','反對':'sh-st-opp'},
+    note:'本頁尚未取得可核實發言：民眾黨、產業團體、經濟部能源署、核四官方立場。' },
+  referendum:{ label:'第 22 案公投／非核家園政策', order:['同意','不同意','未表態'],
+    cls:{'同意':'sh-st-sup','不同意':'sh-st-opp','未表態':'sh-st-neu'},
+    note:'「同意」指支持廢除「非核家園」的能源政策，「不同意」指反對廢除；「（程序面）」是本頁依所附發言註記的理由類型（所附發言的理由是不需用公投處理）。' }
+};
+const SH_AXES = ['restart','referendum'];
+const SH_KEY = 'renewable_stk_axis';
+let shState = null, shRO = null, shHideT = 0, shPinned = -1, shRaf = 0, shBound = false, shData = null, shAxis = 'restart';
+function shAxData(r,ax){ const a = r && r.axes && r.axes[ax]; return a && SH_AX[ax].cls[a.stance] ? a : null; }
+function shHas(ax){ return ((shData&&shData.roles)||[]).some(r=>r&&r.id&&r.name&&shAxData(r,ax)); }
 function shRender(sh){
-  const roles = ((sh&&sh.roles)||[]).filter(r=>r&&r.id&&r.name&&SH_CLS[r.stance]);
-  if(!roles.length){ shState = null; return ''; }
+  shData = sh;
+  let ax = 'restart';
+  try{ const v = localStorage.getItem(SH_KEY); if(SH_AXES.includes(v)) ax = v; }catch(e){}
+  if(!shHas(ax)) ax = SH_AXES.find(shHas) || '';
+  if(!ax){ shState = null; return ''; }
+  shAxis = ax;
+  return `<div class="case-card" id="sh-wrap">${shInner()}</div>`;
+}
+function shInner(){
+  const sh = shData, ax = shAxis, A = SH_AX[ax];
+  const roles = (sh.roles||[]).filter(r=>r&&r.id&&r.name&&shAxData(r,ax));
   const byId = {}; roles.forEach(r=>{ byId[r.id]=r; });
-  const conflicts = ((sh&&sh.conflicts)||[]).filter(c=>c&&byId[c.a]&&byId[c.b]&&c.a!==c.b);
+  const conflicts = (sh.conflicts||[]).filter(c=>c&&(c.axis||'restart')===ax&&byId[c.a]&&byId[c.b]&&c.a!==c.b);
   const side = (c,k)=>({name:byId[c[k]].name, text:c[k+'_text']||'', src:c[k+'_src']||[]});
   const sideLine = s=>(s.text||(s.src||[]).length) ? `<div class="sh-pop-s"><b>${esc(s.name)}</b>：${semiLines(s.text, srcInline(s.src))}</div>` : '';
   shState = { conflicts: conflicts.map((c,i)=>({i, a:c.a, b:c.b, label:c.label||String(c.point||'').slice(0,5),
     pop:`<div class="sh-pop-t">⚔ ${esc(c.point||'')}</div>${sideLine(side(c,'a'))}${sideLine(side(c,'b'))}`})) };
   const card = r=>{
-    const bas = r.stance_basis&&r.stance_basis.text ? `<div class="np-block"><b>立場依據</b>${semiLines(r.stance_basis.text, srcInline(r.stance_basis.sources))}</div>` : '';
-    const qs = (r.quotes||[]).filter(x=>x&&x.text);
+    const a = shAxData(r,ax);
+    const bas = a.stance_basis&&a.stance_basis.text ? `<div class="np-block"><b>立場依據</b>${semiLines(a.stance_basis.text, srcInline(a.stance_basis.sources))}</div>` : '';
+    const qs = (a.quotes||[]).filter(x=>x&&x.text);
     const qh = qs.length ? `<div class="np-block"><b>代表發言</b><ul class="txt-bullets">${qs.map(x=>`<li>${x.who?esc(x.who):''}${x.date?`<span style="color:var(--muted);">（${esc(x.date)}）</span>`:''}：${semiLines(x.text, srcInline(x.sources))}</li>`).join('')}</ul></div>` : '';
-    const as = (r.actions||[]).filter(x=>x&&x.text);
+    const as = (a.actions||[]).filter(x=>x&&x.text);
     const ah = as.length ? `<div class="np-block"><b>計畫／作為</b><ul class="txt-bullets">${as.map(x=>`<li>${x.date?`<span style="color:var(--muted);">${esc(x.date)}</span>：`:''}${semiLines(x.text, srcInline(x.sources))}</li>`).join('')}</ul></div>` : '';
     const mine = conflicts.filter(c=>c.a===r.id||c.b===r.id).map(c=>{
       const me = c.a===r.id?'a':'b', ot = me==='a'?'b':'a', o = byId[c[ot]];
       const line = (nm,k)=>(c[k+'_text']||(c[k+'_src']||[]).length) ? `<span class="sh-conf-s">${esc(nm)}：${semiLines(c[k+'_text']||'', srcInline(c[k+'_src']))}</span>` : '';
       return `<div class="sh-conf"><span class="sh-conf-hd">⚔ 衝突：與${esc(o.name)}——${esc(c.point||'')}</span>${line('本方',me)}${line('對方',ot)}</div>`;
     }).join('');
-    return `<div class="sh-role" data-rid="${esc(r.id)}"><div class="sh-hd"><div class="sh-name">${esc(r.name)}</div><span class="sh-pill ${SH_CLS[r.stance]}">${esc(r.stance)}</span></div>${r.group?`<div class="sh-grp">${esc(r.group)}</div>`:''}${bas}${qh}${ah}${mine}</div>`;
+    return `<div class="sh-role" data-rid="${esc(r.id)}"><div class="sh-hd"><div class="sh-name">${esc(r.name)}</div><span class="sh-pill ${A.cls[a.stance]}">${esc(a.stance)}${a.stance_note?esc('（'+a.stance_note+'）'):''}</span></div>${r.group?`<div class="sh-grp">${esc(r.group)}</div>`:''}${bas}${qh}${ah}${mine}</div>`;
   };
-  const cols = SH_ORDER.map(st=>`<div class="sh-col">${roles.filter(r=>r.stance===st).map(card).join('')}</div>`).join('');
+  const cols = A.order.map(st=>`<div class="sh-col">${roles.filter(r=>shAxData(r,ax).stance===st).map(card).join('')}</div>`).join('');
   const lbls = shState.conflicts.map(c=>`<button type="button" class="sh-lbl" data-ci="${c.i}" aria-label="衝突：${esc(c.label)}">${esc(c.label)}</button>`).join('');
-  const legend = SH_ORDER.map(st=>`<span class="sh-pill ${SH_CLS[st]}">${st}</span>`).join('');
-  return `<div class="case-card"><div class="case-name">🧭 利害關係人立場與衝突${sh.as_of?`<span style="font-weight:400;color:var(--muted);font-size:11px;">（${esc(sh.as_of)}）</span>`:''}</div>
+  const legend = A.order.map(st=>`<span class="sh-pill ${A.cls[st]}">${esc(st)}</span>`).join('');
+  const axes = SH_AXES.filter(shHas);
+  const tabs = axes.length>1 ? `<div class="sh-tabs" role="tablist" aria-label="立場圖面向">${axes.map(k=>`<button type="button" role="tab" id="sh-tab-${k}" class="sh-tab${k===ax?' on':''}" aria-selected="${k===ax}" aria-controls="sh-panel" tabindex="${k===ax?0:-1}" data-ax="${k}">${esc(SH_AX[k].label)}</button>`).join('')}</div>` : '';
+  let note = A.note;
+  if(ax==='referendum'){
+    const miss = (sh.roles||[]).filter(r=>r&&r.name&&!shAxData(r,'referendum')).map(r=>r.name);
+    note = esc(A.note) + `本頁尚未取得第22案公投可核實發言：${miss.map(esc).join('、')}；第5場意見發表會（2026-11-20 晚間）發言亦尚未取得。`;
+  } else note = esc(note);
+  return `<div class="case-name">🧭 利害關係人立場與衝突${sh.as_of?`<span style="font-weight:400;color:var(--muted);font-size:11px;">（${esc(sh.as_of)}）</span>`:''}</div>
+    ${tabs}
+    <div id="sh-panel"${tabs?` role="tabpanel" aria-labelledby="sh-tab-${ax}"`:''}>
     <div class="sh-legend">${legend}<span>立場標籤為本頁依所附發言歸納（本頁判斷、非當事方自稱）；連線代表兩方公開發言就同一點立場不同，不代表本頁評斷對錯</span></div>
-    <div class="sh-note">有引號者為原文直接引述，無引號者為報導轉述；點選或移到連線上的標籤可看衝突點與雙方來源。本頁尚未取得可核實發言：民眾黨、產業團體、經濟部能源署、核四官方立場。</div>
-    <div class="sh-board" id="sh-board"><svg class="sh-svg" aria-hidden="true"></svg><div class="sh-cols">${cols}</div>${lbls}<div class="sh-pop" id="sh-pop"></div></div></div>`;
+    <div class="sh-note">有引號者為原文直接引述，無引號者為報導轉述；點選或移到連線上的標籤可看衝突點與雙方來源。${note}</div>
+    <div class="sh-board" id="sh-board"><svg class="sh-svg" aria-hidden="true"></svg><div class="sh-cols" style="grid-template-columns:repeat(${A.order.length},minmax(0,1fr));">${cols}</div>${lbls}<div class="sh-pop" id="sh-pop"></div></div></div>`;
+}
+function shSwitch(ax, focus){
+  if(!shData || !SH_AXES.includes(ax) || ax===shAxis || !shHas(ax)) return;
+  shAxis = ax;
+  try{ localStorage.setItem(SH_KEY, ax); }catch(e){}
+  const wrap = document.getElementById('sh-wrap'); if(!wrap) return;
+  wrap.innerHTML = shInner();
+  shInit();
+  if(focus){ const t = document.getElementById('sh-tab-'+ax); if(t) t.focus(); }
 }
 function shLayout(){
   const board = document.getElementById('sh-board');
@@ -815,6 +858,16 @@ function shInit(){
   if(shRO){ shRO.disconnect(); shRO = null; }
   const board = document.getElementById('sh-board');
   shPinned = -1;
+  const wrap = document.getElementById('sh-wrap');
+  if(wrap && !wrap.__tabs){ wrap.__tabs = true;
+    wrap.addEventListener('click', e=>{ const t = e.target.closest && e.target.closest('.sh-tab'); if(t) shSwitch(t.getAttribute('data-ax'), true); });
+    wrap.addEventListener('keydown', e=>{
+      const t = e.target.closest && e.target.closest('.sh-tab'); if(!t) return;
+      const tabs = [...wrap.querySelectorAll('.sh-tab')], i = tabs.indexOf(t);
+      const to = e.key==='ArrowRight' ? tabs[(i+1)%tabs.length] : e.key==='ArrowLeft' ? tabs[(i-1+tabs.length)%tabs.length] : e.key==='Home' ? tabs[0] : e.key==='End' ? tabs[tabs.length-1] : null;
+      if(to){ e.preventDefault(); shSwitch(to.getAttribute('data-ax'), true); }
+    });
+  }
   if(!board||!shState) return;
   const sched = ()=>{ cancelAnimationFrame(shRaf); shRaf = requestAnimationFrame(shLayout); };
   if(window.ResizeObserver){ shRO = new ResizeObserver(sched); shRO.observe(board); board.querySelectorAll('.sh-col').forEach(c=>shRO.observe(c)); }
