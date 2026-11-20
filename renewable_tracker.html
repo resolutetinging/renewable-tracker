@@ -1213,7 +1213,7 @@ async function init(){
   ];
   const tpsTimelineHtml = tpsPeriods.filter(p=>(tl[p.k]||[]).length).map(p=>`
     ${tpsSubHd(p.t)}
-    <div class="case-card"><div class="case-desc"><ul class="txt-bullets">${tl[p.k].map(tpsItemLi).join('')}</ul></div></div>`).join('');
+    <div class="case-card"><div class="case-desc"><ul class="txt-bullets">${[...tl[p.k]].sort((a,b)=>String(a.sort||'').localeCompare(String(b.sort||''))).map(tpsItemLi).join('')}</ul></div></div>`).join('');
   const fcd = tps.forecast_check||{};
   const fcSrc = x=>srcInline(Array.isArray(x)?x:(x?[x]:[]));
   const fcGroups = [];
