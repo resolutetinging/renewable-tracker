@@ -80,8 +80,8 @@ def _prompt_view(obj):
 MONITORED_KEYS = ['smart_management', 'ai_energy_impact', 'nuclear_country_profiles', 'taiwan_power_shortage']
 
 def _tps_prompt_data(tps):
-    """缺電專區送週查證的精簡資料：timeline 只留文字、排除 ai:true 靜態點，不送 metric_note。"""
-    out = {k: v for k, v in tps.items() if k not in ('timeline', 'metric_note')}
+    """缺電專區送週查證的精簡資料：timeline 只留文字、排除 ai:true 靜態點，不送 metric_note 與 forecast_check（預測準不準對照表，靜態人工核實資料）。"""
+    out = {k: v for k, v in tps.items() if k not in ('timeline', 'metric_note', 'forecast_check')}
     tl = tps.get('timeline') or {}
     out['timeline'] = {
         period: [it.get('text', '') for it in items if not it.get('ai')]

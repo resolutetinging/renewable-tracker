@@ -128,6 +128,10 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .tl-body{font-size:11.5px;color:var(--text2);line-height:1.6;padding-bottom:12px;overflow-wrap:anywhere;}
 .tl-tag{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:12px;margin-right:5px;vertical-align:baseline;background:var(--card2);color:var(--nuclear);border:1px solid var(--nuclear);}
 .tl-tag.tl-plan{background:var(--card);border-style:dashed;}
+.fc-table{min-width:560px;}
+.fc-table td{padding:8px 12px;}
+.fc-table td.fc-grp{background:var(--card2);font-weight:700;color:var(--text);padding:7px 12px;}
+.fc-note{font-size:11px;color:var(--muted2);margin-top:2px;}
 .tl-today .tl-date{color:var(--smart);}
 .tl-today .tl-rail::after{content:'';position:absolute;left:50%;top:7px;width:10px;height:2px;margin-left:-5px;background:var(--smart);}
 .tl-today .tl-body{padding-bottom:12px;color:var(--smart);font-weight:700;border-top:1px dashed var(--smart);margin-top:7px;padding-top:2px;}
@@ -1184,6 +1188,21 @@ async function init(){
   const tpsTimelineHtml = tpsPeriods.filter(p=>(tl[p.k]||[]).length).map(p=>`
     ${tpsSubHd(p.t)}
     <div class="case-card"><div class="case-desc"><ul class="txt-bullets">${tl[p.k].map(tpsItemLi).join('')}</ul></div></div>`).join('');
+  const fcd = tps.forecast_check||{};
+  const fcSrc = x=>srcInline(Array.isArray(x)?x:(x?[x]:[]));
+  const fcGroups = [];
+  (fcd.rows||[]).forEach(r=>{ let g=fcGroups.find(z=>z.m===r.metric); if(!g){ g={m:r.metric,rows:[]}; fcGroups.push(g); } g.rows.push(r); });
+  const tpsForecastHtml = fcGroups.length ? `
+    ${tpsSubHd('🎯 預測準不準'+(fcd.as_of?`<span style="font-weight:400;color:var(--muted);">（資料時間點：${esc(fcd.as_of)}）</span>`:''))}
+    ${fcd.note?`<div class="src-note" style="margin:0 0 8px;">ℹ️ ${esc(fcd.note)}</div>`:''}
+    <div class="data-table-wrap"><table class="data-table fc-table"><thead><tr><th>年份</th><th>預測值（哪版報告）</th><th>實績值</th><th>差距</th></tr></thead><tbody>
+    ${fcGroups.map(g=>`<tr><td class="fc-grp" colspan="4">${esc(g.m)}</td></tr>`+g.rows.map(r=>`<tr>
+      <td class="dt-country">${esc(r.year)}</td>
+      <td>${esc(r.forecast)}${fcSrc(r.forecast_src)}</td>
+      <td>${esc(r.actual)}${fcSrc(r.actual_src)}</td>
+      <td>${esc(r.diff)}${r.diff_note?`<div class="fc-note">${esc(r.diff_note)}</div>`:''}</td></tr>`).join('')).join('')}
+    </tbody></table></div>
+    ${(fcd.points||[]).length?`<div class="case-card" style="margin-top:10px;"><div class="case-name">📝 歸納（本頁依上表整理）</div><div class="case-desc"><ul class="txt-bullets">${fcd.points.map(tpsItemLi).join('')}</ul></div></div>`:''}` : '';
   const tpsViewsHtml = (tps.viewpoints||[]).length ? `
     <div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🗣 台電說法</div>
     <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${tps.viewpoints.map(v=>`
@@ -1192,8 +1211,8 @@ async function init(){
         <div class="case-desc">${bulletize(v.desc)}</div>
         ${v.src_url?`<div class="case-src">來源：<a href="${safeUrl(v.src_url)}" target="_blank" rel="noopener">${esc(v.src_label||'連結')}</a></div>`:''}
       </div>`).join('')}</div>` : '';
-  document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsMetricHtml || tpsTimelineHtml || tpsViewsHtml)
-    ? `${riskBannerHtml}${tpsMetricHtml}${tpsTimelineHtml}${tpsViewsHtml}`
+  document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsMetricHtml || tpsTimelineHtml || tpsForecastHtml || tpsViewsHtml)
+    ? `${riskBannerHtml}${tpsMetricHtml}${tpsTimelineHtml}${tpsForecastHtml}${tpsViewsHtml}`
     : '<div class="empty-state">尚無資料</div>';
 
   const aiEnergy = data.ai_energy_impact||{};

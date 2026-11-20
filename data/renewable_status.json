@@ -1870,6 +1870,654 @@
         }
       ]
     },
+    "forecast_check": {
+      "as_of": "2026-11-20",
+      "rows": [
+        {
+          "metric": "日尖峰負載",
+          "year": 2019,
+          "forecast": "37,400 MW（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "37,067 MW",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+0.9%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "日尖峰負載",
+          "year": 2020,
+          "forecast": "37,920 MW（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "37,715 MW",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+0.5%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "日尖峰負載",
+          "year": 2021,
+          "forecast": "38,410 MW（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "38,701 MW",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-0.8%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "日尖峰負載",
+          "year": 2022,
+          "forecast": "38,910 MW（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "40,593 MW",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-4.1%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "日尖峰負載",
+          "year": 2023,
+          "forecast": "39,410 MW（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "39,489 MW",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-0.2%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "日尖峰負載",
+          "year": 2024,
+          "forecast": "39,920 MW（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "40,882 MW",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-2.4%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "日尖峰負載",
+          "year": 2021,
+          "forecast": "38,310 MW（2019–2020 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+          },
+          "actual": "38,701 MW",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-1.0%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "日尖峰負載",
+          "year": 2022,
+          "forecast": "38,970 MW（2019–2020 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+          },
+          "actual": "40,593 MW",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-4.0%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "日尖峰負載",
+          "year": 2023,
+          "forecast": "39,880 MW（2019–2020 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+          },
+          "actual": "39,489 MW",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+1.0%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "夜尖峰負載",
+          "year": 2022,
+          "forecast": "37,230 MW（2021 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+          },
+          "actual": "37,800 MW",
+          "actual_src": {
+            "label": "能源署《2022 年度全國電力資源供需報告》內文（2022 年夜尖峰實績）",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+          },
+          "diff": "-1.5%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "夜尖峰負載",
+          "year": 2023,
+          "forecast": "37,810 MW（2021 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+          },
+          "actual": "36,146 MW",
+          "actual_src": {
+            "label": "能源署《2024 年度全國電力資源供需報告》內文（2024 年夜尖峰 37,301 MW，較 2023 年成長 1,155 MW）",
+            "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+          },
+          "diff": "+4.6%",
+          "diff_note": "本頁計算；實績為本頁以 37,301 MW 減 1,155 MW 計算"
+        },
+        {
+          "metric": "夜尖峰負載",
+          "year": 2024,
+          "forecast": "38,700 MW（2021 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+          },
+          "actual": "37,301 MW",
+          "actual_src": {
+            "label": "能源署《2024 年度全國電力資源供需報告》內文（2024 年夜尖峰實績）",
+            "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+          },
+          "diff": "+3.8%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "夜尖峰負載",
+          "year": 2023,
+          "forecast": "37,810 MW（2022 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2022 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+          },
+          "actual": "36,146 MW",
+          "actual_src": {
+            "label": "能源署《2024 年度全國電力資源供需報告》內文（2024 年夜尖峰 37,301 MW，較 2023 年成長 1,155 MW）",
+            "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+          },
+          "diff": "+4.6%",
+          "diff_note": "本頁計算；實績為本頁以 37,301 MW 減 1,155 MW 計算"
+        },
+        {
+          "metric": "夜尖峰負載",
+          "year": 2024,
+          "forecast": "38,180 MW（2022 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2022 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+          },
+          "actual": "37,301 MW",
+          "actual_src": {
+            "label": "能源署《2024 年度全國電力資源供需報告》內文（2024 年夜尖峰實績）",
+            "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+          },
+          "diff": "+2.4%",
+          "diff_note": "本頁計算"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2019,
+          "forecast": "16.0%（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "16.8%",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-0.8 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2020,
+          "forecast": "16.1%（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "16.4%",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-0.3 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2021,
+          "forecast": "15.8%（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "13.5%",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+2.3 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2022,
+          "forecast": "16.5%（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "9.6%（日間口徑）",
+          "actual_src": {
+            "label": "能源署《2022 年度全國電力資源供需報告》內文（2022 年日尖峰備用容量率約 9.6%）",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+          },
+          "diff": "+6.9 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2023,
+          "forecast": "15.7%（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "14.7%（夜間口徑）",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+1.0 個百分點",
+          "diff_note": "本頁計算（百分點）；預測為日間口徑、實績為夜間口徑，跨口徑僅供參考"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2024,
+          "forecast": "16.9%（2018 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+          },
+          "actual": "11.0%（夜間口徑）",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+5.9 個百分點",
+          "diff_note": "本頁計算（百分點）；預測為日間口徑、實績為夜間口徑，跨口徑僅供參考"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2021,
+          "forecast": "15.5%（2019–2020 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+          },
+          "actual": "13.5%",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+2.0 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2022,
+          "forecast": "17.1%（2019–2020 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+          },
+          "actual": "9.6%（日間口徑）",
+          "actual_src": {
+            "label": "能源署《2022 年度全國電力資源供需報告》內文（2022 年日尖峰備用容量率約 9.6%）",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+          },
+          "diff": "+7.5 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2023,
+          "forecast": "15.3%（2019–2020 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+          },
+          "actual": "14.7%（夜間口徑）",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+0.6 個百分點",
+          "diff_note": "本頁計算（百分點）；預測為日間口徑、實績為夜間口徑，跨口徑僅供參考"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2024,
+          "forecast": "18.1%（2019–2020 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+          },
+          "actual": "11.0%（夜間口徑）",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+7.1 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2022,
+          "forecast": "13.9%（2021 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+          },
+          "actual": "12.2%（夜間口徑）",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+1.7 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2023,
+          "forecast": "14.0%（2021 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+          },
+          "actual": "14.7%（夜間口徑）",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-0.7 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2024,
+          "forecast": "17.0%（2021 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+          },
+          "actual": "11.0%（夜間口徑）",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "+6.0 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2023,
+          "forecast": "9.5%（2022 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2022 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+          },
+          "actual": "14.7%（夜間口徑）",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-5.2 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "備用容量率",
+          "year": 2024,
+          "forecast": "10.2%（2022 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2022 年度全國電力資源供需報告》表3-1",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+          },
+          "actual": "11.0%（夜間口徑）",
+          "actual_src": {
+            "label": "台電開放資料：歷年尖峰負載及備用容量率",
+            "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+          },
+          "diff": "-0.8 個百分點",
+          "diff_note": "本頁計算（百分點）"
+        },
+        {
+          "metric": "用電量年均成長",
+          "year": "2020→2024",
+          "forecast": "年均 2.5%（2021–2027 年預測；2019–2020 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2019–2020 年度全國電力資源供需報告》內文",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+          },
+          "actual": "年均 1.16%（2020 年 2,711 億度 → 2024 年 2,838.5 億度）",
+          "actual_src": [
+            {
+              "label": "能源署《2019–2020 年度全國電力資源供需報告》內文（2020 年全國電力消費量）",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+            },
+            {
+              "label": "能源署《2024 年度全國電力資源供需報告》內文（2024 年全國電力消費量）",
+              "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+            }
+          ],
+          "diff": "+1.34 個百分點",
+          "diff_note": "本頁計算；預測為整段區間年均、實績只到 2024 年，區間不同僅供參考"
+        },
+        {
+          "metric": "用電量年均成長",
+          "year": "2021→2024",
+          "forecast": "年均 2.3%（2022–2028 年預測；2021 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2021 年度全國電力資源供需報告》內文",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+          },
+          "actual": "年均 0.05%（2021 年 2,834 億度 → 2024 年 2,838.5 億度）",
+          "actual_src": [
+            {
+              "label": "能源署《2021 年度全國電力資源供需報告》內文（2021 年全國電力消費量）",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+            },
+            {
+              "label": "能源署《2024 年度全國電力資源供需報告》內文（2024 年全國電力消費量）",
+              "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+            }
+          ],
+          "diff": "+2.25 個百分點",
+          "diff_note": "本頁計算；預測為整段區間年均、實績只到 2024 年，區間不同僅供參考"
+        },
+        {
+          "metric": "用電量年均成長",
+          "year": "2022→2024",
+          "forecast": "年均 2.03%（2023–2029 年預測；2022 年度報告）",
+          "forecast_src": {
+            "label": "能源署《2022 年度全國電力資源供需報告》內文",
+            "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+          },
+          "actual": "年均 0.78%（2022 年 2,794.5 億度 → 2024 年 2,838.5 億度）",
+          "actual_src": [
+            {
+              "label": "能源署《2022 年度全國電力資源供需報告》內文（2022 年全國電力消費量）",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+            },
+            {
+              "label": "能源署《2024 年度全國電力資源供需報告》內文（2024 年全國電力消費量）",
+              "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+            }
+          ],
+          "diff": "+1.25 個百分點",
+          "diff_note": "本頁計算；預測為整段區間年均、實績只到 2024 年，區間不同僅供參考"
+        }
+      ],
+      "points": [
+        {
+          "text": "日尖峰負載：2018 年度報告對 2019–2024 年的預測與實績相差 -4.1%～+0.9%，其中 2019、2020、2021、2023 四年誤差在 1% 以內；2022 年（-4.1%）、2024 年（-2.4%）預測偏低；2019–2020 年度報告對 2022 年的預測同樣偏低（-4.0%）",
+          "sources": [
+            {
+              "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+            },
+            {
+              "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+            },
+            {
+              "label": "台電開放資料：歷年尖峰負載及備用容量率",
+              "url": "https://service.taipower.com.tw/data/opendata/apply/file/d003002/001.csv"
+            }
+          ]
+        },
+        {
+          "text": "夜尖峰負載：2021、2022 年度報告對 2023、2024 年的預測皆高於實績（共 4 列，+2.4%～+4.6%）；2021 年度報告對 2022 年的預測低於實績（-1.5%）",
+          "sources": [
+            {
+              "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+            },
+            {
+              "label": "能源署《2022 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+            },
+            {
+              "label": "能源署《2024 年度全國電力資源供需報告》表3-2",
+              "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+            }
+          ]
+        },
+        {
+          "text": "備用容量率：2018、2019–2020、2021 年度三版報告共 10 個同口徑比較點，7 個預測高於實績（+1.7～+7.5 個百分點）、3 個低於實績；2022 年度報告對 2023、2024 年的預測低於實績（-5.2、-0.8 個百分點）",
+          "sources": [
+            {
+              "label": "能源署《2018 年度全國電力資源供需報告》表5-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/f72db013-9134-4c33-9871-d4a2d5a3d717.pdf"
+            },
+            {
+              "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+            },
+            {
+              "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+            },
+            {
+              "label": "能源署《2022 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+            }
+          ]
+        },
+        {
+          "text": "用電量成長：三個版本的年均成長預測（2.5%、2.3%、2.03%）都高於本頁以已知年度算出的實績年均（1.16%、0.05%、0.78%）；預測為整段區間、實績只到 2024 年，區間不同僅供參考",
+          "sources": [
+            {
+              "label": "能源署《2019–2020 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+            },
+            {
+              "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+            },
+            {
+              "label": "能源署《2022 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+            },
+            {
+              "label": "能源署《2024 年度全國電力資源供需報告》表3-2",
+              "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+            }
+          ]
+        },
+        {
+          "text": "同一目標年的夜間備用容量率預測在較晚版本被下修：2023 年 14.0%（2021 年度報告）→9.5%（2022 年度報告）；2024 年 17.0%→10.2%；2029 年 22.6%（2022 年度報告）→11.6%（2024 年度報告）",
+          "sources": [
+            {
+              "label": "能源署《2021 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+            },
+            {
+              "label": "能源署《2022 年度全國電力資源供需報告》表3-1",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/c11043f3-45ec-4224-9591-7af1d9b63216.pdf"
+            },
+            {
+              "label": "能源署《2024 年度全國電力資源供需報告》表3-2",
+              "url": "https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=58"
+            }
+          ]
+        },
+        {
+          "text": "供給時程：第三天然氣接收站外推方案使供氣期程延後 2.5 年、至 2025 年 6 月才供氣（2021 年度報告）；2019–2020 年度報告估算 2023–2024 年大潭電廠機組供電能力因此減少約 102～186 萬瓩",
+          "sources": [
+            {
+              "label": "能源署《2021 年度全國電力資源供需報告》內文",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/1f8a5215-e908-497d-856d-bcdaff0932f7.pdf"
+            },
+            {
+              "label": "能源署《2019–2020 年度全國電力資源供需報告》內文",
+              "url": "https://ws.ndc.gov.tw/001/administrator/10/relfile/5653/30018/adb5a614-0e39-46b1-9a22-d49075499ac2.pdf"
+            }
+          ]
+        },
+        {
+          "text": "本頁依上表歸納：表內的需求預測（夜尖峰、用電量成長）多高於實績，表內查到的供給時程（第三天然氣接收站）晚於原規劃，兩者方向相反，本表無法判斷未來預測的淨偏向",
+          "sources": []
+        }
+      ],
+      "note": "差距：負載為（預測−實績）÷實績，備用容量率與用電成長為預測減實績的百分點，皆為本頁計算；1 萬瓩＝10 MW。2022 年起官方備用容量率改採夜間口徑，標註跨口徑的列僅供參考。只列本頁取得報告原檔或台電開放資料核實的數字；2025 年與僅有新聞轉述的報告版本未列入。"
+    },
     "viewpoints": [
       {
         "source": "台電（2024-08，官方立場）",
