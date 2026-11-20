@@ -546,6 +546,133 @@
     "taiwan_status": "2025年5月17日核三2號機40年運轉執照屆滿，當晚進入安全停機；中央社報導，台灣屆時正式進入「非核家園」。2025年全年核能占比為1.12%（全國發電量口徑，見「台灣能源使用狀況」）",
     "taiwan_status_sources": [{"label": "中央社（2025-05-17）", "url": "https://www.cna.com.tw/news/afe/202505170134.aspx"}, {"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}],
     "taiwan_share_pct": null,
+    "taiwan_summary": [
+      {
+        "title": "現況",
+        "points": [
+          {
+            "text": "2025年5月17日核三2號機40年運轉執照屆滿，當晚進入安全停機；中央社報導，台灣屆時正式進入「非核家園」。2025年全年核能占比為1.12%（全國發電量口徑，見「台灣能源使用狀況」）",
+            "sources": [
+              {
+                "label": "中央社（2025-05-17）",
+                "url": "https://www.cna.com.tw/news/afe/202505170134.aspx"
+              },
+              {
+                "label": "經濟部能源署《能源統計手冊2025年版》3-01",
+                "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+              }
+            ]
+          },
+          {
+            "text": "核安會2026年9月24日核定核三再運轉計畫，台電後續須提出執行結果報告再送核安會審查；台電同時正進行自主安全檢查",
+            "sources": [
+              {
+                "label": "中央社 2026-09-24",
+                "url": "https://www.cna.com.tw/news/afe/202609240313.aspx"
+              }
+            ]
+          },
+          {
+            "text": "併網時程官方說法：經濟部次長何晉滄回應最快何時併網供電：「按照時程規劃，大概2028年的年底左右」",
+            "sources": [
+              {
+                "label": "聯合報／經濟日報 2026-03-20",
+                "url": "https://udn.com/news/story/7238/9393319"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "挑戰",
+        "points": [
+          {
+            "text": "高階核廢料：選址評估尚未開始，法源不完備；尚無最終處置場；依台電計算，最快也要2055年才能完成高階最終處置場的建造與運轉試驗",
+            "sources": [
+              {
+                "label": "地球公民基金會",
+                "url": "https://www.cet-taiwan.org/node/4507"
+              }
+            ]
+          },
+          {
+            "text": "核三用過燃料池每座設計容量2160束，現存1號機1879束、2號機1906束；計畫書稱在乾式貯存設施啟用前仍保有存放兩個完整燃料週期所產生用過核子燃料束的空間",
+            "sources": [
+              {
+                "label": "台電《第三核能發電廠再運轉計畫(公開版)》2026年8月，第13–14頁",
+                "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
+              }
+            ]
+          },
+          {
+            "text": "核三廠尚無用過核子燃料乾式貯存設施、仍在規劃中；台電2025-08表示預計當年底發包、約8年後完工、可存放4000束，並稱僅是中期管理方案",
+            "sources": [
+              {
+                "label": "台電《第三核能發電廠再運轉計畫(公開版)》2026年8月，第15頁",
+                "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
+              },
+              {
+                "label": "公視 2025-08-23",
+                "url": "https://news.pts.org.tw/article/767079"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "變數",
+        "points": [
+          {
+            "text": "2026年11月28日第22案公投（與九合一地方選舉同日）主文：「你是否支持政府使用『核電』振興經濟，以廢除『非核家園』的能源政策？」",
+            "sources": [
+              {
+                "label": "中央社 2026-11-16",
+                "url": "https://www.cna.com.tw/news/aipl/202611160178.aspx"
+              }
+            ]
+          },
+          {
+            "text": "公投門檻與效力：有效同意票多於不同意票且達投票權人總額四分之一以上為通過（第29條）；有關重大政策者，由總統或權責機關為實現該公投案內容作必要處置（第30條）",
+            "sources": [
+              {
+                "label": "全國法規資料庫《公民投票法》第29、30條",
+                "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0020050"
+              }
+            ]
+          },
+          {
+            "text": "環評：現行《應實施環境影響評估細目及範圍認定標準》僅核電廠「興建」「增加機組」或「反應器除役」須環評，「延役」未被納入；環境部長彭啟明（2026-03-22）稱核能延役是否要環評尚未討論；2025-11-29 表示「也許可以先做政策環評」",
+            "sources": [
+              {
+                "label": "環境資訊中心 2025-05-14",
+                "url": "https://e-info.org.tw/node/241283"
+              },
+              {
+                "label": "聯合新聞網 2026-03-22",
+                "url": "https://udn.com/news/story/124794/9395693"
+              },
+              {
+                "label": "經濟日報 2025-11-29",
+                "url": "https://money.udn.com/money/story/7307/9171174"
+              }
+            ]
+          },
+          {
+            "text": "重啟時程說法：2026-03-10 龔明鑫「最快2028年可以重啟」；2026-03-20 何晉滄「大概2028年的年底左右」",
+            "sources": [
+              {
+                "label": "經濟日報 2026-03-10",
+                "url": "https://money.udn.com/money/story/7307/9370572"
+              },
+              {
+                "label": "聯合報／經濟日報 2026-03-20",
+                "url": "https://udn.com/news/story/7238/9393319"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "country_profiles": [
       {
         "country": "美國",
@@ -1005,7 +1132,8 @@
               "label": "地球公民基金會",
               "url": "https://www.cet-taiwan.org/node/4507"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2013-11",
@@ -1022,7 +1150,8 @@
               "label": "科技新報（2021-12-08）",
               "url": "https://technews.tw/2021/12/08/restarting-fourth-nuclear-power-plant-is-more-difficult/"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2019-09",
@@ -1039,7 +1168,8 @@
               "label": "科技新報（2021-12-08）",
               "url": "https://technews.tw/2021/12/08/restarting-fourth-nuclear-power-plant-is-more-difficult/"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2020 年底",
@@ -1056,7 +1186,8 @@
               "label": "科技新報（2021-12-08）",
               "url": "https://technews.tw/2021/12/08/restarting-fourth-nuclear-power-plant-is-more-difficult/"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2021-03",
@@ -1073,7 +1204,8 @@
               "label": "科技新報（2021-12-08）",
               "url": "https://technews.tw/2021/12/08/restarting-fourth-nuclear-power-plant-is-more-difficult/"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2021-12-08",
@@ -1090,7 +1222,8 @@
               "label": "科技新報（2021-12-08）",
               "url": "https://technews.tw/2021/12/08/restarting-fourth-nuclear-power-plant-is-more-difficult/"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2024-01",
@@ -1103,7 +1236,8 @@
               "label": "地球公民基金會",
               "url": "https://www.cet-taiwan.org/node/4507"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2025-05",
@@ -1120,7 +1254,8 @@
               "label": "環境資訊中心 2025-08-23",
               "url": "https://e-info.org.tw/node/241997"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2025-05-14",
@@ -1132,6 +1267,26 @@
             {
               "label": "環境資訊中心 2025-05-14",
               "url": "https://e-info.org.tw/node/241283"
+            }
+          ],
+          "impact": [
+            {
+              "text": "環境部長彭啟明（2026-03-22）：核能延役是否要環評，目前還沒討論到這部分，按照現行法規執行；核電廠是否重啟「並不是環境問題，而是核安問題」",
+              "sources": [
+                {
+                  "label": "聯合新聞網 2026-03-22",
+                  "url": "https://udn.com/news/story/124794/9395693"
+                }
+              ]
+            },
+            {
+              "text": "彭啟明（2025-11-29）：建議討論個案是否環評之前，「也許可以先做政策環評」",
+              "sources": [
+                {
+                  "label": "經濟日報 2025-11-29",
+                  "url": "https://money.udn.com/money/story/7307/9171174"
+                }
+              ]
             }
           ]
         },
@@ -1146,7 +1301,8 @@
               "label": "中央社（2025-05-17）",
               "url": "https://www.cna.com.tw/news/afe/202505170134.aspx"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2025-08-23",
@@ -1163,7 +1319,8 @@
               "label": "環境資訊中心 2025-08-23",
               "url": "https://e-info.org.tw/node/241997"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2025-08-23",
@@ -1176,7 +1333,8 @@
               "label": "Taiwan News（轉述中選會數字）",
               "url": "https://www.taiwannews.com.tw/zh/news/6185573"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2025-11-27",
@@ -1189,7 +1347,8 @@
               "label": "聯合新聞網／經濟日報（2026-03-21）",
               "url": "https://udn.com/news/story/7238/9394717"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2026-09-24",
@@ -1201,6 +1360,21 @@
             {
               "label": "中央社 2026-09-24",
               "url": "https://www.cna.com.tw/news/afe/202609240313.aspx"
+            }
+          ],
+          "impact": [
+            {
+              "text": "台電須提出執行結果報告再送核安會審查，同時進行自主安全檢查；台電預估自我安檢時間為18至24個月",
+              "sources": [
+                {
+                  "label": "中央社 2026-09-24",
+                  "url": "https://www.cna.com.tw/news/afe/202609240313.aspx"
+                },
+                {
+                  "label": "公視 2026-03-03",
+                  "url": "https://news.pts.org.tw/article/797158"
+                }
+              ]
             }
           ]
         },
@@ -1219,18 +1393,16 @@
               "label": "中央社 2026-10-22",
               "url": "https://cna.com.tw/news/aipl/202610220409.aspx"
             }
-          ]
-        },
-        {
-          "date": "2027",
-          "sort": "2027",
-          "status": "planned",
-          "plant": "核三",
-          "text": "公視報導稱「最快可能在2027年重啟」",
-          "sources": [
+          ],
+          "impact": [
             {
-              "label": "公視 2025-11-28",
-              "url": "https://news.pts.org.tw/article/783526"
+              "text": "公民投票法第29條：有效同意票多於不同意票，且達投票權人總額四分之一以上為通過；第30條：有關重大政策者，由總統或權責機關為實現該公投案內容作必要處置",
+              "sources": [
+                {
+                  "label": "全國法規資料庫《公民投票法》第29、30條",
+                  "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0020050"
+                }
+              ]
             }
           ]
         },
@@ -1245,7 +1417,8 @@
               "label": "台電《第三核能發電廠再運轉計畫(公開版)》2026年8月，第30頁",
               "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
             }
-          ]
+          ],
+          "impact": []
         },
         {
           "date": "2028 年底",
@@ -1257,6 +1430,17 @@
             {
               "label": "聯合報／經濟日報 2026-03-20",
               "url": "https://udn.com/news/story/7238/9393319"
+            }
+          ],
+          "impact": [
+            {
+              "text": "何晉滄：會盡量加速進行，但設備有沒有老化的現象還要再檢查；行政院長卓榮泰：「時程當然有彈性」",
+              "sources": [
+                {
+                  "label": "聯合報／經濟日報 2026-03-20",
+                  "url": "https://udn.com/news/story/7238/9393319"
+                }
+              ]
             }
           ]
         },
@@ -1270,6 +1454,31 @@
             {
               "label": "地球公民基金會",
               "url": "https://www.cet-taiwan.org/node/4507"
+            }
+          ],
+          "impact": []
+        },
+        {
+          "date": "2026-03-10",
+          "sort": "2026-03-10",
+          "status": "past",
+          "plant": "核三",
+          "text": "經濟部長龔明鑫表示，核三廠已啟動自主安全檢查，最快2028年可以重啟",
+          "sources": [
+            {
+              "label": "經濟日報 2026-03-10",
+              "url": "https://money.udn.com/money/story/7307/9370572"
+            }
+          ],
+          "impact": [
+            {
+              "text": "龔明鑫：若汰換設備不多，啟用時間就可以縮短",
+              "sources": [
+                {
+                  "label": "經濟日報 2026-03-10",
+                  "url": "https://money.udn.com/money/story/7307/9370572"
+                }
+              ]
             }
           ]
         }
@@ -1308,15 +1517,6 @@
           "points": [
             {
               "text": "低階核廢料：依法須經地方公投通過才能成為正式場址；因當地居民反對、地方政府不同意舉辦地方公投，選址至今未完成",
-              "sources": [
-                {
-                  "label": "地球公民基金會",
-                  "url": "https://www.cet-taiwan.org/node/4507"
-                }
-              ]
-            },
-            {
-              "text": "高階核廢料：選址評估尚未開始，法源不完備；尚無最終處置場",
               "sources": [
                 {
                   "label": "地球公民基金會",
@@ -1426,15 +1626,6 @@
           "name": "核三（馬鞍山）",
           "facts": [
             {
-              "text": "再運轉計畫與檢查結果仍須送核安會審查，核准並發給運轉執照後才能重啟",
-              "sources": [
-                {
-                  "label": "聯合新聞網／經濟日報（2026-03-21）",
-                  "url": "https://udn.com/news/story/7238/9394717"
-                }
-              ]
-            },
-            {
               "text": "核三廠兩部機額定容量各951 MWe，總裝置容量1,902 MW，每部機每年發電約84億度",
               "sources": [
                 {
@@ -1444,7 +1635,7 @@
               ]
             },
             {
-              "text": "自主安全檢查時程：台電預估18至24個月；經濟部長表示最快約需1年半至2年，並稱何時能真正重啟經濟部沒辦法預估",
+              "text": "自主安全檢查時程：經濟部長表示最快約需1年半至2年，並稱何時能真正重啟經濟部沒辦法預估",
               "sources": [
                 {
                   "label": "公視 2026-03-03",
@@ -1475,30 +1666,7 @@
               ]
             }
           ],
-          "cons": [
-            {
-              "text": "核三用過燃料池每座設計容量2160束，現存1號機1879束、2號機1906束；計畫書稱在乾式貯存設施啟用前仍保有存放兩個完整燃料週期所產生用過核子燃料束的空間",
-              "sources": [
-                {
-                  "label": "台電《第三核能發電廠再運轉計畫(公開版)》2026年8月，第13–14頁",
-                  "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
-                }
-              ]
-            },
-            {
-              "text": "核三廠尚無用過核子燃料乾式貯存設施、仍在規劃中；台電2025-08表示預計當年底發包、約8年後完工、可存放4000束，並稱僅是中期管理方案",
-              "sources": [
-                {
-                  "label": "台電《第三核能發電廠再運轉計畫(公開版)》2026年8月，第15頁",
-                  "url": "https://www.nusc.gov.tw/share/file/regulation/FdiDgV~NHtPdAzDj87QhZA__.pdf?v=2026092430"
-                },
-                {
-                  "label": "公視 2025-08-23",
-                  "url": "https://news.pts.org.tw/article/767079"
-                }
-              ]
-            }
-          ]
+          "cons": []
         },
         {
           "name": "核四（龍門）",
@@ -1512,7 +1680,8 @@
           "核三再運轉後每年新增的用過燃料量",
           "核燃料安全存量天數",
           "核三再運轉對備用容量率的官方量化評估",
-          "新燃料採購金額"
+          "新燃料採購金額",
+          "核電延役或重啟納入環評之修法草案"
         ]
       },
       "disclaimer": "以上為依已附來源資料並列正反，不代表立場；核能政策為公共爭議，2026-11-28 另有公投。"
