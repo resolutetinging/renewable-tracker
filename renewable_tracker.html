@@ -113,7 +113,7 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .case-desc{font-size:12px;color:var(--text2);line-height:1.62;margin-bottom:6px;}
 .case-src{font-size:11px;}
 .src-dots{white-space:nowrap;font-size:0;line-height:0;}
-.src-dot{display:inline-block;position:relative;width:9px;height:9px;margin:0 1.5px;border-radius:50%;background:var(--smart);vertical-align:baseline;cursor:pointer;text-decoration:none;box-sizing:border-box;}
+.src-dot{display:inline-block;position:relative;width:13px;height:13px;margin:0 1px;background:var(--smart);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat;vertical-align:-2px;cursor:pointer;text-decoration:none;box-sizing:border-box;}
 .src-dot::after{content:'';position:absolute;inset:-4px;}
 .src-dot:hover,.src-dot:focus-visible{background:var(--text);outline:none;}
 .src-dot:focus-visible{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--smart);}
@@ -560,7 +560,7 @@ function trendChartSvg(trend, opts){
     </svg>
     ${legendHtml?`<div class="trend-legend">${legendHtml}</div>`:''}
     ${trend.note?`<div class="src-note" style="margin-top:6px;">${esc(trend.note)}</div>`:''}
-    ${trend.source_url?`<div class="src-note" style="margin-top:4px;">📌 ${srcDot(trend.source_label,trend.source_url)}</div>`:''}
+    ${trend.source_url?`<div class="src-note" style="margin-top:4px;">${srcDot(trend.source_label,trend.source_url)}</div>`:''}
   </div>`;
 }
 
@@ -590,7 +590,7 @@ function barChartSvg(data, opts){
     ${titleLabel?`<div class="sec-meta" style="margin-bottom:6px;">${titleLabel}${data.as_of?'（'+esc(data.as_of)+'）':''}</div>`:''}
     <svg viewBox="0 0 ${W} ${H}" style="width:${W}px;max-width:100%;height:auto;display:block;">${rows}</svg>
     ${data.note?`<div class="src-note" style="margin-top:8px;">${esc(data.note)}</div>`:''}
-    ${data.source_url?`<div class="src-note" style="margin-top:4px;">📌 ${srcDot(data.source_label,data.source_url)}</div>`:''}
+    ${data.source_url?`<div class="src-note" style="margin-top:4px;">${srcDot(data.source_label,data.source_url)}</div>`:''}
   </div>`;
 }
 
@@ -626,7 +626,7 @@ function stackedBarSvg(hist, opts){
     <svg viewBox="0 0 ${W} ${H}" style="width:${W}px;max-width:100%;height:auto;display:block;">${grid}${xl}${bars}</svg>
     <div class="trend-legend stack-legend">${legend}</div>
     ${hist.note?`<div class="src-note" style="margin-top:6px;">${esc(hist.note)}</div>`:''}
-    ${hist.source_url?`<div class="src-note" style="margin-top:4px;">📌 ${srcDot(hist.source_label,hist.source_url)}</div>`:''}
+    ${hist.source_url?`<div class="src-note" style="margin-top:4px;">${srcDot(hist.source_label,hist.source_url)}</div>`:''}
   </div>`;
 }
 
@@ -644,7 +644,7 @@ function twImportBlock(tw){
   if(fuels.length) lines.push(`${esc(fuels.map(it=>it.name).join('＋'))}合計約占發電量 <b>${esc(Math.round(fuelSum))}%</b>，這些燃料幾乎全靠進口`);
   return `<div class="total-banner"><ul class="txt-bullets">${lines.map(l=>`<li>${l}</li>`).join('')}</ul>
     ${s.note?`<div class="src-note" style="margin-top:4px;">${esc(s.note)}</div>`:''}
-    ${s.source_url?`<div class="src-note" style="margin-top:2px;">📌 ${srcDot(s.source_label,s.source_url)}</div>`:''}</div>`;
+    ${s.source_url?`<div class="src-note" style="margin-top:2px;">${srcDot(s.source_label,s.source_url)}</div>`:''}</div>`;
 }
 
 // 未來方向：future.items[{title,points:[{text,sources[]}]}]
@@ -674,7 +674,7 @@ function costSnapshotBlock(snapshot){
   return `<div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">📊 同年度跨技術成本快照${snapshot.as_of?'（'+esc(snapshot.as_of)+'）':''}</div>
     <div class="rank-grid">${rows}</div>
     ${snapshot.note?`<div class="src-note" style="margin-top:8px;">${esc(snapshot.note)}</div>`:''}
-    ${snapshot.source_url?`<div class="src-note" style="margin-top:4px;">📌 ${srcDot(snapshot.source_label,snapshot.source_url)}</div>`:''}`;
+    ${snapshot.source_url?`<div class="src-note" style="margin-top:4px;">${srcDot(snapshot.source_label,snapshot.source_url)}</div>`:''}`;
 }
 
 function countryBreakdownBlock(items){
@@ -700,7 +700,7 @@ function caseCard(item){
     <div class="case-name">${esc(item.name)}</div>
     ${item.date?`<div class="case-date">🕐 ${esc(item.date)}${item.region?' · '+esc(item.region):''}</div>`:''}
     <div class="case-desc">${bulletize(item.desc)}</div>
-    ${item.src_url?`<div class="case-src">📌 ${srcDot(item.src_label||'連結',item.src_url)}</div>`:''}
+    ${item.src_url?`<div class="case-src">${srcDot(item.src_label||'連結',item.src_url)}</div>`:''}
   </div>`;
 }
 
@@ -1094,7 +1094,7 @@ function riShareChartSvg(re){
   const ins = riShareInsight(re);
   const notes = [
     `* 歐盟：來源為 Eurostat ${riLink(RI_SRC_EUROSTAT,'nrg_ind_ren')}，口徑與其餘六者（IRENA）不同，僅供參考、不宜直接比較；2000–2003 年無資料。`,
-    `📌 ${riLink(RI_SRC_IRENA,'IRENA IRENASTAT（再生能源占總發電量）')}`
+    `${riLink(RI_SRC_IRENA,'IRENA IRENASTAT（再生能源占總發電量）')}`
   ];
   return riWrap('📈 各國再生能源發電占比 '+esc(years[0])+'–'+esc(years[n-1])+'（單位：%）', svg, ins&&ins.text, notes);
 }
@@ -1147,7 +1147,7 @@ function riTwAnnualBlock(tm){
   const blk = {labels:a.years.map(String), series:a.series, share:Array.isArray(a.re_share)?a.re_share:[]};
   const r = riStackSvg(blk, l=>l, (l,i)=> i%3===0 || i===blk.labels.length-1, '再生占比');
   return riWrap('🇹🇼 台灣再生能源發電量　歷年（'+esc(a.years[0])+'–'+esc(a.years[a.years.length-1])+'，單位：億度）', r.svg, null,
-    [`📌 ${riLink(RI_SRC_ESIST,'經濟部能源署（能源統計資料庫）')}；占比為再生發電量占全國總發電量。`], r.legend);
+    [`${riLink(RI_SRC_ESIST,'經濟部能源署（能源統計資料庫）')}；占比為再生發電量占全國總發電量。`], r.legend);
 }
 function riTwMonthlyBlock(tm){
   if(!riValidStack(tm,'months')) return RI_PENDING;
@@ -1155,7 +1155,7 @@ function riTwMonthlyBlock(tm){
   const r = riStackSvg(blk, l=>l.slice(2), (l,i)=> i%3===0 || i===blk.labels.length-1, '再生占比');
   const ins = riMonthlyInsight(tm);
   return riWrap('🇹🇼 台灣再生能源發電量　逐月（'+esc(tm.months[0])+' 至 '+esc(tm.months[tm.months.length-1])+'，單位：億度）', r.svg, ins&&ins.text,
-    [`📌 ${riLink(RI_SRC_ESIST,'經濟部能源署（能源統計資料庫）')}；占比為再生發電量占全國總發電量。`], r.legend);
+    [`${riLink(RI_SRC_ESIST,'經濟部能源署（能源統計資料庫）')}；占比為再生發電量占全國總發電量。`], r.legend);
 }
 
 // 圖 c：台灣每日備轉容量率
@@ -1194,7 +1194,7 @@ function riReserveBlock(rv){
   const notes = [
     `燈號門檻依台電供電燈號分級：備轉容量率 ≥10% 供電充裕（綠燈）、6–10% 供電吃緊（黃燈）、≤6% 供電警戒（橘燈）；詳見${riLink(RI_SRC_TPC_LIGHT,'台電今日預估尖峰備轉容量率頁')}。`,
     `縱軸上限 ${CAP}%${clipped?`，另有 ${clipped} 天數值高於 ${CAP}%（含極端值）於圖上緣截斷，提示框顯示原值`:''}。`,
-    `📌 ${riLink(RI_SRC_TPC,'台灣電力公司開放資料（每日備轉容量率）')}`
+    `${riLink(RI_SRC_TPC,'台灣電力公司開放資料（每日備轉容量率）')}`
   ];
   const rxH = t=>`<div style="margin-top:6px;"><b>${t}</b></div>`;
   const rxL = arr=>`<ul class="txt-bullets">${arr.map(x=>`<li>${x}</li>`).join('')}</ul>`;
@@ -1208,7 +1208,7 @@ function riReserveBlock(rv){
     + rxL(['數字越高，代表尖峰時刻還有越多備用發電能力，可以應付機組臨時故障或用電高於預期','維持在 10% 以上即為台電判定的「供電充裕」','台電未公布 10%、6% 門檻的訂定理由'])
     + rxH('別和「備用容量率」搞混')
     + rxL(['備用容量率＝（系統規劃淨尖峰能力－系統尖峰負載）÷系統尖峰負載，是每年電源開發的長期規劃指標，政府核准的合理目標值為 15%','備轉容量率則是每日、以扣除檢修與故障機組後的實際運轉能力計算的調度指標'])
-    + `<div class="src-note" style="margin-top:6px;">📌 ${riLink(RI_SRC_TPC_RESERVE_DEF,'台電今日預估尖峰備轉容量率（含定義與供電燈號）')}${riLink(RI_SRC_TPC_PLAN,'台電備用容量之說明')}</div>`
+    + `<div class="src-note" style="margin-top:6px;">${riLink(RI_SRC_TPC_RESERVE_DEF,'台電今日預估尖峰備轉容量率（含定義與供電燈號）')}${riLink(RI_SRC_TPC_PLAN,'台電備用容量之說明')}</div>`
     + `</div>`;
   const legend = `<span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px;"><span style="display:inline-block;width:16px;height:2px;background:#5a7fa8;opacity:.35;"></span>每日值</span><span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:16px;height:3px;background:#2f5f8f;"></span>7 日移動平均</span>`;
   return riWrap('🔌 台灣每日備轉容量率（'+esc(rv.days[0])+' 至 '+esc(rv.days[n-1])+'，單位：%）', svg, ins&&ins.text, notes, legend, explain);
@@ -1286,7 +1286,7 @@ async function init(){
     ? mix.items.map(it=>rankCard(it,kindCls(it.kind))).join('')
     : '<div class="empty-state">尚無資料</div>';
   document.getElementById('mix-src').innerHTML = mix.source_url
-    ? `📌 ${srcDot(mix.source_label,mix.source_url)}` : '';
+    ? `${srcDot(mix.source_label,mix.source_url)}` : '';
   document.getElementById('mix-crossref').textContent = mix.cross_ref_note || '';
   const drawTrendG = ()=>{ document.getElementById('trend-chart-block').innerHTML = trendChartSvg(data.historical_trend); };
   drawTrendG(); riOnResize(drawTrendG);
@@ -1298,7 +1298,7 @@ async function init(){
     ? twMix.items.map(it=>rankCard(it,kindCls(it.kind))).join('')
     : '<div class="empty-state">尚無資料</div>';
   document.getElementById('tw-mix-src').innerHTML = twMix.source_url
-    ? `📌 ${srcDot(twMix.source_label,twMix.source_url)}` : '';
+    ? `${srcDot(twMix.source_label,twMix.source_url)}` : '';
   document.getElementById('tw-mix-crossref').textContent = twMix.cross_ref_note || '';
   document.getElementById('tw-import-block').innerHTML = twImportBlock(twMix);
   const drawTwHist = ()=>{ document.getElementById('tw-history-block').innerHTML = stackedBarSvg(twMix.history, {titleLabel:'📊 台灣歷年發電結構'}); };
@@ -1324,7 +1324,7 @@ async function init(){
       ? block.items.map(renewCard).join('')
       : '<div class="empty-state">尚無資料</div>';
     document.getElementById(prefix+'-src').innerHTML = block.source_url
-      ? `📌 ${srcDot(block.source_label,block.source_url)}` : '';
+      ? `${srcDot(block.source_label,block.source_url)}` : '';
   }
   const renewData = data.renewable_breakdown||{};
   const gRenewSummary = (mix.items||[]).filter(it=>it.kind==='renew' && it.share_pct!=null)
@@ -1348,14 +1348,14 @@ async function init(){
        <div class="case-desc">${ptsHtml(storage.taiwan_points)}</div>`
     : '';
   document.getElementById('storage-src').innerHTML = storage.source_url
-    ? `📌 ${srcDot(storage.source_label,storage.source_url)}` : '';
+    ? `${srcDot(storage.source_label,storage.source_url)}` : '';
 
   const minerals = data.critical_minerals||{};
   document.getElementById('minerals-meta').textContent = minerals.as_of ? `資料時間點：${minerals.as_of}` : '';
   document.getElementById('minerals-block').innerHTML = (minerals.minerals||[]).length
     ? `${minerals.intro_note?`<div class="total-banner">${ptsHtml(minerals.intro_note)}</div>`:''}
        <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">${minerals.minerals.map(mineralCard).join('')}</div>
-       ${minerals.source_url?`<div class="src-note" style="margin-top:8px;">📌 ${srcDot(minerals.source_label,minerals.source_url)}</div>`:''}`
+       ${minerals.source_url?`<div class="src-note" style="margin-top:8px;">${srcDot(minerals.source_label,minerals.source_url)}</div>`:''}`
     : '<div class="empty-state">尚無資料</div>';
 
   const nuclear = data.nuclear||{};
@@ -1410,13 +1410,13 @@ async function init(){
     ? `<div class="sec-meta" style="margin:14px 0 8px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🏗 各國核能營運狀況／計畫／政策</div>
        <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">${nuclear.country_profiles.map(nuclearProfileCard).join('')}</div>` : '';
   document.getElementById('nuclear-src').innerHTML = nuclear.source_url
-    ? `📌 ${srcDot(nuclear.source_label,nuclear.source_url)}` : '';
+    ? `${srcDot(nuclear.source_label,nuclear.source_url)}` : '';
 
   const carbon = data.carbon||{};
   document.getElementById('carbon-total').innerHTML = carbon.global_total
     ? `全球碳排放總量 <span class="big" style="color:var(--fossil);">${esc(carbon.global_total)}</span>
        ${carbon.global_trend_note?`<div style="margin-top:5px;">${bulletize(carbon.global_trend_note)}</div>`:''}
-       ${carbon.taiwan_total?`<div style="margin-top:8px;">🇹🇼 台灣：<b>${esc(carbon.taiwan_total)}</b>${carbon.taiwan_note?`<div style="margin-top:3px;">${bulletize(carbon.taiwan_note)}</div>`:''}${carbon.taiwan_src_url?`<div class="case-src">📌 ${srcDot(carbon.taiwan_src_label||'連結',carbon.taiwan_src_url)}</div>`:''}</div>`:''}`
+       ${carbon.taiwan_total?`<div style="margin-top:8px;">🇹🇼 台灣：<b>${esc(carbon.taiwan_total)}</b>${carbon.taiwan_note?`<div style="margin-top:3px;">${bulletize(carbon.taiwan_note)}</div>`:''}${carbon.taiwan_src_url?`<div class="case-src">${srcDot(carbon.taiwan_src_label||'連結',carbon.taiwan_src_url)}</div>`:''}</div>`:''}`
     : '';
   const drawCarbon = ()=>{
     document.getElementById('carbon-trend-block').innerHTML = trendChartSvg(carbon.historical_trend, {titleLabel:'📈 全球碳排放歷年趨勢', fallbackColor:'var(--fossil)'});
@@ -1431,11 +1431,11 @@ async function init(){
         ${c.note?`<div class="rank-note">${bulletize(c.note)}</div>`:''}
         ${c.main_source?`<div class="np-block"><b>碳排主因</b>${bulletize(c.main_source)}</div>`:''}
         ${c.policy?`<div class="rank-reason"><b>對應政策：</b>${bulletize(c.policy)}</div>`:''}
-        ${c.src_url?`<div class="case-src">📌 ${srcDot(c.src_label||'連結',c.src_url)}</div>`:''}
+        ${c.src_url?`<div class="case-src">${srcDot(c.src_label||'連結',c.src_url)}</div>`:''}
       </div>`).join('')
     : '<div class="empty-state">尚無資料</div>';
   document.getElementById('carbon-src').innerHTML = carbon.source_url
-    ? `📌 ${srcDot(carbon.source_label,carbon.source_url)}` : '';
+    ? `${srcDot(carbon.source_label,carbon.source_url)}` : '';
 
   const targets = data.national_targets||{};
   // {{tw_renew_pct}}／{{tw_renew_gap}}：由台灣能源使用狀況的再生占比現算，避免多處手寫同一數字
@@ -1457,7 +1457,7 @@ async function init(){
          <td>${bulletize(fillTwTokens(c.current_progress))}${srcInline(c.current_progress_sources)}</td>
        </tr>`).join('')}
        </tbody></table></div>
-       ${targets.source_url?`<div class="src-note" style="margin-top:8px;">📌 ${srcDot(targets.source_label,targets.source_url)}</div>`:''}`
+       ${targets.source_url?`<div class="src-note" style="margin-top:8px;">${srcDot(targets.source_label,targets.source_url)}</div>`:''}`
     : '<div class="empty-state">尚無資料</div>';
 
   const tps = data.taiwan_power_shortage||{};
@@ -1505,7 +1505,7 @@ async function init(){
       <div class="case-card">
         <div class="case-name">${esc(v.source)}</div>
         <div class="case-desc">${bulletize(v.desc)}</div>
-        ${v.src_url?`<div class="case-src">📌 ${srcDot(v.src_label||'連結',v.src_url)}</div>`:''}
+        ${v.src_url?`<div class="case-src">${srcDot(v.src_label||'連結',v.src_url)}</div>`:''}
       </div>`).join('')}</div>` : '';
   document.getElementById('taiwan-power-block').innerHTML = (riskBannerHtml || tpsMetricHtml || tpsTimelineHtml || tpsForecastHtml || tpsViewsHtml)
     ? `${riskBannerHtml}${tpsMetricHtml}${tpsTimelineHtml}${tpsForecastHtml}${tpsViewsHtml}`
@@ -1516,7 +1516,7 @@ async function init(){
   document.getElementById('ai-energy-block').innerHTML = (aiEnergy.country_profiles||[]).length
     ? `${aiEnergy.intro_note?`<div class="total-banner">${bulletize(aiEnergy.intro_note)}${srcInline(aiEnergy.intro_sources)}</div>`:''}
        <div class="case-cols" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">${aiEnergy.country_profiles.map(aiEnergyCard).join('')}</div>
-       ${aiEnergy.source_url?`<div class="src-note" style="margin-top:8px;">📌 ${srcDot(aiEnergy.source_label,aiEnergy.source_url)}</div>`:''}`
+       ${aiEnergy.source_url?`<div class="src-note" style="margin-top:8px;">${srcDot(aiEnergy.source_label,aiEnergy.source_url)}</div>`:''}`
     : '<div class="empty-state">尚無資料</div>';
 
   const sm = data.smart_management||{};
