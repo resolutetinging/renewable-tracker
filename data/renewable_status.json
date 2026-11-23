@@ -2855,8 +2855,8 @@
     "global_trend_note": "化石燃料CO2排放預估較2025年減少0.4%（石油減1.9%、天然氣減0.3%、煤炭增0.6%）。化石燃料與土地利用變化合計的CO2排放預估為433億噸，2025年為428億噸；合計排放近十年年均成長0.3%，前一個十年為年均1.7%。剩餘1.5°C碳預算約1,500億噸CO2，以目前排放水準不到4年",
     "taiwan_total": "251.4百萬噸CO2e（2024年淨排放，扣除碳匯）",
     "taiwan_note": "較基準年（2005年）減少6.59%",
-    "taiwan_src_url": "https://money.udn.com/money/story/7307/9544359",
-    "taiwan_src_label": "聯合新聞網報導環境部國家溫室氣體排放清冊（2026-06-04）",
+    "taiwan_src_url": "https://enews.moenv.gov.tw/page/3b3c62c78849f32f/676c7942-c59c-419d-b468-a63efbcf7c28",
+    "taiwan_src_label": "環境部新聞稿：國家溫室氣體排放清冊（2026年版）",
     "country_ranking": [
       {
         "rank": 1,
@@ -3022,19 +3022,6 @@
             "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0130075"
           }
         ]
-      },
-      {
-        "text": "兩者口徑不同，不可直接比較：備轉容量率達綠燈（10%以上），不代表年度備用容量率達到15%目標",
-        "sources": [
-          {
-            "label": "中央社 2025-09-15（備轉容量率定義）",
-            "url": "https://www.cna.com.tw/news/afe/202509150253.aspx"
-          },
-          {
-            "label": "全國法規資料庫（備用供電容量率）",
-            "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0130075"
-          }
-        ]
       }
     ],
     "timeline": {
@@ -3071,11 +3058,11 @@
           "sort": "2025"
         },
         {
-          "text": "2025-09-09晚間，興達電廠新2號燃氣機組試運轉測試時，7時57分偵測到天然氣外洩，8時5分天然氣在管內竄起火（台電董事長曾文生說明）；ETtoday報導備轉容量率一度跌至3%，全國進入10天供電警戒期",
+          "text": "2025-09-09晚間，興達電廠新2號燃氣機組試運轉測試時，19時57分偵測到天然氣外洩，20時05分起火（台電新聞稿）；據ETtoday報導，備轉容量率一度跌至3%，全國進入10天供電警戒期",
           "sources": [
             {
-              "label": "中央社 2025-09-10",
-              "url": "https://www.cna.com.tw/news/aloc/202509100321.aspx"
+              "label": "台電新聞稿：興達電廠新建機組火警事故",
+              "url": "https://www.taipower.com.tw/2289/2323/2324/64236/normalPost"
             },
             {
               "label": "ETtoday 2025-09-11",
@@ -3132,15 +3119,15 @@
       ],
       "near": [
         {
-          "text": "台電規劃2026年新增燃氣機組裝置容量520萬瓩（興達新2、3號機與台中新1、2號機，工商時報）；台中新1號機2026年5月接受調度、新2號機目標明年3月商轉（中央社）",
+          "text": "台中新1號燃氣機組2026年5月接受調度（台電）、新2號機目標2027年3月商轉（中央社）",
           "sources": [
+            {
+              "label": "台電新聞稿：台中電廠新燃氣機組與減煤說明",
+              "url": "https://www.taipower.com.tw/2289/2323/2332/69832/normalPost"
+            },
             {
               "label": "中央社 2026-09-04",
               "url": "https://www.cna.com.tw/news/afe/202609040200.aspx"
-            },
-            {
-              "label": "工商時報 2026-10-28",
-              "url": "https://www.ctee.com.tw/news/20261028700121-430104"
             }
           ],
           "sort": "2026a"
@@ -3168,15 +3155,11 @@
       ],
       "long": [
         {
-          "text": "能源署供需報告預估夜間備用容量率：2028年8%、2029年7.1%。台電表示2028-2029年夜間備用容量仍有300萬瓩以上，2030年後夜間備用容量率穩定15%以上（報導轉述）",
+          "text": "能源署供需報告預估夜間備用容量率：2028年8%、2029年7.1%。台電表示這樣的夜間備用容量仍達300萬瓩以上（報導轉述）",
           "sources": [
             {
               "label": "聯合報 2026-10-27",
               "url": "https://udn.com/news/story/6656/9838503"
-            },
-            {
-              "label": "工商時報 2026-10-28",
-              "url": "https://www.ctee.com.tw/news/20261028700121-430104"
             }
           ],
           "sort": "2028"
@@ -3197,19 +3180,19 @@
           "ai": true,
           "sources": [
             {
-              "label": "中央社 2026-06-18",
-              "url": "https://www.cna.com.tw/news/afe/202606180283.aspx"
+              "label": "經濟部能源署新聞稿：114年度全國電力資源供需報告（2026-06-18）",
+              "url": "https://ea01.moeaea.gov.tw/e0406/01/news/show?id=460a0d07b5a34b5093ab57cfc2350761"
             }
           ],
           "sort": "2035a"
         },
         {
-          "text": "台電預估半導體產業用電由2026年約520億度，成長至2035年約1,100億度，約占全國用電三成（台電董事長曾文生，2026-10-14）",
+          "text": "台電預估國內半導體產業用電由2026年約520億度，翻倍成長至2035年約1,100億度",
           "ai": true,
           "sources": [
             {
-              "label": "華視／中央社 2026-10-14",
-              "url": "https://news.cts.com.tw/cna/money/202610/202610143089816.html"
+              "label": "台電新聞稿：台電對未來十年電力布局說明",
+              "url": "https://www.taipower.com.tw/2289/2323/2324/70391/normalPost"
             }
           ],
           "sort": "2035b"
@@ -3954,13 +3937,8 @@
   },
   "ai_energy_impact": {
     "as_of": "2026-11-19（逐點標註來源與日期）",
-    "intro_note": "2025年全球資料中心用電約788 TWh。",
-    "intro_sources": [
-      {
-        "label": "Crypto Briefing（2026-08-27，轉述 Energy Institute《2026 Statistical Review of World Energy》）",
-        "url": "https://cryptobriefing.com/us-data-center-power-demand-surge/"
-      }
-    ],
+    "intro_note": "",
+    "intro_sources": [],
     "country_profiles": [
       {
         "country": "美國",
@@ -3971,15 +3949,6 @@
               {
                 "label": "NUS Consulting：PJM Capacity Auction 2026/27",
                 "url": "https://www.nusconsulting.com/energy-news/pjm-capacity-auction-2026-2027/"
-              }
-            ]
-          },
-          {
-            "text": "2025年美國資料中心用電量312.6 TWh，占全球資料中心用電39.7%",
-            "sources": [
-              {
-                "label": "Crypto Briefing（2026-08-27，轉述 Energy Institute《2026 Statistical Review of World Energy》）",
-                "url": "https://cryptobriefing.com/us-data-center-power-demand-surge/"
               }
             ]
           },
@@ -3998,7 +3967,7 @@
         "country": "中國",
         "energy_availability": [
           {
-            "text": "2030年中國資料中心用電量預測區間為400–600 TWh；高盛預估由2025年初約200 TWh增至近600 TWh（Carbon Brief 2025-04-16 轉述 Bloomberg）",
+            "text": "據Carbon Brief報導，2030年中國資料中心用電量預測區間為400–600 TWh；高盛預估由2025年初約200 TWh增至近600 TWh（Carbon Brief 2025-04-16 轉述 Bloomberg）",
             "sources": [
               {
                 "label": "Carbon Brief：How China is managing the rising energy demand from data centres（2025-04-16）",
@@ -4035,7 +4004,7 @@
         "country": "日本",
         "energy_availability": [
           {
-            "text": "Wood Mackenzie預估日本資料中心用電量將由2024年19 TWh增至2034年57–66 TWh",
+            "text": "據Wood Mackenzie新聞稿，預估日本資料中心用電量將由2024年19 TWh增至2034年57–66 TWh",
             "sources": [
               {
                 "label": "Wood Mackenzie 新聞稿（2025-08-26）",
@@ -4058,7 +4027,7 @@
             ]
           },
           {
-            "text": "上述增加量約相當於19座1.4 GW的APR1400大型反應爐",
+            "text": "據Korea JoongAng Daily報導換算，上述增加量約相當於19座1.4 GW的APR1400大型反應爐",
             "sources": [
               {
                 "label": "Korea JoongAng Daily（2026-08-20）",
@@ -4072,7 +4041,7 @@
         "country": "菲律賓",
         "ai_development_status": [
           {
-            "text": "菲律賓AI基礎建設總體規劃（2026–2033）預計投資344億美元，其中公共資金135億美元（39%）、私人投資210億美元（61%）",
+            "text": "據W.Media報導，菲律賓AI基礎建設總體規劃（2026–2033）預計投資344億美元，其中公共資金135億美元（39%）、私人投資210億美元（61%）",
             "sources": [
               {
                 "label": "W.Media（2026-09-15）",
@@ -4081,7 +4050,7 @@
             ]
           },
           {
-            "text": "資料中心容量由基準約50 MW增至2033年1.5 GW，第一階段2030年前約400 MW",
+            "text": "據W.Media報導，資料中心容量由基準約50 MW增至2033年1.5 GW，第一階段2030年前約400 MW",
             "sources": [
               {
                 "label": "W.Media（2026-09-15）",
@@ -4092,7 +4061,7 @@
         ],
         "energy_availability": [
           {
-            "text": "規劃可支持約15.2萬顆GPU；目標2033年前太陽能與地熱供應AI基礎建設用電的40%；能源部將評估核電作為較長期選項",
+            "text": "據W.Media報導，規劃可支持約15.2萬顆GPU；目標2033年前太陽能與地熱供應AI基礎建設用電的40%；能源部將評估核電作為較長期選項",
             "sources": [
               {
                 "label": "W.Media（2026-09-15）",
@@ -4203,11 +4172,11 @@
           "title": "減碳階段目標（新聞轉述環境部、行政院）",
           "points": [
             {
-              "text": "2030年較2005年減量28±2%（行政院2025-05-06核定）；2035年減量38±2%（行政院2025-11-03核定）",
+              "text": "2030年較2005年減量28±2%；2035年減量38±2%（行政院2025-11-03核定NDC 3.0）",
               "sources": [
                 {
-                  "label": "聯合報",
-                  "url": "https://udn.com/news/story/7266/9124079"
+                  "label": "環境部新聞稿：臺灣2035年國家自定貢獻（NDC3.0）（2025-11-07）",
+                  "url": "https://enews.moenv.gov.tw/Page/3b3c62c78849f32f/2d33dba0-8a01-43d1-8747-43bd1f500751"
                 },
                 {
                   "label": "中央社（2025-11-07）",
@@ -4305,11 +4274,11 @@
             ]
           },
           {
-            "text": "二期新增4部燃氣機組自2031年起陸續上線，台電稱2034年底前達成台中電廠無煤供電",
+            "text": "台電表示，新燃氣二期計畫預定第1部機2031年起更新上線，預計2034年底達成台中電廠無煤供電目標",
             "sources": [
               {
-                "label": "自由財經",
-                "url": "https://ec.ltn.com.tw/article/breakingnews/5527202"
+                "label": "台電新聞稿：台中電廠新燃氣機組與減煤說明",
+                "url": "https://www.taipower.com.tw/2289/2323/2332/69832/normalPost"
               }
             ]
           }
@@ -4344,11 +4313,11 @@
             ]
           },
           {
-            "text": "2026年11月再生能源發電占比20%目標：經濟部長2026-04向立法院表示恐無法達成、將再次延遲",
+            "text": "再生能源發電占比20%目標：經濟部原訂2成綠電目標將延至2026年11月完成；經濟部長龔明鑫2026-02-05表示目標不變，時程上會往後延",
             "sources": [
               {
-                "label": "工商時報（2026-04-20）",
-                "url": "https://www.ctee.com.tw/news/20260420700057-430104"
+                "label": "中央社經Newtalk（2026-02-05）",
+                "url": "https://newtalk.tw/news/view/2026-02-05/1018780"
               }
             ]
           },
@@ -4373,8 +4342,8 @@
         ],
         "note": "較2024年11.79%上升1.53個百分點",
         "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}],
-        "trend_reason": "經濟部原訂2成綠電目標將延至2026年11月完成；經濟部長龔明鑫表示光電環評三法通過後確實造成推動困難（中央社，2026-02-05）。工商時報（2026-04-20）報導，龔明鑫日前於立法院經濟委員會證實，20%目標今年11月恐仍無法達成、將再次延遲；經濟部檢討報導指出，太陽光電受環評三法修法等因素影響，建置速度趨緩（工商時報，2026-04-20）",
-        "reason_sources": [{"label": "中央社經Newtalk（2026-02-05）", "url": "https://newtalk.tw/news/view/2026-02-05/1018780"}, {"label": "工商時報（2026-04-20）", "url": "https://www.ctee.com.tw/news/20260420700057-430104"}]
+        "trend_reason": "經濟部原訂2成綠電目標將延至2026年11月完成；經濟部長龔明鑫表示光電環評三法通過後確實造成推動困難（中央社，2026-02-05）",
+        "reason_sources": [{"label": "中央社經Newtalk（2026-02-05）", "url": "https://newtalk.tw/news/view/2026-02-05/1018780"}]
       },
       {
         "rank": 4,
@@ -4424,7 +4393,7 @@
           }
         ],
         "note": "2025年全年平均值；2016年為11.99%。核三2號機於2025-05-17因40年運轉執照屆滿安全停機，見本頁核能專區「台灣現況」",
-        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}, {"label": "中央社（2025-05-17）", "url": "https://www.cna.com.tw/news/afe/202505170134.aspx"}]
+        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}, {"label": "台電新聞稿：核三廠2號機40年運轉執照屆期安全停機（2025-05-17）", "url": "https://www.taipower.com.tw/2289/2323/2324/62567/normalPost"}]
       },
       {
         "rank": 6,
@@ -4473,8 +4442,12 @@
         "renewable_target": "2035年非化石能源占能源消費總量比重提高至30%以上；風電與太陽能裝置容量提高至2020年的6倍以上、力爭達3,600GW（習近平2025年9月於聯合國氣候峰會宣布）",
         "renewable_target_sources": [
           {
-            "label": "Climate Home News（2025-09-24）",
-            "url": "https://www.climatechangenews.com/2025/09/24/china-unveils-underwhelming-emissions-cutting-target-for-2035/"
+            "label": "中國外交部：習近平在聯合國氣候峰會視訊致詞",
+            "url": "https://www.mfa.gov.cn/mfa_eng/xw/zyxw/202509/t20250925_11716513.html"
+          },
+          {
+            "label": "中國政府網（英文版）：習近平在聯合國氣候峰會視訊致詞",
+            "url": "https://english.www.gov.cn/news/202509/25/content_WS68d47dcac6d00ca5f9a066a5.html"
           }
         ],
         "current_progress": "風電與太陽能裝置容量2026年9月底達2,013GW",
@@ -4613,15 +4586,11 @@
             "url": "https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/7a65a06e-3f71-4c68-b368-85549fbca5d1"
           }
         ],
-        "renewable_target": "再生能源發電占比20%：經濟部原訂延至2026年11月完成；工商時報（2026-04-20）報導，經濟部長龔明鑫日前於立法院經委會證實，今年11月恐仍無法達成、將再次延遲",
+        "renewable_target": "再生能源發電占比20%：經濟部原訂延至2026年11月完成；經濟部長龔明鑫2026-02-05表示目標不變、時程上會往後延",
         "renewable_target_sources": [
           {
             "label": "中央社經Newtalk（2026-02-05）",
             "url": "https://newtalk.tw/news/view/2026-02-05/1018780"
-          },
-          {
-            "label": "工商時報（2026-04-20）",
-            "url": "https://www.ctee.com.tw/news/20260420700057-430104"
           }
         ],
         "current_progress": "2025年全國發電量口徑再生能源占比{{tw_renew_pct}}%",
@@ -4792,7 +4761,7 @@
     }
   },
   "storage": {
-    "as_of": "全球：2025年（Ember GER2026）；台灣：ESG遠見整理經濟部《全國電力供需報告》，統計至2026年3月底",
+    "as_of": "全球：2025年（Ember GER2026）",
     "source_label": "Ember — Global Electricity Review 2026（§2.2 電池）",
     "source_url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/global-electricity-insights#batteries-are-making-daytime-solar-into-anytime-so",
     "global_points": [
@@ -4861,44 +4830,7 @@
         ]
       }
     ],
-    "taiwan_points": [
-      {
-        "text": "併網型儲能2025年1GW設置目標已超額達成",
-        "sources": [
-          {
-            "label": "ESG遠見：最新《全國電力供需報告》10大重點（重點九）",
-            "url": "https://esg.gvm.com.tw/article/120055"
-          }
-        ]
-      },
-      {
-        "text": "光電結合儲能系統截至2026年3月底，累積分配儲能達198.629MW",
-        "sources": [
-          {
-            "label": "ESG遠見：最新《全國電力供需報告》10大重點（重點九）",
-            "url": "https://esg.gvm.com.tw/article/120055"
-          }
-        ]
-      },
-      {
-        "text": "用戶端儲能：2025年底公告補助要點，協助工業區、科學園區等產業用戶設置「國產電池芯儲能設備」進行尖離峰移轉，目標2026～2027年每年推動300MWh，2028～2029年每年推動200MWh",
-        "sources": [
-          {
-            "label": "ESG遠見：最新《全國電力供需報告》10大重點（重點九）",
-            "url": "https://esg.gvm.com.tw/article/120055"
-          }
-        ]
-      },
-      {
-        "text": "全台最大儲能系統是抽蓄水力；既有的日月潭抽蓄水力已落實白天抽水蓄電、夜間放水發電的調節模式，新規劃的大甲溪流域抽蓄水力機組目前處於環評階段",
-        "sources": [
-          {
-            "label": "ESG遠見：最新《全國電力供需報告》10大重點（重點九）",
-            "url": "https://esg.gvm.com.tw/article/120055"
-          }
-        ]
-      }
-    ]
+    "taiwan_points": []
   },
   "critical_minerals": {
     "as_of": "開採端與美國進口依存度：2025年（USGS《Mineral Commodity Summaries 2026》，2026年2月發布）；加工端占比與評分：歐盟執委會《Study on the Critical Raw Materials for the EU 2023》（2016–2020年）",

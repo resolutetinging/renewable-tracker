@@ -1346,6 +1346,8 @@ async function init(){
         ${c.note?`<div class="rank-note">${bulletize(c.note)}${srcInline(c.sources)}</div>`:''}
       </div>`).join('')
     : '<div class="empty-state">尚無資料</div>';
+  // 11-23：taiwan_points 為空時連外層容器一起隱藏，避免出現空白卡片
+  document.getElementById('storage-taiwan-card').parentElement.style.display = (storage.taiwan_points||[]).length ? '' : 'none';
   document.getElementById('storage-taiwan-card').innerHTML = (storage.taiwan_points||[]).length
     ? `<div class="case-name">🇹🇼 台灣儲能現況</div>
        <div class="case-desc">${ptsHtml(storage.taiwan_points)}</div>`
