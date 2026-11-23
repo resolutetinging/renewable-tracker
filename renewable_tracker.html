@@ -880,6 +880,7 @@ function shInit(){
     if(ci>=0){ if(shPinned<0) shShow(ci); return; }
     const role = e.target.closest('.sh-role');
     if(role && shPinned<0){
+      clearTimeout(shHideT); // 11-23：在角色卡內移動（子元素間）會先觸發 mouseout 排定熄線，這裡要取消
       const rid = role.getAttribute('data-rid');
       shState.conflicts.forEach(c=>shHi(c.i,false)); shState.conflicts.forEach(c=>{ if(c.a===rid||c.b===rid) shHi(c.i,true); });
     }
@@ -887,6 +888,8 @@ function shInit(){
   board.addEventListener('mouseout', e=>{
     const rt = e.relatedTarget;
     if(rt && board.contains(rt) && (rt.closest('.sh-pop')||ciOf(rt)>=0)) return;
+    const fromRole = e.target.closest('.sh-role');
+    if(fromRole && rt && fromRole.contains(rt)) return; // 仍在同一張角色卡內，關係線保持亮著
     shHide(false);
   });
   board.addEventListener('click', e=>{
