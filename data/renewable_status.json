@@ -2848,11 +2848,11 @@
     }
   },
   "carbon": {
-    "as_of": "全球：2025年預估（Global Carbon Project，2025-11-13發布）；台灣：2024年（環境部國家溫室氣體排放清冊，2026-06-03公布）；國別與歷年序列：Our World in Data（2026-11-19下載）",
-    "source_label": "Global Carbon Budget 2025",
-    "source_url": "https://globalcarbonbudget.org/fossil-fuel-co2-emissions-hit-record-high-in-2025/",
-    "global_total": "381億噸CO2（化石燃料，2025年預估）／41億噸CO2（土地利用變化，2025年預估）",
-    "global_trend_note": "化石燃料CO2排放較2024年預估增加1.1%，創歷史新高。化石燃料與土地利用變化合計的CO2排放，近十年年均成長0.3%，前一個十年為年均1.9%。剩餘1.5°C碳預算約1,700億噸CO2，以2025年排放水準約僅夠4年",
+    "as_of": "全球：2026年預估（Global Carbon Project，2026-11-10發布）；台灣：2024年（環境部國家溫室氣體排放清冊，2026-06-03公布）；國別與歷年序列：Our World in Data（2026-11-23下載）",
+    "source_label": "Global Carbon Budget 2026",
+    "source_url": "https://globalcarbonbudget.org/fossil-co2-emissions-decrease-in-2026/",
+    "global_total": "382億噸CO2（化石燃料，2026年預估）／51億噸CO2（土地利用變化，2026年預估）",
+    "global_trend_note": "化石燃料CO2排放預估較2025年減少0.4%（石油減1.9%、天然氣減0.3%、煤炭增0.6%）。化石燃料與土地利用變化合計的CO2排放預估為433億噸，2025年為428億噸；合計排放近十年年均成長0.3%，前一個十年為年均1.7%。剩餘1.5°C碳預算約1,500億噸CO2，以目前排放水準不到4年",
     "taiwan_total": "251.4百萬噸CO2e（2024年淨排放，扣除碳匯）",
     "taiwan_note": "較基準年（2005年）減少6.59%",
     "taiwan_src_url": "https://money.udn.com/money/story/7307/9544359",
@@ -2861,42 +2861,42 @@
       {
         "rank": 1,
         "country": "中國",
-        "value": "32.09%（12,401.1 Mt CO2）",
+        "value": "31.84%（12,417.5 Mt CO2）",
         "note": "",
-        "data_year": "2024",
+        "data_year": "2025",
         "src_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
-        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-19下載，2024年資料）"
+        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-23下載，2025年資料）"
       },
       {
         "rank": 2,
         "country": "美國",
-        "value": "12.71%（4,911.7 Mt CO2）",
+        "value": "12.91%（5,035.6 Mt CO2）",
         "note": "",
-        "data_year": "2024",
+        "data_year": "2025",
         "src_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
-        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-19下載，2024年資料）"
+        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-23下載，2025年資料）"
       },
       {
         "rank": 3,
         "country": "印度",
-        "value": "8.22%（3,175.6 Mt CO2）",
+        "value": "8.21%（3,203.4 Mt CO2）",
         "note": "",
-        "data_year": "2024",
+        "data_year": "2025",
         "src_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
-        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-19下載，2024年資料）"
+        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-23下載，2025年資料）"
       },
       {
         "rank": 4,
         "country": "歐盟（合併計）",
-        "value": "6.24%（2,412.0 Mt CO2）",
+        "value": "6.17%（2,405.1 Mt CO2）",
         "note": "",
-        "data_year": "2024",
+        "data_year": "2025",
         "src_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
-        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-19下載，2024年資料）"
+        "src_label": "Our World in Data — Annual CO₂ emissions（2026-11-23下載，2025年資料）"
       }
     ],
     "historical_trend": {
-      "as_of": "2015–2024年（Our World in Data，2026-11-19下載）",
+      "as_of": "2015–2025年（Our World in Data，2026-11-23下載）",
       "source_label": "Our World in Data — Annual CO₂ emissions（全球）",
       "source_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
       "unit": "Gt",
@@ -2910,7 +2910,8 @@
         2021,
         2022,
         2023,
-        2024
+        2024,
+        2025
       ],
       "series": [
         {
@@ -2925,77 +2926,78 @@
             36.89,
             37.47,
             38.14,
-            38.65
+            38.65,
+            39.0
           ]
         }
       ],
-      "note": "取Our World in Data資料集的全球CO2排放（不含土地利用變化）；2025年預估值見上方，不併入折線"
+      "note": "取Our World in Data資料集的全球CO2排放（不含土地利用變化）；2026年預估值見上方，不併入折線"
     },
     "country_breakdown_chart": {
-      "as_of": "2024年（Our World in Data，2026-11-19下載）",
+      "as_of": "2025年（Our World in Data，2026-11-23下載）",
       "source_label": "Our World in Data — Annual CO₂ emissions",
       "source_url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country",
-      "note": "占比為該資料集各國排放量除以全球排放量。不含歐盟整體（歐盟27國合計6.24%／2,412.0 Mt，已含德國，與個別國家並列會重複計算，故不畫進直條圖）",
+      "note": "占比為該資料集各國排放量除以全球排放量。不含歐盟整體（歐盟27國合計6.17%／2,405.1 Mt，已含德國，與個別國家並列會重複計算，故不畫進直條圖）",
       "items": [
         {
           "rank": 1,
           "country": "中國",
-          "pct": 32.09,
-          "value_mt": 12401.1
+          "pct": 31.84,
+          "value_mt": 12417.5
         },
         {
           "rank": 2,
           "country": "美國",
-          "pct": 12.71,
-          "value_mt": 4911.7
+          "pct": 12.91,
+          "value_mt": 5035.6
         },
         {
           "rank": 3,
           "country": "印度",
-          "pct": 8.22,
-          "value_mt": 3175.6
+          "pct": 8.21,
+          "value_mt": 3203.4
         },
         {
           "rank": 4,
           "country": "俄羅斯",
-          "pct": 4.63,
-          "value_mt": 1788.5
+          "pct": 4.53,
+          "value_mt": 1766.7
         },
         {
           "rank": 5,
           "country": "日本",
-          "pct": 2.51,
-          "value_mt": 969.6
+          "pct": 2.46,
+          "value_mt": 960.2
         },
         {
           "rank": 6,
           "country": "伊朗",
-          "pct": 2.18,
-          "value_mt": 842.6
+          "pct": 2.19,
+          "value_mt": 855.3
         },
         {
           "rank": 7,
           "country": "印尼",
-          "pct": 2.05,
-          "value_mt": 791.9
+          "pct": 2.11,
+          "value_mt": 821.8
         },
         {
           "rank": 8,
           "country": "沙烏地阿拉伯",
-          "pct": 1.63,
-          "value_mt": 630.8
+          "pct": 1.64,
+          "value_mt": 638.2
         },
         {
           "rank": 9,
           "country": "南韓",
-          "pct": 1.51,
-          "value_mt": 584.8
+          "pct": 1.49,
+          "value_mt": 580.6
         },
         {
           "rank": 10,
           "country": "德國",
-          "pct": 1.49,
-          "value_mt": 573.9
+          "pct": 1.47,
+          "value_mt": 573.5
         }
       ]
     }
