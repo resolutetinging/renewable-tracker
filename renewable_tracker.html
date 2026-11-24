@@ -1394,7 +1394,7 @@ async function init(){
   const plCards = (twp.plants||[]).filter(p=>p&&p.name).map(plCard).join('');
   document.getElementById('nuclear-plants-intro').innerHTML = plCards
     ? `<div class="sec-meta" style="margin:14px 0 6px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🏭 ${esc(twp.title||'台灣核電廠一覽')}</div>
-       <div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:start;">${plCards}</div>` : '';
+       <div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:stretch;">${plCards}</div>` : '';
   const rs = nuclear.restart||{};
   const rsHd = t=>`<div class="sec-meta" style="margin:10px 0 6px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">${t}</div>`;
   const rsPlant = p=>{
@@ -1421,7 +1421,7 @@ async function init(){
        ${tlHtml}
        ${shHtml}
        ${rsCommon?`<div class="case-card"><div class="case-name">🚦 共通前提（核三、核四皆適用）</div>${rsCommon}</div>`:''}
-       ${rsPlantsHtml?`<div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start;">${rsPlantsHtml}</div>`:''}
+       ${rsPlantsHtml?`<div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:stretch;">${rsPlantsHtml}</div>`:''}
        ${rsGaps}
        ${rs.disclaimer?`<div class="src-note" style="margin-top:8px;">${esc(rs.disclaimer)}</div>`:''}` : '';
   shInit();
