@@ -689,6 +689,223 @@
         ]
       }
     ],
+    "taiwan_plants": {
+      "title": "台灣核電廠一覽",
+      "plants": [
+        {
+          "name": "核一廠",
+          "location": "新北市石門區",
+          "reactor": "沸水式（BWR-4）",
+          "units": [
+            {
+              "unit": "1號機",
+              "capacity": "63.6萬瓩",
+              "commercial": "1978-12-06",
+              "shutdown": "2018-12-05"
+            },
+            {
+              "unit": "2號機",
+              "capacity": "63.6萬瓩",
+              "commercial": "1979-07-16",
+              "shutdown": "2019-07-15"
+            }
+          ],
+          "status": "除役中",
+          "points": [
+            {
+              "text": "兩部機組設計相同，總裝置容量127萬2千瓩，每部機每年發電約50億度",
+              "sources": [
+                {
+                  "label": "台電《第一核能發電廠除役計畫 技術與管理能力及財務基礎評估報告》2019年7月",
+                  "url": "https://www.nusc.gov.tw/share/file/focus/fx3k119B031zC1CD4Jj4vg__.pdf"
+                }
+              ]
+            },
+            {
+              "text": "台電規劃採拆除方式，取得除役許可後25年內完成除役",
+              "sources": [
+                {
+                  "label": "台電《第一核能發電廠除役計畫 技術與管理能力及財務基礎評估報告》2019年7月",
+                  "url": "https://www.nusc.gov.tw/share/file/focus/fx3k119B031zC1CD4Jj4vg__.pdf"
+                }
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "label": "台電「核電廠簡介：核電廠基本資料」",
+              "url": "https://www.taipower.com.tw/2289/2363/2380/2382/simpleList"
+            },
+            {
+              "label": "台電《第一核能發電廠除役計畫 技術與管理能力及財務基礎評估報告》2019年7月",
+              "url": "https://www.nusc.gov.tw/share/file/focus/fx3k119B031zC1CD4Jj4vg__.pdf"
+            },
+            {
+              "label": "核安會《我國核電廠除役現況及安全管制》2025年4月，第3頁",
+              "url": "https://www.nusc.gov.tw/share/file/focus/Y0H0q~Oi4EdDm4QKLxApGA__.pdf"
+            }
+          ]
+        },
+        {
+          "name": "核二廠",
+          "location": "新北市萬里區",
+          "reactor": "沸水式（BWR-6）",
+          "units": [
+            {
+              "unit": "1號機",
+              "capacity": "98.5萬瓩",
+              "commercial": "1981-12-28",
+              "shutdown": "2021-12-27"
+            },
+            {
+              "unit": "2號機",
+              "capacity": "98.5萬瓩",
+              "commercial": "1983-03-15",
+              "shutdown": "2023-03-14"
+            }
+          ],
+          "status": "除役中",
+          "points": [
+            {
+              "text": "兩部機組設計相同，總裝置容量197萬瓩，每部機每年發電約75億度",
+              "sources": [
+                {
+                  "label": "台電《第二核能發電廠除役計畫 技術與管理能力及財務基礎報告》2020年9月",
+                  "url": "https://www.nusc.gov.tw/share/file/focus/YfA6h3N-FtRnJTMwYDgVqw__.pdf"
+                }
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "label": "台電「核電廠簡介：核電廠基本資料」",
+              "url": "https://www.taipower.com.tw/2289/2363/2380/2382/simpleList"
+            },
+            {
+              "label": "台電《第二核能發電廠除役計畫 技術與管理能力及財務基礎報告》2020年9月",
+              "url": "https://www.nusc.gov.tw/share/file/focus/YfA6h3N-FtRnJTMwYDgVqw__.pdf"
+            },
+            {
+              "label": "核安會《我國核電廠除役現況及安全管制》2025年4月，第3頁",
+              "url": "https://www.nusc.gov.tw/share/file/focus/Y0H0q~Oi4EdDm4QKLxApGA__.pdf"
+            }
+          ]
+        },
+        {
+          "name": "核三廠",
+          "location": "屏東縣恆春鎮",
+          "reactor": "壓水式",
+          "units": [
+            {
+              "unit": "1號機",
+              "capacity": "95.1萬瓩",
+              "commercial": "1984-07-27",
+              "shutdown": "2024-07-27"
+            },
+            {
+              "unit": "2號機",
+              "capacity": "95.1萬瓩",
+              "commercial": "1985-05-18",
+              "shutdown": "2025-05-17"
+            }
+          ],
+          "status": "運轉執照已屆期，台電將依法申請換發執照",
+          "points": [
+            {
+              "text": "每部機額定容量951 MWe，總裝置容量1,902 MW，每部機每年發電約84億度",
+              "sources": [
+                {
+                  "label": "台電《運轉執照換照申請書附件 技術與管理能力及財務基礎評估報告(公開版)》2026年8月，第1頁",
+                  "url": "https://www.nusc.gov.tw/share/file/regulation/V64df6VyGFCrKDD5bE1k1g__.pdf"
+                }
+              ]
+            },
+            {
+              "text": "運轉執照有效期均已屆滿，台電依核管法第6條第3項申請換發執照以繼續運轉（2026年8月公開版文件）",
+              "sources": [
+                {
+                  "label": "台電《運轉執照換照申請書附件 技術與管理能力及財務基礎評估報告(公開版)》2026年8月，第1頁",
+                  "url": "https://www.nusc.gov.tw/share/file/regulation/V64df6VyGFCrKDD5bE1k1g__.pdf"
+                }
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "label": "台電「核電廠簡介：核電廠基本資料」",
+              "url": "https://www.taipower.com.tw/2289/2363/2380/2382/simpleList"
+            },
+            {
+              "label": "台電《運轉執照換照申請書附件 技術與管理能力及財務基礎評估報告(公開版)》2026年8月，第1頁",
+              "url": "https://www.nusc.gov.tw/share/file/regulation/V64df6VyGFCrKDD5bE1k1g__.pdf"
+            },
+            {
+              "label": "核安會《我國核電廠除役現況及安全管制》2025年4月，第3頁",
+              "url": "https://www.nusc.gov.tw/share/file/focus/Y0H0q~Oi4EdDm4QKLxApGA__.pdf"
+            }
+          ]
+        },
+        {
+          "name": "核四廠",
+          "alias": "龍門",
+          "location": "新北市貢寮區",
+          "reactor": "進步型沸水式（奇異公司）",
+          "units": [
+            {
+              "unit": "1號機",
+              "capacity": "135萬瓩",
+              "commercial": "未商轉",
+              "shutdown": "未商轉"
+            },
+            {
+              "unit": "2號機",
+              "capacity": "135萬瓩",
+              "commercial": "未商轉",
+              "shutdown": "未商轉"
+            }
+          ],
+          "status": "資產維護管理（未完成興建）",
+          "points": [
+            {
+              "text": "建廠許可日期為1999年3月17日，建廠執照已於2020年12月31日屆期失效，該廠並未完成興建作業",
+              "sources": [
+                {
+                  "label": "核安會《龍門(核四)電廠基本資料》（資料來源：台電網站）",
+                  "url": "https://www.nusc.gov.tw/share/file/regulation/KDpFAxM5gXhR~FyhumFYOw__.pdf"
+                },
+                {
+                  "label": "核安會《原龍門(核四)電廠簡要說明》",
+                  "url": "https://www.nusc.gov.tw/share/file/regulation/MV3pm99PqATHD5hQG-vx9Q__.pdf"
+                }
+              ]
+            },
+            {
+              "text": "2014年4月行政院宣布封存，2015年7月1日進入封存，台電現列為依政府指示進行資產維護管理",
+              "sources": [
+                {
+                  "label": "台電《龍門(核四)停工及封存計畫執行情形》第3頁",
+                  "url": "https://www.nusc.gov.tw/share/file/about/4uFC9dLFdHEjoxB5IXIfSA__.pdf"
+                },
+                {
+                  "label": "台電「核電廠簡介：核電廠基本資料」",
+                  "url": "https://www.taipower.com.tw/2289/2363/2380/2382/simpleList"
+                }
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "label": "台電「核電廠簡介：核電廠基本資料」",
+              "url": "https://www.taipower.com.tw/2289/2363/2380/2382/simpleList"
+            },
+            {
+              "label": "核安會《龍門(核四)電廠基本資料》（資料來源：台電網站）",
+              "url": "https://www.nusc.gov.tw/share/file/regulation/KDpFAxM5gXhR~FyhumFYOw__.pdf"
+            }
+          ]
+        }
+      ]
+    },
     "country_profiles": [
       {
         "country": "美國",

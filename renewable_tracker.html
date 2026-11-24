@@ -122,6 +122,13 @@ span.src-dot:hover,span.src-dot:focus-visible{background:var(--muted);}
 .pt-ln{display:block;padding-left:1em;}
 .judge-box{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:8px;font-size:12px;color:var(--text2);line-height:1.6;}
 .judge-box b{color:var(--text);}
+.pl-meta{font-size:12px;color:var(--text2);line-height:1.62;}
+.pl-meta b{color:var(--text);}
+.pl-tb-wrap{overflow-x:auto;margin:7px 0 2px;border:1px solid var(--border);border-radius:8px;}
+.pl-tb{width:100%;border-collapse:collapse;font-size:11.5px;}
+.pl-tb th{text-align:left;font-size:10.5px;color:var(--muted);font-weight:700;padding:6px 8px;border-bottom:1px solid var(--border2);white-space:nowrap;}
+.pl-tb td{padding:6px 8px;border-bottom:1px solid var(--card2);color:var(--text2);line-height:1.5;white-space:nowrap;}
+.pl-tb tr:last-child td{border-bottom:none;}
 .np-block{font-size:11.5px;color:var(--text2);line-height:1.6;margin-top:7px;}
 .np-block b{display:block;font-size:10.5px;color:var(--smart);font-weight:700;margin-bottom:2px;}
 /* ── 利害關係人：四欄（依立場）＋衝突連接線；窄螢幕改清單 ── */
@@ -322,6 +329,7 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);font-
   <div class="sec-title" id="sec-nuclear">☢️ 核能專區</div>
   <div class="sec-meta" id="nuclear-meta" style="text-transform:none;letter-spacing:normal;margin-bottom:8px;"></div>
   <div class="total-banner" id="nuclear-tw-banner"></div>
+  <div id="nuclear-plants-intro"></div>
   <div id="nuclear-restart-block"></div>
   <div class="rank-grid" id="nuclear-country-grid"></div>
   <div id="nuclear-plants-block"></div>
@@ -1373,6 +1381,20 @@ async function init(){
     ? `🇹🇼 台灣現況${nuclear.taiwan_share_pct!=null?`　核能占比 <span class="big" style="color:var(--nuclear);">${esc(nuclear.taiwan_share_pct)}%</span>`:''}
        <div style="margin-top:6px;">${bulletize(nuclear.taiwan_status)}${srcInline(nuclear.taiwan_status_sources)}</div>`
     : '';
+  // 台灣核電廠介紹：欄位為空字串者顯示「—」，不推定、不自行加總
+  const twp = nuclear.taiwan_plants||{};
+  const plRow = (lb,v)=>v?`<div><b>${lb}</b>${esc(v)}</div>`:'';
+  const plCard = p=>{
+    const units = (p.units||[]).filter(u=>u&&u.unit);
+    const tb = units.length
+      ? `<div class="pl-tb-wrap"><table class="pl-tb"><thead><tr><th>機組</th><th>裝置容量</th><th>商轉日期</th><th>運轉執照屆期</th></tr></thead><tbody>${units.map(u=>`<tr><td>${esc(u.unit)}</td><td>${esc(u.capacity||'—')}</td><td>${esc(u.commercial||'—')}</td><td>${esc(u.shutdown||'—')}</td></tr>`).join('')}</tbody></table></div>` : '';
+    return `<div class="case-card"><div class="case-name">${esc(p.name||'')}${p.alias?`（${esc(p.alias)}）`:''}${srcInline(p.sources)}</div>
+      <div class="pl-meta">${plRow('位置：',p.location)}${plRow('反應爐型式：',p.reactor)}${plRow('現況：',p.status)}</div>${tb}<div class="case-desc" style="margin-top:6px;margin-bottom:0;">${ptsHtml(p.points)}</div></div>`;
+  };
+  const plCards = (twp.plants||[]).filter(p=>p&&p.name).map(plCard).join('');
+  document.getElementById('nuclear-plants-intro').innerHTML = plCards
+    ? `<div class="sec-meta" style="margin:14px 0 6px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">🏭 ${esc(twp.title||'台灣核電廠一覽')}</div>
+       <div class="case-cols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:start;">${plCards}</div>` : '';
   const rs = nuclear.restart||{};
   const rsHd = t=>`<div class="sec-meta" style="margin:10px 0 6px;text-transform:none;letter-spacing:normal;font-weight:700;color:var(--text2);">${t}</div>`;
   const rsPlant = p=>{
