@@ -544,7 +544,20 @@
       }
     ],
     "taiwan_status": "2025年5月17日核三2號機40年運轉執照屆滿，當晚進入安全停機；中央社報導，台灣屆時正式進入「非核家園」。2025年全年核能占比為1.12%（全國發電量口徑，見「台灣能源使用狀況」）",
-    "taiwan_status_sources": [{"label": "中央社（2025-05-17）", "url": "https://www.cna.com.tw/news/afe/202505170134.aspx"}, {"label": "核能安全委員會視察報告 NRD-NPP-114-10（2025-06）", "url": "https://www.nusc.gov.tw/webpage/UploadFiles/report_file/20251550508434511.pdf"}, {"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}],
+    "taiwan_status_sources": [
+      {
+        "label": "中央社（2025-05-17）",
+        "url": "https://www.cna.com.tw/news/afe/202505170134.aspx"
+      },
+      {
+        "label": "核能安全委員會視察報告 NRD-NPP-114-10（2025-06）",
+        "url": "https://www.nusc.gov.tw/webpage/UploadFiles/report_file/20251550508434511.pdf"
+      },
+      {
+        "label": "經濟部能源署《能源統計手冊2025年版》3-01",
+        "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+      }
+    ],
     "taiwan_share_pct": null,
     "taiwan_summary": [
       {
@@ -4314,35 +4327,269 @@
       "source_url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf",
       "note": "再生能源含慣常水力、地熱、太陽光電、風力、生質能、廢棄物；抽蓄水力另列；各年占比四捨五入，加總可能有±0.01的差",
       "categories": [
-        {"key": "coal", "name": "燃煤", "kind": "fossil"},
-        {"key": "gas", "name": "天然氣", "kind": "fossil"},
-        {"key": "oil", "name": "燃油", "kind": "fossil"},
-        {"key": "nuclear", "name": "核能", "kind": "nuclear"},
-        {"key": "renew", "name": "再生能源", "kind": "renew"},
-        {"key": "pumped", "name": "抽蓄水力", "kind": "renew"}
+        {
+          "key": "coal",
+          "name": "燃煤",
+          "kind": "fossil"
+        },
+        {
+          "key": "gas",
+          "name": "天然氣",
+          "kind": "fossil"
+        },
+        {
+          "key": "oil",
+          "name": "燃油",
+          "kind": "fossil"
+        },
+        {
+          "key": "nuclear",
+          "name": "核能",
+          "kind": "nuclear"
+        },
+        {
+          "key": "renew",
+          "name": "再生能源",
+          "kind": "renew"
+        },
+        {
+          "key": "pumped",
+          "name": "抽蓄水力",
+          "kind": "renew"
+        }
       ],
       "years": [
-        {"year": 2005, "shares": {"coal": 52.76, "gas": 17.1, "oil": 7.56, "nuclear": 17.57, "renew": 3.31, "pumped": 1.69}},
-        {"year": 2006, "shares": {"coal": 52.67, "gas": 17.03, "oil": 8.43, "nuclear": 16.93, "renew": 3.29, "pumped": 1.66}},
-        {"year": 2007, "shares": {"coal": 52.84, "gas": 18.52, "oil": 6.92, "nuclear": 16.67, "renew": 3.42, "pumped": 1.62}},
-        {"year": 2008, "shares": {"coal": 51.28, "gas": 20.36, "oil": 6.31, "nuclear": 17.13, "renew": 3.47, "pumped": 1.45}},
-        {"year": 2009, "shares": {"coal": 52.46, "gas": 20.55, "oil": 4.09, "nuclear": 18.07, "renew": 3.39, "pumped": 1.44}},
-        {"year": 2010, "shares": {"coal": 49.52, "gas": 24.39, "oil": 4.51, "nuclear": 16.85, "renew": 3.5, "pumped": 1.24}},
-        {"year": 2011, "shares": {"coal": 49.36, "gas": 25.46, "oil": 3.76, "nuclear": 16.7, "renew": 3.56, "pumped": 1.15}},
-        {"year": 2012, "shares": {"coal": 48.9, "gas": 26.48, "oil": 3.04, "nuclear": 16.14, "renew": 4.26, "pumped": 1.17}},
-        {"year": 2013, "shares": {"coal": 48.13, "gas": 27.1, "oil": 2.7, "nuclear": 16.5, "renew": 4.3, "pumped": 1.26}},
-        {"year": 2014, "shares": {"coal": 47.49, "gas": 28.11, "oil": 3.08, "nuclear": 16.31, "renew": 3.82, "pumped": 1.2}},
-        {"year": 2015, "shares": {"coal": 45.39, "gas": 30.61, "oil": 4.64, "nuclear": 14.13, "renew": 4.06, "pumped": 1.18}},
-        {"year": 2016, "shares": {"coal": 45.9, "gas": 31.54, "oil": 4.5, "nuclear": 11.99, "renew": 4.82, "pumped": 1.25}},
-        {"year": 2017, "shares": {"coal": 47.34, "gas": 33.84, "oil": 4.71, "nuclear": 8.31, "renew": 4.58, "pumped": 1.23}},
-        {"year": 2018, "shares": {"coal": 47.64, "gas": 33.54, "oil": 2.97, "nuclear": 10.05, "renew": 4.58, "pumped": 1.22}},
-        {"year": 2019, "shares": {"coal": 46.11, "gas": 33.25, "oil": 2.13, "nuclear": 11.79, "renew": 5.55, "pumped": 1.17}},
-        {"year": 2020, "shares": {"coal": 44.94, "gas": 35.65, "oil": 1.58, "nuclear": 11.22, "renew": 5.48, "pumped": 1.13}},
-        {"year": 2021, "shares": {"coal": 44.21, "gas": 37.18, "oil": 1.83, "nuclear": 9.54, "renew": 6.15, "pumped": 1.09}},
-        {"year": 2022, "shares": {"coal": 41.96, "gas": 38.84, "oil": 1.54, "nuclear": 8.24, "renew": 8.36, "pumped": 1.06}},
-        {"year": 2023, "shares": {"coal": 42.13, "gas": 39.46, "oil": 1.33, "nuclear": 6.29, "renew": 9.7, "pumped": 1.08}},
-        {"year": 2024, "shares": {"coal": 39.16, "gas": 42.33, "oil": 1.45, "nuclear": 4.21, "renew": 11.79, "pumped": 1.06}},
-        {"year": 2025, "shares": {"coal": 35.29, "gas": 47.69, "oil": 1.51, "nuclear": 1.12, "renew": 13.32, "pumped": 1.07}}
+        {
+          "year": 2005,
+          "shares": {
+            "coal": 52.76,
+            "gas": 17.1,
+            "oil": 7.56,
+            "nuclear": 17.57,
+            "renew": 3.31,
+            "pumped": 1.69
+          }
+        },
+        {
+          "year": 2006,
+          "shares": {
+            "coal": 52.67,
+            "gas": 17.03,
+            "oil": 8.43,
+            "nuclear": 16.93,
+            "renew": 3.29,
+            "pumped": 1.66
+          }
+        },
+        {
+          "year": 2007,
+          "shares": {
+            "coal": 52.84,
+            "gas": 18.52,
+            "oil": 6.92,
+            "nuclear": 16.67,
+            "renew": 3.42,
+            "pumped": 1.62
+          }
+        },
+        {
+          "year": 2008,
+          "shares": {
+            "coal": 51.28,
+            "gas": 20.36,
+            "oil": 6.31,
+            "nuclear": 17.13,
+            "renew": 3.47,
+            "pumped": 1.45
+          }
+        },
+        {
+          "year": 2009,
+          "shares": {
+            "coal": 52.46,
+            "gas": 20.55,
+            "oil": 4.09,
+            "nuclear": 18.07,
+            "renew": 3.39,
+            "pumped": 1.44
+          }
+        },
+        {
+          "year": 2010,
+          "shares": {
+            "coal": 49.52,
+            "gas": 24.39,
+            "oil": 4.51,
+            "nuclear": 16.85,
+            "renew": 3.5,
+            "pumped": 1.24
+          }
+        },
+        {
+          "year": 2011,
+          "shares": {
+            "coal": 49.36,
+            "gas": 25.46,
+            "oil": 3.76,
+            "nuclear": 16.7,
+            "renew": 3.56,
+            "pumped": 1.15
+          }
+        },
+        {
+          "year": 2012,
+          "shares": {
+            "coal": 48.9,
+            "gas": 26.48,
+            "oil": 3.04,
+            "nuclear": 16.14,
+            "renew": 4.26,
+            "pumped": 1.17
+          }
+        },
+        {
+          "year": 2013,
+          "shares": {
+            "coal": 48.13,
+            "gas": 27.1,
+            "oil": 2.7,
+            "nuclear": 16.5,
+            "renew": 4.3,
+            "pumped": 1.26
+          }
+        },
+        {
+          "year": 2014,
+          "shares": {
+            "coal": 47.49,
+            "gas": 28.11,
+            "oil": 3.08,
+            "nuclear": 16.31,
+            "renew": 3.82,
+            "pumped": 1.2
+          }
+        },
+        {
+          "year": 2015,
+          "shares": {
+            "coal": 45.39,
+            "gas": 30.61,
+            "oil": 4.64,
+            "nuclear": 14.13,
+            "renew": 4.06,
+            "pumped": 1.18
+          }
+        },
+        {
+          "year": 2016,
+          "shares": {
+            "coal": 45.9,
+            "gas": 31.54,
+            "oil": 4.5,
+            "nuclear": 11.99,
+            "renew": 4.82,
+            "pumped": 1.25
+          }
+        },
+        {
+          "year": 2017,
+          "shares": {
+            "coal": 47.34,
+            "gas": 33.84,
+            "oil": 4.71,
+            "nuclear": 8.31,
+            "renew": 4.58,
+            "pumped": 1.23
+          }
+        },
+        {
+          "year": 2018,
+          "shares": {
+            "coal": 47.64,
+            "gas": 33.54,
+            "oil": 2.97,
+            "nuclear": 10.05,
+            "renew": 4.58,
+            "pumped": 1.22
+          }
+        },
+        {
+          "year": 2019,
+          "shares": {
+            "coal": 46.11,
+            "gas": 33.25,
+            "oil": 2.13,
+            "nuclear": 11.79,
+            "renew": 5.55,
+            "pumped": 1.17
+          }
+        },
+        {
+          "year": 2020,
+          "shares": {
+            "coal": 44.94,
+            "gas": 35.65,
+            "oil": 1.58,
+            "nuclear": 11.22,
+            "renew": 5.48,
+            "pumped": 1.13
+          }
+        },
+        {
+          "year": 2021,
+          "shares": {
+            "coal": 44.21,
+            "gas": 37.18,
+            "oil": 1.83,
+            "nuclear": 9.54,
+            "renew": 6.15,
+            "pumped": 1.09
+          }
+        },
+        {
+          "year": 2022,
+          "shares": {
+            "coal": 41.96,
+            "gas": 38.84,
+            "oil": 1.54,
+            "nuclear": 8.24,
+            "renew": 8.36,
+            "pumped": 1.06
+          }
+        },
+        {
+          "year": 2023,
+          "shares": {
+            "coal": 42.13,
+            "gas": 39.46,
+            "oil": 1.33,
+            "nuclear": 6.29,
+            "renew": 9.7,
+            "pumped": 1.08
+          }
+        },
+        {
+          "year": 2024,
+          "shares": {
+            "coal": 39.16,
+            "gas": 42.33,
+            "oil": 1.45,
+            "nuclear": 4.21,
+            "renew": 11.79,
+            "pumped": 1.06
+          }
+        },
+        {
+          "year": 2025,
+          "shares": {
+            "coal": 35.29,
+            "gas": 47.69,
+            "oil": 1.51,
+            "nuclear": 1.12,
+            "renew": 13.32,
+            "pumped": 1.07
+          }
+        }
       ]
     },
     "future": {
@@ -4444,7 +4691,12 @@
           }
         ],
         "note": "較2024年42.33%上升5.36個百分點；2016年為31.5%",
-        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}]
+        "note_sources": [
+          {
+            "label": "經濟部能源署《能源統計手冊2025年版》3-01",
+            "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+          }
+        ]
       },
       {
         "rank": 2,
@@ -4501,7 +4753,12 @@
           }
         ],
         "note": "較2024年39.16%下降3.87個百分點；2016年為45.9%",
-        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}]
+        "note_sources": [
+          {
+            "label": "經濟部能源署《能源統計手冊2025年版》3-01",
+            "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+          }
+        ]
       },
       {
         "rank": 3,
@@ -4558,9 +4815,19 @@
           }
         ],
         "note": "較2024年11.79%上升1.53個百分點",
-        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}],
+        "note_sources": [
+          {
+            "label": "經濟部能源署《能源統計手冊2025年版》3-01",
+            "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+          }
+        ],
         "trend_reason": "經濟部原訂2成綠電目標將延至2026年11月完成；經濟部長龔明鑫表示光電環評三法通過後確實造成推動困難（中央社，2026-02-05）",
-        "reason_sources": [{"label": "中央社經Newtalk（2026-02-05）", "url": "https://newtalk.tw/news/view/2026-02-05/1018780"}]
+        "reason_sources": [
+          {
+            "label": "中央社經Newtalk（2026-02-05）",
+            "url": "https://newtalk.tw/news/view/2026-02-05/1018780"
+          }
+        ]
       },
       {
         "rank": 4,
@@ -4589,7 +4856,12 @@
           }
         ],
         "note": "較2024年1.45%微升0.06個百分點",
-        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}]
+        "note_sources": [
+          {
+            "label": "經濟部能源署《能源統計手冊2025年版》3-01",
+            "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+          }
+        ]
       },
       {
         "rank": 5,
@@ -4610,7 +4882,16 @@
           }
         ],
         "note": "2025年全年平均值；2016年為11.99%。核三2號機於2025-05-17因40年運轉執照屆滿安全停機，見本頁核能專區「台灣現況」",
-        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}, {"label": "台電新聞稿：核三廠2號機40年運轉執照屆期安全停機（2025-05-17）", "url": "https://www.taipower.com.tw/2289/2323/2324/62567/normalPost"}]
+        "note_sources": [
+          {
+            "label": "經濟部能源署《能源統計手冊2025年版》3-01",
+            "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+          },
+          {
+            "label": "台電新聞稿：核三廠2號機40年運轉執照屆期安全停機（2025-05-17）",
+            "url": "https://www.taipower.com.tw/2289/2323/2324/62567/normalPost"
+          }
+        ]
       },
       {
         "rank": 6,
@@ -4620,7 +4901,12 @@
         "kind": "renew",
         "data_year": "2025年（全國發電量口徑）",
         "note": "較2024年1.06%上升0.01個百分點",
-        "note_sources": [{"label": "經濟部能源署《能源統計手冊2025年版》3-01", "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"}]
+        "note_sources": [
+          {
+            "label": "經濟部能源署《能源統計手冊2025年版》3-01",
+            "url": "https://ea01.moeaea.gov.tw/a0303/02/attachments/handbook/2025/docs/3-01.發電量(114).pdf"
+          }
+        ]
       }
     ]
   },
@@ -5261,6 +5547,6 @@
     ]
   },
   "weekly_check": {
-    "last_checked": "2026-11-19"
+    "last_checked": "2026-11-26"
   }
 }
