@@ -1616,5 +1616,23 @@ function initToc(){
 }
 initToc();
 </script>
+<script>
+// cc_flash 卡片識別：區塊標題 id＋區塊內序號（各區塊非同步渲染，不能靠全頁順序）
+(function(){
+  var SEL='.rank-card,.case-card,.trend-chart-wrap,.cb-card,.total-banner';
+  function keyIt(){
+    var sec='top',n=0;
+    document.querySelectorAll('.sec-title,'+SEL).forEach(function(el){
+      if(el.classList.contains('sec-title')){ sec=el.id||sec; n=0; return; }
+      if(el.parentElement&&el.parentElement.closest(SEL)) return;
+      n++;
+      if(!el.id) el.setAttribute('data-flash-key',sec+'/'+n);
+    });
+  }
+  keyIt();
+  try{ new MutationObserver(keyIt).observe(document.body,{childList:true,subtree:true}); }catch(e){}
+})();
+</script>
+<script src="https://resolutetinging.github.io/control-center/cc_flash.js" data-flash-sel=".rank-card,.case-card,.trend-chart-wrap,.cb-card,.total-banner" data-flash-page="renewable"></script>
 </body>
 </html>
