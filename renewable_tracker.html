@@ -743,7 +743,7 @@ function shRender(sh){
   if(!shHas(ax)) ax = SH_AXES.find(shHas) || '';
   if(!ax){ shState = null; return ''; }
   shAxis = ax;
-  return `<div class="case-card" id="sh-wrap">${shInner()}</div>`;
+  return `<div class="case-card" id="sh-wrap" data-flash-key="sh-wrap/${shAxis}">${shInner()}</div>`;
 }
 function shInner(){
   const sh = shData, ax = shAxis, A = SH_AX[ax];
@@ -790,6 +790,7 @@ function shSwitch(ax, focus){
   shAxis = ax;
   try{ localStorage.setItem(SH_KEY, ax); }catch(e){}
   const wrap = document.getElementById('sh-wrap'); if(!wrap) return;
+  wrap.setAttribute('data-flash-key', 'sh-wrap/'+ax);   // cc_flash：各面向分開記，切換面向不算資料更新
   wrap.innerHTML = shInner();
   shInit();
   if(focus){ const t = document.getElementById('sh-tab-'+ax); if(t) t.focus(); }
